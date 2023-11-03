@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iniciar Sesión</title>
+</head>
+<body>
+    <h1>Iniciar Sesión</h1>
+
+
+
+    <!-- Formulario de inicio de sesión local -->
+    <form id="local-login-form">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username">
+        <br>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password">
+        <br>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+
+    <!-- Botones para iniciar sesión con Google y Facebook -->
+    <button id="google-login-button">Iniciar Sesión con Google</button>
+    <button id="facebook-login-button">Iniciar Sesión con Facebook</button>
+
+    <!-- Botón para iniciar sesión como invitado -->
+    <button id="guest-login-button">Iniciar Sesión como Invitado</button>
+
+    <!-- Aquí mostrar mensajes de error o éxito de inicio de sesión -->
+    <p id="login-message"></p>
+
+    <!-- Agregar scripts JavaScript para manejar la lógica de inicio de sesión -->
+    <script>
+
+        // Lógica de inicio de sesión local
+        document.getElementById('local-login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Realiza la autenticación local, verifica las credenciales, etc.
+            // Muestra un mensaje de éxito o error en #login-message.
+        });
+
+        // Inicio de sesión con Google
+        document.getElementById('google-login-button').addEventListener('click', function () {
+            // Utiliza la API de autenticación de Google para iniciar sesión con Google.
+            // Redirige a la página de autenticación de Google.
+        });
+
+        // Inicio de sesión con Facebook
+        document.getElementById('facebook-login-button').addEventListener('click', function () {
+            // Utiliza la API de autenticación de Facebook para iniciar sesión con Facebook.
+            // Redirige a la página de autenticación de Facebook.
+        });
+
+        // Inicio de sesión como invitado
+        document.getElementById('guest-login-button').addEventListener('click', function () {
+            // Permite a los usuarios iniciar sesión como invitados sin requerir autenticación.
+            // Muestra un mensaje de éxito en #login-message.
+        });
+    </script>
+</body>
+</html>

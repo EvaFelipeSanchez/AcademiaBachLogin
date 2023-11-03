@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      /* Estilos para el menú sidebar */
+      .sidebar {
+          height: 150%;
+          width: 150px;
+          position: fixed;
+          top: 0;
+          left: -150px; /* Ocultar inicialmente el menú */
+          background-color: #acc1e5;
+          transition: 0.3s;
+      }
+
+      .sidebar a {
+          padding: 10px;
+          text-decoration: none;
+          font-size: 20px;
+          color: #1c4b6a;
+          display: block;
+      }
+
+      .sidebar img {
+      width: 120px;
+      height: 120px;
+      }
+
+      .sidebar a:hover {
+          background-color: #acc1e5;
+      }
+
+      .openbtn {
+          position: fixed;
+          left: 40px;
+          top: 40px;
+      }
+
+      /* Estilo para el contenido principal (debes ajustar esto para evitar solapamientos) */
+      .content {
+          margin-left: 10px;
+          padding: 20px;
+      }
+
+      .content a img {
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        width: 120px;
+        height: 120px;
+        }
+
+        body {
+            background-image: url('images/Fondo3.png');
+            background-size: cover;
+            background-repeat: no-repeat; 
+        }
+
+        .count {
+            font-size: 62px;
+            height: 0;
+            margin-top: 180px; /* Mueve el elemento hacia arriba 50 píxeles */
+            width: 150px;
+
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%; /* Centrar verticalmente en todos los dispositivos */
+            left: 50%; /* Centrar horizontalmente en todos los dispositivos */
+            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            color: rgb(31, 39, 78);
+                font-family: 'Arial', sans-serif; 
+        }
+
+        .store {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 120px;
+            margin-left: 80px;
+        }
+
+        .item {
+            background-color: #acc1e5;
+            border: 1px solid #1b184f;
+            padding: 8px;
+            margin: 10px;
+            text-align: center;
+        }
+
+
+        .store img {
+            max-width: 60%;
+        }
+
+        .price {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .activar-button {
+            background-color: #213953;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .tiendabar{
+            margin-bottom: 140px; /* Mueve el elemento hacia arriba 50 píxeles */
+            width: 130px;
+            background-color: #acc1e5;
+            border: 1px solid #1b184f;
+            padding: 8px;
+
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 9%; /* Centrar verticalmente en todos los dispositivos */
+            left: 75%; /* Centrar horizontalmente en todos los dispositivos */
+            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            color: rgb(31, 39, 78);
+
+        }
+
+        .tiendabar img {
+        width: 110px;
+        height: 110px;
+        }
+
+        .cementerio{
+            margin-bottom: 140px; /* Mueve el elemento hacia arriba 50 píxeles */
+            width: 130px;
+            background-color: #acc1e5;
+            border: 1px solid #1b184f;
+            padding: 8px;
+
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 9%; /* Centrar verticalmente en todos los dispositivos */
+            left: 85%; /* Centrar horizontalmente en todos los dispositivos */
+            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            color: rgb(31, 39, 78);
+
+        }
+
+        .cementerio img {
+        width: 110px;
+        height: 110px;
+        }
+
+        .punto {
+        font-size: 42px;
+        height: 0;
+        margin-top: 20px;
+        width: 150px;
+   
+        padding-top: 50px; /* Cambia el alto del relleno en la parte superior */
+        padding-right: 130px; /* Cambia el ancho del relleno en el lado derecho */
+        padding-bottom: 45px; /* Cambia el alto del relleno en la parte inferior */
+        padding-left: 100px; /* Cambia el ancho del relleno en el lado izquierdo */
+
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 7%;
+        left: 63%;
+        transform: translate(-50%, -50%);
+        font-family: 'Arial', sans-serif;
+        background-color: rgb(52, 60, 104);
+        color: #fff;
+        }
+
+        .punto img {
+        width: 75px; /* Ajusta el ancho de la imagen según tus necesidades */
+        padding: 20px 0; 
+        margin-right: 20px; /* Espacio entre la imagen y el texto */
+        }
+
+        .punto .contenido {
+        flex: 1; /* El contenido ocupa el espacio restante */
+        }
+
+
+
+
+
+      
+  </style>
+  </head>
+    
+  <body>
+    <div class="sidebar" id="sidebar">
+      <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+      <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
+      <a href="#" onclick="index()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
+           <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
+      <a href="#"><img src="images/ajustesicono.png" alt="Icono Ajustes"></a>
+
+      <!-- Agrega más íconos o imágenes aquí -->
+  </div>
+
+  <div class="content" >
+      <!-- Contenido principal de tu página -->
+      <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
+      <!--  <button class="openbtn" onclick="toggleSidebar()">☰</button> -->
+
+  </div>
+
+  <div class="tiendabar" id="tiendabar">
+    <a href="#" onclick="tienda()"><img src="images/homeicono.png" alt="Icono de tienda"></a>
+  </div>
+
+
+
+  <div class="punto">
+    <img src="images/Monedas.png" alt="Moneda">
+    <div class="puntostexto">
+        <p id="puntosTotales">00</p>
+    </div>
+</div>
+
+  <div class="store">
+    <div class="item">
+        <img src="images/1.1.png" alt="Producto 1" >
+        <img class="segunda-imagen" src="images/1.2.png" alt="Producto 1-2" style="display: none">
+        <p class="nombre">Paco</p>
+        <button class="activar-button" onclick="activar(1)">Activar</button>
+    </div>
+    <div class="item">
+        <img src="images/2.1.png" alt="Producto 2"  id="imagenMascotaDespierta">
+        <img class="segunda-imagen" src="images/2.2.png" alt="Producto 2-2" style="display: none">
+        <p class="nombre">Paquita</p>
+        <button class="activar-button" onclick="activar(2)">Activar</button>
+    </div>
+  </div>
+
+  <script>
+      function toggleSidebar() {
+          var sidebar = document.getElementById('sidebar');
+          if (sidebar.style.left === '0px') {
+              sidebar.style.left = '-250px';
+          } else {
+              sidebar.style.left = '0px';
+          }
+      }
+  </script>
+
+<script>
+        // Obtener la tienda (div con clase "store")
+        var store = document.querySelector('.store');
+
+        // Obtener todos los elementos con clase "item" dentro de la tienda
+        var items = store.querySelectorAll('.item');
+
+        // Crear una lista local para almacenar los elementos de la tienda
+        var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
+        //var listaLocal = [];
+        localStorage.setItem('storeElements', JSON.stringify(listaLocal));
+
+        if (listaLocal.length === 0) {
+            items.forEach(function (item, index) {
+            var imagen = item.querySelector('img').src;
+            var segundaImagen = item.querySelector('.segunda-imagen').src;
+            var nombre = item.querySelector('.nombre').textContent;
+
+            var elementoTienda = {
+                imagenPrincipal: imagen,
+                segundaImagen: segundaImagen,
+                nombre: nombre
+            };
+
+            listaLocal.push(elementoTienda);
+        });
+
+        } 
+
+        localStorage.setItem('storeElements', JSON.stringify(listaLocal));
+
+        console.log(listaLocal);
+
+
+
+        //var storeElements = JSON.parse(localStorage.getItem('storeElements')) || [];
+
+         if (!localStorage.getItem('funcionEjecutada')) {
+            window.onload = function() {
+                window.location.href = "tienda.html";
+                localStorage.setItem('funcionEjecutada', 'true');
+            };
+        }
+
+        window.onload = function() {
+
+        
+            function elementYaExisteEnMascota(elementData) {
+                var storeContainer = document.querySelector('.store');
+                var items = storeContainer.querySelectorAll('.item');
+
+                for (var i = 0; i < items.length; i++) {
+                    var nombreElement = items[i].querySelector('.nombre');
+                    if (nombreElement.textContent === elementData.nombre) {
+                        return true; // El elemento ya existe en la ventana "mascota.html"
+                    }
+                }
+
+                return false; // El elemento no existe en la ventana "mascota.html"
+            }
+
+
+        function cargarElementosGuardados() {
+            var storeContainer = document.querySelector('.store');
+            var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
+            storeContainer.innerHTML = '';
+
+            listaLocal.forEach(function (elementData) {
+                if (!elementYaExisteEnMascota(elementData)) {
+            var nuevoItem = document.createElement('div');
+            nuevoItem.classList.add('item');
+            var nuevoItem = document.createElement('div');
+                nuevoItem.classList.add('item');
+
+                var nuevaImagen = document.createElement('img');
+                nuevaImagen.src = elementData.imagenPrincipal;
+                nuevaImagen.alt = 'Nuevo Producto';
+                nuevoItem.appendChild(nuevaImagen);
+
+                var nuevaSegundaImagen = document.createElement('img');
+                nuevaSegundaImagen.src = elementData.segundaImagen;
+                nuevaSegundaImagen.alt = 'Nuevo Producto-2';
+                nuevaSegundaImagen.classList.add('segunda-imagen');
+                nuevaSegundaImagen.style.display = 'none';
+                nuevoItem.appendChild(nuevaSegundaImagen);
+
+                var nuevoNombre = document.createElement('p');
+                nuevoNombre.classList.add('nombre');
+                nuevoNombre.textContent = elementData.nombre;
+                nuevoItem.appendChild(nuevoNombre);
+
+                var nuevoBotonActivar = document.createElement('button');
+                nuevoBotonActivar.classList.add('activar-button');
+                nuevoBotonActivar.textContent = 'Activar';
+                nuevoBotonActivar.onclick = function () {
+                    activar(listaLocal.indexOf(elementData) + 1);
+                };
+                nuevoItem.appendChild(nuevoBotonActivar);
+
+                storeContainer.appendChild(nuevoItem);
+         
+            }
+
+            });
+        } 
+
+         cargarElementosGuardados();
+        }
+
+
+        let itemStore = parseInt(localStorage.getItem('itemstorevalue') || '3');
+        var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+
+        if (puntosTotalesGuardados) {
+        puntosTotales = parseInt(puntosTotalesGuardados, 10);
+        // Actualiza el texto en el elemento de puntos totales
+        document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+        } else {
+            puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
+        }
+
+
+        function agregarNuevoItem() {
+
+            // Obtener item
+            itemStore++;
+            localStorage.setItem('itemstorevalue', itemStore); 
+
+            //const storeContainer = document.querySelector('.store');
+
+
+            const nuevoItem = document.createElement('div'); //
+            nuevoItem.classList.add('item');  //
+
+            // Crear una imagen para el nuevo elemento
+            var nuevaImagen = document.createElement('img');
+            nuevaImagen.src = localStorage.getItem('imagenPrincipalTraspaso'); ;
+            nuevaImagen.alt = localStorage.getItem('nombreTraspasado');
+            nuevoItem.appendChild(nuevaImagen);
+
+            // Crea una segunda imagen para el nuevo elemento
+            var nuevaSegundaImagen = document.createElement('img');
+            nuevaSegundaImagen.src = localStorage.getItem('segundaImagenTraspaso');
+            nuevaSegundaImagen.alt = localStorage.getItem('nombreTraspasado') + '-2';
+            nuevaSegundaImagen.classList.add('segunda-imagen');
+            nuevaSegundaImagen.style.display = 'none';
+            nuevoItem.appendChild(nuevaSegundaImagen);
+
+            // Crea un párrafo con la clase "nombre" y contenido para el nuevo elemento
+            var nuevoNombreElement = document.createElement('p');
+            nuevoNombreElement.classList.add('nombre');
+            nuevoNombreElement.textContent = localStorage.getItem('nombreTraspasado'); 
+            nuevoItem.appendChild(nuevoNombreElement);
+
+            // Crea un botón de activación para el nuevo elemento
+            var nuevoBotonActivar = document.createElement('button');
+            nuevoBotonActivar.classList.add('activar-button');
+            nuevoBotonActivar.textContent = 'Activar';
+            nuevoBotonActivar.onclick = function () {
+                activar(itemStore);
+            };
+            nuevoItem.appendChild(nuevoBotonActivar);
+
+            var storeContainer = document.querySelector('.store');
+            storeContainer.appendChild(nuevoItem);
+
+            // Almacena la información del nuevo elemento localmente
+            listaLocal.push({
+                imagenPrincipal:  localStorage.getItem('imagenPrincipalTraspaso'),
+                segundaImagen:  localStorage.getItem('segundaImagenTraspaso'),
+                nombre: localStorage.getItem('nombreTraspasado'),
+            });
+            localStorage.setItem('storeElements', JSON.stringify(listaLocal));
+
+            // Asigna el evento "Activar" al botón del nuevo elemento
+            nuevoBotonActivar.onclick = function () {
+                activar(itemStore);
+            };
+       }
+        
+
+        var traspaso = localStorage.getItem('traspaso') === "true"; // Recuperar el valor y convertirlo a boolean
+        if (traspaso) {
+            //agregarNuevoItem();
+            traspaso = false; // Establecerlo en falso después de agregar el nuevo elemento
+            localStorage.setItem('traspaso', traspaso); // Guardar el valor actualizado
+           
+        }
+
+
+        function activar(item) {
+            var index = item - 1; // Resta 1 para obtener el índice correcto
+            if (index >= 0 && index < listaLocal.length) {
+                // Obtén las rutas de las imágenes y el nombre del elemento específico
+                var imagenPrincipal = listaLocal[index].imagenPrincipal;
+                var segundaImagen = listaLocal[index].segundaImagen;
+                var nombre = listaLocal[index].nombre;
+
+                // Almacena las rutas de las imágenes y el nombre en el almacenamiento local
+                localStorage.setItem('imagenPrincipal', imagenPrincipal);
+                localStorage.setItem('segundaImagen', segundaImagen);
+                localStorage.setItem('nombrePrincipal', nombre);
+
+                console.log(imagenPrincipal);
+                console.log(segundaImagen);
+                console.log(nombre);
+
+                // Redirige a otro HTML
+                window.location.href = 'index.html';
+            }
+        }
+
+
+    
+
+
+</script>
+
+
+<script>
+    function checklist(){
+        window.location.href = "checklist.html";
+
+    }
+
+    function index(){
+        window.location.href = "index.html";
+
+    }
+
+    function cementerio(){
+        window.location.href = "cementerio.html";
+    }
+
+
+
+    function tienda(){
+        window.location.href = "tienda.html";
+    }
+</script>
+
+    <!--  <h1>Hello, world!</h1> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>

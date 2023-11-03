@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      /* Estilos para el menú sidebar */
+      .sidebar {
+          height: 150%;
+          width: 150px;
+          position: fixed;
+          top: 0;
+          left: -150px; /* Ocultar inicialmente el menú */
+          background-color: #acc1e5;
+          transition: 0.3s;
+      }
+
+      .sidebar a {
+          padding: 10px;
+          text-decoration: none;
+          font-size: 20px;
+          color: #1c4b6a;
+          display: block;
+      }
+
+      .sidebar img {
+      width: 120px;
+      height: 120px;
+      }
+
+      .sidebar a:hover {
+          background-color: #acc1e5;
+      }
+
+      /* Estilos para el botón de abrir/cerrar el menú */
+      .openbtn {
+          position: fixed;
+          left: 40px;
+          top: 40px;
+      }
+
+      /* Estilo para el contenido principal (debes ajustar esto para evitar solapamientos) */
+      .content {
+          margin-left: 10px;
+          padding: 20px;
+      }
+
+      .content a img {
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        width: 120px;
+        height: 120px;
+        z-index: 3;
+        }
+
+        body {
+            background-image: url('images/Fondo12.png'); /* Reemplaza 'ruta-de-tu-imagen.jpg' con la ruta correcta de tu imagen */
+            background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; 
+        }
+
+
+        .count {
+            font-size: 62px;
+            height: 0;
+            margin-top: 180px; /* Mueve el elemento hacia arriba 50 píxeles */
+            width: 150px;
+
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%; /* Centrar verticalmente en todos los dispositivos */
+            left: 50%; /* Centrar horizontalmente en todos los dispositivos */
+            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            color: rgb(31, 39, 78);
+                font-family: 'Arial', sans-serif; 
+        }
+
+        .empezar {
+            font-size: 42px;
+            height: 0;
+            margin-top: 390px; /* Mueve el elemento hacia arriba 50 píxeles */
+            width: 150px;
+
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%; /* Centrar verticalmente en todos los dispositivos */
+            left: 50%; /* Centrar horizontalmente en todos los dispositivos */
+            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            color: rgb(255, 255, 255);
+            font-family: 'Arial', sans-serif; 
+            background-color: rgb(31, 39, 78);
+        }
+
+        .terminar {
+            font-size: 42px;
+            height: 0;
+            margin-top: 390px; /* Mueve el elemento hacia arriba 50 píxeles */
+            width: 150px;
+
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%; /* Centrar verticalmente en todos los dispositivos */
+            left: 50%; /* Centrar horizontalmente en todos los dispositivos */
+            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            color: rgb(255, 255, 255);
+            font-family: 'Arial', sans-serif; 
+            background-color: rgb(31, 39, 78);
+
+        }
+
+        .punto {
+        font-size: 42px;
+        height: 0;
+        margin-top: 20px;
+        width: 150px;
+   
+        padding-top: 50px; /* Cambia el alto del relleno en la parte superior */
+        padding-right: 130px; /* Cambia el ancho del relleno en el lado derecho */
+        padding-bottom: 45px; /* Cambia el alto del relleno en la parte inferior */
+        padding-left: 100px; /* Cambia el ancho del relleno en el lado izquierdo */
+
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 10%;
+        left: 78%;
+        transform: translate(-50%, -50%);
+        font-family: 'Arial', sans-serif;
+        background-color: rgb(31, 39, 78);
+        color: #fff;
+        }
+
+        .punto img {
+        width: 75px; /* Ajusta el ancho de la imagen según tus necesidades */
+        padding: 20px 0; 
+        margin-right: 20px; /* Espacio entre la imagen y el texto */
+        }
+
+        .punto .contenido {
+        flex: 1; /* El contenido ocupa el espacio restante */
+        }
+
+        .barra-de-progreso {
+            height: 20px;
+            margin-top: 375px; 
+            width: 40%;
+
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 45%; /* Centrar verticalmente en todos los dispositivos */
+            left: 50%; /* Centrar horizontalmente en todos los dispositivos */
+            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+
+            background-color: #ccc;
+        }
+
+        .barra-fondo {
+        width: 100%;
+        height: 100%;
+        background-color: #f0f0f0;
+        }
+
+        .barra-avance {
+        height: 100%;
+        background-color: rgb(31, 39, 78);
+        width: 0;
+        transition: width 1s;
+        }
+ 
+
+        .slider-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px;
+        margin-top: 410px;
+        position: relative;
+        left: 78%; 
+        transform: translate(-50%, -50%);
+        }
+
+        .blue-background {
+            background: rgb(31, 39, 78);; 
+            width: 250px;
+            height: 550px; 
+            position: absolute; 
+            z-index: -1;
+
+        }
+
+    
+        .duration-label {
+            font-weight: bold;
+            font-size: 20px;
+            color: #f0f0f0;
+            margin-bottom: 5px; 
+        }
+
+        .vertical-slider {
+            writing-mode: bt-lr; /* Utiliza writing-mode en lugar de appearance */
+            width: 390px;
+            height: 500px;
+            cursor: pointer;
+
+            background: linear-gradient(to bottom, #ccc, #ccc);
+            border: 1px solid #000;
+            border-radius: 5px;
+            transform: rotate(-90deg);
+
+        }
+
+        .slider-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        .vertical-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: rgb(31, 39, 78);;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+
+
+        .mascotadespierta-image {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .mascotadormida-image {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+        .message-block {
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 150px;
+            background-color: rgb(144, 164, 208);
+            border: 1px solid #1b1c47;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        #message {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 30px;
+
+        }
+
+        .nombreMascota {
+            position: fixed;
+            top: 61%;
+            left: 58%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            text-align: center;
+            color: rgb(255, 255, 255);
+            font-family: 'Arial', sans-serif; 
+            background-color: rgb(31, 39, 78);
+            z-index: 10;
+
+        }
+
+
+
+  
+  </style>
+  </head>
+    
+  <body>
+
+    <div class="content" >
+        <!-- Contenido principal de tu página -->
+        <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
+        <!--  <button class="openbtn" onclick="toggleSidebar()">☰</button> -->
+  
+    </div>
+
+    <div class="message-block" id="messageBlock" style="display: none">
+        <p id="message">Mensaje inicial</p>
+    </div>
+
+    <p class="nombreMascota" id="MascotaNombre">Nombre</p>
+
+
+    <div class="sidebar" id="sidebar">
+      <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+      <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
+      <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
+      <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
+      <a href="#"><img src="images/ajustesicono.png" alt="Icono Ajustes"></a>
+
+      <!-- Agrega más íconos o imágenes aquí -->
+  </div>
+
+  <img src="images/1.2.png" alt="Mascota dormida" class="mascotadormida-image"  id="imagenMascotaDormida">
+  <img src="images/1.1.png" alt="Mascota despierta" class="mascotadespierta-image"  id="imagenMascotaDespierta">
+
+
+
+
+ <div class="count" id="countdown"> 00:00</div>
+ <div class="empezar" >
+  <!-- Contenido principal de tu página -->
+  <button id="startButton" onclick="startCountdown()">Empezar</button>
+</div>
+
+<div class="terminar" >
+    <!-- Contenido principal de tu página -->
+    <button id="terminarButton" onclick="terminarCountdown()">FINALIZAR</button>
+  </div>
+
+
+
+  
+<div class="punto">
+    <img src="images/Monedas.png" alt="Moneda">
+    <div class="puntostexto">
+        <p id="puntosTotales">00</p>
+    </div>
+</div>
+
+<div class="barra-de-progreso">
+    <div class="barra-fondo">
+      <div class="barra-avance" id="barraAvance"></div>
+    </div>
+  </div>
+
+
+  <div class="slider-container">
+    <div class="blue-background"></div> 
+    <div class="duration-label">Duración: <span id="duracionLabel">25</span> minutos</div>
+    <div class="slider-wrapper">
+        <input type="range" id="duracion" name="duracion" min="1" max="240" value="20" class="vertical-slider" oninput="updateDurationLabel()">
+    </div>
+    
+</div>
+
+<script>
+    const messagesdescanso = [
+    "Mensaje 1",
+    "Mensaje 2",
+    "Mensaje 3",
+    "Mensaje 4",
+    "Mensaje 5",
+    ];
+
+    const messageBlock = document.getElementById("messageBlock");
+    const messageElement = document.getElementById("message");
+
+    function getRandomMessage() {
+    const randomIndex = Math.floor(Math.random() * messagesdescanso.length);
+    return messagesdescanso[randomIndex];
+    }
+
+    function updateMessage() {
+        const newMessage = getRandomMessage();
+        messageElement.textContent = newMessage;
+    }
+
+    //updateMessage();
+    //despierta.style.display = "none"; 
+    //dormida.style.display = "block"; 
+    
+
+     var imagenPrincipalSrc = localStorage.getItem('imagenPrincipal');
+     var segundaImagenSrc = localStorage.getItem('segundaImagen');
+     document.getElementById('imagenMascotaDespierta').src = imagenPrincipalSrc;
+     document.getElementById('imagenMascotaDormida').src = segundaImagenSrc;
+
+     var nombrePrincipalSrc = localStorage.getItem('nombrePrincipal');
+     document.getElementById('MascotaNombre').textContent = nombrePrincipalSrc;
+     console.log("Nombre mascota: " + nombrePrincipalSrc)
+
+     function toggleSidebar() {
+          var sidebar = document.getElementById('sidebar');
+          if (sidebar.style.left === '0px') {
+              sidebar.style.left = '-250px';
+          } else {
+              sidebar.style.left = '0px';
+          }
+      }
+
+    var countdown;
+    var puntosTotales = 0;
+    var cicloIniciado = false;
+    var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+
+    
+    var despierta = document.getElementById("imagenMascotaDespierta");
+    var dormida = document.getElementById("imagenMascotaDormida");
+    despierta.style.display = "block"; 
+    dormida.style.display = "none";
+
+    var terminar = document.getElementById("terminarButton");
+    terminar.style.display = "none";
+    var empezar = document.getElementById("startButton");
+    empezar.style.display = "block";
+
+
+    if (puntosTotalesGuardados) {
+    puntosTotales = parseInt(puntosTotalesGuardados, 10);
+    // Actualiza el texto en el elemento de puntos totales
+    document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+    } else {
+        puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
+    }
+
+    var valorBarraAvance = localStorage.getItem("barraAvance");
+
+    if (valorBarraAvance !== null) {
+        barraAvance.style.width = valorBarraAvance;
+    }
+
+    function updateDurationLabel() {
+            var duracionLabel = document.getElementById("duracionLabel");
+            var duracionInput = document.getElementById("duracion");
+            duracionLabel.textContent = duracionInput.value;
+        }
+
+        
+    function startCountdown() {
+        var timeLeft = 0; // Duración en segundos de la cuenta atrás
+        var pomSet = 5; //Duración en segundos de la cuenta atrás del set.                                              Cambiar
+        var descanso1 = 3 //Duración del descanso.                                                                      Cambiar
+        var descanso2 = 6 //Duración del descanso.  
+        var numerosetrealizados = -1;
+        
+        var segundostotalesInsertados = parseInt(document.getElementById("duracion").value);
+        //segundostotalesInsertados = segundostotalesInsertados * 60; 
+        var segundostotales = parseInt(document.getElementById("duracion").value);      
+        //segundostotales = segundostotales * 60; 
+        var slider = document.getElementById("duracion");
+        var valorActualSlider = parseInt(slider.value, 10);
+        
+        
+        var descansodesactivado = true;                                              
+        var display = document.getElementById('countdown');
+
+        
+        dormida.style.display = "block"; 
+        despierta.style.display = "none"; 
+        terminar.style.display = "block";
+        empezar.style.display = "none";
+
+
+
+        function updateDisplay() {             
+              
+        var minutes = Math.floor(timeLeft / 60);
+        var seconds = timeLeft % 60;
+        display.textContent = '' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+ 
+        }
+
+        
+        var barraAvance = document.getElementById("barraAvance");
+
+        function actualizarBarraDeProgreso() {
+        var porcentaje = (segundostotales / segundostotalesInsertados) * 100;
+        barraAvance.style.width = porcentaje + "%";
+        }
+
+
+
+        // Función para manejar la cuenta regresiva
+        function countdown() {
+            barraAvance.style.width = "100%";
+           localStorage.setItem("barraAvance", "100");
+           terminar.style.display = "block";
+           empezar.style.display = "none";
+
+
+
+            var timer = setInterval(function () {
+                updateDisplay();
+                actualizarBarraDeProgreso();
+                
+
+                if (timeLeft === 0) {
+                    if ( descansodesactivado) {
+                        messageBlock.style.display = "none";
+                        if (cicloIniciado) {
+                            // Suma un punto solo si el ciclo ya ha comenzado
+                            puntosTotales++;
+                            // Actualiza el texto en el elemento de puntos totales
+                            document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+                            localStorage.setItem("puntosTotales", puntosTotales);
+                        } else {
+                            cicloIniciado = true; // Marca el inicio del ciclo
+                        }
+                        numerosetrealizados++;
+                        descansodesactivado = false;
+                        timeLeft = pomSet;
+                        console.log("Número de sets terminados: " + numerosetrealizados); 
+
+                    } else {
+                        // Inicio del ciclo de descanso
+                        messageBlock.style.display = "block";
+                        updateMessage();
+                        descansodesactivado = true;
+
+                        if (numerosetrealizados === 4) {
+                            // Comienza el segundo ciclo de descanso (descanso2)
+                            numerosetrealizados = 0; // Reinicia el número de sets realizados
+                            timeLeft = descanso2;
+                            console.log("¡Segundo ciclo de descanso!");
+                        } else {
+                                // Inicio del ciclo de descanso normal (descanso1)
+                            timeLeft = descanso1;
+                        }
+                        //timeLeft = descanso1;
+                    }
+                }
+
+                if (segundostotales === 0) {
+                        clearInterval(timer); // Detén el temporizador cuando se agoten los segundos totales
+                        console.log("Cuenta atrás finalizada.");
+                        display.textContent = '' + (0 < 10 ? '0' : '') + 0 + ':' + (0 < 10 ? '0' : '') + 0;
+                        segundostotales= 0;
+                        descansodesactivado = true;
+                        numerosetrealizados = -1;
+                        cicloIniciado = false; 
+                        porcentaje = 100;
+                        barraAvance.style.width  = porcentaje + "%";
+                        document.getElementById("duracionLabel").textContent = valorActualSlider;
+                        
+                        despierta.style.display = "block"; 
+                        dormida.style.display = "none"; 
+                        terminar.style.display = "none";
+                        empezar.style.display = "block";
+                }
+
+                timeLeft--;
+                segundostotales--;
+                valorActualSlider--;
+                slider.value = valorActualSlider;
+
+            }, 1000);
+
+        }
+
+
+        var valorBarraAvance = localStorage.getItem("barraAvance");
+        if (!valorBarraAvance) {
+            barraAvance.style.width = "100%";
+            localStorage.setItem("barraAvance", "100");
+        }
+
+        countdown();
+            
+    }
+
+    var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
+        window.onload = function () {
+            // Obtener la lista local
+            var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
+
+            // Establecer itemStore en función del índice más alto en la lista local
+            itemStore = 0;
+            listaCementerio.forEach(function (element) {
+                if (element.index > itemStore) {
+                    itemStore = element.index;
+                }
+            });
+
+    };
+
+
+    function enviarCementerio() {
+            // imagenPrincipalSrc
+            // nombrePrincipalSrc 
+
+            var fechaActual = new Date();
+
+            // Formatea la fecha
+            var options = { year: 'numeric', month: 'long', day: 'numeric' };
+            var fechaFormateada = fechaActual.toLocaleDateString(undefined, options);
+
+
+            localStorage.setItem('imagenPrincipalCementerio', imagenPrincipalSrc);
+            localStorage.setItem('nombrePrincipalCementerio', nombrePrincipalSrc );
+            localStorage.setItem('fechaCementerio', fechaFormateada );
+
+            var nuevoElemento = {
+                        imagenPrincipal: imagenPrincipalSrc,
+                        nombre: nombrePrincipalSrc,
+                        fechamuerte: fechaFormateada
+            };
+            listaCementerio.push(nuevoElemento);
+            localStorage.setItem('CementerioElements', JSON.stringify( listaCementerio));
+           
+
+            document.getElementById('imagenMascotaDespierta').src = "images/cruz.png";
+            document.getElementById('imagenMascotaDormida').src = "images/cruz.png";
+            document.getElementById('MascotaNombre').textContent = "";
+            localStorage.setItem('imagenPrincipal', "images/cruz.png");
+            localStorage.setItem('segundaImagen', "images/cruz.png");
+            localStorage.setItem('nombrePrincipal', "");
+
+
+            // Redirigir a otro HTML
+            window.location.href = 'cementerio.html';
+
+
+            
+     }
+
+    function terminarCountdown(){
+        enviarCementerio();
+    }
+
+</script>
+
+
+<script>
+    function checklist(){
+        window.location.href = "checklist.html";
+
+    }
+
+    function mascota(){
+        window.location.href = "mascota.html";
+
+    }
+
+    function cementerio(){
+        window.location.href = "cementerio.html";
+    }
+</script>
+
+    <!--  <h1>Hello, world!</h1> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>

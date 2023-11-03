@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="bootstrap-datepicker-master/dist/css/bootstrap-datepicker.css">
+    <script src="bootstrap-datepicker-master/dist/js/bootstrap-datepicker.js"></script>
+
+
+
+
+        <style>
+      /* Estilos para el menú sidebar */
+      .sidebar {
+          height: 150%;
+          width: 150px;
+          position: fixed;
+          top: 0;
+          left: -150px; /* Ocultar inicialmente el menú */
+          background-color: #acc1e5;
+          transition: 0.3s;
+      }
+
+      .sidebar a {
+          padding: 10px;
+          text-decoration: none;
+          font-size: 20px;
+          color: #1c4b6a;
+          display: block;
+      }
+
+      .sidebar img {
+      width: 120px; /* Establece el ancho deseado */
+      height: 120px; /* Establece el alto deseado */
+      }
+
+      .sidebar a:hover {
+          background-color: #acc1e5;
+      }
+
+      /* Estilos para el botón de abrir/cerrar el menú */
+      .openbtn {
+          position: fixed;
+          left: 40px;
+          top: 40px;
+      }
+
+      /* Estilo para el contenido principal (debes ajustar esto para evitar solapamientos) */
+      .content {
+          margin-left: 10px;
+          padding: 20px;
+      }
+
+      .content a img {
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        width: 120px;
+        height: 120px;
+        }
+
+        body {
+            background-image: url('images/Fondo3.png'); /* Reemplaza 'ruta-de-tu-imagen.jpg' con la ruta correcta de tu imagen */
+            background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+        }
+        
+
+        .listaTareasEliminadas {
+            background-color: rgb(163, 186, 217);
+            width: 1500px;
+            max-height: 70vh; 
+            overflow-y: auto; 
+            height: 700px;
+            padding: 30px;
+            border: 1px solid #ccc;
+            position: fixed;
+            top: 50%; /* Centrar verticalmente en todos los dispositivos */
+            left: 50%; /* Centrar horizontalmente en todos los dispositivos */
+            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            font-family: 'Arial', sans-serif; 
+            font-size: 17px;
+            flex-direction: column;
+            display: flex;
+            
+        }
+
+        .listaTareasEliminadas li {
+            list-style-type: none;
+            display: flex;
+            flex-direction: row; /* Establece la dirección de los elementos como fila */
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: white; /* Fondo blanco para cada tarea */
+            border: 1px solid #ccc; /* Borde alrededor de cada tarea */
+            padding: 10px;
+        }
+
+        .listaTareasEliminadas input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        /* Estilos para los campos de información adicional */
+        .listaTareasEliminadas input[type="text"] {
+            flex: 3; /* Distribuye el espacio disponible de manera uniforme */
+            padding: 2px;
+            margin: 5px 10px; 
+        }
+
+        .nuevaTarea {
+            margin-bottom: 180px;
+            position: absolute;
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            left: 35%;
+            top: 11%;
+            transform: translate(-50%, -50%);
+            font-family: 'Arial', sans-serif; 
+            font-size: 18px;
+  
+        }    
+        .nuevaTarea input {
+            margin: 0px 5px; /* Añadimos margen vertical entre los campos de entrada */
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            margin: 10px 0;
+        }
+
+        .col {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        .col:last-child {
+            margin-right: 0;
+        }
+
+        .flechavolver {
+
+        margin-bottom: 140px; 
+        width: 300px;
+
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 9%; 
+        left: 15%; 
+        transform: translate(-50%, -50%); 
+        color: rgb(31, 39, 78);
+
+        }
+
+        .flechavolver img {
+        width: 110px;
+        height: 110px;
+        }
+
+        .textoexplicativo {
+            color: rgb(255, 255, 255);
+            font-family: 'Arial', sans-serif; 
+            font-size: 18px;
+            position: absolute;
+            top: 830px;
+            left: 1120px;
+                
+        }
+
+              
+  </style>
+  </head>
+    
+  <body>
+    <div class="sidebar" id="sidebar">
+      <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+      <a href="#" onclick="index()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
+      <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
+      <a href="#"><img src="images/ajustesicono.png" alt="Icono Ajustes"></a>
+
+
+  </div>
+
+  <div style="position: relative;">
+    <div class="textoexplicativo" id="textoexplicativo">Las tareas con fecha de hace un mes se borrarán automáticamente</div>
+</div>
+
+
+  <div class="content" >
+      <!-- Contenido principal de tu página -->
+      <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
+      <!--  <button class="openbtn" onclick="toggleSidebar()">☰</button> -->
+
+  </div>
+
+  <script>
+      function toggleSidebar() {
+          var sidebar = document.getElementById('sidebar');
+          if (sidebar.style.left === '0px') {
+              sidebar.style.left = '-250px';
+          } else {
+              sidebar.style.left = '0px';
+          }
+      }
+  </script>
+
+ <!-- <div class="count" id="countdown"></div>  -->
+
+
+    <ul class="listaTareasEliminadas" id="listaTareasEliminadas">
+    </ul>
+
+
+
+ <script>
+        const tareasEliminadasList = document.querySelector('.listaTareasEliminadas');
+        const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || [];
+
+        const botonesRestaurar = document.querySelectorAll(".botonrestaurar");
+
+        botonesRestaurar.forEach(boton => {
+            boton.addEventListener('click', () => {
+                console.log('Botón restaurar presionado');
+                restaurarTarea(boton.parentElement.parentElement);
+            });
+        });
+        function eliminarTareasAnterioresAUnMes() {
+            const fechaActual = new Date();
+            fechaActual.setMonth(fechaActual.getMonth() - 1);
+            const fechaLimite = fechaActual.toISOString().slice(0, 10);
+            const tareasEliminadas = Array.from(tareasEliminadasList.querySelectorAll('li'));
+
+            tareasEliminadas.forEach(tarea => {
+                const fechaTarea = tarea.querySelector('.col-2').textContent;
+
+                // Parse dates in a standardized format (YYYY-MM-DD)
+                const fechaTareaParts = fechaTarea.split('-');
+                const fechaActualParts = fechaLimite.split('-');
+
+                const tareaDate = new Date(fechaTareaParts[0], fechaTareaParts[1] - 1, fechaTareaParts[2]);
+                const limiteDate = new Date(fechaActualParts[0], fechaActualParts[1] - 1, fechaActualParts[2]);
+
+                if (tareaDate <= limiteDate) {
+                    tarea.remove();
+                    eliminarTarea(tarea);
+                }
+            });
+         }
+
+        function eliminarTarea(tareaRow) {
+            const taskId = tareaRow.dataset.taskId;
+            const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+            const tareaIndex = tareas.findIndex(task => task.id === parseInt(taskId));
+            if (tareaIndex !== -1) {
+                tareasEliminadas.push(tareas[tareaIndex]);
+                tareas.splice(tareaIndex, 1);
+                localStorage.setItem('tareas', JSON.stringify(tareas));
+                localStorage.setItem('tareasEliminadas', JSON.stringify(tareasEliminadas));
+            }
+            tareaRow.remove();
+        }
+
+        
+        function restaurarTarea(tareaElement) {
+            console.log("Hasta aqui llega");
+            const tarea = {
+                tarea: tareaElement.querySelector('label').textContent,
+                fecha: tareaElement.querySelector('.col-2').textContent,
+                puntos: tareaElement.querySelector('.col-1').textContent,
+                tipoTarea: tareaElement.querySelector('.col-3').textContent,
+            };
+
+            // Agregar la tarea nuevamente a la lista principal
+            const listaTareas = document.querySelector('.listaTareas');
+            const nuevaTareaLi = document.createElement('div');
+            nuevaTareaLi.classList.add('row');
+            nuevaTareaLi.innerHTML = `
+                <div class="col-auto"><input type="checkbox" disabled></div>
+                <div class="col"> <label for="tarea1">${tarea.tarea}</label></div>
+                <div class="col-2">${tarea.fecha}</div>
+                <div class="col-1">${tarea.puntos}</div>
+                <div class="col-3">${tarea.tipoTarea}</div>
+                <div class="col-3"><button class="botoneliminar">Eliminar</button></div>
+            `;
+            listaTareas.appendChild(nuevaTareaLi);
+
+            const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+            tarea.id = taskIdCounter++; // Asigna un nuevo ID a la tarea restaurada
+            tareas.push(tarea);
+            localStorage.setItem('tareas', JSON.stringify(tareas));
+            tareaElement.remove();
+            eliminarTarea(tareaElement); 
+        }
+
+
+
+        tareasEliminadas.forEach(tarea => {
+            const tareaItem = document.createElement('li');
+            tareaItem.innerHTML = `
+                <div class="col"> <label for="tarea1">${tarea.tarea}</label></div>
+                <div class="col-2">${tarea.fecha}</div>
+                <div class="col-1">${tarea.puntos}</div>
+                <div class="col-3">${tarea.tipoTarea}</div>
+                <div class="col-3"><button class="botonrestaurar">Restaurar</button></div>
+            `;
+            tareasEliminadasList.appendChild(tareaItem);
+        });    
+
+
+        function compareDates(dateStringA, dateStringB) {
+            const dateA = new Date(dateStringA);
+            const dateB = new Date(dateStringB);
+            return dateA - dateB;
+        }
+
+        function ordenarTareasPorFecha() {
+            const listaTareas = document.querySelector('.listaTareasEliminadas');
+            const tareas = Array.from(listaTareas.querySelectorAll('li'));
+
+            tareas.sort((a, b) => {
+                const fechaA = a.querySelector('.col-2').textContent;
+                const fechaB = b.querySelector('.col-2').textContent;
+                return compareDates(fechaA, fechaB);
+            });
+
+            while (listaTareas.firstChild) {
+                listaTareas.removeChild(listaTareas.firstChild);
+            }
+
+            tareas.forEach(tarea => {
+                listaTareas.appendChild(tarea);
+            });
+        }
+
+        eliminarTareasAnterioresAUnMes();
+        ordenarTareasPorFecha();
+</script>
+
+<div class="flechavolver" id="flechavolver">
+    <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+    <a href="#" onclick="flechavolver()"><img src="images/Flecha.png" alt="IconoFlecha"></a>
+</div>
+
+
+
+<script>
+    function index(){
+        window.location.href = "index.html";
+
+    }
+
+    function flechavolver(){
+        window.location.href = "checklist.html";
+
+    }
+
+    function mascota(){
+        window.location.href = "mascota.html";
+
+    }
+</script>
+    <script src="bootstrap-datepicker-master/dist/js/bootstrap-datepicker.js"></script>
+
+    <!--  <h1>Hello, world!</h1> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>

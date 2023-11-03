@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="bootstrap-datepicker-master/dist/css/bootstrap-datepicker.css">
+    <script src="bootstrap-datepicker-master/dist/js/bootstrap-datepicker.js"></script>
+
+
+
+
+        <style>
+      /* Estilos para el menú sidebar */
+      .sidebar {
+          height: 150%;
+          width: 150px;
+          position: fixed;
+          top: 0;
+          left: -150px; /* Ocultar inicialmente el menú */
+          background-color: #acc1e5;
+          transition: 0.3s;
+          z-index: 9;
+      }
+
+      .sidebar a {
+          padding: 10px;
+          text-decoration: none;
+          font-size: 20px;
+          color: #1c4b6a;
+          display: block;
+      }
+
+      .sidebar img {
+      width: 120px; /* Establece el ancho deseado */
+      height: 120px; /* Establece el alto deseado */
+      }
+
+      .sidebar a:hover {
+          background-color: #acc1e5;
+      }
+
+      /* Estilos para el botón de abrir/cerrar el menú */
+      .openbtn {
+          position: fixed;
+          left: 40px;
+          top: 40px;
+      }
+
+
+      .content {
+          margin-left: 10px;
+          padding: 20px;
+          z-index: 10;
+      }
+
+      .content a img {
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        width: 120px;
+        height: 120px;
+        z-index: 10;
+        }
+
+        body {
+            background-image: url('images/Fondo3.png'); /* Reemplaza 'ruta-de-tu-imagen.jpg' con la ruta correcta de tu imagen */
+            background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+        }
+        
+
+        .listaTareas {
+            background-color: rgb(163, 186, 217);
+            width: 1500px;
+            max-height: 70vh; 
+            overflow-y: auto; 
+            height: 700px;
+            padding: 30px;
+            border: 1px solid #ccc;
+            position: fixed;
+            top: 50%; /* Centrar verticalmente en todos los dispositivos */
+            left: 50%; /* Centrar horizontalmente en todos los dispositivos */
+            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            font-family: 'Arial', sans-serif; 
+            font-size: 17px;
+            flex-direction: column;
+            display: flex;
+            
+        }
+
+        .listaTareas li {
+            list-style-type: none;
+            display: flex;
+            flex-direction: row; /* Establece la dirección de los elementos como fila */
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: white; /* Fondo blanco para cada tarea */
+            border: 1px solid #ccc; /* Borde alrededor de cada tarea */
+            padding: 10px;
+        }
+
+        .listaTareas input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        /* Estilos para los campos de información adicional */
+        .listaTareas input[type="text"] {
+            flex: 3; /* Distribuye el espacio disponible de manera uniforme */
+            padding: 2px;
+            margin: 5px 10px; 
+        }
+
+        .nuevaTarea {
+            margin-bottom: 180px;
+            position: absolute;
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            left: 35%;
+            top: 11%;
+            transform: translate(-50%, -50%);
+            font-family: 'Arial', sans-serif; 
+            font-size: 18px;
+  
+        }    
+        .nuevaTarea input {
+            margin: 0px 5px; /* Añadimos margen vertical entre los campos de entrada */
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            margin: 10px 0;
+        }
+
+        .col {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        .col:last-child {
+            margin-right: 0;
+        }
+
+        
+        .papelera {
+
+            margin-bottom: 140px; /* Mueve el elemento hacia arriba 50 píxeles */
+            width: 300px;
+
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 9%; /* Centrar verticalmente en todos los dispositivos */
+            left: 85%; /* Centrar horizontalmente en todos los dispositivos */
+            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            color: rgb(31, 39, 78);
+
+        }
+
+        .papelera img {
+        width: 110px;
+        height: 110px;
+        }
+
+
+
+
+      
+  </style>
+  </head>
+    
+  <body>
+    <div class="sidebar" id="sidebar">
+      <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+      <a href="#" onclick="index()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
+      <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
+      <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
+      <a href="#"><img src="images/ajustesicono.png" alt="Icono Ajustes"></a>
+
+      <!-- Agrega más íconos o imágenes aquí -->
+  </div>
+
+  <div class="content" >
+      <!-- Contenido principal de tu página -->
+      <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
+      <!--  <button class="openbtn" onclick="toggleSidebar()">☰</button> -->
+
+  </div>
+
+  <script>
+
+
+      function toggleSidebar() {
+          var sidebar = document.getElementById('sidebar');
+          if (sidebar.style.left === '0px') {
+              sidebar.style.left = '-250px';
+          } else {
+              sidebar.style.left = '0px';
+          }
+      }
+  </script>
+
+ <!-- <div class="count" id="countdown"></div>  -->
+
+                                                                                             <!--BORRAR INTERIOR DE LA LISTA DE TAREAS  -->
+    <ul class="listaTareas">
+
+    </ul>
+
+
+    <form onsubmit="agregarTarea(); return false;" class="nuevaTarea">
+
+        <input type="text" id="nuevaTareaInput" placeholder="Escribe una nueva tarea" required>
+        <input type="text" id="fechaVencimiento" placeholder="Fecha de entrega">
+              
+        <select id="Puntos">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <select id="Tipo de tarea">
+            <option value="Examen">Examen</option>
+            <option value="Proyecto">Proyecto</option>
+            <option value="Ejercicio/s">Ejercicio/s</option>
+        </select>
+        <button type="submit">Agregar</button>
+
+    </form>
+
+ <script>
+
+
+         let taskIdCounter = 0; //Identificador tareas
+
+         const storedTareas = JSON.parse(localStorage.getItem('tareas')) || [];
+
+        storedTareas.forEach(function (task) {
+            const listaTareas = document.querySelector(".listaTareas");
+            var nuevaTareaLi = document.createElement("div");
+            nuevaTareaLi.classList.add("row");
+            nuevaTareaLi.dataset.taskId = task.id;
+            nuevaTareaLi.innerHTML = `
+                <div class="col-auto"><input type="checkbox" disabled></div>
+                <div class="col"> <label for="tarea1">${task.tarea}</label></div>
+                <div class="col-2">${task.fecha}</div>
+                <div class="col-1">${task.puntos}</div>
+                <div class="col-3">${task.tipoTarea}</div>
+                <div class="col-3"><button class="botoneliminar">Eliminar</button></div>
+            `;
+            listaTareas.appendChild(nuevaTareaLi);
+        });
+
+        ordenarTareasPorFecha();
+                
+
+        const fechaVencimientoInput = document.getElementById('fechaVencimiento');
+            $(fechaVencimientoInput).datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+        });
+
+   function agregarTarea() {
+    var nuevaTareaInput = document.getElementById("nuevaTareaInput");
+    var nuevaTarea = nuevaTareaInput.value;
+    var fechaVencimiento = fechaVencimientoInput.value;
+    var puntos = document.getElementById("Puntos").value;
+    var tipotarea = document.getElementById("Tipo de tarea").value;
+
+    if (nuevaTarea.trim() !== "") {
+        // Verificar si ya existe una tarea con el mismo nombre
+        var tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+        var tareaExistente = tareas.find(function (tarea) {
+            return tarea.tarea.toLowerCase() === nuevaTarea.toLowerCase();
+        });
+
+        if (tareaExistente) {
+            alert("¡Ya existe una tarea con el mismo nombre!");
+        } else {
+            taskIdCounter++;
+            var listaTareas = document.querySelector(".listaTareas");
+            var nuevaTareaLi = document.createElement("div");
+            nuevaTareaLi.classList.add("row");
+            nuevaTareaLi.dataset.taskId = taskIdCounter;
+            nuevaTareaLi.innerHTML = `
+                <div class="col-auto"><input type="checkbox" disabled></div>
+                <div class="col"> <label for="tarea1">${nuevaTarea}</label></div>
+                <div class="col-2">${fechaVencimiento}</div>
+                <div class="col-1">${puntos}</div>
+                <div class="col-3">${tipotarea}</div>
+                <div class="col-3"><button class="botoneliminar">Eliminar</button></div>
+            `;
+            listaTareas.appendChild(nuevaTareaLi);
+            nuevaTareaInput.value = "";
+            fechaVencimientoInput.value = "";
+
+            const botonEliminar = nuevaTareaLi.querySelector(".botoneliminar");
+            botonEliminar.addEventListener('click', function (event) {
+                eliminarTarea(event.target.parentElement.parentElement);
+            });
+
+            tareas.push({
+                id: taskIdCounter,
+                tarea: nuevaTarea,
+                fecha: fechaVencimiento,
+                puntos: puntos,
+                tipoTarea: tipotarea
+            });
+
+            localStorage.setItem('tareas', JSON.stringify(tareas));
+
+            ordenarTareasPorFecha();
+        }
+        }
+    }
+
+
+        const botonesEliminar = document.getElementsByClassName("botoneliminar");
+
+        for (const boton of botonesEliminar) {
+            boton.addEventListener('mousedown', function (event) {
+                console.log('Botón eliminar presionado');
+                eliminarTarea(event.target.parentElement.parentElement);
+            });
+        }
+
+        const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || [];
+
+
+        function eliminarTarea(tareaRow) {
+
+            const taskId = tareaRow.dataset.taskId;
+            const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+            const tareaIndex = tareas.findIndex(task => task.id === parseInt(taskId));
+            if (tareaIndex !== -1) {
+
+                tareasEliminadas.push(tareas[tareaIndex]);
+                tareas.splice(tareaIndex, 1);
+                localStorage.setItem('tareas', JSON.stringify(tareas));
+                localStorage.setItem('tareasEliminadas', JSON.stringify(tareasEliminadas));
+            }
+            tareaRow.remove();
+        }
+
+        function compararFechas(a, b) {
+            const fechaA = new Date(a.querySelector(".col-2").textContent); // Use .col-2 for the date column
+            const fechaB = new Date(b.querySelector(".col-2").textContent);
+
+            // Check if the dates are valid
+            if (!isNaN(fechaA) && !isNaN(fechaB)) {
+                return fechaA - fechaB;
+            } else {
+                // If the dates are invalid, move the task with an invalid date to the end
+                return isNaN(fechaA) ? 1 : -1;
+            }
+        }
+
+        function ordenarTareasPorFecha() {
+            const listaTareas = document.querySelector(".listaTareas");
+            const tareas = Array.from(listaTareas.querySelectorAll(".row"));
+
+            tareas.sort(compararFechas);
+
+            while (listaTareas.firstChild) {
+                listaTareas.removeChild(listaTareas.firstChild);
+            }
+
+            tareas.forEach(tarea => {
+                listaTareas.appendChild(tarea);
+            });
+
+        }
+
+
+</script>
+
+<div class="papelera" id="papelera">
+    <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+    <a href="#" onclick="papelera()"><img src="images/Trash3.png" alt="IconoPapelera"></a>
+</div>
+
+
+
+<script>
+    function index(){
+        window.location.href = "index.html";
+
+    }
+
+    function papelera(){
+        window.location.href = "papelera.html";
+
+    }
+
+    function mascota(){
+        window.location.href = "mascota.html";
+
+    }
+
+    function cementerio(){
+        window.location.href = "cementerio.html";
+    }
+</script>
+    <script src="bootstrap-datepicker-master/dist/js/bootstrap-datepicker.js"></script>
+
+    <!--  <h1>Hello, world!</h1> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
