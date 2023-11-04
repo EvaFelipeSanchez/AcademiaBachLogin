@@ -138,7 +138,7 @@
         justify-content: center;
         align-items: center;
         top: 10%;
-        left: 78%;
+        left: 75%;
         transform: translate(-50%, -50%);
         font-family: 'Arial', sans-serif;
         background-color: rgb(31, 39, 78);
@@ -296,6 +296,20 @@
 
         }
 
+        .logout{
+            width: 100%;
+            padding: 10px;
+            font-size: 24px;
+            margin-top: 0;
+            position: absolute;
+            top: 77%;
+            left: 75%;
+            transform: translate(0%, 0%);
+            color: white; 
+            border-radius: 5px;
+            z-index: 88;
+        }
+
 
 
   
@@ -303,6 +317,11 @@
   </head>
     
   <body>
+    <div class="logout" >
+    <form action="/logout?_method=DELETE" method="POST">
+        <button type="submit">Log Out</button>
+      </form>
+    </div>
 
     <div class="content" >
         <!-- Contenido principal de tu página -->

@@ -1,17 +1,150 @@
-<h1>Register</h1>
-<form action="/register" method="POST">
-    <div>
-        <label for="name">Name</label>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AcademiaBach</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+  <style>
+      body {
+        background-image: url('images/Fondo3.png'); 
+        background-size: cover; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; 
+        margin: 0;
+        flex-direction: column; 
+
+      }
+
+
+
+
+      .registro{
+        background-color: white;
+        border: 4px solid rgb(21, 28, 71);
+        padding: 10px;
+        border-radius: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center;
+        margin: -10px;
+        width: 500px;
+        height: 500px;
+        font-size: 25px;
+        transform: translate(0%, 10%);
+
+      }
+
+      .registroIntro {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        width: 500px;
+        font-size: 45px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: aliceblue;
+        text-shadow: -1px -1px 0 rgb(19, 31, 108), 1px -1px 0 rgb(19, 31, 108), -1px 1px 0 rgb(19, 31, 108), 3px 3px 0 rgb(21, 28, 71);
+        margin-top: 50px;
+        transform: translate(0%, 50%);
+      }
+      .registro .email{
+        margin-top: -50px;
+      }
+
+      .imagen-superpuesta {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: 30%;
+        top: 5%;
+        z-index: 1; 
+      }
+
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+        width: 100%;
+        text-align: left;
+      }
+
+      .button button {
+        width: 100%;
+        padding: 10px; /* Aumenta el tamaño del botón */
+        font-size: 24px; /* Aumenta el tamaño del texto del botón */
+        margin-top: -30px; /* Ajusta el margen superior para subir más el botón */
+        background-color: rgb(19, 31, 108); /* Color de fondo azul oscuro */
+        color: white; /* Texto en color blanco */
+        border: 4px solid rgb(13, 17, 44) ; /* Quita el borde */
+        border-radius: 5px;
+        transform: translate(0%, 70%); /* Centrar en la mitad de la pantalla */
+      }
+
+      .button button:hover {
+          background-color: #0C1573; /* Cambia el color de fondo en el hover */
+        }
+
+        .login {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        width: 500px;
+        font-size: 25px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: rgb(255, 255, 255);
+        transform: translate(0%, 50%);
+      }
+
+</style>
+
+
+
+</head>
+<body>
+
+  <div class="registroIntro">Registro</div>
+  <div class="registro">
+
+    
+    <% if (messages.error) { %>
+      <%= messages.error %>
+    <% } %>
+    <form action="/register" method="POST">
+      <div class="input-container">
+        <label for="name">Nombre de usuario</label>
         <input type="text" id="name" name="name" required>
       </div>
-      <div>
+      <div class="input-container">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
       </div>
-      <div>
-        <label for="password">Password</label>
+      <div class="input-container">
+        <label for="password">Contraseña</label>
         <input type="password" id="password" name="password" required>
       </div>
-      <button type="submit">Register</button>
+      <div class="button">
+        <button type="submit">Registrarse</button>
+      </div>
 </form>
-<a href="/login">Login</a>
+<div class= login><a href="/login">Login</a></div>
+  </div>
+  <img src="images/LogoBlue1.png" class="imagen-superpuesta" alt="Imagen Superpuesta">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
