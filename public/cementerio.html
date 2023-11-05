@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>AcademiaBach</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
       /* Estilos para el menú sidebar */
@@ -208,6 +208,7 @@
         });
 
     }
+
     localStorage.setItem('CementerioElements', JSON.stringify(listaCementerio));
     console.log(listaCementerio);
 
@@ -220,11 +221,11 @@
             for (var i = 0; i < items.length; i++) {
                 var nombreElement = items[i].querySelector('.nombre');
                 if (nombreElement.textContent === elementData.nombre) {
-                    return true; // El elemento ya existe en la ventana "mascota.html"
+                    return true; 
                 }
             }
 
-            return false; // El elemento no existe en la ventana "mascota.html"
+            return false; 
         }
 
 
@@ -263,60 +264,6 @@
 
         cargarElementosGuardados();
     }
-
-                
-    //agregarElementoAlCementerio();
-
-    function agregarElementoAlCementerio() {
-            // Recupera los datos necesarios desde donde sea necesario, por ejemplo, desde localStorage
-            var imagenPrincipalSrc = localStorage.getItem('imagenPrincipalCementerio');
-            var nombrePrincipalSrc = localStorage.getItem('nombrePrincipalCementerio');
-            var fechaCementerio = localStorage.getItem('fechaCementerio');
-
-            // Crea un nuevo elemento y agrega los datos
-            var nuevoElemento = document.createElement('div');
-            nuevoElemento.classList.add('item');
-            
-            // Agrega la imagen
-            var imagen = document.createElement('img');
-            imagen.src = imagenPrincipalSrc;
-            imagen.alt = 'Producto en el cementerio';
-            nuevoElemento.appendChild(imagen);
-
-            // Agrega el nombre
-            var nombre = document.createElement('p');
-            nombre.classList.add('nombre');
-            nombre.textContent = nombrePrincipalSrc;
-            nuevoElemento.appendChild(nombre);
-
-            // Agrega la fecha
-            var fechamuerte = document.createElement('p');
-            fechamuerte.classList.add('fechamuerte');
-            fechamuerte.textContent = fechaCementerio;
-            nuevoElemento.appendChild(fechamuerte);
-
-            // Agrega el nuevo elemento al contenedor sin borrar los elementos anteriores
-            var cementerioContainer = document.getElementById('cementerioContainer');
-            cementerioContainer.appendChild(nuevoElemento);
-
-            var CementerioContainer = document.querySelector('.cementerio');
-            CementerioContainer.appendChild(nuevoElemento);
-
-            // Almacena la información del nuevo elemento localmente
-            listaCementerio.push({
-                imagenPrincipal:  localStorage.getItem('imagenPrincipalCementerio'),
-                nombre:  localStorage.getItem('nombrePrincipalCementerio'),
-                fechaCementerio: localStorage.getItem('fechaCementerio'),
-            });
-            localStorage.setItem('CementerioElements', JSON.stringify(listaCementerio));
-
-    }
-
-
-
-
-
-
 
 </script>
 

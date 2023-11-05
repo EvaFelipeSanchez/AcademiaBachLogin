@@ -47,6 +47,11 @@ app.get('/', checkAuthenticated, (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
+const port = parseInt(process.env.PORT) || 8080;
+app.listen(port, () => {
+  console.log(`helloworld: listening on port ${port}`);
+});
+
 /*
 app.get('/', checkAuthenticated, (req, res) => {
     res.render('index.ejs', { name: req.user.name});

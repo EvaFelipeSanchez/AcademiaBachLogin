@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>AcademiaBach</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
       /* Estilos para el menú sidebar */
@@ -320,56 +320,54 @@
         localStorage.setItem('traspaso', traspaso);
 
         function comprar(item){
-
             var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
 
             if (puntosTotalesGuardados) {
-            puntosTotales = parseInt(puntosTotalesGuardados, 10);
-            // Actualiza el texto en el elemento de puntos totales        
-            document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+                puntosTotales = parseInt(puntosTotalesGuardados, 10);
+                document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
             } else {
-                puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
+                puntosTotales = 0;
             }
 
-
-            if(traspaso){
+            if (traspaso) {
                 var precioElement = document.querySelector('.store .item:nth-child(' + item + ') .price');
-                var precio = precioElement.textContent;
-                console.log(precio );
-                if(puntosTotalesGuardados >= precio){
-                    
+                var precio = parseInt(precioElement.textContent, 10);
 
-                    var imagenMascotaDespierta = document.querySelector('.store .item:nth-child(' + item + ') img');
-                    var imagenMascotaDormida = document.querySelector('.store .item:nth-child(' + item + ') .segunda-imagen');
+                if (puntosTotalesGuardados >= precio) {
                     var nombreMascotaInput = document.querySelector('.store .item:nth-child(' + item + ') .nuevaMascotaInput');
                     var nombreMascota = nombreMascotaInput.value;
 
-                    var nuevoElemento = {
-                        imagenPrincipal: imagenMascotaDespierta.src,
-                        segundaImagen: imagenMascotaDormida.src,
-                        nombre: nombreMascota
-                    };
-                    listaLocal.push(nuevoElemento);
-                    
-                    console.log("Nombre mascota: " + nombreMascota );
+                    // Comprobar si el nombre de la mascota ya existe en la lista local
+                    var nombreRepetido = listaLocal.some(function (element) {
+                        return element.nombre === nombreMascota;
+                    });
 
-                    localStorage.setItem('storeElements', JSON.stringify(listaLocal));
+                    if (!nombreRepetido) {
+                        var imagenMascotaDespierta = document.querySelector('.store .item:nth-child(' + item + ') img');
+                        var imagenMascotaDormida = document.querySelector('.store .item:nth-child(' + item + ') .segunda-imagen');
 
-                    puntosTotalesGuardados = puntosTotalesGuardados - precio;
-                    localStorage.setItem("puntosTotales", puntosTotalesGuardados);
+                        var nuevoElemento = {
+                            imagenPrincipal: imagenMascotaDespierta.src,
+                            segundaImagen: imagenMascotaDormida.src,
+                            nombre: nombreMascota
+                        };
 
-                    traspaso = false;
-                    localStorage.setItem('traspaso', traspaso);
+                        listaLocal.push(nuevoElemento);
 
-                    window.location.href = 'mascota.html';
+                        puntosTotalesGuardados -= precio;
+                        localStorage.setItem("puntosTotales", puntosTotalesGuardados);
 
+                        localStorage.setItem('storeElements', JSON.stringify(listaLocal));
+                        traspaso = false;
+                        localStorage.setItem('traspaso', traspaso);
+
+                        window.location.href = 'mascota.html';
+                    } else {
+                        alert("El nombre de la mascota ya existe.");
+                        // Aquí puedes mostrar un mensaje de error o tomar alguna acción adecuada.
+                    }
                 }
-
-      
-
-            
             }
-
 
         }
 
