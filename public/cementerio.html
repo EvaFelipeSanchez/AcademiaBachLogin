@@ -238,28 +238,24 @@
                 if (!elementYaExisteEnMascota(elementData)) {
                     var nuevoItem = document.createElement('div');
                     nuevoItem.classList.add('item');
-                    var nuevoItem = document.createElement('div');
-                        nuevoItem.classList.add('item');
 
-                var nuevaImagen = document.createElement('img');
-                nuevaImagen.src = elementData.imagenPrincipal;
-                nuevoItem.appendChild(nuevaImagen);
+                    var nuevaImagen = document.createElement('img');
+                    nuevaImagen.src = elementData.imagenPrincipal;
+                    nuevoItem.appendChild(nuevaImagen);
 
-                var nuevoNombre = document.createElement('p');
-                nuevoNombre.classList.add('nombre');
-                nuevoNombre.textContent = elementData.nombre;
-                nuevoItem.appendChild(nuevoNombre);
+                    var nuevoNombre = document.createElement('p');
+                    nuevoNombre.classList.add('nombre');
+                    nuevoNombre.textContent = elementData.nombre;
+                    nuevoItem.appendChild(nuevoNombre);
 
-                var nuevoFecha = document.createElement('p');
-                nuevoFecha.classList.add('fechamuerte');
-                nuevoFecha.textContent = elementData.fechaCementerio;
-                nuevoItem.appendChild(nuevoFecha);
+                    var nuevoFecha = document.createElement('p');
+                    nuevoFecha.classList.add('fechamuerte');
+                    nuevoFecha.textContent = elementData.fechamuerte; // Utiliza la propiedad correcta
+                    nuevoItem.appendChild(nuevoFecha);
 
-                CementerioElementsContainer.appendChild(nuevoItem);
-
-        }
-
-        });
+                    CementerioElementsContainer.appendChild(nuevoItem);
+                }
+            });
         } 
 
         cargarElementosGuardados();

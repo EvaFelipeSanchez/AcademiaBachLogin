@@ -47,9 +47,9 @@ app.get('/', checkAuthenticated, (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-const port = parseInt(process.env.PORT) || 8080;
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
-  console.log(`helloworld: listening on port ${port}`);
+  console.log(`Servidor escuchando en el puerto ${port}`);
 });
 
 /*

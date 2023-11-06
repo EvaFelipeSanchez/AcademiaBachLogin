@@ -1,4 +1,9 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/academiabach/my-custom-image', '.']
-images: ['gcr.io/academiabach/my-custom-image']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'my-app'
+  - '--image=gcr.io/academiabach/academiabachimagen'
+  - '--platform=managed'
+  - '--region=europe-southwest1'

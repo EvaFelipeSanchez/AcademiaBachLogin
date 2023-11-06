@@ -475,19 +475,46 @@
     empezar.style.display = "block";
 
     var nopoder = document.querySelector(".nopoder");
-
-
     var savedDisplayValue = localStorage.getItem("displayValue");
 
-
-
     if (savedDisplayValue) {
-    console.log("Llega aqui");
     var nopoder = document.querySelector(".nopoder");
     nopoder.style.display = savedDisplayValue;
     }else{
         nopoder.style.display = "block";
     }
+
+    //sidebar
+    function ocultarSidebar() {
+        var logoButton = document.querySelector('.content a img');
+        logoButton.style.display = 'none';
+
+        var sidebar = document.querySelector('.sidebar');
+        var elementosSidebar = sidebar.children;
+
+        for (var i = 0; i < elementosSidebar.length; i++) {
+            var elemento = elementosSidebar[i];
+            elemento.style.display = 'none';
+        }
+
+        
+    }
+
+    function mostrarSidebar() {
+        var logoButton = document.querySelector('.content a img');
+        logoButton.style.display = 'block';
+
+        var sidebar = document.querySelector('.sidebar');
+        var elementosSidebar = sidebar.children;
+
+        for (var i = 0; i < elementosSidebar.length; i++) {
+            var elemento = elementosSidebar[i];
+            elemento.style.display = 'block';
+        }
+    }
+
+
+
 
 
 
@@ -537,6 +564,18 @@
         despierta.style.display = "none"; 
         terminar.style.display = "block";
         empezar.style.display = "none";
+        ocultarSidebar();
+
+        window.addEventListener('beforeunload', function (e) {
+              terminarCountdown();
+            window.location.href = 'cementerio.html';
+
+
+        });
+
+
+
+
     
 
 
@@ -626,6 +665,7 @@
                         dormida.style.display = "none"; 
                         terminar.style.display = "none";
                         empezar.style.display = "block";
+                        mostrarSidebar();
 
                 }
 
@@ -736,6 +776,7 @@
      
 
     function terminarCountdown(){
+        mostrarSidebar();
         enviarCementerio();
         
     }
