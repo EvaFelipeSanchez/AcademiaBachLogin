@@ -1,0 +1,4 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/academiabach/my-custom-image', '.']
+images: ['gcr.io/academiabach/my-custom-image']
