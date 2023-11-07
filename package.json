@@ -1,10 +1,14 @@
 {
   "name": "academiabach",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "server.js",
   "scripts": {
     "devStart": "node server.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   },
   "author": "Google LLC",
   "license": "Apache-2.0",

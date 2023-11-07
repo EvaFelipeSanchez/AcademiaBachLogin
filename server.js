@@ -22,19 +22,21 @@ initializePassport(
   id => users.find(user => user.id === id)
 )
 
-
-
-
 const users = [];
 
-app.set('view-engine', 'ejs');
+app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(flash())
+
+const secrett = process.env.SESSION_SECRET || 'default-secret';
 app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-}))
+  secret: secrett, // Replace with your actual secret key
+  resave: false,
+  saveUninitialized: true
+}));
+
+
+
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -45,12 +47,12 @@ app.use(methodOverride('_method'))
 app.get('/', checkAuthenticated, (req, res) => {
   // Envia el archivo HTML en respuesta a la solicitud GET
   res.sendFile(__dirname + '/public/index.html');
+  //res.send(__dirname + '/public/index.html');
 });
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`Servidor escuchando en el puerto ${port}`);
-});
+
+
+
 
 /*
 app.get('/', checkAuthenticated, (req, res) => {
@@ -154,5 +156,14 @@ function checkAuthenticated(req, res, next) {
 app.use(express.static('public'));
 
 
+const port = parseInt(process.env.PORT) || 8080;
+app.listen(port, () => {
+  console.log(`helloworld: listening on port ${port}`);
+});
 
-app.listen(3000);
+
+
+
+
+
+//app.listen(3000);

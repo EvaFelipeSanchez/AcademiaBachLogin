@@ -186,9 +186,7 @@
       <a href="#" onclick="index()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
       <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
       <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
-      <a href="#"><img src="images/ajustesicono.png" alt="Icono Ajustes"></a>
 
-      <!-- Agrega más íconos o imágenes aquí -->
   </div>
 
   <div class="content" >
@@ -211,9 +209,7 @@
       }
   </script>
 
- <!-- <div class="count" id="countdown"></div>  -->
-
-                                                                                             <!--BORRAR INTERIOR DE LA LISTA DE TAREAS  -->
+                                                                                           
     <ul class="listaTareas">
 
     </ul>
@@ -246,6 +242,8 @@
          let taskIdCounter = 0; //Identificador tareas
 
          const storedTareas = JSON.parse(localStorage.getItem('tareas')) || [];
+         var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+
 
         storedTareas.forEach(function (task) {
             const listaTareas = document.querySelector(".listaTareas");
@@ -253,7 +251,7 @@
             nuevaTareaLi.classList.add("row");
             nuevaTareaLi.dataset.taskId = task.id;
             nuevaTareaLi.innerHTML = `
-                <div class="col-auto"><input type="checkbox" disabled></div>
+                <div class="col-auto"><input type="checkbox"></div>
                 <div class="col"> <label for="tarea1">${task.tarea}</label></div>
                 <div class="col-2">${task.fecha}</div>
                 <div class="col-1">${task.puntos}</div>
@@ -261,6 +259,32 @@
                 <div class="col-3"><button class="botoneliminar">Eliminar</button></div>
             `;
             listaTareas.appendChild(nuevaTareaLi);
+
+            var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+
+
+            const checkbox = nuevaTareaLi.querySelector('input[type="checkbox"]');
+            checkbox.addEventListener('change', function () {
+                if (checkbox.checked) {
+    
+                    console.log(`Checkbox en la tarea con ID ${task.id} marcado`);
+                    const respuesta = confirm("¿Ha completado la tarea " + task.tarea + "?");
+                    if (respuesta) {
+                        console.log("La acción se llevará a cabo. Los puntos totales son: " + task.puntos);
+                        //console.log("puntos antes: " + puntosTotalesGuardados);
+
+                        puntosTotalesGuardados = parseInt(puntosTotalesGuardados, 10); // Convertir a número si es una cadena
+                        puntosTotalesGuardados += parseInt(task.puntos, 10);
+                        //console.log("puntos despues: " + puntosTotalesGuardados);
+                        localStorage.setItem("puntosTotales", puntosTotalesGuardados);
+                        eliminarTarea(nuevaTareaLi);
+                    } else { 
+                        checkbox.checked = false;
+                    }
+
+                                    
+                } 
+            });
         });
 
         ordenarTareasPorFecha();
@@ -271,6 +295,7 @@
                 format: 'yyyy-mm-dd',
                 autoclose: true
         });
+
 
    function agregarTarea() {
     var nuevaTareaInput = document.getElementById("nuevaTareaInput");
@@ -295,7 +320,7 @@
             nuevaTareaLi.classList.add("row");
             nuevaTareaLi.dataset.taskId = taskIdCounter;
             nuevaTareaLi.innerHTML = `
-                <div class="col-auto"><input type="checkbox" disabled></div>
+                <div class="col-auto"><input type="checkbox"></div>
                 <div class="col"> <label for="tarea1">${nuevaTarea}</label></div>
                 <div class="col-2">${fechaVencimiento}</div>
                 <div class="col-1">${puntos}</div>
@@ -308,8 +333,8 @@
 
             const botonEliminar = nuevaTareaLi.querySelector(".botoneliminar");
             botonEliminar.addEventListener('click', function (event) {
-                eliminarTarea(event.target.parentElement.parentElement);
             });
+
 
             tareas.push({
                 id: taskIdCounter,
@@ -324,6 +349,7 @@
             ordenarTareasPorFecha();
         }
         }
+        location.reload(); 
     }
 
 

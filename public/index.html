@@ -330,6 +330,25 @@
             z-index: 88;
         }
 
+        .sisales{
+            font-size: 16px;
+            height: 90px;
+            margin-top: 390px;
+            width: 500px;
+
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 50%;
+            left: 80%;
+            transform: translate(-50%, -50%);
+            color:  rgb(16, 21, 45);
+            font-family: 'Arial', sans-serif; 
+            font-weight: bold; 
+
+        }
+
 
 
   
@@ -362,13 +381,12 @@
       <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
       <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
       <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
-      <a href="#"><img src="images/ajustesicono.png" alt="Icono Ajustes"></a>
 
       <!-- Agrega más íconos o imágenes aquí -->
   </div>
-
-  <img src="images/1.2.png" alt="Mascota dormida" class="mascotadormida-image"  id="imagenMascotaDormida">
-  <img src="images/1.1.png" alt="Mascota despierta" class="mascotadespierta-image"  id="imagenMascotaDespierta">
+  
+  <img src="images/cruz.png" alt="Mascota dormida" class="mascotadormida-image" id="imagenMascotaDormida">
+  <img src="images/cruz.png" alt="Mascota despierta" class="mascotadespierta-image" id="imagenMascotaDespierta">
 
 
 
@@ -385,6 +403,8 @@
   </div>
 
   <p class="nopoder" >Asigna una mascota para continuar</p>
+
+  <p class="sisales" >Si actualizas las página, cierras la página o le das al botón de finalizar tu mascota morirá y se irá al cementerio.</p>
 
 
 
@@ -438,12 +458,22 @@
     //updateMessage();
     //despierta.style.display = "none"; 
     //dormida.style.display = "block"; 
-    
 
-     var imagenPrincipalSrc = localStorage.getItem('imagenPrincipal');
+    if (!localStorage.getItem('imagenPrincipal') || localStorage.getItem('imagenPrincipal') === 'null') {
+    if (!localStorage.getItem('segundaImagen') || localStorage.getItem('segundaImagen') === 'null') {
+        var nuevaImagen = 'images/cruz.png';
+         document.getElementById('imagenMascotaDespierta').src = nuevaImagen;
+        document.getElementById('imagenMascotaDormida').src = nuevaImagen;
+    }    
+     }else{
+        var imagenPrincipalSrc = localStorage.getItem('imagenPrincipal');
      var segundaImagenSrc = localStorage.getItem('segundaImagen');
      document.getElementById('imagenMascotaDespierta').src = imagenPrincipalSrc;
      document.getElementById('imagenMascotaDormida').src = segundaImagenSrc;
+     }
+    
+
+
 
      var nombrePrincipalSrc = localStorage.getItem('nombrePrincipal');
      document.getElementById('MascotaNombre').textContent = nombrePrincipalSrc;
@@ -473,6 +503,13 @@
     terminar.style.display = "none";
     var empezar = document.getElementById("startButton");
     empezar.style.display = "block";
+
+
+    var sisales = document.querySelector(".sisales");
+    sisales.style.display = "none";
+
+
+
 
     var nopoder = document.querySelector(".nopoder");
     var savedDisplayValue = localStorage.getItem("displayValue");
@@ -512,6 +549,8 @@
             elemento.style.display = 'block';
         }
     }
+
+    var empezarcoundown = false;
 
 
 
@@ -564,22 +603,20 @@
         despierta.style.display = "none"; 
         terminar.style.display = "block";
         empezar.style.display = "none";
+        sisales.style.display = "block";
+
         ocultarSidebar();
+        empezarcoundown = true;
 
         window.addEventListener('beforeunload', function (e) {
-              terminarCountdown();
+            if(empezarcoundown){
+                terminarCountdown();
             window.location.href = 'cementerio.html';
+            }
+        }); 
 
 
-        });
-
-
-
-
-    
-
-
-
+ 
 
         function updateDisplay() {             
               
@@ -605,6 +642,11 @@
            localStorage.setItem("barraAvance", "100");
            terminar.style.display = "block";
            empezar.style.display = "none";
+           sisales.style.display = "block";
+
+           
+
+
 
 
 
@@ -665,7 +707,9 @@
                         dormida.style.display = "none"; 
                         terminar.style.display = "none";
                         empezar.style.display = "block";
+                        sisales.style.display = "none";
                         mostrarSidebar();
+                        empezarcoundown = false;
 
                 }
 

@@ -179,6 +179,16 @@
                 
         }
 
+        .textoexplicativo2 {
+            color: rgb(255, 255, 255);
+            font-family: 'Arial', sans-serif; 
+            font-size: 18px;
+            position: absolute;
+            top: 855px;
+            left: 1120px;
+                
+        }
+
               
   </style>
   </head>
@@ -188,13 +198,15 @@
       <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
       <a href="#" onclick="index()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
       <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
-      <a href="#"><img src="images/ajustesicono.png" alt="Icono Ajustes"></a>
+      <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
+
 
 
   </div>
 
   <div style="position: relative;">
-    <div class="textoexplicativo" id="textoexplicativo">Las tareas con fecha de hace un mes se borrarán automáticamente</div>
+    <div class="textoexplicativo" id="textoexplicativo">Las tareas con fecha de hace un mes se borrarán automáticamente.</div>
+    <div class="textoexplicativo2" id="textoexplicativo2">Las tareas restauradas ya no valdrán puntos.</div>
 </div>
 
 
@@ -224,10 +236,14 @@
 
 
 
+
+
  <script>
         const tareasEliminadasList = document.querySelector('.listaTareasEliminadas');
         const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || [];
+        let taskIdCounter = 0;
 
+        /*
         const botonesRestaurar = document.querySelectorAll(".botonrestaurar");
 
         botonesRestaurar.forEach(boton => {
@@ -235,7 +251,10 @@
                 console.log('Botón restaurar presionado');
                 restaurarTarea(boton.parentElement.parentElement);
             });
-        });
+        }); */
+
+
+
         function eliminarTareasAnterioresAUnMes() {
             const fechaActual = new Date();
             fechaActual.setMonth(fechaActual.getMonth() - 1);
@@ -273,38 +292,36 @@
         }
 
         
-        function restaurarTarea(tareaElement) {
-            console.log("Hasta aqui llega");
+
+        function restaurarTarea(tareaItem, tareaNombre, tareaFecha, tareaPuntos, tareaTipo) {
             const tarea = {
-                tarea: tareaElement.querySelector('label').textContent,
-                fecha: tareaElement.querySelector('.col-2').textContent,
-                puntos: tareaElement.querySelector('.col-1').textContent,
-                tipoTarea: tareaElement.querySelector('.col-3').textContent,
+                tarea: tareaNombre,
+                fecha: tareaFecha,
+                puntos: tareaPuntos,
+                tipoTarea: tareaTipo,
             };
 
-            // Agregar la tarea nuevamente a la lista principal
-            const listaTareas = document.querySelector('.listaTareas');
-            const nuevaTareaLi = document.createElement('div');
-            nuevaTareaLi.classList.add('row');
-            nuevaTareaLi.innerHTML = `
-                <div class="col-auto"><input type="checkbox" disabled></div>
-                <div class="col"> <label for="tarea1">${tarea.tarea}</label></div>
-                <div class="col-2">${tarea.fecha}</div>
-                <div class="col-1">${tarea.puntos}</div>
-                <div class="col-3">${tarea.tipoTarea}</div>
-                <div class="col-3"><button class="botoneliminar">Eliminar</button></div>
-            `;
-            listaTareas.appendChild(nuevaTareaLi);
+            // Elimina la tarea de la lista de tareas eliminadas
+            const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || [];
+            const tareaIndex = tareasEliminadas.findIndex(task => task.tarea === tareaNombre);
+            if (tareaIndex !== -1) {
+                tareasEliminadas.splice(tareaIndex, 1);
+                localStorage.setItem('tareasEliminadas', JSON.stringify(tareasEliminadas));
+            }
 
-            const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+            let tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+            if (!Array.isArray(tareas)) {
+                tareas = [];
+            }
+
             tarea.id = taskIdCounter++; // Asigna un nuevo ID a la tarea restaurada
             tareas.push(tarea);
             localStorage.setItem('tareas', JSON.stringify(tareas));
-            tareaElement.remove();
-            eliminarTarea(tareaElement); 
+
+            // Elimina la tarea de la vista de tareas eliminadas
+            tareaItem.remove();
+            window.location.href = "checklist.html";
         }
-
-
 
         tareasEliminadas.forEach(tarea => {
             const tareaItem = document.createElement('li');
@@ -315,8 +332,29 @@
                 <div class="col-3">${tarea.tipoTarea}</div>
                 <div class="col-3"><button class="botonrestaurar">Restaurar</button></div>
             `;
+
+
             tareasEliminadasList.appendChild(tareaItem);
-        });    
+        });
+
+        // Obtén una lista de todos los botones "Restaurar"
+        const botonesRestaurar = document.querySelectorAll('.botonrestaurar');
+
+        // Agrega un controlador de eventos a cada botón "Restaurar"
+         botonesRestaurar.forEach(boton => {
+                boton.addEventListener('click', () => {
+                    const tareaItem = boton.closest('li');
+                    const tareaNombre = tareaItem.querySelector('label').textContent;
+                    const tareaFecha = tareaItem.querySelector('.col-2').textContent;
+                    const tareaPuntos = 0;
+                    const tareaTipo = tareaItem.querySelector('.col-3').textContent;
+                    restaurarTarea( tareaItem, tareaNombre, tareaFecha, tareaPuntos, tareaTipo);
+
+                    //alert(`Restaurar tarea: ${tareaNombre}, Fecha: ${tareaFecha}, Puntos: ${tareaPuntos}, Tipo: ${tareaTipo}`);
+                });
+            });
+
+
 
 
         function compareDates(dateStringA, dateStringB) {
