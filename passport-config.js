@@ -1,31 +1,32 @@
-const LocalStrategy = require('passport-local').Strategy
-const bcrypt = require('bcrypt')
 
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 
-function initialize(passport, getUserByEmail, getUserById){
-    const authenticateUser = async (email, password, done) => {
-        const user = getUserByEmail(email)
-        if(user == null) {
-            return done(null, false, { message: 'No existe un usuario con ese email'})
-        }
+function initializePassport(passport, getUserByEmail, getUserById, usersCollection) {
+  const authenticateUser = async (email, password, done) => {
+    const user = await getUserByEmail(email);
+    if (!user) {
+      return done(null, false, { message: 'No user found with email: ' + email });
+    }
 
-        try{
-            if(await bcrypt.compare(password, user.password)){
-                return done(null, user)
-            }else{
-                return done(null, false, { message: 'Contraseña incorrecta'})
-            }
-        }catch (e) {
-            return done(e)
-
-        }
-
+    try {
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (passwordMatch) {
+        return done(null, user);
+      } else {
+        return done(null, false, { message: 'Incorrect password for email: ' + email });
       }
-      passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser))
-      passport.serializeUser((user, done) => { done(null, user.id) })
-      passport.deserializeUser((id, done) => { 
-        done(null, getUserById>(id))
-     })
+    } catch (e) {
+      console.error('Error comparing passwords:', e);
+      return done(e);
+    }
+  };
+
+  passport.use(new LocalStrategy({ usernameField: 'email' }, authenticateUser));
+  passport.serializeUser((user, done) => done(null, user.id));
+  passport.deserializeUser((id, done) => done(null, getUserById(id)));
+
+  return passport;
 }
 
-module.exports = initialize
+module.exports = initializePassport;

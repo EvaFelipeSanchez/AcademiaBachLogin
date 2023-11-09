@@ -1,28 +1,66 @@
-if(process.env.NODE_ENV !== 'production'){
-    require('dotenv').config()
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
 }
+
 const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
-const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
-const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
+const { v4: uuidv4 } = require('uuid');
+const passport = require('passport');
 
+
+const initializePassport = require('./passport-config');
+const MongoClient = require('mongodb').MongoClient;
 
 // Middleware para analizar datos del formulario HTML
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const initializePassport = require('./passport-config');
+const uri = 'mongodb://localhost:27017/mi_basededatos';
+
+let usersCollection;
+
+(async () => {
+  const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  const db = client.db('mi_basededatos');
+  usersCollection = db.collection('users');
+})();
+
+
+//const initializePassport = require('./passport-config');
 initializePassport(
   passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
-)
+  async email => {
+    try {
+      const user = await usersCollection.findOne({ email: email });
+      return user;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
+  async id => {
+    try {
+      const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+      const usersCollection = client.db('mi_basededatos').collection('users');
+      const user = await usersCollection.findOne({ id: id });
+      client.close();
+      return user;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
-const users = [];
+const users = [
+  { id: 1, username: 'user1', email: 'user1@example.com', password: 'w' },
+  { id: 2, username: 'user2', email: 'user2@example.com', password: 'w' },
+  // ... otros usuarios
+];
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
@@ -30,24 +68,49 @@ app.use(flash())
 
 const secrett = process.env.SESSION_SECRET || 'default-secret';
 app.use(session({
-  secret: secrett, // Replace with your actual secret key
-  resave: false,
-  saveUninitialized: true
+secret: secrett, // Replace with your actual secret key
+resave: false,
+saveUninitialized: true
 }));
 
+const getUserByEmail = async (email) => {
+  try {
+    const user = await usersCollection.findOne({ email: email });
+    return user;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
 
 
+const { ObjectId } = require('mongodb');
 
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(methodOverride('_method'))
+const getUserById = async (id) => {
+  try {
+    const user = await usersCollection.findOne({ _id: ObjectId(id) });
+    return user;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+
+const passportInstance = passport;
+initializePassport(passportInstance, getUserByEmail, getUserById, usersCollection);
+
+app.use(passportInstance.initialize());
+app.use(passportInstance.session());
+app.use(methodOverride('_method'));
+
 
 
 // Ruta para mostrar el formulario HTML
 app.get('/', checkAuthenticated, (req, res) => {
-  // Envia el archivo HTML en respuesta a la solicitud GET
-  res.sendFile(__dirname + '/public/index.html');
-  //res.send(__dirname + '/public/index.html');
+// Envia el archivo HTML en respuesta a la solicitud GET
+res.sendFile(__dirname + '/public/index.html');
+//res.send(__dirname + '/public/index.html');
 });
 
 
@@ -56,114 +119,113 @@ app.get('/', checkAuthenticated, (req, res) => {
 
 /*
 app.get('/', checkAuthenticated, (req, res) => {
-    res.render('index.ejs', { name: req.user.name});
+  res.render('index.ejs', { name: req.user.name});
 });
 */
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
-    res.render('login.ejs');
+  res.render('login.ejs');
 })
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login',
-    failureFlash: true
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
 }));
 
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
-    res.render('register.ejs');
+  res.render('register.ejs');
 });
 
+
 app.post('/register', checkNotAuthenticated, async (req, res) => {
-    try{
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        users.push({
-            id: Date.now().toString(),
-            name: req.body.name,
-            email: req.body.email, 
-            password: hashedPassword
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-        });
-        res.redirect('/login');
-        
-    } catch {
-        res.redirect('/register');
+    const newUser = {
+      id: uuidv4(),
+      name: req.body.name,
+      email: req.body.email,
+      password: hashedPassword,
+      servicioLocal: uuidv4(),
+      username: req.body.username,
+    };
 
-    }
-    
+    console.log('Nuevo Usuario:', newUser);
+
+    await usersCollection.insertOne(newUser);
+
+    res.redirect('/login');
+  } catch (error) {
+    console.error('Error al registrar nuevo usuario:', error);
+    res.redirect('/register');
+  }
 });
 
 
 // Ruta para mostrar el formulario HTML
 app.get('/', (req, res) => {
-    // Envia el archivo HTML en respuesta a la solicitud GET
-    res.sendFile(__dirname + '/public/index.html');
-  });
-  
+  // Envia el archivo HTML en respuesta a la solicitud GET
+  res.sendFile(__dirname + '/public/index.html');
+});
+
 
 // Ruta para procesar los datos del formulario (POST)
 app.post('/guardar', (req, res) => {
-    // Conectar a la base de datos
-    MongoClient.connect('mongodb://localhost:27017/mi_basededatos', (err, client) => {
+  // Conectar a la base de datos
+  MongoClient.connect('mongodb://localhost:27017/mi_basededatos', (err, client) => {
+    if (err) return console.error(err);
+    console.log('Conexión exitosa a la base de datos');
+
+    const db = client.db('mi_basededatos');
+    const collection = db.collection('misdatos');
+
+    // Insertar datos en la colección
+    collection.insertOne(req.body, (err, result) => {
       if (err) return console.error(err);
-      console.log('Conexión exitosa a la base de datos');
-  
-      const db = client.db('mi_basededatos');
-      const collection = db.collection('misdatos');
-  
-      // Insertar datos en la colección
-      collection.insertOne(req.body, (err, result) => {
-        if (err) return console.error(err);
-        console.log('Datos insertados con éxito');
-        client.close();
-        res.redirect('/');
-      });
+      console.log('Datos insertados con éxito');
+      client.close();
+      res.redirect('/');
+      console.log('Ruta /guardar llamada');
     });
   });
+});
 
 
 
 
 
 app.delete('/logout', (req, res) => {
-    req.logOut(function(err) {
-      if (err) {
-        console.error(err);
-      }
-      res.redirect('/login');
-    });
+  req.logOut(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    res.redirect('/login');
   });
+});
 
 function checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next()
-    }
-  
-    res.redirect('/login')
+  if (req.isAuthenticated()) {
+    return next()
   }
 
-  function checkNotAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return res.redirect('/')
-    }
-    next()
+  res.redirect('/login')
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/')
   }
+  next()
+}
 
 
 
 // Configura la carpeta "public" para servir archivos estáticos
 app.use(express.static('public'));
 
-
-const port = parseInt(process.env.PORT) || 8080;
+const port = parseInt(process.env.PORT) || 3000;
 app.listen(port, () => {
-  console.log(`helloworld: listening on port ${port}`);
+console.log(`helloworld: listening on port ${port}`);
 });
-
-
-
-
-
-
-//app.listen(3000);
