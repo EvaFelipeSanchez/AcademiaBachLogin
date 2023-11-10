@@ -20,8 +20,8 @@ const MongoClient = require('mongodb').MongoClient;
 // Middleware para analizar datos del formulario HTML
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const uri = 'mongodb://localhost:27017/mi_basededatos';
-
+//const uri = 'mongodb://localhost:27017/mi_basededatos';
+const uri = 'mongodb+srv://evafelipe:BL8h6Y4AguSZWB56@clusteracademiabach.wz3n9ev.mongodb.net/ClusterAcademiaBach?retryWrites=true&w=majority';
 let usersCollection;
 
 (async () => {
@@ -150,6 +150,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
       password: hashedPassword,
       servicioLocal: uuidv4(),
       username: req.body.username,
+      
     };
 
     console.log('Nuevo Usuario:', newUser);
