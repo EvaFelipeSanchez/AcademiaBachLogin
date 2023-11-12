@@ -22,26 +22,6 @@
       }
 
 
-
-
-      .registro{
-        background-color: white;
-        border: 4px solid rgb(21, 28, 71);
-        padding: 10px;
-        border-radius: 40px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        display: flex;
-        flex-direction: column; 
-        justify-content: center;
-        align-items: center;
-        margin: -10px;
-        width: 500px;
-        height: 500px;
-        font-size: 25px;
-        transform: translate(0%, 10%);
-
-      }
-
       .registroIntro {
         padding: 20px;
         display: flex;
@@ -54,14 +34,29 @@
         color: aliceblue;
         text-shadow: -1px -1px 0 rgb(19, 31, 108), 1px -1px 0 rgb(19, 31, 108), -1px 1px 0 rgb(19, 31, 108), 3px 3px 0 rgb(21, 28, 71);
         margin-top: 50px;
-        transform: translate(0%, 50%);
-      }
-      .registro .email{
-        margin-top: -50px;
+        transform: translate(0%, -80%);
       }
 
+      .registro{
+        background-color: white;
+        border: 4px solid rgb(21, 28, 71);
+        padding: 10px;
+        border-radius: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column; 
+        justify-content: center;
+        align-items: center;
+        margin: -10px;
+        width: 100%;
+        height: auto;
+        font-size: 25px;
+        transform: translate(0%, -20%);
+
+      }
+
+
       .imagen-superpuesta {
-        position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -87,7 +82,7 @@
         color: white; /* Texto en color blanco */
         border: 4px solid rgb(13, 17, 44) ; /* Quita el borde */
         border-radius: 5px;
-        transform: translate(0%, 70%); /* Centrar en la mitad de la pantalla */
+        transform: translate(0%, 40%); /* Centrar en la mitad de la pantalla */
       }
 
       .button button:hover {
@@ -100,47 +95,61 @@
         justify-content: center;
         align-items: center;
         margin: 0;
-        width: 500px;
+        width: 100%;
         font-size: 25px;
         font-family: Arial, Helvetica, sans-serif;
         color: rgb(255, 255, 255);
-        transform: translate(0%, 50%);
+        transform: translate(0%, 30%);
       }
 
+      .parent {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(7, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        }
+
+        .div1 { grid-area: 3 / 2 / 4 / 3; }
+        .div2 { grid-area: 4 / 2 / 7 / 3; }
+
 </style>
-
-
-
 </head>
+
 <body>
 
-  <div class="registroIntro">Registro</div>
-  <div class="registro">
-
-    
-    <% if (messages.error) { %>
-      <%= messages.error %>
-    <% } %>
-    <form action="/register" method="POST">
-      <div class="input-container">
-        <label for="name">Nombre de usuario</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-      <div class="input-container">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-      <div class="input-container">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <div class="button">
-        <button type="submit">Registrarse</button>
-      </div>
-</form>
-<div class= login><a href="/login">Login</a></div>
+  <div class="parent">
+    <div class="div1"> 
+      <img src="images/LogoBlue1.png" class="imagen-superpuesta" alt="Imagen Superpuesta">
+    </div>
+    <div class="div2"> 
+      <div class="registroIntro">Registro</div>
+      <div class="registro">    
+        <% if (messages.error) { %>
+          <%= messages.error %>
+        <% } %>
+        <form action="/register" method="POST">
+          <div class="input-container">
+            <label for="name">Nombre de usuario</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="input-container">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="input-container">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" required>
+          </div>
+          <div class="button">
+            <button type="submit">Registrarse</button>
+          </div>
+    </form>
+    <div class= login><a href="/login">Login</a></div>
+    </div>
+    </div>
   </div>
-  <img src="images/LogoBlue1.png" class="imagen-superpuesta" alt="Imagen Superpuesta">
+  
 
 
       <script>

@@ -57,7 +57,7 @@
         }
 
         body {
-            background-image: url('images/Fondo12.png'); /* Reemplaza 'ruta-de-tu-imagen.jpg' con la ruta correcta de tu imagen */
+            background-image: url('images/Fondo3.png'); /* Reemplaza 'ruta-de-tu-imagen.jpg' con la ruta correcta de tu imagen */
             background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
             background-repeat: no-repeat; /* Evita que la imagen se repita */
             height: 100%;
@@ -213,7 +213,7 @@
         margin-top: 410px;
         position: relative;
         left: 78%; 
-        transform: translate(-50%, -50%);
+        transform: translate(-20%, -70%);
         }
 
         .blue-background {
@@ -279,6 +279,15 @@
             transform: translate(-50%, -50%);
         }
 
+        .blanco-image {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -4;
+            width: 40%;
+        }
+
 
         .message-block {
             position: fixed;
@@ -324,7 +333,7 @@
             position: absolute;
             top: 77%;
             left: 75%;
-            transform: translate(0%, 0%);
+            transform: translate(-32%, 120%);
             color: white; 
             border-radius: 5px;
             z-index: 88;
@@ -348,7 +357,20 @@
             font-weight: bold; 
 
         }
+        .parent {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(9, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        }
 
+        .div1 { grid-area: 1 / 1 / 10 / 2; }
+        .div2 { grid-area: 2 / 7 / 3 / 8; }
+        .div3 { grid-area: 2 / 3 / 8 / 7; }
+        .div4 { grid-area: 8 / 4 / 9 / 6; }
+        .div5 { grid-area: 8 / 6 / 9 / 8; }
+        .div6 { grid-area: 2 / 7 / 8 / 8; }
 
 
   
@@ -356,80 +378,87 @@
   </head>
     
   <body>
-    <div class="logout" >
-    <form action="/logout?_method=DELETE" method="POST">
-        <button type="submit">Log Out</button>
-      </form>
+
+    <div class="parent">
+        <div class="div1"> 
+            <div class="content" >
+                <!-- Contenido principal de tu página -->
+                <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
+            </div>
+            <div class="sidebar" id="sidebar">
+                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+                <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
+                <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
+                <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
+            </div>
+
+        </div>
+        <div class="div2">               
+            <div class="punto">
+                <img src="images/Monedas.png" alt="Moneda">
+                <div class="puntostexto">
+                    <p id="puntosTotales">00</p>
+                </div>
+            </div>
+        </div>
+        <div class="div3"> 
+            <div class="slider-container">
+                <div class="blue-background"></div> 
+                <div class="duration-label">Duración: <span id="duracionLabel">25</span> minutos</div>
+                <div class="slider-wrapper">
+                    <input type="range" id="duracion" name="duracion" min="1" max="240" value="20" class="vertical-slider" oninput="updateDurationLabel()">
+                </div>
+
+            <div class="logout" >
+                <form action="/logout?_method=DELETE" method="POST">
+                    <button type="submit">Log Out</button>
+                  </form>
+            </div>
+
+        </div>
+        <div class="div4">
+            <div class="message-block" id="messageBlock" style="display: none">
+                <p id="message">Mensaje inicial</p>
+            </div>
+            <p class="nombreMascota" id="MascotaNombre">Nombre</p>
+            <img src="images/cruz.png" alt="Mascota dormida" class="mascotadormida-image" id="imagenMascotaDormida">
+            <img src="images/cruz.png" alt="Mascota despierta" class="mascotadespierta-image" id="imagenMascotaDespierta">
+            <img src="images/BlancoSet.png" alt="blanco-image" class="blanco-image" id="blanco-image">
+            <div class="count" id="countdown"> 00:00</div>
+            <div class="barra-de-progreso">
+                <div class="barra-fondo">
+                  <div class="barra-avance" id="barraAvance"></div>
+                </div>
+              </div>
+            
+
+
+        </div>
+        <div class="div5"> 
+            <div class="empezar" >
+                <!-- Contenido principal de tu página -->
+                <button id="startButton" onclick="startCountdown()">Empezar</button>
+              </div>
+              <div class="terminar" >
+               <!-- Contenido principal de tu página -->
+               <button id="terminarButton" onclick="terminarCountdown()">FINALIZAR</button>
+             </div>
+             <p class="nopoder" >Asigna una mascota para continuar</p>
+        </div>
+        <div class="div6"> 
+            <p class="sisales" >Si actualizas las página, cierras la página o le das al botón de finalizar tu mascota morirá y se irá al cementerio.</p>
+        </div>
     </div>
-
-    <div class="content" >
-        <!-- Contenido principal de tu página -->
-        <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
-        <!--  <button class="openbtn" onclick="toggleSidebar()">☰</button> -->
-  
-    </div>
-
-    <div class="message-block" id="messageBlock" style="display: none">
-        <p id="message">Mensaje inicial</p>
-    </div>
-
-    <p class="nombreMascota" id="MascotaNombre">Nombre</p>
-
-
-    <div class="sidebar" id="sidebar">
-      <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-      <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
-      <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
-      <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
-
-      <!-- Agrega más íconos o imágenes aquí -->
-  </div>
-  
-  <img src="images/cruz.png" alt="Mascota dormida" class="mascotadormida-image" id="imagenMascotaDormida">
-  <img src="images/cruz.png" alt="Mascota despierta" class="mascotadespierta-image" id="imagenMascotaDespierta">
+        
 
 
 
 
- <div class="count" id="countdown"> 00:00</div>
- <div class="empezar" >
-  <!-- Contenido principal de tu página -->
-  <button id="startButton" onclick="startCountdown()">Empezar</button>
-</div>
-
-<div class="terminar" >
-    <!-- Contenido principal de tu página -->
-    <button id="terminarButton" onclick="terminarCountdown()">FINALIZAR</button>
-  </div>
-
-  <p class="nopoder" >Asigna una mascota para continuar</p>
-
-  <p class="sisales" >Si actualizas las página, cierras la página o le das al botón de finalizar tu mascota morirá y se irá al cementerio.</p>
 
 
 
 
-  
-<div class="punto">
-    <img src="images/Monedas.png" alt="Moneda">
-    <div class="puntostexto">
-        <p id="puntosTotales">00</p>
-    </div>
-</div>
 
-<div class="barra-de-progreso">
-    <div class="barra-fondo">
-      <div class="barra-avance" id="barraAvance"></div>
-    </div>
-  </div>
-
-
-  <div class="slider-container">
-    <div class="blue-background"></div> 
-    <div class="duration-label">Duración: <span id="duracionLabel">25</span> minutos</div>
-    <div class="slider-wrapper">
-        <input type="range" id="duracion" name="duracion" min="1" max="240" value="20" class="vertical-slider" oninput="updateDurationLabel()">
-    </div>
     
 </div>
 

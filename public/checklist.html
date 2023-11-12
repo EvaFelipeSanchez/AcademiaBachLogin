@@ -61,8 +61,8 @@
         position: fixed;
         left: 10px;
         top: 10px;
-        width: 120px;
-        height: 120px;
+        width: 7%;
+        height: auto;
         z-index: 10;
         }
 
@@ -75,10 +75,10 @@
 
         .listaTareas {
             background-color: rgb(163, 186, 217);
-            width: 1500px;
+            width: 70%;
             max-height: 70vh; 
             overflow-y: auto; 
-            height: 700px;
+            height: 100%;
             padding: 30px;
             border: 1px solid #ccc;
             position: fixed;
@@ -122,7 +122,7 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            width: 300px;
+            width: 100%;
             left: 35%;
             top: 11%;
             transform: translate(-50%, -50%);
@@ -131,7 +131,7 @@
   
         }    
         .nuevaTarea input {
-            margin: 0px 5px; /* Añadimos margen vertical entre los campos de entrada */
+            margin: 0px 5px; 
         }
 
         .row {
@@ -155,7 +155,7 @@
         .papelera {
 
             margin-bottom: 140px; /* Mueve el elemento hacia arriba 50 píxeles */
-            width: 300px;
+            width: 100%;
 
             position: fixed;
             display: flex;
@@ -169,37 +169,90 @@
         }
 
         .papelera img {
-        width: 110px;
-        height: 110px;
+        width: 60%;
+        height: auto;
         }
 
 
 
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(9, 1fr);
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+            }
 
+            .div1 { grid-area: 1 / 1 / 10 / 2; }
+            .div2 { grid-area: 2 / 3 / 9 / 8; }
+            .div3 { grid-area: 2 / 7 / 3 / 8; }
+            .div4 { grid-area: 2 / 3 / 3 / 7; }
       
   </style>
   </head>
     
   <body>
-    <div class="sidebar" id="sidebar">
-      <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-      <a href="#" onclick="index()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
-      <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
-      <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
 
-  </div>
+    <div class="parent">
+        <div class="div1">
+            <div class="sidebar" id="sidebar">
+                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+                <a href="#" onclick="index()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
+                <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
+                <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
+            </div>
+            <div class="content" >
+                <!-- Contenido principal de tu página -->
+                <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
+            </div>
+          
+        </div>
+        <div class="div2"> 
+            <ul class="listaTareas">
+            </ul>
+        
+        </div>
+        <div class="div3"> 
+            <div class="papelera" id="papelera">
+                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+                <a href="#" onclick="papelera()"><img src="images/Trash3.png" alt="IconoPapelera"></a>
+            </div>
+            
+        </div>
+        <div class="div4"> 
+            <form onsubmit="agregarTarea(); return false;" class="nuevaTarea">
 
-  <div class="content" >
-      <!-- Contenido principal de tu página -->
-      <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
-      <!--  <button class="openbtn" onclick="toggleSidebar()">☰</button> -->
+                <input type="text" id="nuevaTareaInput" placeholder="Escribe una nueva tarea" required>
+                <input type="text" id="fechaVencimiento" placeholder="Fecha de entrega">
+                      
+                <select id="Puntos">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <select id="Tipo de tarea">
+                    <option value="Examen">Examen</option>
+                    <option value="Proyecto">Proyecto</option>
+                    <option value="Ejercicio/s">Ejercicio/s</option>
+                </select>
+                <button type="submit">Agregar</button>
+        
+            </form>
+        </div>
+    </div>
 
-  </div>
-
-  <script>
 
 
-      function toggleSidebar() {
+                                                                                         
+
+
+
+
+ <script>
+
+    function toggleSidebar() {
           var sidebar = document.getElementById('sidebar');
           if (sidebar.style.left === '0px') {
               sidebar.style.left = '-250px';
@@ -207,37 +260,6 @@
               sidebar.style.left = '0px';
           }
       }
-  </script>
-
-                                                                                           
-    <ul class="listaTareas">
-
-    </ul>
-
-
-    <form onsubmit="agregarTarea(); return false;" class="nuevaTarea">
-
-        <input type="text" id="nuevaTareaInput" placeholder="Escribe una nueva tarea" required>
-        <input type="text" id="fechaVencimiento" placeholder="Fecha de entrega">
-              
-        <select id="Puntos">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-        <select id="Tipo de tarea">
-            <option value="Examen">Examen</option>
-            <option value="Proyecto">Proyecto</option>
-            <option value="Ejercicio/s">Ejercicio/s</option>
-        </select>
-        <button type="submit">Agregar</button>
-
-    </form>
-
- <script>
-
 
          let taskIdCounter = 0; //Identificador tareas
 
@@ -412,10 +434,6 @@
 
 </script>
 
-<div class="papelera" id="papelera">
-    <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-    <a href="#" onclick="papelera()"><img src="images/Trash3.png" alt="IconoPapelera"></a>
-</div>
 
 
 

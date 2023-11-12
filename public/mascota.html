@@ -26,8 +26,8 @@
       }
 
       .sidebar img {
-      width: 120px;
-      height: 120px;
+      width: 120px; 
+      height: auto; 
       }
 
       .sidebar a:hover {
@@ -40,18 +40,20 @@
           top: 40px;
       }
 
-      /* Estilo para el contenido principal (debes ajustar esto para evitar solapamientos) */
+
       .content {
           margin-left: 10px;
           padding: 20px;
+          z-index: 10;
       }
 
       .content a img {
         position: fixed;
         left: 10px;
         top: 10px;
-        width: 120px;
-        height: 120px;
+        width: 7%;
+        height: auto;
+        z-index: 10;
         }
 
         body {
@@ -64,7 +66,7 @@
             font-size: 62px;
             height: 0;
             margin-top: 180px; /* Mueve el elemento hacia arriba 50 píxeles */
-            width: 150px;
+            width: 10%;
 
             position: fixed;
             display: flex;
@@ -78,12 +80,16 @@
         }
 
         .store {
+            position: fixed;
+            top: 15%;
+            left: 15%; 
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            margin-top: 120px;
-            margin-left: 80px;
+            transform: translate(-10%, 5%);
+            overflow-y: auto; 
+            max-height: 80vh;
         }
 
         .item {
@@ -96,7 +102,7 @@
 
 
         .store img {
-            max-width: 60%;
+            max-width: 50%;
         }
 
         .price {
@@ -113,8 +119,8 @@
         }
 
         .tiendabar{
-            margin-bottom: 140px; /* Mueve el elemento hacia arriba 50 píxeles */
-            width: 130px;
+            margin-bottom: 140px; 
+            width: 7%;
             background-color: #acc1e5;
             border: 1px solid #1b184f;
             padding: 8px;
@@ -123,21 +129,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 9%; /* Centrar verticalmente en todos los dispositivos */
-            left: 75%; /* Centrar horizontalmente en todos los dispositivos */
-            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            top: 9%; 
+            left: 75%;
+            transform: translate(-50%, -50%); 
             color: rgb(31, 39, 78);
 
         }
 
         .tiendabar img {
-        width: 110px;
-        height: 110px;
+        width: 100%;
+        height: auto;
         }
 
+       /* 
         .cementerio{
-            margin-bottom: 140px; /* Mueve el elemento hacia arriba 50 píxeles */
-            width: 130px;
+            margin-bottom: 140px; 
+            width: 130%;
             background-color: #acc1e5;
             border: 1px solid #1b184f;
             padding: 8px;
@@ -146,9 +153,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 9%; /* Centrar verticalmente en todos los dispositivos */
-            left: 85%; /* Centrar horizontalmente en todos los dispositivos */
-            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            top: 9%; 
+            left: 85%;
+            transform: translate(-50%, -50%); 
             color: rgb(31, 39, 78);
 
         }
@@ -157,17 +164,18 @@
         width: 110px;
         height: 110px;
         }
-
+        */
+       
         .punto {
         font-size: 42px;
-        height: 0;
+        height: 0%;
         margin-top: 20px;
-        width: 150px;
+        width: 10%;
    
-        padding-top: 50px; /* Cambia el alto del relleno en la parte superior */
-        padding-right: 130px; /* Cambia el ancho del relleno en el lado derecho */
-        padding-bottom: 45px; /* Cambia el alto del relleno en la parte inferior */
-        padding-left: 100px; /* Cambia el ancho del relleno en el lado izquierdo */
+        padding-top: 50px;  
+        padding-right: 130px; 
+        padding-bottom: 45px;
+        padding-left: 100px;
 
         position: fixed;
         display: flex;
@@ -192,7 +200,18 @@
         }
 
 
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            grid-column-gap: 6px;
+            grid-row-gap: 28px;
+            }
 
+            .div1 { grid-area: 1 / 1 / 10 / 2; }
+            .div2 { grid-area: 2 / 6 / 3 / 7; }
+            .div3 { grid-area: 2 / 7 / 3 / 8; }
+            .div4 { grid-area: 3 / 3 / 8 / 8; }
 
 
       
@@ -200,38 +219,50 @@
   </head>
     
   <body>
-    <div class="sidebar" id="sidebar">
-      <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-      <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
-      <a href="#" onclick="index()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
-           <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
 
-      <!-- Agrega más íconos o imágenes aquí -->
-  </div>
+    <div class="parent">
+        <div class="div1"> 
+            <div class="sidebar" id="sidebar">
+                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+                <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
+                <a href="#" onclick="index()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
+                     <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
+              </div>
+          
+              <div class="content" >
+                  <!-- Contenido principal de tu página -->
+                  <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
+              </div>
+        </div>
+        <div class="div2"> 
 
-  <div class="content" >
-      <!-- Contenido principal de tu página -->
-      <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
-      <!--  <button class="openbtn" onclick="toggleSidebar()">☰</button> -->
+            <div class="punto">
+                <img src="images/Monedas.png" alt="Moneda">
+                <div class="puntostexto">
+                    <p id="puntosTotales">00</p>
+                </div>
+            </div>
+        </div>
+        <div class="div3"> 
+            <div class="tiendabar" id="tiendabar">
+                <a href="#" onclick="tienda()"><img src="images/homeicono.png" alt="Icono de tienda"></a>
+              </div>
+            
+        </div>
+        <div class="div4"> 
+            <div class="store">
 
-  </div>
-
-  <div class="tiendabar" id="tiendabar">
-    <a href="#" onclick="tienda()"><img src="images/homeicono.png" alt="Icono de tienda"></a>
-  </div>
-
-
-
-  <div class="punto">
-    <img src="images/Monedas.png" alt="Moneda">
-    <div class="puntostexto">
-        <p id="puntosTotales">00</p>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="store">
 
-  </div>
+
+
+
+
+
+
 
   <script>
       function toggleSidebar() {

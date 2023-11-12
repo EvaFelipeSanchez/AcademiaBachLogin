@@ -25,9 +25,10 @@
           display: block;
       }
 
+
       .sidebar img {
-      width: 120px;
-      height: 120px;
+      width: 120px; 
+      height: auto; 
       }
 
       .sidebar a:hover {
@@ -78,12 +79,16 @@
         }
 
         .store {
+            position: fixed;
+            top: 15%;
+            left: 15%; 
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            margin-top: 120px;
-            margin-left: 80px;
+            transform: translate(-10%, 5%);
+            overflow-y: auto; 
+            max-height: 80vh;
         }
 
         .item {
@@ -96,7 +101,7 @@
 
 
         .store img {
-            max-width: 60%;
+            max-width: 50%;
         }
 
         .price {
@@ -113,8 +118,8 @@
         }
 
         .mascotabar{
-            margin-bottom: 140px; /* Mueve el elemento hacia arriba 50 píxeles */
-            width: 130px;
+            margin-bottom: 140px; 
+            width: 8%;
             background-color: #acc1e5;
             border: 1px solid #1b184f;
             padding: 8px;
@@ -123,51 +128,30 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 9%; /* Centrar verticalmente en todos los dispositivos */
-            left: 75%; /* Centrar horizontalmente en todos los dispositivos */
-            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            top: 9%; 
+            left: 75%;
+            transform: translate(-50%, -50%); 
             color: rgb(31, 39, 78);
 
         }
 
         .mascotabar img {
-        width: 110px;
-        height: 110px;
+            width: 100%;
+            height: auto;
         }
 
-        .cementerio{
-            margin-bottom: 140px; /* Mueve el elemento hacia arriba 50 píxeles */
-            width: 130px;
-            background-color: #acc1e5;
-            border: 1px solid #1b184f;
-            padding: 8px;
 
-            position: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 9%; /* Centrar verticalmente en todos los dispositivos */
-            left: 85%; /* Centrar horizontalmente en todos los dispositivos */
-            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
-            color: rgb(31, 39, 78);
-
-        }
-
-        .cementerio img {
-        width: 110px;
-        height: 110px;
-        }
 
         .punto {
         font-size: 42px;
-        height: 0;
+        height: 0%;
         margin-top: 20px;
-        width: 150px;
+        width: 10%;
    
-        padding-top: 50px; /* Cambia el alto del relleno en la parte superior */
-        padding-right: 130px; /* Cambia el ancho del relleno en el lado derecho */
-        padding-bottom: 45px; /* Cambia el alto del relleno en la parte inferior */
-        padding-left: 100px; /* Cambia el ancho del relleno en el lado izquierdo */
+        padding-top: 50px;  
+        padding-right: 130px; 
+        padding-bottom: 45px;
+        padding-left: 100px;
 
         position: fixed;
         display: flex;
@@ -182,145 +166,167 @@
         }
 
         .punto img {
-        width: 75px; /* Ajusta el ancho de la imagen según tus necesidades */
+        width: 75px; 
         padding: 20px 0; 
-        margin-right: 20px; /* Espacio entre la imagen y el texto */
+        margin-right: 20px; 
         }
 
         .punto .contenido {
-        flex: 1; /* El contenido ocupa el espacio restante */
+        flex: 1; 
         }
 
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            grid-column-gap: 6px;
+            grid-row-gap: 28px;
+            }
+
+            .div1 { grid-area: 1 / 1 / 10 / 2; }
+            .div2 { grid-area: 2 / 6 / 3 / 7; }
+            .div3 { grid-area: 2 / 7 / 3 / 8; }
+            .div4 { grid-area: 3 / 3 / 8 / 8; }
 
 
 
       
   </style>
   </head>
+
+  <div class="parent">
+    <div class="div1"> 
+        <div class="sidebar" id="sidebar">
+            <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+            <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
+            <a href="#" onclick="index()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
+            <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
+          </div>
+      
+          <div class="content" >
+            <!-- Contenido principal de tu página -->
+            <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
+          </div>
+    </div>
+    <div class="div2"> 
+        <div class="punto">
+            <img src="images/Monedas.png" alt="Moneda">
+            <div class="puntostexto">
+                <p id="puntosTotales">00</p>
+            </div>
+        </div>
+    </div>
+    <div class="div3"> 
+        <div class="mascotabar" id="mascotabar">
+            <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono de tienda"></a>
+          </div>
+    </div>
+    <div class="div4"> 
+        <div class="store">
+            <div class="item">
+                <img src="images/2.1.png" alt="Producto 1">
+                <img class="segunda-imagen" src="images/2.2.png" alt="Producto 1-2" style="display: none">
+                <p class="price">0</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(1)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/3.1.png" alt="Producto 2">
+                <img class="segunda-imagen" src="images/3.2.png" alt="Producto 2-2" style="display: none">
+                <p class="price">0</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(2)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/4.1.png" alt="Producto 3">
+                <img class="segunda-imagen" src="images/4.2.png" alt="Producto 3-2" style="display: none">
+                <p class="price">0</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(3)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/5.1.png" alt="Producto 4">
+                <img class="segunda-imagen" src="images/5.2.png" alt="Producto 4-2" style="display: none">
+                <p class="price">0</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(4)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/6.1.png" alt="Producto 5">
+                <img class="segunda-imagen" src="images/6.2.png" alt="Producto 6-2" style="display: none">
+                <p class="price">1</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(5)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/7.1.png" alt="Producto 6">
+                <img class="segunda-imagen" src="images/7.2.png" alt="Producto 7-2" style="display: none">
+                <p class="price">1</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(6)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/1.1.png" alt="Producto 7">
+                <img class="segunda-imagen" src="images/1.2.png" alt="Producto 8-2" style="display: none">
+                <p class="price">1</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(7)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/8.1.png" alt="Producto 8">
+                <img class="segunda-imagen" src="images/8.2.png" alt="Producto 9-2" style="display: none">
+                <p class="price">1</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(8)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/9.1.png" alt="Producto 9">
+                <img class="segunda-imagen" src="images/9.2.png" alt="Producto 10-2" style="display: none">
+                <p class="price">1</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(9)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/10.1.png" alt="Producto 10">
+                <img class="segunda-imagen" src="images/10.2.png" alt="Producto 11-2" style="display: none">
+                <p class="price">1</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(10)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/11.1.png" alt="Producto 11">
+                <img class="segunda-imagen" src="images/11.2.png" alt="Producto 12-2" style="display: none">
+                <p class="price">1</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(11)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/12.1.png" alt="Producto 12">
+                <img class="segunda-imagen" src="images/12.2.png" alt="Producto 13-2" style="display: none">
+                <p class="price">1</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(12)">Comprar</button>
+            </div>
+            <div class="item">
+                <img src="images/13.1.png" alt="Producto 13">
+                <img class="segunda-imagen" src="images/13.2.png" alt="Producto 14-2" style="display: none">
+                <p class="price">1</p>
+                <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
+                <button class="buy-button" onclick="comprar(13)">Comprar</button>
+            </div>
+    </div>
+    </div>
     
   <body>
-    <div class="sidebar" id="sidebar">
-      <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-      <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
-      <a href="#" onclick="index()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
-      <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
 
 
-      <!-- Agrega más íconos o imágenes aquí -->
-  </div>
-
-  <div class="content" >
-      <!-- Contenido principal de tu página -->
-      <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
-      <!--  <button class="openbtn" onclick="toggleSidebar()">☰</button> -->
-
-  </div>
-
-  <div class="mascotabar" id="mascotabar">
-    <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono de tienda"></a>
-  </div>
 
 
-  <div class="punto">
-    <img src="images/Monedas.png" alt="Moneda">
-    <div class="puntostexto">
-        <p id="puntosTotales">00</p>
-    </div>
-</div>
 
 
-  <div class="store">
-    <div class="item">
-        <img src="images/2.1.png" alt="Producto 1">
-        <img class="segunda-imagen" src="images/2.2.png" alt="Producto 1-2" style="display: none">
-        <p class="price">0</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(1)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/3.1.png" alt="Producto 2">
-        <img class="segunda-imagen" src="images/3.2.png" alt="Producto 2-2" style="display: none">
-        <p class="price">0</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(2)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/4.1.png" alt="Producto 3">
-        <img class="segunda-imagen" src="images/4.2.png" alt="Producto 3-2" style="display: none">
-        <p class="price">0</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(3)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/5.1.png" alt="Producto 4">
-        <img class="segunda-imagen" src="images/5.2.png" alt="Producto 4-2" style="display: none">
-        <p class="price">0</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(4)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/6.1.png" alt="Producto 5">
-        <img class="segunda-imagen" src="images/6.2.png" alt="Producto 6-2" style="display: none">
-        <p class="price">1</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(5)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/7.1.png" alt="Producto 6">
-        <img class="segunda-imagen" src="images/7.2.png" alt="Producto 7-2" style="display: none">
-        <p class="price">1</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(6)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/1.1.png" alt="Producto 7">
-        <img class="segunda-imagen" src="images/1.2.png" alt="Producto 8-2" style="display: none">
-        <p class="price">1</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(7)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/8.1.png" alt="Producto 8">
-        <img class="segunda-imagen" src="images/8.2.png" alt="Producto 9-2" style="display: none">
-        <p class="price">1</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(8)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/9.1.png" alt="Producto 9">
-        <img class="segunda-imagen" src="images/9.2.png" alt="Producto 10-2" style="display: none">
-        <p class="price">1</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(9)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/10.1.png" alt="Producto 10">
-        <img class="segunda-imagen" src="images/10.2.png" alt="Producto 11-2" style="display: none">
-        <p class="price">1</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(10)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/11.1.png" alt="Producto 11">
-        <img class="segunda-imagen" src="images/11.2.png" alt="Producto 12-2" style="display: none">
-        <p class="price">1</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(11)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/12.1.png" alt="Producto 12">
-        <img class="segunda-imagen" src="images/12.2.png" alt="Producto 13-2" style="display: none">
-        <p class="price">1</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(12)">Comprar</button>
-    </div>
-    <div class="item">
-        <img src="images/13.1.png" alt="Producto 13">
-        <img class="segunda-imagen" src="images/13.2.png" alt="Producto 14-2" style="display: none">
-        <p class="price">1</p>
-        <input type="text" class="nuevaMascotaInput" placeholder="Nombre Mascota" required>
-        <button class="buy-button" onclick="comprar(13)">Comprar</button>
-    </div>
+
+
+
 
 </div>
 
