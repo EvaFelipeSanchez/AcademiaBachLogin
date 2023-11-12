@@ -9,66 +9,65 @@
       /* Estilos para el menú sidebar */
       .sidebar {
           height: 150%;
-          width: 150px;
+          width: 9%;
           position: fixed;
           top: 0;
-          left: -150px; /* Ocultar inicialmente el menú */
+          left: -150%; 
           background-color: #acc1e5;
           transition: 0.3s;
       }
 
       .sidebar a {
-          padding: 10px;
+          padding: 7%;
           text-decoration: none;
-          font-size: 20px;
+          font-size: 1vw;
           color: #1c4b6a;
           display: block;
       }
 
       .sidebar img {
-      width: 120px; 
-      height: auto; 
+      width: 100%;
+      height: auto;
       }
 
       .sidebar a:hover {
           background-color: #acc1e5;
       }
 
-      .openbtn {
-          position: fixed;
-          left: 40px;
-          top: 40px;
-      }
-
 
       .content {
-          margin-left: 10px;
-          padding: 20px;
+          margin-left: 5%;
+          padding: 7%;
           z-index: 10;
       }
 
+
       .content a img {
         position: fixed;
-        left: 10px;
-        top: 10px;
+        left: 1%;
+        top: 1%;
         width: 7%;
         height: auto;
-        z-index: 10;
+        z-index: 3;
         }
 
         body {
-            background-image: url('images/Fondo3.png');
-            background-size: cover;
+            background-image: url('images/Fondo3.png'); 
+            background-size: cover; 
             background-repeat: no-repeat; 
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden
         }
+        
+
 
         .count {
-            font-size: 62px;
-            height: 0;
-            margin-top: 180px; /* Mueve el elemento hacia arriba 50 píxeles */
-            width: 10%;
 
-            position: fixed;
+            height: 0;
+           width: 10%;          
             display: flex;
             justify-content: center;
             align-items: center;
@@ -82,7 +81,7 @@
         .store {
             position: fixed;
             top: 15%;
-            left: 15%; 
+            left: 20%; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -95,8 +94,6 @@
         .item {
             background-color: #acc1e5;
             border: 1px solid #1b184f;
-            padding: 8px;
-            margin: 10px;
             text-align: center;
         }
 
@@ -106,24 +103,24 @@
         }
 
         .price {
-            font-size: 18px;
-            margin: 10px 0;
+            font-size: 1.2vw;
+
         }
 
         .activar-button {
             background-color: #213953;
             color: #fff;
-            padding: 5px 10px;
+            padding: 1% 5%;
             border: none;
             cursor: pointer;
         }
 
         .tiendabar{
-            margin-bottom: 140px; 
+
             width: 7%;
             background-color: #acc1e5;
             border: 1px solid #1b184f;
-            padding: 8px;
+            padding: 0%;
 
             position: fixed;
             display: flex;
@@ -167,15 +164,15 @@
         */
        
         .punto {
-        font-size: 42px;
+        font-size: 2vw;
         height: 0%;
-        margin-top: 20px;
+        margin-top: 2%;
         width: 10%;
    
-        padding-top: 50px;  
-        padding-right: 130px; 
-        padding-bottom: 45px;
-        padding-left: 100px;
+        padding-top: 3%; 
+        padding-right: 7%;
+        padding-bottom: 2.5%;
+        padding-left: 9%; 
 
         position: fixed;
         display: flex;
@@ -189,12 +186,27 @@
         color: #fff;
         }
 
-        .punto img {
-        width: 75px; /* Ajusta el ancho de la imagen según tus necesidades */
-        padding: 20px 0; 
-        margin-right: 20px; /* Espacio entre la imagen y el texto */
-        }
+        .moneda-image {
+            font-size: 2vw;
+        text-align: center;
+        height: 0;
+        margin-top: 1%;
+        width: 2%;
 
+
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 40%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        font-family: 'Arial', sans-serif;
+
+        color: #fff;
+        z-index: 4;
+   
+        }
         .punto .contenido {
         flex: 1; /* El contenido ocupa el espacio restante */
         }
@@ -237,7 +249,7 @@
         <div class="div2"> 
 
             <div class="punto">
-                <img src="images/Monedas.png" alt="Moneda">
+                <p class="moneda-image">Puntos:</p>  
                 <div class="puntostexto">
                     <p id="puntosTotales">00</p>
                 </div>

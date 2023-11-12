@@ -17,59 +17,56 @@
       /* Estilos para el menú sidebar */
       .sidebar {
           height: 150%;
-          width: 150px;
+          width: 9%;
           position: fixed;
           top: 0;
-          left: -150px; /* Ocultar inicialmente el menú */
+          left: -150%; 
           background-color: #acc1e5;
           transition: 0.3s;
-          z-index: 9;
       }
 
       .sidebar a {
-          padding: 10px;
+          padding: 7%;
           text-decoration: none;
-          font-size: 20px;
+          font-size: 1vw;
           color: #1c4b6a;
           display: block;
       }
 
       .sidebar img {
-      width: 120px; /* Establece el ancho deseado */
-      height: 120px; /* Establece el alto deseado */
+      width: 100%;
+      height: auto;
       }
 
       .sidebar a:hover {
           background-color: #acc1e5;
       }
 
-      /* Estilos para el botón de abrir/cerrar el menú */
-      .openbtn {
-          position: fixed;
-          left: 40px;
-          top: 40px;
-      }
-
 
       .content {
-          margin-left: 10px;
-          padding: 20px;
+          margin-left: 5%;
+          padding: 7%;
           z-index: 10;
       }
 
+
       .content a img {
         position: fixed;
-        left: 10px;
-        top: 10px;
+        left: 1%;
+        top: 1%;
         width: 7%;
         height: auto;
-        z-index: 10;
+        z-index: 3;
         }
-
         body {
-            background-image: url('images/Fondo3.png'); /* Reemplaza 'ruta-de-tu-imagen.jpg' con la ruta correcta de tu imagen */
-            background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
-            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            background-image: url('images/Fondo3.png'); 
+            background-size: cover; 
+            background-repeat: no-repeat; 
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden
         }
         
 
@@ -79,14 +76,14 @@
             max-height: 70vh; 
             overflow-y: auto; 
             height: 100%;
-            padding: 30px;
+            padding: 1%;
             border: 1px solid #ccc;
             position: fixed;
             top: 50%; /* Centrar verticalmente en todos los dispositivos */
             left: 50%; /* Centrar horizontalmente en todos los dispositivos */
             transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
             font-family: 'Arial', sans-serif; 
-            font-size: 17px;
+            font-size: 1vw;
             flex-direction: column;
             display: flex;
             
@@ -97,25 +94,25 @@
             display: flex;
             flex-direction: row; /* Establece la dirección de los elementos como fila */
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 10%;
             background-color: white; /* Fondo blanco para cada tarea */
             border: 1px solid #ccc; /* Borde alrededor de cada tarea */
-            padding: 10px;
+            padding: 10%;
         }
 
         .listaTareas input[type="checkbox"] {
-            margin-right: 10px;
+            margin-right: 10%;
         }
 
         /* Estilos para los campos de información adicional */
         .listaTareas input[type="text"] {
             flex: 3; /* Distribuye el espacio disponible de manera uniforme */
-            padding: 2px;
-            margin: 5px 10px; 
+            padding: 1%;
+    
         }
 
         .nuevaTarea {
-            margin-bottom: 180px;
+         
             position: absolute;
             padding: 10px;
             display: flex;
@@ -127,51 +124,62 @@
             top: 11%;
             transform: translate(-50%, -50%);
             font-family: 'Arial', sans-serif; 
-            font-size: 18px;
+            font-size: 1vw;
   
         }    
         .nuevaTarea input {
-            margin: 0px 5px; 
+            margin: 0% 0.5% ; 
         }
 
         .row {
             display: flex;
             align-items: center;
             background-color: #fff;
-            margin: 10px 0;
+            margin: 0.7% 0%;
         }
 
         .col {
-            padding: 10px;
+            padding: 0.5%;
             border: 1px solid #ccc;
-            margin-right: 10px;
+            margin-right: 0.7%;
         }
 
         .col:last-child {
-            margin-right: 0;
+            margin-right: 0%;
         }
 
         
         .papelera {
-
-            margin-bottom: 140px; /* Mueve el elemento hacia arriba 50 píxeles */
-            width: 100%;
-
-            position: fixed;
+             position: fixed;
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 9%; /* Centrar verticalmente en todos los dispositivos */
-            left: 85%; /* Centrar horizontalmente en todos los dispositivos */
-            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            top: 9%; 
+            left: 85%; 
+            transform: translate(-50%, -50%); 
             color: rgb(31, 39, 78);
 
         }
 
         .papelera img {
-        width: 60%;
-        height: auto;
+            max-width: 60%;
+            height: auto;
         }
+
+        @media screen and (max-width: 1200px) {
+            .papelera img {
+                max-width: 50%; 
+            }
+        }
+
+        /* Media query para pantallas aún más pequeñas */
+        @media screen and (max-width: 768px) {
+            .papelera img {
+                max-width: 40%; 
+            }
+        }
+
+
 
 
 

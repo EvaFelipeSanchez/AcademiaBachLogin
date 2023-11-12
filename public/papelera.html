@@ -17,25 +17,25 @@
       /* Estilos para el menú sidebar */
       .sidebar {
           height: 150%;
-          width: 150px;
+          width: 9%;
           position: fixed;
           top: 0;
-          left: -150px; /* Ocultar inicialmente el menú */
+          left: -150%; 
           background-color: #acc1e5;
           transition: 0.3s;
       }
 
       .sidebar a {
-          padding: 10px;
+          padding: 7%;
           text-decoration: none;
-          font-size: 20px;
+          font-size: 1vw;
           color: #1c4b6a;
           display: block;
       }
 
       .sidebar img {
-      width: 120px; 
-      height: auto; 
+      width: 100%;
+      height: auto;
       }
 
       .sidebar a:hover {
@@ -43,31 +43,31 @@
       }
 
 
-      .openbtn {
-          position: fixed;
-          left: 40px;
-          top: 40px;
-      }
-
       .content {
-          margin-left: 10px;
-          padding: 20px;
+          margin-left: 5%;
+          padding: 7%;
           z-index: 10;
       }
 
+
       .content a img {
         position: fixed;
-        left: 10px;
-        top: 10px;
+        left: 1%;
+        top: 1%;
         width: 7%;
         height: auto;
-        z-index: 10;
+        z-index: 3;
         }
 
         body {
             background-image: url('images/Fondo3.png'); 
             background-size: cover; 
-            background-repeat: repeat;
+            background-repeat: no-repeat; 
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden
         }
         
 
@@ -77,14 +77,14 @@
             max-height: 70vh; 
             overflow-y: auto; 
             height: 70vh;
-            padding: 30px;
+            padding: 1.5%;
             border: 1px solid #ccc;
             position: fixed;
             top: 50%; /* Centrar verticalmente en todos los dispositivos */
             left: 50%; /* Centrar horizontalmente en todos los dispositivos */
             transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
             font-family: 'Arial', sans-serif; 
-            font-size: 17px;
+            font-size: 1vw;
             flex-direction: column;
             display: flex;
             
@@ -95,54 +95,40 @@
             display: flex;
             flex-direction: row; /* Establece la dirección de los elementos como fila */
             align-items: center;
-            margin-bottom: 20px;
             background-color: white; /* Fondo blanco para cada tarea */
             border: 1px solid #ccc; /* Borde alrededor de cada tarea */
-            padding: 10px;
+            padding: 0.5%;
         }
 
-        .listaTareasEliminadas input[type="checkbox"] {
-            margin-right: 10px;
-        }
 
-        /* Estilos para los campos de información adicional */
-        .listaTareasEliminadas input[type="text"] {
-            flex: 3; /* Distribuye el espacio disponible de manera uniforme */
-            padding: 2px;
-            margin: 5px 10px; 
-        }
 
         .nuevaTarea {
-            margin-bottom: 180px;
-            position: absolute;
-            padding: 10px;
+            padding: 1%;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            width: 300px;
+            width: 100%;
             left: 35%;
             top: 11%;
             transform: translate(-50%, -50%);
             font-family: 'Arial', sans-serif; 
-            font-size: 18px;
+            font-size: 1vw;
   
         }    
-        .nuevaTarea input {
-            margin: 0px 5px; 
-        }
+
 
         .row {
             display: flex;
             align-items: center;
             background-color: #fff;
-            margin: 10px 0;
+
         }
 
         .col {
             padding: 10px;
             border: 1px solid #ccc;
-            margin-right: 10px;
+            margin: 0% 0%;;
         }
 
         .col:last-child {
@@ -150,16 +136,13 @@
         }
 
         .flechavolver {
-
-        margin-bottom: 140px; 
         width: 90%;
-
         position: fixed;
         display: flex;
         justify-content: center;
         align-items: center;
         top: 9%; 
-        left: 20%; 
+        left: 25%; 
         transform: translate(-50%, -50%); 
         color: rgb(31, 39, 78);
 
@@ -170,10 +153,25 @@
         height: auto;
         }
 
+        @media screen and (max-width: 1200px) {
+            .flechavolver img {
+                width: 30%; 
+            }
+        }
+
+        /* Media query para pantallas aún más pequeñas */
+        @media screen and (max-width: 768px) {
+            .flechavolver img {
+                width: 20%;
+            }
+        }
+
+
+
         .textoexplicativo {
             color: rgb(255, 255, 255);
             font-family: 'Arial', sans-serif; 
-            font-size: 18px;
+            font-size: 1.2vw;
             position: absolute;
             top: 87%;
             left: 50%;
@@ -183,7 +181,7 @@
         .textoexplicativo2 {
             color: rgb(255, 255, 255);
             font-family: 'Arial', sans-serif; 
-            font-size: 18px;
+            font-size: 1.2vw;
             position: absolute;
             top: 90%;
             left: 50%;
