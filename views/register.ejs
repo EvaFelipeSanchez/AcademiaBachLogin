@@ -22,84 +22,102 @@
       }
 
 
+      .imagen-superpuesta {
+        transform: translate(7%, 15%);
+      max-width: 100%; 
+      height: auto;
+      z-index: 1; 
+        }
+
+        @media screen and (max-width: 768px) {
+          .imagen-superpuesta {
+            max-width: 90%; 
+          }
+        }
+
+    @media screen and (max-width: 480px) {
+      .imagen-superpuesta {
+        max-width: 95%; 
+      }
+    }
+
+    .registro .name{
+        margin-top: 10%;
+      }
+
+      .registro .contraseña{
+        margin-bottom: 30%;
+      }
+
+
+
       .registroIntro {
-        padding: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0;
-        width: 500px;
-        font-size: 45px;
+
+        width: 100%;
+        font-size: 2.3vw;
         font-family: Arial, Helvetica, sans-serif;
         color: aliceblue;
         text-shadow: -1px -1px 0 rgb(19, 31, 108), 1px -1px 0 rgb(19, 31, 108), -1px 1px 0 rgb(19, 31, 108), 3px 3px 0 rgb(21, 28, 71);
-        margin-top: 50px;
-        transform: translate(0%, -80%);
+        transform: translate(0%, 0%); 
       }
 
       .registro{
         background-color: white;
         border: 4px solid rgb(21, 28, 71);
-        padding: 10px;
-        border-radius: 40px;
+        border-radius: 4%;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         display: flex;
         flex-direction: column; 
-        justify-content: center;
-        align-items: center;
-        margin: -10px;
-        width: 100%;
-        height: auto;
-        font-size: 25px;
-        transform: translate(0%, -20%);
 
+        align-items: center;
+        margin: -1% 0%;
+        width: 80%;
+        max-height: 100%;
+
+        font-size: 1.5vw;
+        font-family: Arial, Helvetica, sans-serif;
+        transform: translate(12.5%, 0%); 
       }
 
 
-      .imagen-superpuesta {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        right: 30%;
-        top: 5%;
-        z-index: 1; 
-      }
 
       .input-container {
         display: flex;
         flex-direction: column;
-        margin: 10px 0;
-        width: 100%;
+        width: 100%;        
         text-align: left;
       }
 
+
       .button button {
-        width: 100%;
-        padding: 10px; /* Aumenta el tamaño del botón */
-        font-size: 24px; /* Aumenta el tamaño del texto del botón */
-        margin-top: -30px; /* Ajusta el margen superior para subir más el botón */
-        background-color: rgb(19, 31, 108); /* Color de fondo azul oscuro */
-        color: white; /* Texto en color blanco */
-        border: 4px solid rgb(13, 17, 44) ; /* Quita el borde */
+        width: 50%;
+        padding: 1.5%; 
+        font-size: 1.5vw; 
+        background-color: rgb(19, 31, 108); 
+        color: white; 
+        border: 4px solid rgb(13, 17, 44) ; 
         border-radius: 5px;
-        transform: translate(0%, 40%); /* Centrar en la mitad de la pantalla */
+        transform: translate(50%, 30%); 
       }
 
       .button button:hover {
-          background-color: #0C1573; /* Cambia el color de fondo en el hover */
+          background-color: #0C1573; 
         }
 
         .login {
-        padding: 20px;
+          padding: 2%;
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 0;
         width: 100%;
-        font-size: 25px;
+        font-size: 1.5vw;
         font-family: Arial, Helvetica, sans-serif;
-        color: rgb(255, 255, 255);
-        transform: translate(0%, 30%);
+        color: aliceblue;
+        transform: translate(0%, 20%);  
       }
 
       .parent {
@@ -129,7 +147,7 @@
           <%= messages.error %>
         <% } %>
         <form action="/register" method="POST">
-          <div class="input-container">
+          <div class="input-container" >
             <label for="name">Nombre de usuario</label>
             <input type="text" id="name" name="name" required>
           </div>
