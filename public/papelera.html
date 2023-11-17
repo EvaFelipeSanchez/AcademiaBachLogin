@@ -188,6 +188,23 @@
                 
         }
 
+        .cerrar {
+             position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 9%; 
+            left: 91%; 
+            transform: translate(-50%, -50%); 
+            color: rgb(31, 39, 78);
+
+        }
+
+        .cerrar img {
+            max-width: 60%;
+            height: auto;
+        }
+
         .parent {
             display: grid;
             grid-template-columns: repeat(8, 1fr);
@@ -228,6 +245,11 @@
                 <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
                 <a href="#" onclick="flechavolver()"><img src="images/Flecha.png" alt="IconoFlecha"></a>
             </div>
+            <div class="cerrar" id="cerrar">
+                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+                <a href="#" onclick="cerrar()"><img src="images/cerrar.png" alt="IconoCerrar"></a>
+            </div>
+
             
             
         </div>
@@ -417,6 +439,10 @@
 
     function mascota(){
         window.location.href = "mascota.html";
+
+    }
+    function cerrar(){
+        window.location.href = "index.html";
 
     }
 </script>

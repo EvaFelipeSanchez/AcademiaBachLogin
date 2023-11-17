@@ -166,18 +166,60 @@
             height: auto;
         }
 
+        .cerrar {
+             position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 9%; 
+            left: 91%; 
+            transform: translate(-50%, -50%); 
+            color: rgb(31, 39, 78);
+
+        }
+
+        .cerrar img {
+            max-width: 60%;
+            height: auto;
+        }
+
         @media screen and (max-width: 1200px) {
             .papelera img {
                 max-width: 50%; 
             }
         }
 
-        /* Media query para pantallas aún más pequeñas */
+
         @media screen and (max-width: 768px) {
             .papelera img {
                 max-width: 40%; 
             }
         }
+
+        .tareaVencida {
+            color: red;
+      
+        }
+
+        .avisoTareasVencidas {
+            position: fixed;
+            width: 40%;
+            background-color: rgb(179, 213, 255); 
+            padding: 1%;
+            box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.1); 
+            z-index: 90;
+            top: 80%; 
+            left: 30%; 
+            font-size: 100%;
+            max-height: 150px;
+            overflow-y: auto; /
+        }
+
+        .avisoTareasVencidas ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
 
 
 
@@ -225,6 +267,11 @@
                 <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
                 <a href="#" onclick="papelera()"><img src="images/Trash3.png" alt="IconoPapelera"></a>
             </div>
+            <div class="cerrar" id="cerrar">
+                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+                <a href="#" onclick="cerrar()"><img src="images/cerrar.png" alt="IconoCerrar"></a>
+            </div>
+
             
         </div>
         <div class="div4"> 
@@ -251,9 +298,7 @@
         </div>
     </div>
 
-
-
-                                                                                         
+                                                                                    
 
 
 
@@ -269,16 +314,35 @@
           }
       }
 
-         let taskIdCounter = 0; //Identificador tareas
+         let taskIdCounter = 0; //Identificador tareas    
+         let puntosTotalesGuardados = localStorage.getItem("puntosTotales"); 
+         const storedTareas = JSON.parse(localStorage.getItem('tareas')) || [];   
 
-         const storedTareas = JSON.parse(localStorage.getItem('tareas')) || [];
-         var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+        // Inicializar a cero si es null
+        if (puntosTotalesGuardados === null) {
+            puntosTotalesGuardados = 0;
+        } else {
+            // Convertir a número si no es null
+            puntosTotalesGuardados = parseInt(puntosTotalesGuardados, 10);
+        }
+
+       
+        //var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+
 
 
         storedTareas.forEach(function (task) {
             const listaTareas = document.querySelector(".listaTareas");
             var nuevaTareaLi = document.createElement("div");
             nuevaTareaLi.classList.add("row");
+
+            const tareaVencida = new Date(task.fecha) < new Date();
+            if (tareaVencida) {
+                nuevaTareaLi.classList.add("tareaVencida");
+            }
+
+
+
             nuevaTareaLi.dataset.taskId = task.id;
             nuevaTareaLi.innerHTML = `
                 <div class="col-auto"><input type="checkbox"></div>
@@ -302,12 +366,14 @@
                     if (respuesta) {
                         console.log("La acción se llevará a cabo. Los puntos totales son: " + task.puntos);
                         //console.log("puntos antes: " + puntosTotalesGuardados);
-
-                        puntosTotalesGuardados = parseInt(puntosTotalesGuardados, 10); // Convertir a número si es una cadena
-                        puntosTotalesGuardados += parseInt(task.puntos, 10);
-                        //console.log("puntos despues: " + puntosTotalesGuardados);
-                        localStorage.setItem("puntosTotales", puntosTotalesGuardados);
-                        eliminarTarea(nuevaTareaLi);
+       
+                        if (!isNaN(puntosTotalesGuardados)) {
+                            puntosTotalesGuardados += parseInt(task.puntos, 10);
+                            localStorage.setItem("puntosTotales", puntosTotalesGuardados);
+                            eliminarTarea(nuevaTareaLi);
+                        } else {
+                            console.error("Error: puntosTotalesGuardados es NaN");
+                        }
                     } else { 
                         checkbox.checked = false;
                     }
@@ -348,6 +414,8 @@
             var listaTareas = document.querySelector(".listaTareas");
             var nuevaTareaLi = document.createElement("div");
             nuevaTareaLi.classList.add("row");
+
+
             nuevaTareaLi.dataset.taskId = taskIdCounter;
             nuevaTareaLi.innerHTML = `
                 <div class="col-auto"><input type="checkbox"></div>
@@ -440,6 +508,35 @@
         }
 
 
+        // Función para mostrar un aviso de tareas vencidas
+        function mostrarAvisoTareasVencidas() {
+            const tareasVencidas = storedTareas.filter(task => new Date(task.fecha) < new Date());
+
+            if (tareasVencidas.length > 0) {
+                const avisoDiv = document.createElement('div');
+                avisoDiv.classList.add('avisoTareasVencidas');
+
+                const mensajeDiv = document.createElement('div');
+                mensajeDiv.textContent = '¡Tienes tareas vencidas! Por favor, revisa las siguientes tareas:';
+
+                const listaTareasUl = document.createElement('ul');
+                tareasVencidas.forEach(task => {
+                    const tareaLi = document.createElement('li');
+                    tareaLi.textContent = task.tarea;
+                    listaTareasUl.appendChild(tareaLi);
+                });
+
+                avisoDiv.appendChild(mensajeDiv);
+                avisoDiv.appendChild(listaTareasUl);
+                document.body.appendChild(avisoDiv);
+            }
+        }
+
+        // Llama a la función al cargar la página
+        mostrarAvisoTareasVencidas();
+
+
+
 </script>
 
 
@@ -447,6 +544,11 @@
 
 <script>
     function index(){
+        window.location.href = "index.html";
+
+    }
+
+    function cerrar(){
         window.location.href = "index.html";
 
     }

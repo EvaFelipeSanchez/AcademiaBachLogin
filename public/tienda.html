@@ -185,6 +185,23 @@
         flex: 1; 
         }
 
+        .cerrar {
+             position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 9%; 
+            left: 91%; 
+            transform: translate(-50%, -50%); 
+            color: rgb(31, 39, 78);
+
+        }
+
+        .cerrar img {
+            max-width: 61%;
+            height: auto;
+        }
+
         .parent {
             display: grid;
             grid-template-columns: repeat(8, 1fr);
@@ -230,6 +247,10 @@
         <div class="mascotabar" id="mascotabar">
             <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono de tienda"></a>
           </div>
+          <div class="cerrar" id="cerrar">
+            <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+            <a href="#" onclick="cerrar()"><img src="images/cerrar.png" alt="IconoCerrar"></a>
+        </div>
     </div>
     <div class="div4"> 
         <div class="store">
@@ -467,6 +488,11 @@
 
     function cementerio(){
         window.location.href = "cementerio.html";
+    }
+
+    function cerrar(){
+        window.location.href = "index.html";
+
     }
 
 

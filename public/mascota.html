@@ -211,6 +211,24 @@
         flex: 1; /* El contenido ocupa el espacio restante */
         }
 
+        .cerrar {
+             position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 9%; 
+            left: 91%; 
+            transform: translate(-50%, -50%); 
+            color: rgb(31, 39, 78);
+
+        }
+
+        .cerrar img {
+            max-width: 61%;
+            height: auto;
+        }
+
+
 
         .parent {
             display: grid;
@@ -259,6 +277,10 @@
             <div class="tiendabar" id="tiendabar">
                 <a href="#" onclick="tienda()"><img src="images/homeicono.png" alt="Icono de tienda"></a>
               </div>
+              <div class="cerrar" id="cerrar">
+                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+                <a href="#" onclick="cerrar()"><img src="images/cerrar.png" alt="IconoCerrar"></a>
+            </div>
             
         </div>
         <div class="div4"> 
@@ -525,6 +547,11 @@
 
     function tienda(){
         window.location.href = "tienda.html";
+    }
+
+    function cerrar(){
+        window.location.href = "index.html";
+
     }
 </script>
 

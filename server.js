@@ -106,23 +106,6 @@ app.use(methodOverride('_method'));
 
 
 
-// Ruta para mostrar el formulario HTML
-app.get('/', checkAuthenticated, (req, res) => {
-// Envia el archivo HTML en respuesta a la solicitud GET
-res.sendFile(__dirname + '/public/index.html');
-//res.send(__dirname + '/public/index.html');
-});
-
-
-
-
-
-/*
-app.get('/', checkAuthenticated, (req, res) => {
-  res.render('index.ejs', { name: req.user.name});
-});
-*/
-
 app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('login.ejs');
 })
@@ -141,6 +124,13 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
+
+    const existingUser = await getUserByEmail(req.body.email);
+    if (existingUser) {
+      req.flash('error', 'Email is already registered.');
+      return res.redirect('/register');
+    }
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     const newUser = {
