@@ -155,11 +155,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 });
 
 
-// Ruta para mostrar el formulario HTML
-app.get('/', (req, res) => {
-  // Envia el archivo HTML en respuesta a la solicitud GET
-  res.sendFile(__dirname + '/public/index.html');
-});
+
 
 
 // Ruta para procesar los datos del formulario (POST)
@@ -211,6 +207,94 @@ function checkNotAuthenticated(req, res, next) {
   next()
 }
 
+
+app.post('/api/usuarios', async (req, res) => {
+  try {
+    const { name, email, password, username } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = {
+      id: uuidv4(),
+      name,
+      email,
+      password: hashedPassword,
+      servicioLocal: uuidv4(),
+      username,
+    };
+
+    console.log('Nuevo Usuario:', newUser);
+
+    await usersCollection.insertOne(newUser);
+
+    res.status(201).json({ message: 'Usuario registrado exitosamente' });
+  } catch (error) {
+    console.error('Error al registrar usuario:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+app.get('/api/usuarios', async (req, res) => {
+  try {
+    const usuarios = await usersCollection.find().toArray();
+    res.json({ usuarios });
+  } catch (error) {
+    console.error('Error al obtener la lista de usuarios:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+app.get('/api/usuarios/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await usersCollection.findOne({ id: userId });
+
+    if (!user) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    res.json({ user });
+  } catch (error) {
+    console.error('Error al obtener usuario por ID:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+// Ruta PUT Usuario por ID
+app.put('/api/usuarios/:id', async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const { name, email, password, username } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const updatedUser = {
+      name,
+      email,
+      password: hashedPassword,
+      servicioLocal: uuidv4(),
+      username,
+    };
+
+    const result = await usersCollection.updateOne({ id: userId }, { $set: updatedUser });
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    res.json({ message: 'Usuario actualizado exitosamente' });
+  } catch (error) {
+    console.error('Error al actualizar usuario por ID:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+
+// Ruta para mostrar el formulario HTML
+app.get('/', (req, res) => {
+  // Envia el archivo HTML en respuesta a la solicitud GET
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 
 // Configura la carpeta "public" para servir archivos estáticos
