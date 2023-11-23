@@ -51,7 +51,7 @@
         }
 
         body {
-            background-image: url('images/Fondo3.png'); 
+            background-image: url('/images/Fondo3.png'); 
             background-size: cover; 
             background-repeat: no-repeat; 
             height: 100%;
@@ -129,17 +129,17 @@
         <div class="div1"> 
             <div class="sidebar" id="sidebar">
                 <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-                <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
-                <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
-                <a href="#" onclick="index()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
+                <a href="#" onclick="checklist()"><img src="/images/listaicono.png" alt="Icono Checklist"></a>
+                <a href="#" onclick="mascota()"><img src="/images/homeicono.png" alt="Icono Tienda"></a>
+                <a href="#" onclick="index()"><img src="/images/Tumba.png" alt="Icono Cementerio"></a>
             </div>
             <div class="content" >
                 <!-- Contenido principal de tu página -->
-                <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
+                <a href="#" onclick="toggleSidebar()"><img src="/images/logo.png" alt="Botón de menú"></a>
             </div>
             <div class="cerrar" id="cerrar">
                 <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-                <a href="#" onclick="cerrar()"><img src="images/cerrar.png" alt="IconoCerrar"></a>
+                <a href="#" onclick="cerrar()"><img src="/images/cerrar.png" alt="IconoCerrar"></a>
             </div>
         </div>
         <div class="div2"> 
@@ -255,22 +255,28 @@
 
 <script>
     function checklist(){
-        window.location.href = "checklist.html";
+        var userId = '<%= user.id %>';
+    window.location.href = "/checklist/" + userId;
 
     }
 
     function index(){
-        window.location.href = "index.html";
+        var userId = '<%= user.id %>';
+        window.location.href = "/"  + userId;
+
 
     }
 
 
     function mascota(){
-        window.location.href = "mascota.html";
+        var userId = '<%= user.id %>';
+      window.location.href = "/mascota/" + userId;
     }
 
     function cerrar(){
-        window.location.href = "index.html";
+        var userId = '<%= user.id %>';
+        window.location.href = "/"  + userId;
+
 
     }
 </script>
