@@ -374,24 +374,33 @@
 
 
 <script>
-        var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
+    var userId = '<%= user.id %>';
+       // var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
         window.onload = function () {
             // Obtener la lista local
-            var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
+            //var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
+
+            fetch('/' + userId +'/mascotas')
+            .then(response => response.json())
+            .then(data => {
+                itemStore = 0;
+                data.forEach(function (element) {
+                    if (element.index > itemStore) {
+                        itemStore = element.index;
+                    }
+                });
+                console.log("Lista mascotas: ", data);
+            })
+            .catch(error => console.error('Error al obtener la lista de tareas:', error));
 
             // Establecer itemStore en función del índice más alto en la lista local
-            itemStore = 0;
-            listaLocal.forEach(function (element) {
-                if (element.index > itemStore) {
-                    itemStore = element.index;
-                }
-            });
+
 
          };
 
             
-        localStorage.setItem('traspaso', false);
-        var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+        localStorage.setItem('traspaso', false); //
+        var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
 
         if (puntosTotalesGuardados) {
         puntosTotales = parseInt(puntosTotalesGuardados, 10);
@@ -403,10 +412,10 @@
 
 
         var traspaso = true;
-        localStorage.setItem('traspaso', traspaso);
+        localStorage.setItem('traspaso', traspaso); //
 
         function comprar(item){
-            var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+            var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
 
             if (puntosTotalesGuardados) {
                 puntosTotales = parseInt(puntosTotalesGuardados, 10);
@@ -422,36 +431,62 @@
                 if (puntosTotalesGuardados >= precio) {
                     var nombreMascotaInput = document.querySelector('.store .item:nth-child(' + item + ') .nuevaMascotaInput');
                     var nombreMascota = nombreMascotaInput.value;
+                    fetch('/' + userId +'/mascotas')
+                    .then(response => response.json())
+                    .then(data => {
 
-                    // Comprobar si el nombre de la mascota ya existe en la lista local
-                    var nombreRepetido = listaLocal.some(function (element) {
+                        var nombreRepetido = data.some(function (element) {
                         return element.nombre === nombreMascota;
-                    });
-
+                         });
+                         
                     if (!nombreRepetido) {
                         var imagenMascotaDespierta = document.querySelector('.store .item:nth-child(' + item + ') img');
                         var imagenMascotaDormida = document.querySelector('.store .item:nth-child(' + item + ') .segunda-imagen');
-
+                        var userId = '<%= user.id %>'
+                        
                         var nuevoElemento = {
+                            userId: userId,
                             imagenPrincipal: imagenMascotaDespierta.src,
                             segundaImagen: imagenMascotaDormida.src,
                             nombre: nombreMascota
                         };
 
-                        listaLocal.push(nuevoElemento);
+                        //listaLocal.push(nuevoElemento);
 
                         puntosTotalesGuardados -= precio;
-                        localStorage.setItem("puntosTotales", puntosTotalesGuardados);
+                        localStorage.setItem("puntosTotales", puntosTotalesGuardados); //
 
-                        localStorage.setItem('storeElements', JSON.stringify(listaLocal));
+                        //localStorage.setItem('storeElements', JSON.stringify(listaLocal));
+                        fetch('/' + userId +'/mascotas', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(nuevoElemento),
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Manejar la respuesta recibida después de guardar la tarea
+                                console.log('Mascota guardada:', data);
+                                // Aquí puedes realizar cualquier otra operación después de guardar la tarea
+                            })
+                            .catch(error => console.error('Error al guardar la tarea:', error));
+
                         traspaso = false;
                         localStorage.setItem('traspaso', traspaso);
 
-                        window.location.href = 'mascota.html';
+                        ;
+                        window.location.href = "/mascota/" + userId;
                     } else {
                         alert("El nombre de la mascota ya existe.");
                         // Aquí puedes mostrar un mensaje de error o tomar alguna acción adecuada.
                     }
+                    })
+                    .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+                    // Comprobar si el nombre de la mascota ya existe en la lista local
+                 
+
                 }
             }
 

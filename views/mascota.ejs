@@ -315,42 +315,67 @@
 
         // Obtener todos los elementos con clase "item" dentro de la tienda
         var items = store.querySelectorAll('.item');
+        var userId = '<%= user.id %>';
+
+        fetch('/' + userId +'/mascotas')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Lista de mascotas:', data);
 
         // Crear una lista local para almacenar los elementos de la tienda
-        var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
+        //var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
         //var listaLocal = [];
-        localStorage.setItem('storeElements', JSON.stringify(listaLocal));
+        //localStorage.setItem('storeElements', JSON.stringify(listaLocal));
 
-        if (listaLocal.length === 0) {
+        if (data.length === 0) {
             items.forEach(function (item, index) {
             var imagen = item.querySelector('img').src;
             var segundaImagen = item.querySelector('.segunda-imagen').src;
             var nombre = item.querySelector('.nombre').textContent;
 
             var elementoTienda = {
+                userId: userId,
+                nombre: nombre,
                 imagenPrincipal: imagen,
                 segundaImagen: segundaImagen,
-                nombre: nombre
+                
             };
 
-            listaLocal.push(elementoTienda);
+            
+            fetch('/' + userId + '/mascotas', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(elementoTienda),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Tarea guardada:', data);
+                    })
+                    .catch(error => console.error('Error al guardar la tarea:', error));
+
+
+            if (!localStorage.getItem('funcionEjecutada')) { ///
+            window.onload = function() {
+                window.location.href = "tienda.ejs";
+                localStorage.setItem('funcionEjecutada', 'true');
+            };
+            }
+
+            //listaLocal.push(elementoTienda);
         });
 
         } 
+        })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
 
-        localStorage.setItem('storeElements', JSON.stringify(listaLocal));
-        console.log(listaLocal);
+
+
 
 
 
         //var storeElements = JSON.parse(localStorage.getItem('storeElements')) || [];
-
-         if (!localStorage.getItem('funcionEjecutada')) {
-            window.onload = function() {
-                window.location.href = "tienda.html";
-                localStorage.setItem('funcionEjecutada', 'true');
-            };
-        }
 
         window.onload = function() {
 
@@ -372,69 +397,92 @@
 
         function cargarElementosGuardados() {
             var storeContainer = document.querySelector('.store');
-            var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
+           // var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || []; //
             storeContainer.innerHTML = '';
 
-            listaLocal.forEach(function (elementData) {
-                if (!elementYaExisteEnMascota(elementData)) {
-            var nuevoItem = document.createElement('div');
-            nuevoItem.classList.add('item');
-            var nuevoItem = document.createElement('div');
-                nuevoItem.classList.add('item');
+            fetch('/' + userId +'/mascotas')
+            .then(response => response.json())
+            .then(data => {
+                // Manejar la lista de tareas recibida en 'data'
+                console.log('Lista de mascotas', data);
+                data.forEach(function (elementData) {
 
-                var nuevaImagen = document.createElement('img');
-                nuevaImagen.src = elementData.imagenPrincipal;
-                nuevaImagen.alt = 'Nuevo Producto';
-                nuevoItem.appendChild(nuevaImagen);
+                    if (!elementYaExisteEnMascota(elementData)) {
+                        var nuevoItem = document.createElement('div');
+                        nuevoItem.classList.add('item');
+                        var nuevoItem = document.createElement('div');
+                        nuevoItem.classList.add('item');
 
-                var nuevaSegundaImagen = document.createElement('img');
-                nuevaSegundaImagen.src = elementData.segundaImagen;
-                nuevaSegundaImagen.alt = 'Nuevo Producto-2';
-                nuevaSegundaImagen.classList.add('segunda-imagen');
-                nuevaSegundaImagen.style.display = 'none';
-                nuevoItem.appendChild(nuevaSegundaImagen);
+                        var nuevaImagen = document.createElement('img');
+                        nuevaImagen.src = elementData.imagenPrincipal;
+                        nuevaImagen.alt = 'Nuevo Producto';
+                        nuevoItem.appendChild(nuevaImagen);
 
-                var nuevoNombre = document.createElement('p');
-                nuevoNombre.classList.add('nombre');
-                nuevoNombre.textContent = elementData.nombre;
-                nuevoItem.appendChild(nuevoNombre);
+                        var nuevaSegundaImagen = document.createElement('img');
+                        nuevaSegundaImagen.src = elementData.segundaImagen;
+                        nuevaSegundaImagen.alt = 'Nuevo Producto-2';
+                        nuevaSegundaImagen.classList.add('segunda-imagen');
+                        nuevaSegundaImagen.style.display = 'none';
+                        nuevoItem.appendChild(nuevaSegundaImagen);
 
-                var nuevoBotonActivar = document.createElement('button');
-                nuevoBotonActivar.classList.add('activar-button');
-                nuevoBotonActivar.textContent = 'Activar';
-                nuevoBotonActivar.onclick = function () {
-                    activar(listaLocal.indexOf(elementData) + 1);
-                };
-                nuevoItem.appendChild(nuevoBotonActivar);
+                        var nuevoNombre = document.createElement('p');
+                        nuevoNombre.classList.add('nombre');
+                        nuevoNombre.textContent = elementData.nombre;
+                        nuevoItem.appendChild(nuevoNombre);
 
-                storeContainer.appendChild(nuevoItem);
-         
-            }
+                        var nuevoBotonActivar = document.createElement('button');
+                        nuevoBotonActivar.classList.add('activar-button');
+                        nuevoBotonActivar.textContent = 'Activar';
+                        nuevoBotonActivar.onclick = function () {
+                            
+                                fetch('/' + userId + '/mascotas')
+                                .then(response => response.json())
+                                .then(data => {
+                                    // Manejar la lista de tareas recibida en 'data'
+                                    activar(data.indexOf(elementData) + 1);
+                                })
+                                .catch(error => console.error('Error al obtener la lista de mascotas:', error));
 
+                          
+                        };
+                        nuevoItem.appendChild(nuevoBotonActivar);
+
+                        storeContainer.appendChild(nuevoItem);
+              
+                    }
+  
             });
+
+            })
+            .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+         
+
+
         } 
 
          cargarElementosGuardados();
         }
 
 
-        let itemStore = parseInt(localStorage.getItem('itemstorevalue') || '3');
-        var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+        let itemStore = parseInt(localStorage.getItem('itemstorevalue') || '3');  //
+        var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
 
         if (puntosTotalesGuardados) {
         puntosTotales = parseInt(puntosTotalesGuardados, 10);
         // Actualiza el texto en el elemento de puntos totales
-        document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+        document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales; //
         } else {
             puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
         }
 
 
+        /*
         function agregarNuevoItem() {
 
             // Obtener item
             itemStore++;
-            localStorage.setItem('itemstorevalue', itemStore); 
+            localStorage.setItem('itemstorevalue', itemStore);  //
 
             //const storeContainer = document.querySelector('.store');
 
@@ -480,22 +528,22 @@
                 segundaImagen:  localStorage.getItem('segundaImagenTraspaso'),
                 nombre: localStorage.getItem('nombreTraspasado'),
             });
-            localStorage.setItem('storeElements', JSON.stringify(listaLocal));
+            localStorage.setItem('storeElements', JSON.stringify(listaLocal));  //
 
             // Asigna el evento "Activar" al botón del nuevo elemento
             nuevoBotonActivar.onclick = function () {
                 activar(itemStore);
             };
-       }
+       } 
         
 
-        var traspaso = localStorage.getItem('traspaso') === "true"; // Recuperar el valor y convertirlo a boolean
+        var traspaso = localStorage.getItem('traspaso') === "true"; 
         if (traspaso) {
             //agregarNuevoItem();
-            traspaso = false; // Establecerlo en falso después de agregar el nuevo elemento
-            localStorage.setItem('traspaso', traspaso); // Guardar el valor actualizado
+            traspaso = false; 
+            localStorage.setItem('traspaso', traspaso); 
            
-        }
+        }  */
 
 
         function activar(item) {
@@ -517,7 +565,8 @@
                 localStorage.setItem("displayValue", "none");
 
                 // Redirige a otro HTML
-                window.location.href = 'index.html';
+                var userId = '<%= user.id %>';
+                window.location.href = "/"  + userId;
             }
         }
 

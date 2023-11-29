@@ -7,9 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
     <link rel="stylesheet" href="/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.css">
     <script src="/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.js"></script>
+
 
 
 
@@ -201,18 +201,20 @@
       
         }
 
+
+
         .avisoTareasVencidas {
             position: fixed;
             width: 40%;
             background-color: rgb(179, 213, 255); 
-            padding: 1%;
+            padding: 0.5%;
             box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.1); 
             z-index: 90;
-            top: 80%; 
+            top: 87%; 
             left: 30%; 
             font-size: 100%;
             max-height: 150px;
-            overflow-y: auto; /
+            overflow-y: auto; 
         }
 
         .avisoTareasVencidas ul {
@@ -302,10 +304,9 @@
 
 
 
-
- <script>
-
-    function toggleSidebar() {
+ 
+<script>
+      function toggleSidebar() {
           var sidebar = document.getElementById('sidebar');
           if (sidebar.style.left === '0px') {
               sidebar.style.left = '-250px';
@@ -313,10 +314,76 @@
               sidebar.style.left = '0px';
           }
       }
+  </script>
+
+
+ <script>
+
+       //Tareas//
+       /*
+       const nuevaTarea = {
+        nombre: 'Nombre de la tarea',
+        fechaVencimiento: new Date(), // Puedes ajustar la fecha según sea necesario
+        puntos: 10,
+        tipotarea: 'Tipo de tarea',
+        };
+
+        // Realizar una solicitud POST a la ruta /api/tareas
+        fetch('/api/tareas', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(nuevaTarea),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Manejar la respuesta recibida después de guardar la tarea
+            console.log('Tarea guardada:', data);
+            // Aquí puedes realizar cualquier otra operación después de guardar la tarea
+        })
+        .catch(error => console.error('Error al guardar la tarea:', error));
+
+        fetch('/api/tareas')
+        .then(response => response.json())
+        .then(data => {
+            // Manejar la lista de tareas recibida en 'data'
+            console.log('Lista de tareas:', data);
+            // Aquí puedes realizar cualquier otra operación con la lista de tareas
+        })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+        const taskId = Obtén el id de alguna manera ;
+        // Realizar una solicitud DELETE a la ruta /api/tareas/:id
+        fetch(`/api/tareas/${taskId}`, {
+        method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Manejar la respuesta recibida después de eliminar la tarea
+            console.log('Tarea eliminada:', data);
+            // Puedes realizar cualquier otra operación después de eliminar la tarea
+        })
+        .catch(error => console.error('Error al eliminar la tarea:', error));
+
+    fetch('/api/tareas', {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Manejar la respuesta recibida después de eliminar todas las tareas
+        console.log('Todas las tareas eliminadas:', data);
+        // Puedes realizar cualquier otra operación después de eliminar todas las tareas
+    })
+    .catch(error => console.error('Error al eliminar todas las tareas:', error));
+
+      */
+
+
 
          let taskIdCounter = 0; //Identificador tareas    
-         let puntosTotalesGuardados = localStorage.getItem("puntosTotales"); 
-         const storedTareas = JSON.parse(localStorage.getItem('tareas')) || [];   
+         let puntosTotalesGuardados = localStorage.getItem("puntosTotales"); /// 
+         let userId = '<%= user.id %>';
 
         // Inicializar a cero si es null
         if (puntosTotalesGuardados === null) {
@@ -325,72 +392,155 @@
             // Convertir a número si no es null
             puntosTotalesGuardados = parseInt(puntosTotalesGuardados, 10);
         }
+        
 
-       
-        //var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+            fetch(`/${userId}/tareas`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                })
+                .then(response => response.json())
+                .then(data => {
+                console.log("Idt: " + userId);
+                console.log('Lista de tareas stored data:', data);
+                //storedTareas.forEach(function (task) {
+                    data.forEach(function (task) {
+                        //if(task.userId !== userId){
+                            const listaTareas = document.querySelector(".listaTareas");
+                            var nuevaTareaLi = document.createElement("div");
+                            nuevaTareaLi.classList.add("row");
+
+                            const tareaVencida = new Date(task.fecha) < new Date();
+                            if (tareaVencida) {
+                                nuevaTareaLi.classList.add("tareaVencida");
+                            }
+
+                            if (task.fechaVencimiento) {
+                                // Crear un objeto Date con la fecha de vencimiento
+                                const fechaVencimiento = new Date(task.fechaVencimiento);
+
+                                // Obtener los componentes de la fecha
+                                const año = fechaVencimiento.getFullYear();
+                                const mes = ('0' + (fechaVencimiento.getMonth() + 1)).slice(-2); // Sumar 1 porque los meses son 0-indexed
+                                const día = ('0' + fechaVencimiento.getDate()).slice(-2);
+
+                                // Crear una cadena con el formato deseado (YYYY-MM-DD)
+                                const fechaFormateada = `${año}-${mes}-${día}`;
+
+                                // Asignar la fecha formateada de vuelta a la tarea
+                                task.fechaVencimiento = fechaFormateada;
+                            }
 
 
 
-        storedTareas.forEach(function (task) {
-            const listaTareas = document.querySelector(".listaTareas");
-            var nuevaTareaLi = document.createElement("div");
-            nuevaTareaLi.classList.add("row");
+                            nuevaTareaLi.dataset.taskId = task.id;
+                            nuevaTareaLi.innerHTML = `
+                                <div class="col-auto"><input type="checkbox"></div>
+                                <div class="col"> <label for="tarea1">${task.nombre}</label></div>
+                                <div class="col-2">${task.fechaVencimiento}</div>
+                                <div class="col-1">${task.puntos}</div>
+                                <div class="col-3">${task.tipotarea}</div>
+                                <div class="col-3"><button class="botoneliminar">Eliminar</button></div>
+                            `;
+                            listaTareas.appendChild(nuevaTareaLi);
 
-            const tareaVencida = new Date(task.fecha) < new Date();
-            if (tareaVencida) {
-                nuevaTareaLi.classList.add("tareaVencida");
-            }
-
-
-
-            nuevaTareaLi.dataset.taskId = task.id;
-            nuevaTareaLi.innerHTML = `
-                <div class="col-auto"><input type="checkbox"></div>
-                <div class="col"> <label for="tarea1">${task.tarea}</label></div>
-                <div class="col-2">${task.fecha}</div>
-                <div class="col-1">${task.puntos}</div>
-                <div class="col-3">${task.tipoTarea}</div>
-                <div class="col-3"><button class="botoneliminar">Eliminar</button></div>
-            `;
-            listaTareas.appendChild(nuevaTareaLi);
-
-            var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+                            var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
 
 
-            const checkbox = nuevaTareaLi.querySelector('input[type="checkbox"]');
-            checkbox.addEventListener('change', function () {
-                if (checkbox.checked) {
+                            const checkbox = nuevaTareaLi.querySelector('input[type="checkbox"]');
+                            checkbox.addEventListener('change', function () {
+                                if (checkbox.checked) {
+                    
+                                    console.log(`Checkbox en la tarea con ID ${task.id} marcado`);
+                                    const respuesta = confirm("¿Ha completado la tarea " + task.nombre + "?");
+                                    if (respuesta) {
+                                        console.log("La acción se llevará a cabo. Los puntos totales son: " + task.puntos);
+                                        //console.log("puntos antes: " + puntosTotalesGuardados);
+                    
+                                        if (!isNaN(puntosTotalesGuardados)) {
+                                            puntosTotalesGuardados += parseInt(task.puntos, 10);
+                                            localStorage.setItem("puntosTotales", puntosTotalesGuardados); //
+                                            eliminarTarea(task);
+                                            location.reload();
+                                        } else {
+                                            console.error("Error: puntosTotalesGuardados es NaN");
+                                        }
+                                    } else { 
+                                        checkbox.checked = false;
+                                    }
+
+                                                    
+                                } 
+                            });
+                            const botonesEliminar = nuevaTareaLi.getElementsByClassName("botoneliminar");
+
+                            for (const boton of botonesEliminar) {
+                                boton.addEventListener('click', function (event) {
+                                    console.log('Botón eliminar presionado');
+
+                                    // Obtener la fila (row) de la tarea
+                                    const tareaRow = event.target.parentElement.parentElement;
+
+                                    // Llamar a la función para eliminar la tarea
+                                    eliminarTarea(task);
+                                    location.reload(); 
+                                });
+                                
+                            }   
+                        //}
+
+
+                });
+                ordenarTareasPorFecha();
+               mostrarAvisoTareasVencidas();     
+            })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+
+
     
-                    console.log(`Checkbox en la tarea con ID ${task.id} marcado`);
-                    const respuesta = confirm("¿Ha completado la tarea " + task.tarea + "?");
-                    if (respuesta) {
-                        console.log("La acción se llevará a cabo. Los puntos totales son: " + task.puntos);
-                        //console.log("puntos antes: " + puntosTotalesGuardados);
-       
-                        if (!isNaN(puntosTotalesGuardados)) {
-                            puntosTotalesGuardados += parseInt(task.puntos, 10);
-                            localStorage.setItem("puntosTotales", puntosTotalesGuardados);
-                            eliminarTarea(nuevaTareaLi);
-                        } else {
-                            console.error("Error: puntosTotalesGuardados es NaN");
-                        }
-                    } else { 
-                        checkbox.checked = false;
-                    }
-
-                                    
-                } 
-            });
-        });
-
-        ordenarTareasPorFecha();
-                
 
         const fechaVencimientoInput = document.getElementById('fechaVencimiento');
             $(fechaVencimientoInput).datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true
         });
+
+        function asignarEventosEliminar() {
+            const botonesEliminar = document.getElementsByClassName("botoneliminar");
+        for (const boton of botonesEliminar) {
+            boton.addEventListener('click', function (event) {
+                console.log('Botón eliminar presionado');
+
+                // Obtener la fila (row) de la tarea
+                const tareaRow = event.target.parentElement.parentElement;
+
+                // Obtener la información de la tarea desde los elementos de la fila
+                const taskId = tareaRow.dataset.taskId;
+                const tareaNombre = tareaRow.querySelector('.col label').innerText;
+                const tareaFecha = tareaRow.querySelector('.col-2').innerText;
+                const tareaPuntos = tareaRow.querySelector('.col-1').innerText;
+                const tareaTipo = tareaRow.querySelector('.col-3').innerText;
+
+                // Crear un objeto con la información de la tarea
+                const tareaSeleccionada = {
+                    id: taskId,
+                    nombre: tareaNombre,
+                    fecha: tareaFecha,
+                    puntos: tareaPuntos,
+                    tipo: tareaTipo
+                };
+
+                console.log('Información de la tarea seleccionada:', tareaSeleccionada);
+
+                // Llamar a la función para eliminar la tarea
+                //eliminarTarea(tareaSeleccionada);
+            });
+        }
+        }
+
+
 
 
    function agregarTarea() {
@@ -399,58 +549,126 @@
     var fechaVencimiento = fechaVencimientoInput.value;
     var puntos = document.getElementById("Puntos").value;
     var tipotarea = document.getElementById("Tipo de tarea").value;
+    console.log("Nueva tarea: " + nuevaTarea + " " + fechaVencimiento + " " + puntos );
 
     if (nuevaTarea.trim() !== "") {
-        // Verificar si ya existe una tarea con el mismo nombre
-        var tareas = JSON.parse(localStorage.getItem('tareas')) || [];
-        var tareaExistente = tareas.find(function (tarea) {
-            return tarea.tarea.toLowerCase() === nuevaTarea.toLowerCase();
-        });
 
-        if (tareaExistente) {
-            alert("¡Ya existe una tarea con el mismo nombre!");
-        } else {
-            taskIdCounter++;
-            var listaTareas = document.querySelector(".listaTareas");
-            var nuevaTareaLi = document.createElement("div");
-            nuevaTareaLi.classList.add("row");
-
-
-            nuevaTareaLi.dataset.taskId = taskIdCounter;
-            nuevaTareaLi.innerHTML = `
-                <div class="col-auto"><input type="checkbox"></div>
-                <div class="col"> <label for="tarea1">${nuevaTarea}</label></div>
-                <div class="col-2">${fechaVencimiento}</div>
-                <div class="col-1">${puntos}</div>
-                <div class="col-3">${tipotarea}</div>
-                <div class="col-3"><button class="botoneliminar">Eliminar</button></div>
-            `;
-            listaTareas.appendChild(nuevaTareaLi);
-            nuevaTareaInput.value = "";
-            fechaVencimientoInput.value = "";
-
-            const botonEliminar = nuevaTareaLi.querySelector(".botoneliminar");
-            botonEliminar.addEventListener('click', function (event) {
-            });
+        
+                if (tareaConMismoNombre(nuevaTarea)) {
+                    alert("¡Ya existe una tarea con el mismo nombre!");
+                        return;
+                }
+            
+           
+                taskIdCounter++;
+                var listaTareas = document.querySelector(".listaTareas");
+                var nuevaTareaLi = document.createElement("div");
+                nuevaTareaLi.classList.add("row");
 
 
-            tareas.push({
-                id: taskIdCounter,
-                tarea: nuevaTarea,
-                fecha: fechaVencimiento,
-                puntos: puntos,
-                tipoTarea: tipotarea
-            });
+                nuevaTareaLi.dataset.taskId = taskIdCounter;
+                nuevaTareaLi.innerHTML = `
+                    <div class="col-auto"><input type="checkbox"></div>
+                    <div class="col"> <label for="tarea1">${nuevaTarea}</label></div>
+                    <div class="col-2">${fechaVencimiento}</div>
+                    <div class="col-1">${puntos}</div>
+                    <div class="col-3">${tipotarea}</div>
+                    <div class="col-3"><button class="botoneliminar">Eliminar</button></div>
+                `;
+                listaTareas.appendChild(nuevaTareaLi);
+                nuevaTareaInput.value = "";
+                fechaVencimientoInput.value = "";
+        
+                
+                function tareaConMismoNombre(nombreTarea) {
+                    const tareasExistente = document.querySelectorAll('.listaTareas .col label');
+                    for (const tareaExistente of tareasExistente) {
+                        if (tareaExistente.innerText.trim() === nombreTarea.trim()) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }  
 
-            localStorage.setItem('tareas', JSON.stringify(tareas));
+ 
+         
+                const botonEliminar = nuevaTareaLi.querySelector(".botoneliminar");
+                botonEliminar.addEventListener('click', function (event) {
+                    console.log('Botón eliminar presionado');
 
-            ordenarTareasPorFecha();
+                    // Obtener la fila (row) de la tarea
+                    const tareaRow = event.target.parentElement.parentElement;
+
+                    // Obtener la información de la tarea desde los elementos de la fila
+                    const taskId = tareaRow.dataset.taskId;
+                    const tareaNombre = tareaRow.querySelector('.col label').innerText;
+                    const tareaFecha = tareaRow.querySelector('.col-2').innerText;
+                    const tareaPuntos = tareaRow.querySelector('.col-1').innerText;
+                    const tareaTipo = tareaRow.querySelector('.col-3').innerText;
+
+                    // Crear un objeto con la información de la tarea
+                    const tareaSeleccionada = {
+                        userId: userId,
+                        nombre: tareaNombre,
+                        fecha: tareaFecha,
+                        puntos: tareaPuntos,
+                        tipo: tareaTipo
+                    };
+               
+                    //console.log('Información de la tarea seleccionada:', tareaSeleccionada);
+                    //eliminarTarea(tareaSeleccionada);
+                });
+          
+                /*
+                tareas.push({
+                    id: taskIdCounter,
+                    tarea: nuevaTarea,
+                    fecha: fechaVencimiento,
+                    puntos: puntos,
+                    tipoTarea: tipotarea
+                }); */
+
+          
+                console.log("Nueva tarea:" + nuevaTarea + " " + fechaVencimiento + " " + puntos );
+
+                
+                const nuevaTarea1 = {
+                    userId: userId,
+                    nombre: nuevaTarea,
+                    fechaVencimiento: fechaVencimiento, 
+                    puntos: puntos,
+                    tipotarea: tipotarea,
+                };
+
+
+
+                fetch('/' + userId + '/tareas', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(nuevaTarea1),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Tarea guardada:', data);
+                    })
+                    .catch(error => console.error('Error al guardar la tarea:', error));
+
+
+                //localStorage.setItem('tareas', JSON.stringify(tareas)); //
+
+                ordenarTareasPorFecha();
+                asignarEventosEliminar();
+            //} 
+                   
         }
-        }
-        location.reload(); 
+        location.reload();  
     }
 
 
+
+            /*
         const botonesEliminar = document.getElementsByClassName("botoneliminar");
 
         for (const boton of botonesEliminar) {
@@ -458,35 +676,69 @@
                 console.log('Botón eliminar presionado');
                 eliminarTarea(event.target.parentElement.parentElement);
             });
-        }
-
-        const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || [];
+        } */
 
 
-        function eliminarTarea(tareaRow) {
 
-            const taskId = tareaRow.dataset.taskId;
-            const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
-            const tareaIndex = tareas.findIndex(task => task.id === parseInt(taskId));
-            if (tareaIndex !== -1) {
+        //const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || []; 
+        function eliminarTarea(tarea) {
 
-                tareasEliminadas.push(tareas[tareaIndex]);
-                tareas.splice(tareaIndex, 1);
-                localStorage.setItem('tareas', JSON.stringify(tareas));
-                localStorage.setItem('tareasEliminadas', JSON.stringify(tareasEliminadas));
-            }
-            tareaRow.remove();
+            //const taskId = tareaRow.dataset.taskId;
+            //const tareas = JSON.parse(localStorage.getItem('tareas')) || []; //
+            const tareaInfo = {
+                userId: userId,
+                nombre: tarea.nombre,  
+                fechaVencimiento: tarea.fechaVencimiento,
+                puntos:tarea.puntos,
+                tipotarea: tarea.tipotarea
+            };
+
+
+                fetch('/' + userId + '/papeleras', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(tareaInfo),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                      
+                        console.log('Tarea guardada:', data);
+                      
+                    })
+                    .catch(error => console.error('Error al guardar la tarea:', error));
+
+               
+                    fetch( '/' + userId +`/tareas/${tarea._id}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Tarea eliminada:', data);
+                    })
+                    .catch(error => console.error('Error al eliminar la tarea:', error));
+
+                    fetch('/' + userId + '/papeleras')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Manejar la lista de tareas recibida en 'data'
+                            console.log('Lista de papeleras:', data);
+                            // Aquí puedes realizar cualquier otra operación con la lista de tareas
+                        })
+                        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+  
         }
 
         function compararFechas(a, b) {
-            const fechaA = new Date(a.querySelector(".col-2").textContent); // Use .col-2 for the date column
+            const fechaA = new Date(a.querySelector(".col-2").textContent); 
             const fechaB = new Date(b.querySelector(".col-2").textContent);
 
-            // Check if the dates are valid
             if (!isNaN(fechaA) && !isNaN(fechaB)) {
                 return fechaA - fechaB;
             } else {
-                // If the dates are invalid, move the task with an invalid date to the end
+            
                 return isNaN(fechaA) ? 1 : -1;
             }
         }
@@ -508,35 +760,44 @@
         }
 
 
-        // Función para mostrar un aviso de tareas vencidas
         function mostrarAvisoTareasVencidas() {
-            const tareasVencidas = storedTareas.filter(task => new Date(task.fecha) < new Date());
 
-            if (tareasVencidas.length > 0) {
-                const avisoDiv = document.createElement('div');
-                avisoDiv.classList.add('avisoTareasVencidas');
+            //const tareasVencidas = storedTareas.filter(task => new Date(task.fecha) < new Date());
+            fetch('/' + userId + '/tareas')
+            .then(response => response.json())
+            .then(data => {
 
-                const mensajeDiv = document.createElement('div');
-                mensajeDiv.textContent = '¡Tienes tareas vencidas! Por favor, revisa las siguientes tareas:';
+                const tareasVencidas = data.filter(task => new Date(task.fechaVencimiento) < new Date());
 
-                const listaTareasUl = document.createElement('ul');
-                tareasVencidas.forEach(task => {
-                    const tareaLi = document.createElement('li');
-                    tareaLi.textContent = task.tarea;
-                    listaTareasUl.appendChild(tareaLi);
-                });
+                if (tareasVencidas.length > 0) {
 
-                avisoDiv.appendChild(mensajeDiv);
-                avisoDiv.appendChild(listaTareasUl);
-                document.body.appendChild(avisoDiv);
-            }
+
+                    const avisoDiv = document.createElement('div');
+                    avisoDiv.classList.add('avisoTareasVencidas');
+
+                    const mensajeDiv = document.createElement('div');
+                    mensajeDiv.textContent = '¡Tienes tareas vencidas! Por favor, revisa las siguientes tareas:';
+                    const listaTareasUl = document.createElement('ul');
+
+                    tareasVencidas.forEach(task => {
+                        const tareaLi = document.createElement('li');
+                        tareaLi.textContent = task.nombre;
+               
+                        listaTareasUl.appendChild(tareaLi);
+                    });
+
+
+
+                    avisoDiv.appendChild(mensajeDiv);
+                    avisoDiv.appendChild(listaTareasUl);
+                    document.body.appendChild(avisoDiv);
+                }
+                })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
         }
 
-        // Llama a la función al cargar la página
-        mostrarAvisoTareasVencidas();
 
-
-
+        
 </script>
 
 
@@ -555,18 +816,15 @@
 
     }
 
-
-
     function papelera(){
-      var userId = '<%= user.id %>';
-      window.location.href = "/papelera/" + userId;
+        var userId = '<%= user.id %>';
+        window.location.href = "/papelera/" + userId;
 
     }
 
     function mascota(){
         var userId = '<%= user.id %>';
       window.location.href = "/mascota/" + userId;
-
 
     }
 
@@ -575,7 +833,6 @@
       window.location.href = "/cementerio/" + userId;
 
     }
-
 </script>
     <script src="/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.js"></script>
 

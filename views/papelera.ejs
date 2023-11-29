@@ -268,6 +268,58 @@
 
 
   <script>
+           /*
+       const nuevaTarea = {
+        nombre: 'Nombre de la tarea',
+        fechaVencimiento: new Date(), // Puedes ajustar la fecha según sea necesario
+        puntos: 10,
+        tipotarea: 'Tipo de tarea',
+        };
+
+        // Realizar una solicitud POST a la ruta /api/tareas
+        fetch('/api/tareas', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(nuevaTarea),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Manejar la respuesta recibida después de guardar la tarea
+            console.log('Tarea guardada:', data);
+            // Aquí puedes realizar cualquier otra operación después de guardar la tarea
+        })
+        .catch(error => console.error('Error al guardar la tarea:', error));
+
+        fetch('/api/tareas')
+        .then(response => response.json())
+        .then(data => {
+            // Manejar la lista de tareas recibida en 'data'
+            console.log('Lista de tareas:', data);
+            // Aquí puedes realizar cualquier otra operación con la lista de tareas
+        })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+        const taskId = Obtén el id de alguna manera ;
+        // Realizar una solicitud DELETE a la ruta /api/tareas/:id
+        fetch(`/api/tareas/${taskId}`, {
+        method: 'DELETE',
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Manejar la respuesta recibida después de eliminar la tarea
+            console.log('Tarea eliminada:', data);
+            // Puedes realizar cualquier otra operación después de eliminar la tarea
+        })
+        .catch(error => console.error('Error al eliminar la tarea:', error));
+
+      */
+    
+
+    
+      var userId = '<%= user.id %>';
+      
       function toggleSidebar() {
           var sidebar = document.getElementById('sidebar');
           if (sidebar.style.left === '0px') {
@@ -277,9 +329,10 @@
           }
       }
 
-        const tareasEliminadasList = document.querySelector('.listaTareasEliminadas');
-        const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || [];
+        
+        //const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || []; ///
         let taskIdCounter = 0;
+        const tareasEliminadasList = document.querySelector('.listaTareasEliminadas');
 
         /*
         const botonesRestaurar = document.querySelectorAll(".botonrestaurar");
@@ -291,111 +344,128 @@
             });
         }); */
 
+        
 
+        function eliminarTareasAnterioresAUnMes() {                                                                         //ARREGLAR
 
-        function eliminarTareasAnterioresAUnMes() {
-            const fechaActual = new Date();
-            fechaActual.setMonth(fechaActual.getMonth() - 1);
-            const fechaLimite = fechaActual.toISOString().slice(0, 10);
-            const tareasEliminadas = Array.from(tareasEliminadasList.querySelectorAll('li'));
-
-            tareasEliminadas.forEach(tarea => {
-                const fechaTarea = tarea.querySelector('.col-2').textContent;
-
-                // Parse dates in a standardized format (YYYY-MM-DD)
-                const fechaTareaParts = fechaTarea.split('-');
-                const fechaActualParts = fechaLimite.split('-');
-
-                const tareaDate = new Date(fechaTareaParts[0], fechaTareaParts[1] - 1, fechaTareaParts[2]);
-                const limiteDate = new Date(fechaActualParts[0], fechaActualParts[1] - 1, fechaActualParts[2]);
-
-                if (tareaDate <= limiteDate) {
-                    tarea.remove();
-                    eliminarTarea(tarea);
-                }
-            });
          }
 
+                /*
         function eliminarTarea(tareaRow) {
             const taskId = tareaRow.dataset.taskId;
-            const tareas = JSON.parse(localStorage.getItem('tareas')) || [];
+            const tareas = JSON.parse(localStorage.getItem('tareas')) || []; //
+            
+
             const tareaIndex = tareas.findIndex(task => task.id === parseInt(taskId));
             if (tareaIndex !== -1) {
                 tareasEliminadas.push(tareas[tareaIndex]);
                 tareas.splice(tareaIndex, 1);
-                localStorage.setItem('tareas', JSON.stringify(tareas));
-                localStorage.setItem('tareasEliminadas', JSON.stringify(tareasEliminadas));
+
+                localStorage.setItem('tareas', JSON.stringify(tareas));  ///
+                localStorage.setItem('tareasEliminadas', JSON.stringify(tareasEliminadas)); ///
             }
             tareaRow.remove();
-        }
+        }  */
 
-        
+      
+        const fechaActual = new Date();
+        //const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || [];
+        fetch('/' + userId +'/papeleras')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(tarea => {
+            if (tarea.fechaVencimiento) {
+                        // Crear un objeto Date con la fecha de vencimiento
+                        const fechaVencimiento = new Date(tarea.fechaVencimiento);
+                        const diferenciaEnMilisegundos = fechaVencimiento - fechaActual;
+                        const diferenciaEnDias = Math.floor(diferenciaEnMilisegundos / (1000 * 60 * 60 * 24));
+                        
 
-        function restaurarTarea(tareaItem, tareaNombre, tareaFecha, tareaPuntos, tareaTipo) {
-            const tarea = {
-                tarea: tareaNombre,
-                fecha: tareaFecha,
-                puntos: tareaPuntos,
-                tipoTarea: tareaTipo,
-            };
 
-            // Elimina la tarea de la lista de tareas eliminadas
-            const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || [];
-            const tareaIndex = tareasEliminadas.findIndex(task => task.tarea === tareaNombre);
-            if (tareaIndex !== -1) {
-                tareasEliminadas.splice(tareaIndex, 1);
-                localStorage.setItem('tareasEliminadas', JSON.stringify(tareasEliminadas));
+                        if (diferenciaEnDias > 30) {
+                            fetch('/' + userId +`/papeleras/${tarea._id}`, {
+                                method: 'DELETE',
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                console.log('Tarea eliminada:', data);
+                                })
+                                .catch(error => console.error('Error al eliminar la tarea:', error));
+ 
+                            return; 
+                        }
+
+                        // Obtener los componentes de la fecha
+                        const año = fechaVencimiento.getFullYear();
+                        const mes = ('0' + (fechaVencimiento.getMonth() + 1)).slice(-2);
+                        const día = ('0' + fechaVencimiento.getDate()).slice(-2);
+                        tarea.fechaVencimiento = `${año}-${mes}-${día}`;
             }
 
-            let tareas = JSON.parse(localStorage.getItem('tareas')) || [];
-            if (!Array.isArray(tareas)) {
-                tareas = [];
-            }
-
-            tarea.id = taskIdCounter++; // Asigna un nuevo ID a la tarea restaurada
-            tareas.push(tarea);
-            localStorage.setItem('tareas', JSON.stringify(tareas));
-
-            // Elimina la tarea de la vista de tareas eliminadas
-            tareaItem.remove();
-            window.location.href = "checklist.html";
-        }
-
-        tareasEliminadas.forEach(tarea => {
             const tareaItem = document.createElement('li');
             tareaItem.innerHTML = `
-                <div class="col"> <label for="tarea1">${tarea.tarea}</label></div>
-                <div class="col-2">${tarea.fecha}</div>
+                <div class="col"> <label for="tarea1">${tarea.nombre}</label></div>
+                <div class="col-2">${tarea.fechaVencimiento}</div>
                 <div class="col-1">${tarea.puntos}</div>
-                <div class="col-3">${tarea.tipoTarea}</div>
+                <div class="col-3">${tarea.tipotarea}</div>
                 <div class="col-3"><button class="botonrestaurar">Restaurar</button></div>
             `;
-
-
             tareasEliminadasList.appendChild(tareaItem);
-        });
 
-        // Obtén una lista de todos los botones "Restaurar"
-        const botonesRestaurar = document.querySelectorAll('.botonrestaurar');
+                    // Obtén una lista de todos los botones "Restaurar"
+        const botonesRestaurar = tareaItem.querySelectorAll('.botonrestaurar');
 
         // Agrega un controlador de eventos a cada botón "Restaurar"
-         botonesRestaurar.forEach(boton => {
-                boton.addEventListener('click', () => {
-                    const tareaItem = boton.closest('li');
-                    const tareaNombre = tareaItem.querySelector('label').textContent;
-                    const tareaFecha = tareaItem.querySelector('.col-2').textContent;
-                    const tareaPuntos = 0;
-                    const tareaTipo = tareaItem.querySelector('.col-3').textContent;
-                    restaurarTarea( tareaItem, tareaNombre, tareaFecha, tareaPuntos, tareaTipo);
+        botonesRestaurar.forEach(boton => {
+                boton.addEventListener('click', () => {  
+                    
 
-                    //alert(`Restaurar tarea: ${tareaNombre}, Fecha: ${tareaFecha}, Puntos: ${tareaPuntos}, Tipo: ${tareaTipo}`);
+                    var userId = '<%= user.id %>'; 
+
+                    fetch('/' + userId + '/tareas', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(tarea),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Tarea guardada:', data);
+                    })
+                    .catch(error => console.error('Error al guardar la tarea:', error));
+
+   
+                    const taskId = tarea._id;
+
+                    fetch('/' + userId +`/papeleras/${taskId}`, {
+                    method: 'DELETE',
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                    console.log('Tarea eliminada:', data);
+                    })
+                    .catch(error => console.error('Error al eliminar la tarea:', error));
+
+                
+
+                var userId = '<%= user.id %>';
+                window.location.href = "/checklist/" + userId;
+
+                    
                 });
             });
 
 
+        });
+        })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+        
+
 
 
         function compareDates(dateStringA, dateStringB) {
+            
             const dateA = new Date(dateStringA);
             const dateB = new Date(dateStringB);
             return dateA - dateB;
