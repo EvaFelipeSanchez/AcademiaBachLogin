@@ -381,18 +381,86 @@
 
 
 
+
+
+
          let taskIdCounter = 0; //Identificador tareas    
-         let puntosTotalesGuardados = localStorage.getItem("puntosTotales"); /// 
+         //let puntosTotalesGuardados = localStorage.getItem("puntosTotales"); /// 
          let userId = '<%= user.id %>';
 
+         /*
+         fetch(`/${userId}/puntos`, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Manejar la respuesta recibida después de eliminar todas las tareas
+        console.log('Todas las tareas eliminadas:', data);
+        // Puedes realizar cualquier otra operación después de eliminar todas las tareas
+    })
+    .catch(error => console.error('Error al eliminar todas las tareas:', error)); */
+
+
         // Inicializar a cero si es null
-        if (puntosTotalesGuardados === null) {
-            puntosTotalesGuardados = 0;
-        } else {
-            // Convertir a número si no es null
-            puntosTotalesGuardados = parseInt(puntosTotalesGuardados, 10);
-        }
+        fetch(`/${userId}/puntos`)
+            .then(response => {
+                if (!response.ok) {
+                throw new Error(`Error de red: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Datos de puntos:', data);
+                if (data === null) {
+                    data = 0;
+                } else {
+                    // Convertir a número si no es null
+                    //data = parseInt(data, 10);
+
+                   
+                    if (data.length > 0) {
+                        const idPuntos = data[0]._id;
+                        console.log('ID de los puntos para el userId:', idPuntos);
+                    } else {
+                        if (data.length > 0) {
+                        
+                            fetch(`/${userId}/puntos`, {
+                                method: 'POST', 
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                    body: JSON.stringify({
+                                        userId: userId,
+                                        puntosTotales: 0, 
+                                    }),
+                                })
+                                .then(newResponse => {
+                                    if (!newResponse.ok) {
+                                         throw new Error(`Error al crear nuevos puntos: ${newResponse.status}`);
+                                    }
+                                        return newResponse.json();
+                                })
+                                .then(newData => {
+                                        const newIdPuntos = newData._id;
+                                        console.log('Se creó un nuevo conjunto de puntos. Nuevo ID:', newIdPuntos);
+
+                                })
+                                .catch(newError => {
+                                        console.error('Error al crear nuevos puntos:', newError.message);
+
+                                }); 
+                            }
+                    }  
+                }
         
+            })
+            .catch(error => {
+                console.error('Error al obtener datos de puntos:', error.message);
+                // Manejar el error de alguna manera apropiada para tu aplicación
+            });
+
+ 
+
 
             fetch(`/${userId}/tareas`, {
                 method: 'GET',
@@ -445,7 +513,7 @@
                             `;
                             listaTareas.appendChild(nuevaTareaLi);
 
-                            var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
+                            //var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //                            
 
 
                             const checkbox = nuevaTareaLi.querySelector('input[type="checkbox"]');
@@ -457,7 +525,62 @@
                                     if (respuesta) {
                                         console.log("La acción se llevará a cabo. Los puntos totales son: " + task.puntos);
                                         //console.log("puntos antes: " + puntosTotalesGuardados);
-                    
+    
+                                        fetch(`/${userId}/puntos`)
+                                        .then(response => {
+                                            if (!response.ok) {
+                                            throw new Error(`Error de red: ${response.status}`);
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(datap => {
+
+                                            let idPuntos = datap[0]._id;
+                                            let userId = '<%= user.id %>';
+
+                                            if (!idPuntos) {
+                                                throw new Error('No se encontró un ID en los datos de puntos');
+                                            }
+
+                                            const puntossuma = datap[0].puntosTotales + task.puntos;
+                                            console.log("Suma de los puntos:" + puntossuma);
+
+                                            const dataToUpdate = {
+                                              userId: userId,
+                                              puntosTotales: puntossuma ,
+                                            };
+                                            
+                                            fetch(`/${userId}/puntos/${idPuntos}`, {
+                                            method: 'PUT',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify(dataToUpdate),
+                                            })
+                                            .then(response => {
+                                                if (!response.ok) {
+                                                throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                                                }
+                                                return response.json();
+                                            })
+                                            .then(updatedData => {
+                                                console.log('Response JSON:', updatedData);
+                                                // Handle the updated data as needed
+                                            })
+                                            .catch(error => {
+                                                console.error('Error al realizar la solicitud:', error);
+                                            });
+
+                                            eliminarTarea(task);
+                                            location.reload();
+                                    
+                                        })
+                                        .catch(error => {
+                                            console.error('Error al obtener datos de puntos:', error.message);
+                                            // Manejar el error de alguna manera apropiada para tu aplicación
+                                        });                               
+   
+                                        /*
                                         if (!isNaN(puntosTotalesGuardados)) {
                                             puntosTotalesGuardados += parseInt(task.puntos, 10);
                                             localStorage.setItem("puntosTotales", puntosTotalesGuardados); //
@@ -465,10 +588,11 @@
                                             location.reload();
                                         } else {
                                             console.error("Error: puntosTotalesGuardados es NaN");
-                                        }
+                                        } */
                                     } else { 
                                         checkbox.checked = false;
                                     }
+
 
                                                     
                                 } 

@@ -30,6 +30,7 @@ const { ObjectId } = require('mongodb');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+
 //const uri = 'mongodb://localhost:27017/mi_basededatos';
 const uri = 'mongodb+srv://evafelipe:BL8h6Y4AguSZWB56@clusteracademiabach.wz3n9ev.mongodb.net/ClusterAcademiaBach?retryWrites=true&w=majority';
 //mongoose.connect('mongodb://localhost:27017/mi_basededatos', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -385,7 +386,64 @@ app.put('/:idt/tareas/:id', async (req, res) => {
 });
 
 //Puntos guardados
+const Puntos = require('./model/puntos');  
 
+app.get('/:idt/puntos', async (req, res) => {
+  let idt = req.params.idt;
+  
+  console.log('GET /:idt/puntos');
+  try { 
+    res.json(await Puntos.find({ userId: idt })); }
+  catch (err) { res.status(500).send({ message: err.message }); }
+});
+
+
+app.put('/:idt/puntos/:id', async (req, res) => {
+  let idt = req.params.idt;
+  let id = req.params.id;
+  console.log(`PUT /:idt/puntos/${id}`);
+  try {
+    let puntos = await Puntos.findById(id);
+
+    if (puntos.userId !== idt) {
+      return res.status(403).send({ message: 'Forbidden' });
+    }
+
+    Object.assign(puntos, req.body);
+
+    const updatedPuntos = await puntos.save();
+    res.json(updatedPuntos);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+});
+
+
+
+app.post('/:idt/puntos', async (req, res) => {
+  let puntos = req.body;
+  const idt = req.params.idt;
+  console.log(`POST /:idt/puntos`);
+  console.log('BODY', puntos);
+  try {
+
+    if (idt !== puntos.userId) {
+      return res.status(403).json({ message: 'No tienes permiso para realizar esta acción.' });
+    }
+    puntos.userId = idt;
+    res.json(await Puntos(puntos).save());
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+  });
+
+  app.delete('/:idt/puntos', async (req, res) => {
+    console.log(`DELETE /:idt/puntos`);
+    try { res.json(await Puntos.deleteMany()); }
+    catch (err) { res.status(500).send({ message: err.message }); }
+  });
+  
+  
 //MascotaPrincipal
 
 

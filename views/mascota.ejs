@@ -466,15 +466,31 @@
 
 
         let itemStore = parseInt(localStorage.getItem('itemstorevalue') || '3');  //
-        var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
-
+        /* var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
         if (puntosTotalesGuardados) {
         puntosTotales = parseInt(puntosTotalesGuardados, 10);
         // Actualiza el texto en el elemento de puntos totales
         document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales; //
         } else {
             puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
-        }
+        } */
+
+        
+        fetch(`/${userId}/puntos`)
+        .then(response => response.json())
+        .then(data => {
+            
+            console.log('Lista de tareas:', data);
+            if (data) {
+            puntosTotales = data[0].puntosTotales;
+            document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+            } else {
+                puntosTotales = 0; 
+            }
+            
+        })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
 
 
         /*

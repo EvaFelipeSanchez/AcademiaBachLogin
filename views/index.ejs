@@ -521,7 +521,8 @@
 
 <script>
     console.log('User ID index:', '<%= user.id %>');
-
+    let userId = '<%= user.id %>';
+    
     const messagesdescanso = [
     "Mensaje 1",
     "Mensaje 2",
@@ -580,7 +581,7 @@
     var puntosTotales = 0;
     var cicloIniciado = false;
     
-    var puntosTotalesGuardados = localStorage.getItem("puntosTotales");
+    //var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
 
     
     var despierta = document.getElementById("imagenMascotaDespierta");
@@ -640,14 +641,32 @@
     }
 
     var empezarcoundown = false;
+  
+     //
 
-    if (puntosTotalesGuardados) {
+     fetch(`/${userId}/puntos`)
+        .then(response => response.json())
+        .then(data => {
+            
+            console.log('Lista de tareas:', data);
+            if (data) {
+            puntosTotales = data[0].puntosTotales;
+            document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+            } else {
+                puntosTotales = 0; 
+            }
+            
+        })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+    /*
+    if (puntosTotalesGuardados) { 
     puntosTotales = parseInt(puntosTotalesGuardados, 10);
     // Actualiza el texto en el elemento de puntos totales
     document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
     } else {
         puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
-    }
+    } */
 
     var valorBarraAvance = localStorage.getItem("barraAvance");
 
@@ -742,10 +761,55 @@
                         messageBlock.style.display = "none";
                         if (cicloIniciado) {
                             // Suma un punto solo si el ciclo ya ha comenzado
-                            puntosTotales++;
-                            // Actualiza el texto en el elemento de puntos totales
-                            document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
-                            localStorage.setItem("puntosTotales", puntosTotales);
+                            fetch(`/${userId}/puntos`)
+                            .then(response => response.json())
+                            .then(datap => {
+                                let idPuntos = datap[0]._id;
+                                let userId = '<%= user.id %>';
+
+                                if (!idPuntos) {
+                                    throw new Error('No se encontró un ID en los datos de puntos');
+                                }
+                                
+                                const puntossuma = datap[0].puntosTotales + 1;
+                                console.log("Suma de los puntos:" + puntossuma);
+
+                                const dataToUpdate = {
+                                    userId: userId,
+                                    puntosTotales: puntossuma ,
+                                };
+
+                                
+                                document.getElementById("puntosTotales").textContent = puntossuma < 10 ? '0' +puntossuma : puntossuma;       
+                                /*                         
+                                puntosTotales++;
+                                document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales; ///
+                                localStorage.setItem("puntosTotales", puntosTotales);  */
+
+                                fetch(`/${userId}/puntos/${idPuntos}`, {
+                                            method: 'PUT',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify(dataToUpdate),
+                                            })
+                                            .then(response => {
+                                                if (!response.ok) {
+                                                throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                                                }
+                                                return response.json();
+                                            })
+                                            .then(updatedData => {
+                                                console.log('Response JSON:', updatedData);
+                                                // Handle the updated data as needed
+                                            })
+                                            .catch(error => {
+                                                console.error('Error al realizar la solicitud:', error);
+                                            });                           
+                               
+                            })
+                            .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
                         } else {
                             cicloIniciado = true; // Marca el inicio del ciclo
                         }
@@ -820,7 +884,6 @@
             // Obtener la lista local
             var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
 
-            // Establecer itemStore en función del índice más alto en la lista local
             itemStore = 0;
             listaCementerio.forEach(function (element) {
                 if (element.index > itemStore) {

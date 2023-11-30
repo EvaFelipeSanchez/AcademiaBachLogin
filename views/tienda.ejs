@@ -398,43 +398,108 @@
 
          };
 
+         fetch(`/${userId}/puntos`)
+            .then(response => {
+                if (!response.ok) {
+                throw new Error(`Error de red: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Datos de puntos:', data);
+                if (data === null) {
+                    data = 0;
+                } else {
+                    // Convertir a número si no es null
+                    //data = parseInt(data, 10);
+
+                   
+                    if (data.length > 0) {
+                        const idPuntos = data[0]._id;
+                        console.log('ID de los puntos para el userId:', idPuntos);
+                    } else {
+                        if (data.length > 0) {
+                        
+                            fetch(`/${userId}/puntos`, {
+                                method: 'POST', 
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                    body: JSON.stringify({
+                                        userId: userId,
+                                        puntosTotales: 0, 
+                                    }),
+                                })
+                                .then(newResponse => {
+                                    if (!newResponse.ok) {
+                                         throw new Error(`Error al crear nuevos puntos: ${newResponse.status}`);
+                                    }
+                                        return newResponse.json();
+                                })
+                                .then(newData => {
+                                        const newIdPuntos = newData._id;
+                                        console.log('Se creó un nuevo conjunto de puntos. Nuevo ID:', newIdPuntos);
+
+                                })
+                                .catch(newError => {
+                                        console.error('Error al crear nuevos puntos:', newError.message);
+
+                                }); 
+                            }
+                    }  
+                }
+        
+            })
+
             
         localStorage.setItem('traspaso', false); //
-        var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
+        //var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); ////
 
-        if (puntosTotalesGuardados) {
-        puntosTotales = parseInt(puntosTotalesGuardados, 10);
-        // Actualiza el texto en el elemento de puntos totales
-        document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
-        } else {
-            puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
-        }
+        fetch(`/${userId}/puntos`)
+        .then(response => response.json())
+        .then(data => {
+            
+            console.log('Lista de tareas:', data);
+            if (data) {
+            puntosTotales = data[0].puntosTotales;
+            document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+            } else {
+                puntosTotales = 0; 
+            }
+            
+        })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+
 
 
         var traspaso = true;
         localStorage.setItem('traspaso', traspaso); //
 
         function comprar(item){
-            var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
+            //var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
+            fetch(`/${userId}/puntos`)
+        .then(response => response.json())
+        .then(puntosTotalesGuardados => {                  
 
             if (puntosTotalesGuardados) {
-                puntosTotales = parseInt(puntosTotalesGuardados, 10);
+                puntosTotales = parseInt(puntosTotalesGuardados[0].puntosTotales, 10);
                 document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
             } else {
                 puntosTotales = 0;
-            }
+            } 
 
             if (traspaso) {
                 var precioElement = document.querySelector('.store .item:nth-child(' + item + ') .price');
                 var precio = parseInt(precioElement.textContent, 10);
 
-                if (puntosTotalesGuardados >= precio) {
+                if (puntosTotalesGuardados[0].puntosTotales >= precio) {
                     var nombreMascotaInput = document.querySelector('.store .item:nth-child(' + item + ') .nuevaMascotaInput');
                     var nombreMascota = nombreMascotaInput.value;
                     fetch('/' + userId +'/mascotas')
                     .then(response => response.json())
                     .then(data => {
-
+       
                         var nombreRepetido = data.some(function (element) {
                         return element.nombre === nombreMascota;
                          });
@@ -452,9 +517,43 @@
                         };
 
                         //listaLocal.push(nuevoElemento);
+                        let puntostotalesnuevo =  puntosTotalesGuardados[0].puntosTotales - precio;
+                        console.log("Precios: " + precio);
+                        console.log("Puntos totales nuevos: " + puntostotalesnuevo);
 
-                        puntosTotalesGuardados -= precio;
-                        localStorage.setItem("puntosTotales", puntosTotalesGuardados); //
+                        const idPuntos = puntosTotalesGuardados[0]._id;
+                        if (!idPuntos) {
+                                throw new Error('No se encontró un ID en los datos de puntos');
+                        }
+
+                        const dataToUpdate = {
+                                userId: userId,
+                                puntosTotales: puntostotalesnuevo ,
+                        };
+                                            
+                        fetch(`/${userId}/puntos/${idPuntos}`, {
+                                method: 'PUT',
+                                headers: {
+                                     'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(dataToUpdate),
+                        })
+                        .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                               }
+                                    return response.json();
+                        })
+                        .then(updatedData => {
+                                    console.log('Response JSON:', updatedData);
+                    
+                        })
+                        .catch(error => {
+                                    console.error('Error al realizar la solicitud:', error);
+                        });
+
+                        //puntosTotalesGuardados -= precio;
+                        //localStorage.setItem("puntosTotales", puntosTotalesGuardados); //
 
                         //localStorage.setItem('storeElements', JSON.stringify(listaLocal));
                         fetch('/' + userId +'/mascotas', {
@@ -489,6 +588,9 @@
 
                 }
             }
+            })
+            .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
 
         }
 
