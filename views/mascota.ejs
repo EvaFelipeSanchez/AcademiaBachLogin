@@ -434,15 +434,7 @@
                         nuevoBotonActivar.classList.add('activar-button');
                         nuevoBotonActivar.textContent = 'Activar';
                         nuevoBotonActivar.onclick = function () {
-                            
-                                fetch('/' + userId + '/mascotas')
-                                .then(response => response.json())
-                                .then(data => {
-                                    // Manejar la lista de tareas recibida en 'data'
-                                    activar(data.indexOf(elementData) + 1);
-                                })
-                                .catch(error => console.error('Error al obtener la lista de mascotas:', error));
-
+                            activar(elementData);
                           
                         };
                         nuevoItem.appendChild(nuevoBotonActivar);
@@ -490,6 +482,33 @@
             
         })
         .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+
+        function activar(id) {
+            console.log("Activar botón. El id de la mascota es: " + id);
+                    console.log("Lista encontrada: " + id.nombre);
+
+                    var imagenPrincipal = id.imagenPrincipal;
+                    var segundaImagen = id.segundaImagen;
+                    var nombre = id.nombre;
+
+                    // Almacena las rutas de las imágenes y el nombre en el almacenamiento local
+                    localStorage.setItem('imagenPrincipal', imagenPrincipal);
+                    localStorage.setItem('segundaImagen', segundaImagen);
+                    localStorage.setItem('nombrePrincipal', nombre);
+
+                    console.log(imagenPrincipal);
+                    console.log(segundaImagen);
+                    console.log(nombre);
+                    localStorage.setItem("displayValue", "none");
+
+                    // Redirige a otro HTML
+                    var userId = '<%= user.id %>';
+                    window.location.href = "/"  + userId;
+                //}               
+          
+
+        }
 
 
 
@@ -562,29 +581,7 @@
         }  */
 
 
-        function activar(item) {
-            var index = item - 1; // Resta 1 para obtener el índice correcto
-            if (index >= 0 && index < listaLocal.length) {
-                // Obtén las rutas de las imágenes y el nombre del elemento específico
-                var imagenPrincipal = listaLocal[index].imagenPrincipal;
-                var segundaImagen = listaLocal[index].segundaImagen;
-                var nombre = listaLocal[index].nombre;
 
-                // Almacena las rutas de las imágenes y el nombre en el almacenamiento local
-                localStorage.setItem('imagenPrincipal', imagenPrincipal);
-                localStorage.setItem('segundaImagen', segundaImagen);
-                localStorage.setItem('nombrePrincipal', nombre);
-
-                console.log(imagenPrincipal);
-                console.log(segundaImagen);
-                console.log(nombre);
-                localStorage.setItem("displayValue", "none");
-
-                // Redirige a otro HTML
-                var userId = '<%= user.id %>';
-                window.location.href = "/"  + userId;
-            }
-        }
 
 
     

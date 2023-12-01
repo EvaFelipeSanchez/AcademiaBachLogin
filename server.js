@@ -445,7 +445,63 @@ app.post('/:idt/puntos', async (req, res) => {
   
   
 //MascotaPrincipal
+const MascotaPrincipal = require('./model/mascotaprincipal');  
 
+app.get('/:idt/mascotaprincipal', async (req, res) => {
+  let idt = req.params.idt;
+  
+  console.log('GET /:idt/mascotaprincipal');
+  try { 
+    res.json(await MascotaPrincipal.find({ userId: idt })); }
+  catch (err) { res.status(500).send({ message: err.message }); }
+});
+
+
+app.put('/:idt/mascotaprincipal/:id', async (req, res) => {
+  let idt = req.params.idt;
+  let id = req.params.id;
+  console.log(`PUT /:idt/mascotaprincipal/${id}`);
+  try {
+    let mascotaprincipal = await MascotaPrincipal.findById(id);
+
+    if (mascotaprincipal.userId !== idt) {
+      return res.status(403).send({ message: 'Forbidden' });
+    }
+
+    Object.assign(mascotaprincipal, req.body);
+
+    const updatedmascotaprincipal = await mascotaprincipal.save();
+    res.json(updatedmascotaprincipal);
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+});
+
+
+
+app.post('/:idt/mascotaprincipal', async (req, res) => {
+  let mascotaprincipal = req.body;
+  const idt = req.params.idt;
+  console.log(`POST /:idt/mascotaprincipal`);
+  console.log('BODY', mascotaprincipal);
+  try {
+
+    if (idt !== mascotaprincipal.userId) {
+      return res.status(403).json({ message: 'No tienes permiso para realizar esta acción.' });
+    }
+    mascotaprincipal.userId = idt;
+    res.json(await MascotaPrincipal(mascotaprincipal).save());
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+  });
+
+  app.delete('/:idt/mascotaprincipal', async (req, res) => {
+    console.log(`DELETE /:idt/mascotaprincipal`);
+    try { res.json(await MascotaPrincipal.deleteMany()); }
+    catch (err) { res.status(500).send({ message: err.message }); }
+  });
+  
 
 //Papeleras
 const Papelera = require('./model/papelera');  

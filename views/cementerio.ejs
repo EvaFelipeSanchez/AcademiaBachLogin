@@ -174,32 +174,44 @@
 
     // Obtener todos los elementos con clase "item" dentro de la tienda
     var items = cementerio.querySelectorAll('.item');
+    let userId = '<%= user.id %>';
 
     // Crear una lista local para almacenar los elementos de la tienda
-    var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
+    //var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
     //var listaCementerio = [];
-    localStorage.setItem('CementerioElements', JSON.stringify(listaCementerio));
+    //localStorage.setItem('CementerioElements', JSON.stringify(listaCementerio));
 
-    if (listaCementerio.length === 0) {
+    
+
+
+    fetch(`/${userId}/muertos`)
+        .then(response => response.json())
+        .then(listaCementerio => {
+
+            if (listaCementerio.length === 0) {
             items.forEach(function (item, index) {
             var imagenPrincipal = item.querySelector('img').src;
             var nombre = item.querySelector('.nombre').textContent;
             var fechamuerte = item.querySelector('.fechamuerte').textContent;
             
-
+            /*
             var elementoCementerio = {
                 imagenPrincipal: imagenPrincipal,
                 nombre : nombre,
                 fechamuerte: fechamuerte
             };
 
-            listaCementerio.push(elementoCementerio);
-        });
+            listaCementerio.push(elementoCementerio); */
+                });
 
-    }
+            }
 
-    localStorage.setItem('CementerioElements', JSON.stringify(listaCementerio));
-    console.log(listaCementerio);
+
+        })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error)); 
+ 
+   // localStorage.setItem('CementerioElements', JSON.stringify(listaCementerio));
+    //console.log(listaCementerio);
 
     window.onload = function() {
         
@@ -220,31 +232,40 @@
 
         function cargarElementosGuardados() {
             var CementerioElementsContainer = document.querySelector('.cementerio');
-            var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
             CementerioElementsContainer.innerHTML = '';
+            //var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
+            fetch(`/${userId}/muertos`)
+            .then(response => response.json())
+            .then(listaCementerio => {
+                listaCementerio.forEach(function (elementData) {
+                    if (!elementYaExisteEnMascota(elementData)) {
+                        var nuevoItem = document.createElement('div');
+                        nuevoItem.classList.add('item');
 
-            listaCementerio.forEach(function (elementData) {
-                if (!elementYaExisteEnMascota(elementData)) {
-                    var nuevoItem = document.createElement('div');
-                    nuevoItem.classList.add('item');
+                        var nuevaImagen = document.createElement('img');
+                        nuevaImagen.src = elementData.imagenPrincipal;
+                        nuevoItem.appendChild(nuevaImagen);
 
-                    var nuevaImagen = document.createElement('img');
-                    nuevaImagen.src = elementData.imagenPrincipal;
-                    nuevoItem.appendChild(nuevaImagen);
+                        var nuevoNombre = document.createElement('p');
+                        nuevoNombre.classList.add('nombre');
+                        nuevoNombre.textContent = elementData.nombre;
+                        nuevoItem.appendChild(nuevoNombre);
 
-                    var nuevoNombre = document.createElement('p');
-                    nuevoNombre.classList.add('nombre');
-                    nuevoNombre.textContent = elementData.nombre;
-                    nuevoItem.appendChild(nuevoNombre);
+                        var nuevoFecha = document.createElement('p');
+                        nuevoFecha.classList.add('fechamuerte');
+                        nuevoFecha.textContent = elementData.fecha;
+                        nuevoItem.appendChild(nuevoFecha);
 
-                    var nuevoFecha = document.createElement('p');
-                    nuevoFecha.classList.add('fechamuerte');
-                    nuevoFecha.textContent = elementData.fechamuerte; // Utiliza la propiedad correcta
-                    nuevoItem.appendChild(nuevoFecha);
+                        CementerioElementsContainer.appendChild(nuevoItem);
+                    }
+                });
 
-                    CementerioElementsContainer.appendChild(nuevoItem);
-                }
-            });
+            })
+            .catch(error => console.error('Error al obtener la lista de tareas:', error));
+ 
+         
+
+
         } 
 
         cargarElementosGuardados();

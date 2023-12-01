@@ -344,8 +344,8 @@
 
         .nombreMascota {
             position: fixed;
-            top: 61%;
-            left: 58%;
+            top: 62%;
+            left:62%;
             transform: translate(-50%, -50%);
             font-size: 2vw;
             text-align: center;
@@ -534,6 +534,84 @@
     const messageBlock = document.getElementById("messageBlock");
     const messageElement = document.getElementById("message");
 
+    /*
+    fetch(`/${userId}/puntos`, {
+        method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Manejar la respuesta recibida después de eliminar todas las tareas
+        console.log('Todas las tareas eliminadas:', data);
+        // Puedes realizar cualquier otra operación después de eliminar todas las tareas
+    })
+    .catch(error => console.error('Error al eliminar todas las tareas:', error)); */
+
+    fetch(`/${userId}/puntos`)
+            .then(response => {
+                if (!response.ok) {
+                throw new Error(`Error de red: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Datos de puntos:', data);
+                if (data === null) {
+                    data = 0;
+                } else {
+                    // Convertir a número si no es null
+                    //data = parseInt(data, 10);
+
+                            
+                    if (data.length > 0) {
+                        const idPuntos = data[0]._id;
+                        console.log('ID de los puntos para el userId:', idPuntos);
+                    } else {                       
+                        
+                            fetch(`/${userId}/puntos`, {
+                                method: 'POST', 
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                    body: JSON.stringify({
+                                        userId: userId,
+                                        puntosTotales: 0, 
+                                    }),
+                                })
+                                .then(newResponse => {
+                                    if (!newResponse.ok) {
+                                         throw new Error(`Error al crear nuevos puntos: ${newResponse.status}`);
+                                    }
+                                        return newResponse.json();
+                                })
+                                .then(newData => {
+                                        const newIdPuntos = newData._id;
+                                        console.log('Se creó un nuevo conjunto de puntos. Nuevo ID:', newIdPuntos);
+
+                                })
+                                .catch(newError => {
+                                        console.error('Error al crear nuevos puntos:', newError.message);
+
+                                }); 
+
+                                fetch(`/${userId}/puntos`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    // Manejar la lista de tareas recibida en 'data'
+                                    console.log('Lista de tareas:', data);
+                                    // Aquí puedes realizar cualquier otra operación con la lista de tareas
+                                })
+                                .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+                            
+                    }  
+
+                }
+        
+            })
+
+
+    
+
     function getRandomMessage() {
     const randomIndex = Math.floor(Math.random() * messagesdescanso.length);
     return messagesdescanso[randomIndex];
@@ -548,8 +626,9 @@
     //despierta.style.display = "none"; 
     //dormida.style.display = "block"; 
 
-    if (!localStorage.getItem('imagenPrincipal') || localStorage.getItem('imagenPrincipal') === 'null') {
-    if (!localStorage.getItem('segundaImagen') || localStorage.getItem('segundaImagen') === 'null') {
+    
+    if (!localStorage.getItem('imagenPrincipal') || localStorage.getItem('imagenPrincipal') === 'null') {  //
+    if (!localStorage.getItem('segundaImagen') || localStorage.getItem('segundaImagen') === 'null') {  //
         var nuevaImagen = 'images/cruz.png';
          document.getElementById('imagenMascotaDespierta').src = nuevaImagen;
         document.getElementById('imagenMascotaDormida').src = nuevaImagen;
@@ -564,8 +643,8 @@
 
 
 
-     var nombrePrincipalSrc = localStorage.getItem('nombrePrincipal');
-     document.getElementById('MascotaNombre').textContent = nombrePrincipalSrc;
+     var nombrePrincipalSrc = localStorage.getItem('nombrePrincipal');  //
+     document.getElementById('MascotaNombre').textContent = nombrePrincipalSrc; //
      console.log("Nombre mascota: " + nombrePrincipalSrc)
 
      function toggleSidebar() {
@@ -644,20 +723,6 @@
   
      //
 
-     fetch(`/${userId}/puntos`)
-        .then(response => response.json())
-        .then(data => {
-            
-            console.log('Lista de tareas:', data);
-            if (data) {
-            puntosTotales = data[0].puntosTotales;
-            document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
-            } else {
-                puntosTotales = 0; 
-            }
-            
-        })
-        .catch(error => console.error('Error al obtener la lista de tareas:', error));
 
     /*
     if (puntosTotalesGuardados) { 
@@ -879,10 +944,10 @@
             
     }
 
-    var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
+    var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];  ///
         window.onload = function () {
             // Obtener la lista local
-            var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
+            var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];  ////
 
             itemStore = 0;
             listaCementerio.forEach(function (element) {
@@ -894,24 +959,48 @@
     };
 
 
-    var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
-
-    function eliminarMascota(nombreMascota) {
-
-        var indiceAEliminar = -1;
-        listaLocal.forEach(function (element, index) {
+    //var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
+            /*
+            var indiceAEliminar = -1;
+            data.forEach(function (element, index) {
             if (element.nombre === nombreMascota) {
                 indiceAEliminar = index;
                 console.log("Se llega aqui");
-            }
-        });
+            } */
 
-        if (indiceAEliminar !== -1) {
 
-            listaLocal.splice(indiceAEliminar, 1);
+    function eliminarMascota(nombreMascota) {
+        fetch('/' + userId +'/mascotas')
+        .then(response => response.json())
+        .then(data => {
+                /*Hacerlo aqui*/     
+                const mascotaAEliminar = data.find(mascota => mascota.nombre === nombreMascota);
 
-            localStorage.setItem('storeElements', JSON.stringify(listaLocal));
-        }
+                if (mascotaAEliminar) {
+                    const mascotaId = mascotaAEliminar._id;
+
+                    fetch(`/${userId}/mascotas/${mascotaId}`, {
+                    method: 'DELETE',
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                        throw new Error(`Error al borrar la mascota: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Mascota eliminada con éxito:', data);
+                        // Puedes realizar acciones adicionales después de eliminar la mascota
+                    })
+                    .catch(error => {
+                        console.error('Error al borrar la mascota:', error.message);
+                    });
+
+                }
+        })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+        
+        
     }
 
 
@@ -921,40 +1010,65 @@
             // nombrePrincipalSrc 
 
             var fechaActual = new Date();
-            
+            let userId = '<%= user.id %>';
 
             // Formatea la fecha
             var options = { year: 'numeric', month: 'long', day: 'numeric' };
             var fechaFormateada = fechaActual.toLocaleDateString(undefined, options);
 
+            var nuevoElemento = {
+                            userId: userId,
+                            imagenPrincipal: imagenPrincipalSrc,                            
+                            nombre: nombrePrincipalSrc,
+                            fecha: fechaActual
+            };
+                        
+            fetch('/' + userId +'/muertos', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(nuevoElemento),
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Mascota muerta:', data);
+                            })
+                            .catch(error => console.error('Error al guardar la tarea:', error));
 
-            localStorage.setItem('imagenPrincipalCementerio', imagenPrincipalSrc);
-            localStorage.setItem('nombrePrincipalCementerio', nombrePrincipalSrc );
-            localStorage.setItem('fechaCementerio', fechaFormateada );
 
+                                   
+            localStorage.setItem('imagenPrincipalCementerio', imagenPrincipalSrc); ///
+            localStorage.setItem('nombrePrincipalCementerio', nombrePrincipalSrc );  //
+            localStorage.setItem('fechaCementerio', fechaFormateada );  ///
+
+            /*
             var nuevoElemento = {
                         imagenPrincipal: imagenPrincipalSrc,
                         nombre: nombrePrincipalSrc,
                         fechamuerte: fechaFormateada
-            };
+            }; */
 
-            listaCementerio.push(nuevoElemento);
+            //listaCementerio.push(nuevoElemento);
+
             eliminarMascota(nombrePrincipalSrc);
-            localStorage.setItem('CementerioElements', JSON.stringify( listaCementerio));
+
+            //localStorage.setItem('CementerioElements', JSON.stringify( listaCementerio));
            
 
             document.getElementById('imagenMascotaDespierta').src = "images/cruz.png";
             document.getElementById('imagenMascotaDormida').src = "images/cruz.png";
             document.getElementById('MascotaNombre').textContent = "";
-            localStorage.setItem('imagenPrincipal', "images/cruz.png");
-            localStorage.setItem('segundaImagen', "images/cruz.png");
-            localStorage.setItem('nombrePrincipal', "");
+            
+            localStorage.setItem('imagenPrincipal', "images/cruz.png"); ///
+            localStorage.setItem('segundaImagen', "images/cruz.png");   //
+            localStorage.setItem('nombrePrincipal', ""); ///
 
             nopoder.style.display = "block";
             localStorage.setItem("displayValue", "block");
 
             // Redirigir a otro HTML
-            window.location.href = 'cementerio.html';
+            //window.location.href = '/cementerio/' + userId ;
             
 
 
