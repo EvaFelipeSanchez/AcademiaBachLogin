@@ -571,7 +571,7 @@
                                                 console.error('Error al realizar la solicitud:', error);
                                             });
 
-                                            eliminarTarea(task);
+                                            eliminarTareaCheck(task);
                                             location.reload();
                                     
                                         })
@@ -854,6 +854,55 @@
 
   
         }
+
+        function eliminarTareaCheck(tarea) {
+            //const taskId = tareaRow.dataset.taskId;
+            //const tareas = JSON.parse(localStorage.getItem('tareas')) || []; //
+            const tareaInfo = {
+                userId: userId,
+                nombre: tarea.nombre,  
+                fechaVencimiento: tarea.fechaVencimiento,
+                puntos: 0,
+                tipotarea: tarea.tipotarea
+            };
+
+
+                fetch('/' + userId + '/papeleras', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(tareaInfo),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                    
+                        console.log('Tarea guardada:', data);
+                    
+                    })
+                    .catch(error => console.error('Error al guardar la tarea:', error));
+
+            
+                    fetch( '/' + userId +`/tareas/${tarea._id}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Tarea eliminada:', data);
+                    })
+                    .catch(error => console.error('Error al eliminar la tarea:', error));
+
+                    fetch('/' + userId + '/papeleras')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Manejar la lista de tareas recibida en 'data'
+                            console.log('Lista de papeleras:', data);
+                            // Aquí puedes realizar cualquier otra operación con la lista de tareas
+                        })
+                        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+
+            }
 
         function compararFechas(a, b) {
             const fechaA = new Date(a.querySelector(".col-2").textContent); 

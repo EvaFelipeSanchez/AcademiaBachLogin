@@ -75,11 +75,6 @@ initializePassport(
   }
 );
 
-const users = [
-  { id: 1, username: 'user1', email: 'user1@example.com', password: 'w' },
-  { id: 2, username: 'user2', email: 'user2@example.com', password: 'w' },
-  // ... otros usuarios
-];
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
@@ -161,7 +156,6 @@ app.get('/register', checkNotAuthenticated, async (req, res) => {
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
   try {
-
     const existingUser = await getUserByEmail(req.body.email);
     if (existingUser) {
       req.flash('error', 'Email is already registered.');
@@ -177,20 +171,19 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
       password: hashedPassword,
       servicioLocal: uuidv4(),
       username: req.body.username,
-      
     };
 
     console.log('Nuevo Usuario:', newUser);
 
     await usersCollection.insertOne(newUser);
-    res.status(201).json({ message: 'Usuario registrado exitosamente' })
+    req.flash('success', 'Usuario registrado exitosamente');
     res.redirect('/login');
   } catch (error) {
     console.error('Error al registrar usuario:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    req.flash('error', 'Error interno del servidor');
     res.redirect('/register');
   }
-}); 
+});
 
 
 // Ruta para procesar los datos del formulario (POST)
@@ -245,6 +238,10 @@ function checkNotAuthenticated(req, res, next) {
 app.get('/', async (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 }); */
+
+app.get('/', (req, res) => {
+  res.redirect('/login');
+});
 
 
 app.get('/:id', async (req, res) => {
@@ -447,6 +444,7 @@ app.post('/:idt/puntos', async (req, res) => {
 //MascotaPrincipal
 const MascotaPrincipal = require('./model/mascotaprincipal');  
 
+
 app.get('/:idt/mascotaprincipal', async (req, res) => {
   let idt = req.params.idt;
   
@@ -455,28 +453,6 @@ app.get('/:idt/mascotaprincipal', async (req, res) => {
     res.json(await MascotaPrincipal.find({ userId: idt })); }
   catch (err) { res.status(500).send({ message: err.message }); }
 });
-
-
-app.put('/:idt/mascotaprincipal/:id', async (req, res) => {
-  let idt = req.params.idt;
-  let id = req.params.id;
-  console.log(`PUT /:idt/mascotaprincipal/${id}`);
-  try {
-    let mascotaprincipal = await MascotaPrincipal.findById(id);
-
-    if (mascotaprincipal.userId !== idt) {
-      return res.status(403).send({ message: 'Forbidden' });
-    }
-
-    Object.assign(mascotaprincipal, req.body);
-
-    const updatedmascotaprincipal = await mascotaprincipal.save();
-    res.json(updatedmascotaprincipal);
-  } catch (err) {
-    res.status(500).send({ message: err.message });
-  }
-});
-
 
 
 app.post('/:idt/mascotaprincipal', async (req, res) => {
@@ -502,7 +478,119 @@ app.post('/:idt/mascotaprincipal', async (req, res) => {
     catch (err) { res.status(500).send({ message: err.message }); }
   });
   
+  app.get('/:idt/mascotaprincipal/:id', async (req, res) => {
+    let idt = req.params.idt;
+    let id = req.params.id;
+    console.log(`GET /${idt}/mascotaprincipal/${id}`);
+    try { res.json(await MascotaPrincipal.findById(id)) }
+    catch (err) { res.status(500).send({ message: err.message }); }
+  });
 
+  app.put('/:idt/mascotaprincipal/:id', async (req, res) => {
+    try {
+      const idt = req.params.idt;
+      const id = req.params.id;
+      console.log('ID recibido:', id);
+      console.log(`PUT /${idt}/mascotaprincipal/${id}`);
+
+      const mascotaprincipal = await MascotaPrincipal.findById(id);
+
+      if (!mascotaprincipal) {
+        console.log('Mascota principal no encontrada. ID:', id);
+        return res.status(404).json({ message: 'Mascota principal no encontrada', id: id });
+      }
+  
+
+      if (mascotaprincipal.userId !== idt) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+  
+      Object.assign(mascotaprincipal, req.body);
+  
+      const updatedmascotaprincipal = await mascotaprincipal.save();
+      res.json(updatedmascotaprincipal);
+    } catch (err) {
+      console.error('Error en la solicitud PUT:', err);
+      res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  });
+
+
+//displayValue
+const DisplayValue = require('./model/displayValue');  
+
+
+app.get('/:idt/displayValue', async (req, res) => {
+  let idt = req.params.idt;
+  
+  console.log('GET /:idt/displayValue');
+  try { 
+    res.json(await DisplayValue.find({ userId: idt })); }
+  catch (err) { res.status(500).send({ message: err.message }); }
+});
+
+
+app.post('/:idt/displayValue', async (req, res) => {
+  let displayValue = req.body;
+  const idt = req.params.idt;
+  console.log(`POST /:idt/displayValue`);
+  console.log('BODY', displayValue);
+  try {
+
+    if (idt !== displayValue.userId) {
+      return res.status(403).json({ message: 'No tienes permiso para realizar esta acción.' });
+    }
+    displayValue.userId = idt;
+    res.json(await DisplayValue(displayValue).save());
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+  });
+
+  app.delete('/:idt/displayValue', async (req, res) => {
+    console.log(`DELETE /:idt/displayValue`);
+    try { res.json(await DisplayValue.deleteMany()); }
+    catch (err) { res.status(500).send({ message: err.message }); }
+  });
+  
+  app.get('/:idt/displayValue/:id', async (req, res) => {
+    let idt = req.params.idt;
+    let id = req.params.id;
+    console.log(`GET /${idt}/displayValue/${id}`);
+    try { res.json(await DisplayValue.findById(id)) }
+    catch (err) { res.status(500).send({ message: err.message }); }
+  });
+
+  app.put('/:idt/displayValue/:id', async (req, res) => {
+    try {
+      const idt = req.params.idt;
+      const id = req.params.id;
+      console.log('ID recibido:', id);
+      console.log(`PUT /${idt}/displayValue/${id}`);
+
+      const displayValue = await DisplayValue.findById(id);
+
+      if (!displayValue) {
+        console.log('DisplayValue no encontrada. ID:', id);
+        return res.status(404).json({ message: 'DisplayValue no encontrada', id: id });
+      }
+  
+
+      if (displayValue.userId !== idt) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+  
+      Object.assign(mdisplayValue, req.body);
+  
+      const updateddisplayValue = await displayValue.save();
+      res.json(updateddisplayValue);
+    } catch (err) {
+      console.error('Error en la solicitud PUT:', err);
+      res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  });
+//
+  
 //Papeleras
 const Papelera = require('./model/papelera');  
 

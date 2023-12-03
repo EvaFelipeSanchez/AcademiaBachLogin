@@ -546,6 +546,7 @@
     })
     .catch(error => console.error('Error al eliminar todas las tareas:', error)); */
 
+
     fetch(`/${userId}/puntos`)
             .then(response => {
                 if (!response.ok) {
@@ -609,6 +610,20 @@
         
             })
 
+            fetch(`/${userId}/puntos`)
+        .then(response => response.json())
+        .then(data => {            
+
+            if (data) {
+            puntosTotales = data[0].puntosTotales;
+            document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+            } else {
+                puntosTotales = 0; 
+            }
+            
+        })
+        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
 
     
 
@@ -626,7 +641,90 @@
     //despierta.style.display = "none"; 
     //dormida.style.display = "block"; 
 
-    
+
+    fetch(`/${userId}/mascotaprincipal`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Network error: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Check if there is no information for the userId
+        if (Object.keys(data).length === 0) {
+
+            const postData = {
+                    userId: userId,
+                    nombrePrincipal:  'Nombre', 
+                    imagenPrincipal:  'images/cruz.png',
+                    segundaImagen:  'images/cruz.png',
+            };
+
+            document.getElementById('imagenMascotaDespierta').src = 'images/cruz.png';
+            document.getElementById('imagenMascotaDormida').src = 'images/cruz.png';
+            document.getElementById('MascotaNombre').textContent = '';
+
+            console.log("User: " + userId + " Nombre: " + postData.nombrePrincipal + " Imagen: " + postData.imagenPrincipal);
+
+                    // Continúa con el código para enviar la solicitud al servidor aquí
+                    
+                    fetch(`/${userId}/mascotaprincipal`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(postData),
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Failed to create main mascot: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(newMascotData => {
+                        // Handle the response after creating the main mascot
+                        console.log('Main mascot created:', newMascotData);
+                    })
+                    .catch(error => {
+                        console.error('Error creating main mascot:', error.message);
+                    });
+
+
+
+            // Make a POST request to create a main mascot
+            
+ 
+            //console.log("Imagen despierto if: " + data[0].imagenPrincipal);
+            
+        } else {
+            
+            console.log("Imagen despierto else: " + data[0].imagenPrincipal);
+            document.getElementById('imagenMascotaDespierta').src = data[0].imagenPrincipal;
+            document.getElementById('imagenMascotaDormida').src = data[0].segundaImagen;
+            document.getElementById('MascotaNombre').textContent = data[0].nombrePrincipal;
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching main mascot data:', error.message);
+    });
+
+    /*
+    fetch(`/${userId}/mascotaprincipal`)
+                .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Error de red: ${response.status}`);
+                        }
+                        return response.json();
+                        })
+                .then(datap => {
+                                    
+                    })
+    .catch(error => {
+        console.error('Error al obtener datos de puntos:', error.message);
+    });  */
+
+    /*
+
     if (!localStorage.getItem('imagenPrincipal') || localStorage.getItem('imagenPrincipal') === 'null') {  //
     if (!localStorage.getItem('segundaImagen') || localStorage.getItem('segundaImagen') === 'null') {  //
         var nuevaImagen = 'images/cruz.png';
@@ -638,14 +736,11 @@
      var segundaImagenSrc = localStorage.getItem('segundaImagen');
      document.getElementById('imagenMascotaDespierta').src = imagenPrincipalSrc;
      document.getElementById('imagenMascotaDormida').src = segundaImagenSrc;
-     }
-    
-
-
+     } 
 
      var nombrePrincipalSrc = localStorage.getItem('nombrePrincipal');  //
      document.getElementById('MascotaNombre').textContent = nombrePrincipalSrc; //
-     console.log("Nombre mascota: " + nombrePrincipalSrc)
+     console.log("Nombre mascota: " + nombrePrincipalSrc) */
 
      function toggleSidebar() {
           var sidebar = document.getElementById('sidebar');
@@ -681,7 +776,8 @@
 
 
     var nopoder = document.querySelector(".nopoder");
-    var savedDisplayValue = localStorage.getItem("displayValue");
+    var savedDisplayValue = localStorage.getItem("displayValue");  ///
+
 
     if (savedDisplayValue) {
     var nopoder = document.querySelector(".nopoder");
@@ -777,7 +873,7 @@
         window.addEventListener('beforeunload', function (e) {
             if(empezarcoundown){
                 terminarCountdown();
-            window.location.href = 'cementerio.html';
+            window.location.href = 'cementerio.ejs';
             }
         }); 
 
@@ -944,6 +1040,7 @@
             
     }
 
+    /*
     var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];  ///
         window.onload = function () {
             // Obtener la lista local
@@ -954,9 +1051,9 @@
                 if (element.index > itemStore) {
                     itemStore = element.index;
                 }
-            });
+            });  
 
-    };
+    }; */
 
 
     //var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
@@ -1005,42 +1102,14 @@
 
 
 
+
     function enviarCementerio() {
             // imagenPrincipalSrc
             // nombrePrincipalSrc 
-
-            var fechaActual = new Date();
-            let userId = '<%= user.id %>';
-
-            // Formatea la fecha
-            var options = { year: 'numeric', month: 'long', day: 'numeric' };
-            var fechaFormateada = fechaActual.toLocaleDateString(undefined, options);
-
-            var nuevoElemento = {
-                            userId: userId,
-                            imagenPrincipal: imagenPrincipalSrc,                            
-                            nombre: nombrePrincipalSrc,
-                            fecha: fechaActual
-            };
-                        
-            fetch('/' + userId +'/muertos', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(nuevoElemento),
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log('Mascota muerta:', data);
-                            })
-                            .catch(error => console.error('Error al guardar la tarea:', error));
-
-
-                                   
-            localStorage.setItem('imagenPrincipalCementerio', imagenPrincipalSrc); ///
-            localStorage.setItem('nombrePrincipalCementerio', nombrePrincipalSrc );  //
-            localStorage.setItem('fechaCementerio', fechaFormateada );  ///
+                             
+            //localStorage.setItem('imagenPrincipalCementerio', imagenPrincipalSrc); ///
+            //localStorage.setItem('nombrePrincipalCementerio', nombrePrincipalSrc );  //
+            //localStorage.setItem('fechaCementerio', fechaFormateada );  ///
 
             /*
             var nuevoElemento = {
@@ -1051,24 +1120,104 @@
 
             //listaCementerio.push(nuevoElemento);
 
-            eliminarMascota(nombrePrincipalSrc);
+            
 
             //localStorage.setItem('CementerioElements', JSON.stringify( listaCementerio));
+            fetch(`/${userId}/mascotaprincipal`)
+                .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Error de red: ${response.status}`);
+                        }
+                        return response.json();
+                        })
+                .then(datap => {
+                    
+                        var fechaActual = new Date();
+                        let userId = '<%= user.id %>';
+
+                        // Formatea la fecha
+                        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                        var fechaFormateada = fechaActual.toLocaleDateString(undefined, options);
+
+                        var nuevoElemento = {
+                                userId: userId,
+                                imagenPrincipal: datap[0].imagenPrincipal,                            
+                                nombre: datap[0].nombrePrincipal,
+                                fecha: fechaActual
+                        };
+
+
+                                    
+                        fetch('/' + userId +'/muertos', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify(nuevoElemento),
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            console.log('Mascota muerta:', data);
+                                            eliminarMascota(datap[0].nombrePrincipal)
+
+                                            let idPrincipal = datap[0]._id;
+
+                                            if (!idPrincipal) {
+                                                    throw new Error('No se encontró un ID en los datos de puntos');
+                                            }
+
+
+                                            const dataToUpdate = {
+                                                userId: userId,
+                                                nombrePrincipal:  'Nombre', 
+                                                imagenPrincipal:  'images/cruz.png',
+                                                segundaImagen:  'images/cruz.png',
+                                            };
+                                                                
+                                            fetch(`/${userId}/mascotaprincipal/${idPrincipal}`, {
+                                                method: 'PUT',
+                                                headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                                body: JSON.stringify(dataToUpdate),
+                                            })
+                                            .then(response => {
+                                                if (!response.ok) {
+                                                    throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                                                }
+                                                    return response.json();
+                                                })
+                                                .then(updatedData => {
+                                                    console.log('Response JSON:', updatedData);
+                                                                
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error al realizar la solicitud:', error);
+                                                });
+                                        })
+                                        .catch(error => console.error('Error al guardar la tarea:', error));
+
+   
+                                    
+                    })
+                    .catch(error => {
+                            console.error('Error al obtener datos de puntos:', error.message);
+                             }); 
            
 
             document.getElementById('imagenMascotaDespierta').src = "images/cruz.png";
             document.getElementById('imagenMascotaDormida').src = "images/cruz.png";
             document.getElementById('MascotaNombre').textContent = "";
             
-            localStorage.setItem('imagenPrincipal', "images/cruz.png"); ///
-            localStorage.setItem('segundaImagen', "images/cruz.png");   //
-            localStorage.setItem('nombrePrincipal', ""); ///
+            //localStorage.setItem('imagenPrincipal', "images/cruz.png"); ///
+            //localStorage.setItem('segundaImagen', "images/cruz.png");   //
+            //localStorage.setItem('nombrePrincipal', ""); ///
 
             nopoder.style.display = "block";
-            localStorage.setItem("displayValue", "block");
+            localStorage.setItem("displayValue", "block"); 
 
             // Redirigir a otro HTML
-            //window.location.href = '/cementerio/' + userId ;
+            window.location.href = '/cementerio/' + userId ;
             
 
 

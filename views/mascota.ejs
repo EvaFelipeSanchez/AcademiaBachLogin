@@ -317,11 +317,13 @@
         var items = store.querySelectorAll('.item');
         var userId = '<%= user.id %>';
 
+
+
         fetch('/' + userId +'/mascotas')
         .then(response => response.json())
         .then(data => {
             console.log('Lista de mascotas:', data);
-
+            
         // Crear una lista local para almacenar los elementos de la tienda
         //var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
         //var listaLocal = [];
@@ -370,14 +372,9 @@
         })
         .catch(error => console.error('Error al obtener la lista de tareas:', error));
 
-
-
-
-
-
         //var storeElements = JSON.parse(localStorage.getItem('storeElements')) || [];
 
-        window.onload = function() {
+       // window.onload = function() {
 
         
             function elementYaExisteEnMascota(elementData) {
@@ -395,7 +392,7 @@
             }
 
 
-        function cargarElementosGuardados() {
+        //function cargarElementosGuardados() {
             var storeContainer = document.querySelector('.store');
            // var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || []; //
             storeContainer.innerHTML = '';
@@ -434,7 +431,76 @@
                         nuevoBotonActivar.classList.add('activar-button');
                         nuevoBotonActivar.textContent = 'Activar';
                         nuevoBotonActivar.onclick = function () {
-                            activar(elementData);
+                                console.log(elementData.nombre);
+                                
+                                console.log("Lista encontrada: " + elementData.nombre);
+                                let userId = '<%= user.id %>' || '';
+                                var imagenPrincipal = elementData.imagenPrincipal;
+                                var segundaImagen = elementData.segundaImagen;
+                                var nombre = elementData.nombre;
+                                
+                                
+                                if (!userId) {
+                                        throw new Error('No se encontró un ID en los datos del usuario');
+                                }
+
+     
+                                    
+                                fetch(`/${userId}/mascotaprincipal`)
+                                        .then(response => {
+                                            if (!response.ok) {
+                                            throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                                            }
+                                            return response.json();
+                                        })
+                                        .then(data => {
+                                            let idPrincipal =data[0]._id;
+                                            const dataToUpdate = {
+                                                userId: userId,
+                                                nombrePrincipal: nombre, 
+                                                imagenPrincipal: imagenPrincipal,
+                                                segundaImagen: segundaImagen
+                                            };
+                                            console.log("Nombre principal:" + dataToUpdate.userId);
+                                                console.log("Nombre principal:" + dataToUpdate.nombrePrincipal); //Entrega el nombre correcto
+                                                console.log("Id principal:" + idPrincipal); //Entrega el dato correcto
+                                                console.log("Imagen principal:" + dataToUpdate.imagenPrincipal); 
+                                                
+
+                                            fetch(`/${userId}/mascotaprincipal/${idPrincipal}`, {
+                                                method: 'PUT',
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                },
+                                                body: JSON.stringify(dataToUpdate),
+                                                })
+                                                .then(response => {
+                                                    if (!response.ok) {
+                                                    throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                                                    }
+                                                    return response.json();
+                                                })
+                                                .then(updatedData => {
+                                                    // Manipula los datos actualizados, por ejemplo, imprime en la consola.
+                                                    console.log('Datos actualizados de mascota principal:', updatedData);
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error al realizar la solicitud:', error);
+                                                });
+                                         
+                                        })
+                                        .catch(error => {
+                                            console.error('Error al realizar la solicitud:', error);
+                                        });
+
+                                    //window.location.href = "/"  + userId + "/mascotaprincipal/" + idPrincipal;
+                                    
+ 
+
+                                localStorage.setItem("displayValue", "none");
+                                window.location.href = "/"  + userId;
+                  
+                
                           
                         };
                         nuevoItem.appendChild(nuevoBotonActivar);
@@ -451,10 +517,10 @@
          
 
 
-        } 
+        //} 
 
-         cargarElementosGuardados();
-        }
+         //cargarElementosGuardados();
+        //}
 
 
         let itemStore = parseInt(localStorage.getItem('itemstorevalue') || '3');  //
@@ -484,31 +550,93 @@
         .catch(error => console.error('Error al obtener la lista de tareas:', error));
 
 
+        /*
         function activar(id) {
-            console.log("Activar botón. El id de la mascota es: " + id);
+                    console.log("Activar botón. El id de la mascota es: " + id._id);
                     console.log("Lista encontrada: " + id.nombre);
-
+                    let userId = '<%= user.id %>';
                     var imagenPrincipal = id.imagenPrincipal;
                     var segundaImagen = id.segundaImagen;
                     var nombre = id.nombre;
+                    let idPrincipal = id._id;
 
-                    // Almacena las rutas de las imágenes y el nombre en el almacenamiento local
-                    localStorage.setItem('imagenPrincipal', imagenPrincipal);
-                    localStorage.setItem('segundaImagen', segundaImagen);
-                    localStorage.setItem('nombrePrincipal', nombre);
 
-                    console.log(imagenPrincipal);
-                    console.log(segundaImagen);
-                    console.log(nombre);
+                     if (!idPrincipal) {
+                            throw new Error('No se encontró un ID en los datos de puntos');
+                     }
+                     if (!userId) {
+                            throw new Error('No se encontró un ID en los datos del usuario');
+                     }
+                      
+
+
+                    const dataToUpdate = {
+                        userId: userId,
+                        nombrePrincipal: nombre, 
+                        imagenPrincipal: imagenPrincipal ,
+                        segundaImagen: segundaImagen,
+                    };
+
+                        console.log("Nombre principal:" + dataToUpdate.nombrePrincipal); //Entrega el nombre correcto
+                        console.log("Id principal:" + idPrincipal); //Entrega el dato correcto
+                        console.log("Imagen principal:" + dataToUpdate.imagenPrincipal); 
+
+
+                    
+                    fetch(`/${userId}/mascotaprincipal/${idPrincipal}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Manejar la lista de tareas recibida en 'data'
+                        console.log('Mascota Principal:', data);
+                        // Aquí puedes realizar cualquier otra operación con la lista de tareas
+                    })
+                    .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
+                    fetch(`/${userId}/mascotaprincipal/${idPrincipal}`, {
+                            method: 'PUT',
+                            headers: {
+                            'Content-Type': 'application/json',
+                            },
+                                body: JSON.stringify(dataToUpdate),
+                            })
+                    .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                                }
+                                    return response.json();
+                                })
+                    .then(updatedData => {
+                                    console.log('Response JSON:', updatedData);
+                                                
+                                })
+                    .catch(error => {
+                                    console.error('Error al realizar la solicitud:', error);
+                            });
+                                        
+
+                            /*
+                            fetch(`/${userId}/mascotaprincipal/${idPrincipal}`, {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(dataToUpdate),
+                            }) */
+                                                                
+
+                    //localStorage.setItem('imagenPrincipal', imagenPrincipal);
+                    //localStorage.setItem('segundaImagen', segundaImagen);
+                    //localStorage.setItem('nombrePrincipal', nombre);
+/*
                     localStorage.setItem("displayValue", "none");
 
                     // Redirige a otro HTML
-                    var userId = '<%= user.id %>';
-                    window.location.href = "/"  + userId;
+                    //var userId = '<%= user.id %>';
+                    //window.location.href = "/"  + userId;
                 //}               
           
 
-        }
+        } */
 
 
 

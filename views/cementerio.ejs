@@ -245,15 +245,19 @@
                         var nuevaImagen = document.createElement('img');
                         nuevaImagen.src = elementData.imagenPrincipal;
                         nuevoItem.appendChild(nuevaImagen);
+                        console.log(elementData.imagenPrincipal)
 
                         var nuevoNombre = document.createElement('p');
                         nuevoNombre.classList.add('nombre');
                         nuevoNombre.textContent = elementData.nombre;
                         nuevoItem.appendChild(nuevoNombre);
 
+                        var fechaActual = new Date(elementData.fecha);
+                        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                        var fechaFormateada = fechaActual.toLocaleDateString(undefined, options);
                         var nuevoFecha = document.createElement('p');
                         nuevoFecha.classList.add('fechamuerte');
-                        nuevoFecha.textContent = elementData.fecha;
+                        nuevoFecha.textContent = fechaFormateada;
                         nuevoItem.appendChild(nuevoFecha);
 
                         CementerioElementsContainer.appendChild(nuevoItem);
