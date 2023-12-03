@@ -452,7 +452,7 @@
             })
 
             
-        localStorage.setItem('traspaso', false); //
+        //localStorage.setItem('traspaso', false); //
         //var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); ////
 
         fetch(`/${userId}/puntos`)
@@ -474,7 +474,7 @@
 
 
         var traspaso = true;
-        localStorage.setItem('traspaso', traspaso); //
+        //localStorage.setItem('traspaso', traspaso); //
 
         function comprar(item){
             //var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
@@ -572,7 +572,7 @@
                             .catch(error => console.error('Error al guardar la tarea:', error));
 
                         traspaso = false;
-                        localStorage.setItem('traspaso', traspaso);
+                        //localStorage.setItem('traspaso', traspaso);
 
                         ;
                         window.location.href = "/mascota/" + userId;

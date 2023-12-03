@@ -776,15 +776,91 @@
 
 
     var nopoder = document.querySelector(".nopoder");
-    var savedDisplayValue = localStorage.getItem("displayValue");  ///
 
 
-    if (savedDisplayValue) {
-    var nopoder = document.querySelector(".nopoder");
-    nopoder.style.display = savedDisplayValue;
-    }else{
-        nopoder.style.display = "block";
-    }
+    //var savedDisplayValue = localStorage.getItem("displayValue");  ///
+
+    fetch(`/${userId}/displayValue`)
+            .then(response => {
+                if (!response.ok) {
+                throw new Error(`Error de red: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Datos de displayValue:', data);
+                if (data === null) {
+                    data = 0;
+                } else {
+                    // Convertir a número si no es null
+                    //data = parseInt(data, 10);
+
+                    var savedDisplayValue = data[0].displayValue;
+                    if (data.length > 0) {
+                        const idPuntos = data[0]._id;
+                        console.log('ID de los displayValue para el userId:', idPuntos);
+                        
+                        if (savedDisplayValue) {
+                                   console.log("Valor display existe: " + savedDisplayValue)
+                                    var nopoder = document.querySelector(".nopoder");
+                                    nopoder.style.display = savedDisplayValue;
+                                    }else{
+                                        nopoder.style.display = "none";
+                                    }
+                        } else {                       
+                            
+                            fetch(`/${userId}/displayValue`, {
+                                method: 'POST', 
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                    body: JSON.stringify({
+                                        userId: userId,
+                                        displayValue: "none", 
+                                    }),
+                                })
+                                .then(newResponse => {
+                                    if (!newResponse.ok) {
+                                         throw new Error(`Error al crear nuevos displayValue: ${newResponse.status}`);
+                                    }
+                                        return newResponse.json();
+                                })
+                                .then(newData => {
+                                        const newIdPuntos = newData._id;
+                                        console.log('Se creó un nuevo conjunto de displayValue. Nuevo ID:', newIdPuntos);
+
+                                })
+                                .catch(newError => {
+                                        console.error('Error al crear nuevos displayValue:', newError.message);
+
+                                }); 
+
+                                fetch(`/${userId}/displayValue`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    // Manejar la lista de tareas recibida en 'data'
+                                    console.log('Lista de displayValue:', data);
+
+                                    savedDisplayValue = data[0].displayValue;
+                                    if (savedDisplayValue == "none") {
+                                    var nopoder = document.querySelector(".nopoder");
+                                    nopoder.style.display = savedDisplayValue;
+                                    }else{
+                                        nopoder.style.display = "block";
+                                    }
+                                })
+                                .catch(error => console.error('Error al obtener la lista de displayValue:', error));
+
+                            
+                    }  
+
+
+
+                }
+        
+            })
+
+
 
     //sidebar
     function ocultarSidebar() {
@@ -829,11 +905,81 @@
         puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
     } */
 
-    var valorBarraAvance = localStorage.getItem("barraAvance");
+    //var valorBarraAvance = localStorage.getItem("barraAvance"); //
+    
+    fetch(`/${userId}/barraAvance`)
+            .then(response => {
+                if (!response.ok) {
+                throw new Error(`Error de red: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Datos de barraAvance:', data);
+                if (data === null) {
+                    data = 0;
+                } else {
+                    // Convertir a número si no es null
+                    //data = parseInt(data, 10);
 
-    if (valorBarraAvance !== null) {
-        barraAvance.style.width = valorBarraAvance;
-    }
+                            
+                    if (data.length > 0) {
+                        const idPuntos = data[0]._id;
+                        console.log('ID de los barraAvance para el userId:', idPuntos);
+
+                    } else {                       
+                        
+                            fetch(`/${userId}/barraAvance`, {
+                                method: 'POST', 
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                    body: JSON.stringify({
+                                        userId: userId,
+                                        barraAvance: "100", 
+                                    }),
+                                })
+                                .then(newResponse => {
+                                    if (!newResponse.ok) {
+                                         throw new Error(`Error al crear nuevos barraAvance: ${newResponse.status}`);
+                                    }
+                                        return newResponse.json();
+                                })
+                                .then(newData => {
+                                        const newIdPuntos = newData._id;
+                                        console.log('Se creó un nuevo conjunto de barraAvance. Nuevo ID:', newIdPuntos);
+
+                                })
+                                .catch(newError => {
+                                        console.error('Error al crear nuevos displayValue:', newError.message);
+
+                                }); 
+
+                                fetch(`/${userId}/barraAvance`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    // Manejar la lista de tareas recibida en 'data'
+                                    console.log('Lista de barraAvance:', data);
+                                    valorBarraAvance=  data[0].barraAvance;     
+                                        if (valorBarraAvance !== null) {
+                                        barraAvance.style.width = valorBarraAvance;
+                                        }
+                                })
+                                .catch(error => console.error('Error al obtener la lista de displayValue:', error));
+
+                            
+                    }  
+
+
+
+                }
+        
+            })
+
+
+
+
+
 
     function updateDurationLabel() {
             var duracionLabel = document.getElementById("duracionLabel");
@@ -889,7 +1035,7 @@
         }
 
         
-        var barraAvance = document.getElementById("barraAvance");
+        //var barraAvance = document.getElementById("barraAvance"); 
 
         function actualizarBarraDeProgreso() {
         var porcentaje = (segundostotales / segundostotalesInsertados) * 100;
@@ -901,7 +1047,42 @@
         // Función para manejar la cuenta regresiva
         function countdown() {
             barraAvance.style.width = "100%";
-           localStorage.setItem("barraAvance", "100");
+           //localStorage.setItem("barraAvance", "100"); //
+           fetch(`/${userId}/barraAvance`)
+                            .then(response => response.json())
+                            .then(datap => {
+                                let idbarraAvance = datap[0]._id;
+                                let userId = '<%= user.id %>';
+
+                                const dataToUpdate = {
+                                    userId: userId,
+                                    barraAvance: "100" ,
+                                };
+
+                                fetch(`/${userId}/puntos/${idbarraAvance}`, {
+                                            method: 'PUT',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify(dataToUpdate),
+                                            })
+                                            .then(response => {
+                                                if (!response.ok) {
+                                                throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                                                }
+                                                return response.json();
+                                            })
+                                            .then(updatedData => {
+                                                console.log('Response JSON:', updatedData);
+                                                // Handle the updated data as needed
+                                            })
+                                            .catch(error => {
+                                                console.error('Error al realizar la solicitud:', error);
+                                            });                           
+                               
+                            })
+                            .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
            terminar.style.display = "block";
            empezar.style.display = "none";
            sisales.style.display = "block";
@@ -1030,11 +1211,47 @@
         }
 
 
-        var valorBarraAvance = localStorage.getItem("barraAvance");
-        if (!valorBarraAvance) {
-            barraAvance.style.width = "100%";
-            localStorage.setItem("barraAvance", "100");
-        }
+        //var valorBarraAvance = localStorage.getItem("barraAvance"); //
+        fetch(`/${userId}/barraAvance`)
+                            .then(response => response.json())
+                            .then(datap => {
+                                let idbarraAvance = datap[0]._id;
+                                let userId = '<%= user.id %>';
+
+                                if (!datap[0].barraAvance) {
+                                        barraAvance.style.width = "100%";
+                                        //localStorage.setItem("barraAvance", "100"); //
+                                    
+
+                                    const dataToUpdate = {
+                                        userId: userId,
+                                        barraAvance: "100" ,
+                                    };
+
+                                    fetch(`/${userId}/puntos/${idbarraAvance}`, {
+                                                method: 'PUT',
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                },
+                                                body: JSON.stringify(dataToUpdate),
+                                                })
+                                                .then(response => {
+                                                    if (!response.ok) {
+                                                    throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                                                    }
+                                                    return response.json();
+                                                })
+                                                .then(updatedData => {
+                                                    console.log('Response JSON:', updatedData);
+                                                    // Handle the updated data as needed
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error al realizar la solicitud:', error);
+                                                });                           
+                                }
+                            })
+                            .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
 
         countdown();
             
@@ -1202,7 +1419,7 @@
                     })
                     .catch(error => {
                             console.error('Error al obtener datos de puntos:', error.message);
-                             }); 
+                    }); 
            
 
             document.getElementById('imagenMascotaDespierta').src = "images/cruz.png";
@@ -1214,7 +1431,45 @@
             //localStorage.setItem('nombrePrincipal', ""); ///
 
             nopoder.style.display = "block";
-            localStorage.setItem("displayValue", "block"); 
+            //localStorage.setItem("displayValue", "block"); //
+            
+            fetch(`/${userId}/displayValue`)
+                .then(response => response.json())
+                .then(data => {                                   
+                    console.log('Lista de displayValue:', data);
+                    idPrincipal = data[0]._id;
+
+
+                    const dataToUpdate = {
+                      userId: userId,
+                      displayValue:  "block", 
+
+                     };
+
+                    fetch(`/${userId}/displayValue/${idPrincipal}`, {
+                        method: 'PUT',
+                        headers: {
+                        'Content-Type': 'application/json',
+                    },
+                        body: JSON.stringify(dataToUpdate),
+                     })
+                    .then(response => {
+                        if (!response.ok) {
+                           throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                        }
+                            return response.json();
+                    })
+                    .then(updatedData => {
+                        console.log('Response JSON:', updatedData);
+                                                                
+                    })
+                    .catch(error => {
+                        console.error('Error al realizar la solicitud:', error);
+                    });
+
+            })
+            .catch(error => console.error('Error al obtener la lista de displayValue:', error));
+
 
             // Redirigir a otro HTML
             window.location.href = '/cementerio/' + userId ;

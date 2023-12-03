@@ -358,12 +358,13 @@
                     .catch(error => console.error('Error al guardar la tarea:', error));
 
 
+            /*
             if (!localStorage.getItem('funcionEjecutada')) { ///
             window.onload = function() {
                 window.location.href = "tienda.ejs";
                 localStorage.setItem('funcionEjecutada', 'true');
             };
-            }
+            }  */
 
             //listaLocal.push(elementoTienda);
         });
@@ -497,8 +498,45 @@
                                     
  
 
-                                localStorage.setItem("displayValue", "none");
-                                window.location.href = "/"  + userId;
+                                //localStorage.setItem("displayValue", "none");
+
+                                fetch(`/${userId}/displayValue`)
+                                .then(response => response.json())
+                                .then(datap => {
+                                    let iddisplayValue = datap[0]._id;
+                                    let userId = '<%= user.id %>';
+
+     
+                                        const dataToUpdate = {
+                                            userId: userId,
+                                            displayValue: "none" ,
+                                        };
+
+
+                                        fetch(`/${userId}/displayValue/${iddisplayValue}`, {
+                                                    method: 'PUT',
+                                                    headers: {
+                                                        'Content-Type': 'application/json',
+                                                    },
+                                                    body: JSON.stringify(dataToUpdate),
+                                                    })
+                                                    .then(response => {
+                                                        if (!response.ok) {
+                                                        throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                                                        }
+                                                        return response.json();
+                                                    })
+                                                    .then(updatedData => {
+                                                        console.log('Response JSON:', updatedData);
+                                                        // Handle the updated data as needed
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error al realizar la solicitud:', error);
+                                                    });                           
+                                    
+                                })
+                                .catch(error => console.error('Error al obtener la lista de tareas:', error));
+                                 window.location.href = "/"  + userId;
                   
                 
                           
@@ -523,7 +561,7 @@
         //}
 
 
-        let itemStore = parseInt(localStorage.getItem('itemstorevalue') || '3');  //
+        //let itemStore = parseInt(localStorage.getItem('itemstorevalue') || '3');  //
         /* var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
         if (puntosTotalesGuardados) {
         puntosTotales = parseInt(puntosTotalesGuardados, 10);

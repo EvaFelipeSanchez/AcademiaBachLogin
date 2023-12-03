@@ -580,7 +580,7 @@ app.post('/:idt/displayValue', async (req, res) => {
         return res.status(403).json({ message: 'Forbidden' });
       }
   
-      Object.assign(mdisplayValue, req.body);
+      Object.assign(displayValue, req.body);
   
       const updateddisplayValue = await displayValue.save();
       res.json(updateddisplayValue);
@@ -589,8 +589,84 @@ app.post('/:idt/displayValue', async (req, res) => {
       res.status(500).json({ message: 'Error interno del servidor' });
     }
   });
-//
+
+
+//barraAvance
+const BarraAvance = require('./model/barraAvance');  
+
+
+app.get('/:idt/barraAvance', async (req, res) => {
+  let idt = req.params.idt;
   
+  console.log('GET /:idt/barraAvance');
+  try { 
+    res.json(await BarraAvance.find({ userId: idt })); }
+  catch (err) { res.status(500).send({ message: err.message }); }
+});
+
+
+app.post('/:idt/barraAvance', async (req, res) => {
+  let barraAvance = req.body;
+  const idt = req.params.idt;
+  console.log(`POST /:idt/barraAvance`);
+  console.log('BODY', barraAvance);
+  try {
+
+    if (idt !== barraAvance.userId) {
+      return res.status(403).json({ message: 'No tienes permiso para realizar esta acción.' });
+    }
+    barraAvance.userId = idt;
+    res.json(await BarraAvance(barraAvance).save());
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+  });
+
+  app.delete('/:idt/barraAvance', async (req, res) => {
+    console.log(`DELETE /:idt/barraAvance`);
+    try { res.json(await BarraAvance.deleteMany()); }
+    catch (err) { res.status(500).send({ message: err.message }); }
+  });
+  
+  app.get('/:idt/barraAvance/:id', async (req, res) => {
+    let idt = req.params.idt;
+    let id = req.params.id;
+    console.log(`GET /${idt}/barraAvance/${id}`);
+    try { res.json(await BarraAvance.findById(id)) }
+    catch (err) { res.status(500).send({ message: err.message }); }
+  });
+
+  app.put('/:idt/barraAvance/:id', async (req, res) => {
+    try {
+      const idt = req.params.idt;
+      const id = req.params.id;
+      console.log('ID recibido:', id);
+      console.log(`PUT /${idt}/barraAvance/${id}`);
+
+      const barraAvance = await BarraAvance.findById(id);
+
+      if (!barraAvance) {
+        console.log('BarraAvance no encontrada. ID:', id);
+        return res.status(404).json({ message: 'BarraAvance no encontrada', id: id });
+      }
+  
+
+      if (barraAvance.userId !== idt) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+  
+      Object.assign(barraAvance, req.body);
+  
+      const updatedbarraAvance = await barraAvance.save();
+      res.json(updatedbarraAvance);
+    } catch (err) {
+      console.error('Error en la solicitud PUT:', err);
+      res.status(500).json({ message: 'Error interno del servidor' });
+    }
+  });
+
+
+//
 //Papeleras
 const Papelera = require('./model/papelera');  
 
