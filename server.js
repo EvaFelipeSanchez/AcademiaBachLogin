@@ -1,4 +1,3 @@
-
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
@@ -13,41 +12,37 @@ const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const db = mongoose.connection;   ///
+const { ObjectId } = require('mongodb');
+
+const mongoURI = 'mongodb+srv://evafelipe:BL8h6Y4AguSZWB56@clusteracademiabach.wz3n9ev.mongodb.net/ClusterAcademiaBach?retryWrites=true&w=majority';
 
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const initializePassport = require('./passport-config');
+
+const db = mongoose.connection;
+
 db.on('connected', _ => { console.log('DB CONNECTED'); });
 db.on('disconnected', _ => { console.log('DB DISCONNECTED'); });
 db.on('error', err => { console.error('DB ERROR', err); });
 
-
-const initializePassport = require('./passport-config');
-const MongoClient = require('mongodb').MongoClient;
-const { ObjectId } = require('mongodb');
-// Middleware para analizar datos del formulario HTML
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Replace the connection string with your MongoDB Atlas connection string
 
 
-//const uri = 'mongodb://localhost:27017/mi_basededatos';
-const uri = 'mongodb+srv://evafelipe:BL8h6Y4AguSZWB56@clusteracademiabach.wz3n9ev.mongodb.net/ClusterAcademiaBach?retryWrites=true&w=majority';
-//mongoose.connect('mongodb://localhost:27017/mi_basededatos', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-let usersCollection;
-
-(async () => {
-  const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-  const db = client.db('mi_basededatos');
-  usersCollection = db.collection('users');
-})();
+const usersCollection = mongoose.connection.collection('users');
 
 app.use('*.js', (req, res, next) => {
   res.header('Content-Type', 'application/javascript');
   next();
 });
 app.use(express.json());
+
 
 
 //const initializePassport = require('./passport-config');
@@ -64,13 +59,15 @@ initializePassport(
   },
   async id => {
     try {
-      const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-      const usersCollection = client.db('mi_basededatos').collection('users');
+      //const client = await MongoClient.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+      //const usersCollection = client.db('mi_basededatos').collection('users');
       const user = await usersCollection.findOne({ id: id });
-      client.close();
+      //client.close();
       return user;
     } catch (error) {
       console.error(error);
+      return null;
+
     }
   }
 );
@@ -78,14 +75,16 @@ initializePassport(
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
-app.use(flash())
 
 const secrett = process.env.SESSION_SECRET || 'default-secret';
+
 app.use(session({
 secret: secrett, // Replace with your actual secret key
 resave: false,
 saveUninitialized: true
 }));
+app.use(flash());
+
 
 const getUserByEmail = async (email) => {
   try {
@@ -185,8 +184,20 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
   }
 });
 
+app.post('/guardar', async (req, res) => {
+  try {
+    // Insertar datos en la colección usando Mongoose
+    await usersCollection.create(req.body);
+    console.log('Datos insertados con éxito');
+    res.redirect('/');
+    console.log('Ruta /guardar llamada');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+  }
+});
 
-// Ruta para procesar los datos del formulario (POST)
+/*
 app.post('/guardar', (req, res) => {
   // Conectar a la base de datos
   MongoClient.connect('mongodb://localhost:27017/mi_basededatos', (err, client) => {
@@ -205,7 +216,7 @@ app.post('/guardar', (req, res) => {
       console.log('Ruta /guardar llamada');
     });
   });
-});
+}); */
 
 
 
@@ -665,7 +676,6 @@ app.post('/:idt/barraAvance', async (req, res) => {
     }
   });
 
-
 //
 //Papeleras
 const Papelera = require('./model/papelera');  
@@ -892,10 +902,13 @@ app.put('/:id', async (req, res) => {
 app.use(express.static('public'));
 
 const port = parseInt(process.env.PORT) || 3000;
+
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/tareas-sample');
+   //mongoose.connect('mongodb://127.0.0.1:27017/tareas-sample');
+   await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 main();
+
 app.listen(port, () => {
 console.log(`helloworld: listening on port ${port}`);
 });

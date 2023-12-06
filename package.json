@@ -30,7 +30,7 @@
     "method-override": "^3.0.0",
     "mocha": "^10.2.0",
     "mock-aws-s3": "^4.0.2",
-    "mongodb": "^6.2.0",
+    "mongodb": "^6.3.0",
     "mongoose": "^8.0.1",
     "nock": "^13.4.0",
     "node-gyp": "^10.0.1",

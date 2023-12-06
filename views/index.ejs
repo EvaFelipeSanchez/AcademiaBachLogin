@@ -585,44 +585,46 @@
                                         return newResponse.json();
                                 })
                                 .then(newData => {
-                                        const newIdPuntos = newData._id;
-                                        console.log('Se creó un nuevo conjunto de puntos. Nuevo ID:', newIdPuntos);
+                                    const newIdPuntos = newData._id;
+                                    console.log('Se creó un nuevo conjunto de puntos. Nuevo ID:', newIdPuntos);
 
+                                    // Fetch points after creating new points
+                                    fetch(`/${userId}/puntos`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            // Manejar la lista de tareas recibida en 'data'
+                                            console.log('Lista de tareas:', data);
+                                            // Aquí puedes realizar cualquier otra operación con la lista de tareas
+                                        })
+                                        .catch(error => console.error('Error al obtener la lista de tareas:', error));
                                 })
+
                                 .catch(newError => {
                                         console.error('Error al crear nuevos puntos:', newError.message);
 
                                 }); 
 
-                                fetch(`/${userId}/puntos`)
-                                .then(response => response.json())
-                                .then(data => {
-                                    // Manejar la lista de tareas recibida en 'data'
-                                    console.log('Lista de tareas:', data);
-                                    // Aquí puedes realizar cualquier otra operación con la lista de tareas
-                                })
-                                .catch(error => console.error('Error al obtener la lista de tareas:', error));
-
                             
                     }  
+                    fetch(`/${userId}/puntos`)
+                    .then(response => response.json())
+                    .then(data => {            
+
+                        if (data) {
+                        var puntosTotales = data[0].puntosTotales;
+                        document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+                        } else {
+                            puntosTotales = 0; 
+                        }
+                        
+                    })
+                    .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
 
                 }
         
             })
 
-            fetch(`/${userId}/puntos`)
-        .then(response => response.json())
-        .then(data => {            
-
-            if (data) {
-            puntosTotales = data[0].puntosTotales;
-            document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
-            } else {
-                puntosTotales = 0; 
-            }
-            
-        })
-        .catch(error => console.error('Error al obtener la lista de tareas:', error));
 
 
     
@@ -708,39 +710,7 @@
         console.error('Error fetching main mascot data:', error.message);
     });
 
-    /*
-    fetch(`/${userId}/mascotaprincipal`)
-                .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Error de red: ${response.status}`);
-                        }
-                        return response.json();
-                        })
-                .then(datap => {
-                                    
-                    })
-    .catch(error => {
-        console.error('Error al obtener datos de puntos:', error.message);
-    });  */
 
-    /*
-
-    if (!localStorage.getItem('imagenPrincipal') || localStorage.getItem('imagenPrincipal') === 'null') {  //
-    if (!localStorage.getItem('segundaImagen') || localStorage.getItem('segundaImagen') === 'null') {  //
-        var nuevaImagen = 'images/cruz.png';
-         document.getElementById('imagenMascotaDespierta').src = nuevaImagen;
-        document.getElementById('imagenMascotaDormida').src = nuevaImagen;
-    }    
-     }else{
-        var imagenPrincipalSrc = localStorage.getItem('imagenPrincipal');
-     var segundaImagenSrc = localStorage.getItem('segundaImagen');
-     document.getElementById('imagenMascotaDespierta').src = imagenPrincipalSrc;
-     document.getElementById('imagenMascotaDormida').src = segundaImagenSrc;
-     } 
-
-     var nombrePrincipalSrc = localStorage.getItem('nombrePrincipal');  //
-     document.getElementById('MascotaNombre').textContent = nombrePrincipalSrc; //
-     console.log("Nombre mascota: " + nombrePrincipalSrc) */
 
      function toggleSidebar() {
           var sidebar = document.getElementById('sidebar');
@@ -795,11 +765,11 @@
                     // Convertir a número si no es null
                     //data = parseInt(data, 10);
 
-                    var savedDisplayValue = data[0].displayValue;
+                    
                     if (data.length > 0) {
                         const idPuntos = data[0]._id;
                         console.log('ID de los displayValue para el userId:', idPuntos);
-                        
+                        var savedDisplayValue = data[0].displayValue;
                         if (savedDisplayValue) {
                                    console.log("Valor display existe: " + savedDisplayValue)
                                     var nopoder = document.querySelector(".nopoder");
@@ -990,9 +960,9 @@
         
     function startCountdown() {
         var timeLeft = 0; // Duración en segundos de la cuenta atrás
-        var pomSet = 5; //Duración en segundos de la cuenta atrás del set.                                              Cambiar
-        var descanso1 = 3 //Duración del descanso.                                                                      Cambiar
-        var descanso2 = 6 //Duración del descanso.  
+        var pomSet = 1500; //Duración en segundos de la cuenta atrás del set.                                              Cambiar
+        var descanso1 = 300 //Duración del descanso.                                                                      Cambiar
+        var descanso2 = 1800 //Duración del descanso.  
         var numerosetrealizados = -1;
         
         var segundostotalesInsertados = parseInt(document.getElementById("duracion").value);
