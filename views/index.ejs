@@ -326,20 +326,22 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 30%;
-            height: 30%;
+            height: auto;
             background-color: rgb(144, 164, 208);
             border: 1px solid #1b1c47;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            padding: 10px; 
 
         }
 
         #message {
-            font-size: 1.5vw;
+            font-size: 1vw;
             text-align: center;
-            margin-top: 10%;
-
+            margin: 0;
+            max-width: 100%; 
         }
 
         .nombreMascota {
@@ -658,14 +660,16 @@
         <div class="div3"> 
             <div class="slider-container">
                 <div class="blue-background"></div> 
-                <div class="duration-label">Duración: <span id="duracionLabel">25</span> minutos</div>
+                <div class="duration-label">Duración: <span id="duracionLabel">20</span> minutos</div>
+
                 <div class="slider-wrapper">
                     <input type="range" id="duracion" name="duracion" min="1" max="240" value="20" class="vertical-slider" oninput="updateDurationLabel()">
+
                </div>
 
             <div class="logout" >
-                <form action="/logout?_method=DELETE" method="POST">
-                    <button type="submit">Salir</button>
+                <form action="/logout?_method=DELETE" method="POST" id="logoutForm">
+                    <button  type="submit">Salir</button>
                   </form>
             </div>
             <p class="nombreUsuario" id="nombreUsuario">Usuario conectado: <%= user.name %></p>
@@ -701,7 +705,7 @@
              <p class="nopoder" >Asigna una mascota para continuar</p>
         </div>
         <div class="div6"> 
-            <p class="sisales" >Si actualizas las página, cierras la página o le das al botón de finalizar tu mascota morirá.</p>
+            <p class="sisales" >Si le das al botón de finalizar tu mascota morirá y la cuenta atrás terminará.</p>
         </div>
     </div>
 
@@ -714,15 +718,26 @@
     let userId = '<%= user.id %>';
     
     const messagesdescanso = [
-    "Mensaje 1",
-    "Mensaje 2",
-    "Mensaje 3",
-    "Mensaje 4",
-    "Mensaje 5",
+    "Sistema Leitner: Las flashcards son utilizadas para reformar la memoria mediante el uso de tarjetas de papel. Funcionan de la siguiente manera: Por un lado, se escribe una pregunta, definición…Y del otro lado se escribe la respuesta o a aquello a lo que hace referencia. Las flashcards tienen como objetivo dividir la información en partes más pequeñas y fáciles de asimilar.",
+    "Método Robinson. Su objetivo principal es reducir el tiempo de estudio y mejorar la capacidad para comprender la información.  Para llevar a cabo este método, se siguen los siguientes pasos: Explorar ->  Preguntar -> Leer -> Recitar -> Revisión -> Repetición",
+    "Recuerda tomar agua e hidratarte",
+    "Check-list: La creación de una lista que enumera las tareas a realizar diaria o semanalmente, permitiendo al usuario marcarlas a medida que se completan. Estas listas suelen organizarse según la prioridad o la dificultad de las tareas y ofrecen una visión clara del progreso a lo largo del día o la semana.",
+    "Recuerda NO saltarte los descansos",
+    "No dejes todo para el final",
+    "Utiliza colores durante el estudio para hacer uso de la memoria fotográfica",
+    "Evalúate con exámenes o cuestionarios acerca del tema que estás estudiando",
+    "Durante los descansos levantate y estira esas piernas",
+    "El palacio de la memoria consiste en crear mentalmente un palaciocon diferentes habitaciones y en cada una de ellas se albergará una imagen de algo que se quiere recordar",
+    "Recuerda planificar tus horarios de estudio",
+    "Dormir ayuda a asentar los conocimientos adquiridos durante el estudio"
     ];
 
     const messageBlock = document.getElementById("messageBlock");
     const messageElement = document.getElementById("message");
+
+
+
+
 
     /*
     fetch(`/${userId}/puntos`, {
@@ -926,6 +941,8 @@
     var terminar = document.getElementById("terminarButton");
     terminar.style.display = "none";
     var empezar = document.getElementById("startButton");
+    var botonSalir = document.querySelector('.logout button');
+    botonSalir.style.display = 'block';
     empezar.style.display = "block";
 
 
@@ -1096,7 +1113,7 @@
                                 },
                                     body: JSON.stringify({
                                         userId: userId,
-                                        barraAvance: "100", 
+                                        barraAvance: "100%", 
                                     }),
                                 })
                                 .then(newResponse => {
@@ -1142,23 +1159,30 @@
 
 
     function updateDurationLabel() {
-            var duracionLabel = document.getElementById("duracionLabel");
-            var duracionInput = document.getElementById("duracion");
-            duracionLabel.textContent = duracionInput.value;
+        var duracionLabel = document.getElementById("duracionLabel");
+        var duracionInput = document.getElementById("duracion");
+
+        var minutos = duracionInput.value;
+        var horas = Math.floor(minutos / 60);
+        var minutosRestantes = minutos % 60;
+
+        duracionLabel.textContent = horas + "h " + minutosRestantes + "min";
+
         }
 
         
     function startCountdown() {
         var timeLeft = 0; // Duración en segundos de la cuenta atrás
-        var pomSet = 1500; //Duración en segundos de la cuenta atrás del set.                                              Cambiar
-        var descanso1 = 300 //Duración del descanso.                                                                      Cambiar
-        var descanso2 = 1800 //Duración del descanso.  
+        var pomSet = 1500; //Duración en segundos de la cuenta atrás del set.                                                  Cambiar
+        var descanso1 = 300; //Duración del descanso.                                                                              Cambiar
+        var descanso2 = 1800; //Duración del descanso.  
         var numerosetrealizados = -1;
         
         var segundostotalesInsertados = parseInt(document.getElementById("duracion").value);
-        //segundostotalesInsertados = segundostotalesInsertados * 60; 
+        console.log("Segundos totales: " +  segundostotalesInsertados);
+        segundostotalesInsertados = segundostotalesInsertados * 60; 
         var segundostotales = parseInt(document.getElementById("duracion").value);      
-        //segundostotales = segundostotales * 60; 
+        segundostotales = segundostotales * 60; 
         var slider = document.getElementById("duracion");
         var valorActualSlider = parseInt(slider.value, 10);
         
@@ -1171,17 +1195,20 @@
         despierta.style.display = "none"; 
         terminar.style.display = "block";
         empezar.style.display = "none";
+        botonSalir.style.display = "none";
         sisales.style.display = "block";
 
         ocultarSidebar();
         empezarcoundown = true;
 
+        /*
         window.addEventListener('beforeunload', function (e) {
             if(empezarcoundown){
+                e.preventDefault();
                 terminarCountdown();
-            window.location.href = 'cementerio.ejs';
+                //window.location.href = 'cementerio.ejs';
             }
-        }); 
+        }); */
 
 
  
@@ -1200,6 +1227,7 @@
         function actualizarBarraDeProgreso() {
         var porcentaje = (segundostotales / segundostotalesInsertados) * 100;
         barraAvance.style.width = porcentaje + "%";
+        //console.log("Segundos totales: " +  segundostotales);
         }
 
 
@@ -1216,10 +1244,10 @@
 
                                 const dataToUpdate = {
                                     userId: userId,
-                                    barraAvance: "100" ,
+                                    barraAvance: "100%" ,
                                 };
 
-                                fetch(`/${userId}/puntos/${idbarraAvance}`, {
+                                fetch(`/${userId}/barraAvance/${idbarraAvance}`, {
                                             method: 'PUT',
                                             headers: {
                                                 'Content-Type': 'application/json',
@@ -1245,6 +1273,7 @@
 
            terminar.style.display = "block";
            empezar.style.display = "none";
+           botonSalir.style.display = "none";
            sisales.style.display = "block";
 
            
@@ -1317,7 +1346,12 @@
                         }
                         numerosetrealizados++;
                         descansodesactivado = false;
-                        timeLeft = pomSet;
+                        if(segundostotalesInsertados < 1500){
+                            timeLeft = segundostotalesInsertados;
+                        }else{
+                            timeLeft = pomSet;
+                        }
+                        
                         console.log("Número de sets terminados: " + numerosetrealizados); 
 
                     } else {
@@ -1355,9 +1389,11 @@
                         dormida.style.display = "none"; 
                         terminar.style.display = "none";
                         empezar.style.display = "block";
+                        botonSalir.style.display = "block";
                         sisales.style.display = "none";
                         mostrarSidebar();
                         empezarcoundown = false;
+
 
                 }
 
@@ -1443,6 +1479,8 @@
             } */
 
 
+
+
     function eliminarMascota(nombreMascota) {
         fetch('/' + userId +'/mascotas')
         .then(response => response.json())
@@ -1450,7 +1488,7 @@
                 /*Hacerlo aqui*/     
                 const mascotaAEliminar = data.find(mascota => mascota.nombre === nombreMascota);
 
-                if (mascotaAEliminar) {
+
                     const mascotaId = mascotaAEliminar._id;
 
                     fetch(`/${userId}/mascotas/${mascotaId}`, {
@@ -1464,13 +1502,15 @@
                     })
                     .then(data => {
                         console.log('Mascota eliminada con éxito:', data);
-                        // Puedes realizar acciones adicionales después de eliminar la mascota
+                        window.location.href = "/cementerio/" + userId;
                     })
                     .catch(error => {
                         console.error('Error al borrar la mascota:', error.message);
                     });
 
-                }
+
+
+                
         })
         .catch(error => console.error('Error al obtener la lista de tareas:', error));
         
@@ -1497,7 +1537,6 @@
 
             //listaCementerio.push(nuevoElemento);
 
-            
 
             //localStorage.setItem('CementerioElements', JSON.stringify( listaCementerio));
             fetch(`/${userId}/mascotaprincipal`)
@@ -1542,7 +1581,7 @@
                                             if (!idPrincipal) {
                                                     throw new Error('No se encontró un ID en los datos de puntos');
                                             }
-
+                                            
 
                                             const dataToUpdate = {
                                                 userId: userId,
@@ -1574,6 +1613,57 @@
                                         })
                                         .catch(error => console.error('Error al guardar la tarea:', error));
 
+                                        document.getElementById('imagenMascotaDespierta').src = "images/cruz.png";
+                                        document.getElementById('imagenMascotaDormida').src = "images/cruz.png";
+                                        document.getElementById('MascotaNombre').textContent = "";
+                                        
+                                        //localStorage.setItem('imagenPrincipal', "images/cruz.png"); ///
+                                        //localStorage.setItem('segundaImagen', "images/cruz.png");   //
+                                        //localStorage.setItem('nombrePrincipal', ""); ///
+
+                                        nopoder.style.display = "block";
+                                        //localStorage.setItem("displayValue", "block"); //
+                                        
+                                        fetch(`/${userId}/displayValue`)
+                                            .then(response => response.json())
+                                            .then(data => {                                   
+                                                console.log('Lista de displayValue:', data);
+                                                idPrincipal = data[0]._id;
+
+
+                                                const dataToUpdate = {
+                                                userId: userId,
+                                                displayValue:  "block", 
+
+                                                };
+
+                                                fetch(`/${userId}/displayValue/${idPrincipal}`, {
+                                                    method: 'PUT',
+                                                    headers: {
+                                                    'Content-Type': 'application/json',
+                                                },
+                                                    body: JSON.stringify(dataToUpdate),
+                                                })
+                                                .then(response => {
+                                                    if (!response.ok) {
+                                                    throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+                                                    }
+                                                        return response.json();
+                                                        
+                                                })
+                                                .then(updatedData => {
+                                                    console.log('Response JSON:', updatedData);
+                                                                                            
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error al realizar la solicitud:', error);
+                                                });
+                                                
+                                                
+
+                                        })
+                                        .catch(error => console.error('Error al obtener la lista de displayValue:', error));
+
    
                                     
                     })
@@ -1581,62 +1671,7 @@
                             console.error('Error al obtener datos de puntos:', error.message);
                     }); 
            
-
-            document.getElementById('imagenMascotaDespierta').src = "images/cruz.png";
-            document.getElementById('imagenMascotaDormida').src = "images/cruz.png";
-            document.getElementById('MascotaNombre').textContent = "";
-            
-            //localStorage.setItem('imagenPrincipal', "images/cruz.png"); ///
-            //localStorage.setItem('segundaImagen', "images/cruz.png");   //
-            //localStorage.setItem('nombrePrincipal', ""); ///
-
-            nopoder.style.display = "block";
-            //localStorage.setItem("displayValue", "block"); //
-            
-            fetch(`/${userId}/displayValue`)
-                .then(response => response.json())
-                .then(data => {                                   
-                    console.log('Lista de displayValue:', data);
-                    idPrincipal = data[0]._id;
-
-
-                    const dataToUpdate = {
-                      userId: userId,
-                      displayValue:  "block", 
-
-                     };
-
-                    fetch(`/${userId}/displayValue/${idPrincipal}`, {
-                        method: 'PUT',
-                        headers: {
-                        'Content-Type': 'application/json',
-                    },
-                        body: JSON.stringify(dataToUpdate),
-                     })
-                    .then(response => {
-                        if (!response.ok) {
-                           throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
-                        }
-                            return response.json();
-                    })
-                    .then(updatedData => {
-                        console.log('Response JSON:', updatedData);
-                                                                
-                    })
-                    .catch(error => {
-                        console.error('Error al realizar la solicitud:', error);
-                    });
-
-            })
-            .catch(error => console.error('Error al obtener la lista de displayValue:', error));
-
-
-            // Redirigir a otro HTML
-            window.location.href = '/cementerio/' + userId ;
-            
-
-
-            
+             
      }
 
 
@@ -1645,8 +1680,14 @@
     function terminarCountdown(){
         mostrarSidebar();
         enviarCementerio();
-        
+            
+
     }
+
+    
+
+    
+
 
 
 
