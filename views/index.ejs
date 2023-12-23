@@ -6,8 +6,8 @@
     <title>AcademiaBach</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-      /* Estilos para el menú sidebar */
-      .sidebar {
+
+.sidebar {
           height: 150%;
           width: 9%;
           position: fixed;
@@ -28,6 +28,7 @@
       .sidebar img {
       width: 100%;
       height: auto;
+
       }
 
       .sidebar a:hover {
@@ -50,17 +51,14 @@
         }
 
         body {
-            background-image: url('images/Fondo3.png'); 
-            background-size: cover;
-            
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; 
+        background-image: url('images/Fondo3.png');  
+        background-size: cover;                
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; 
         }
-
-
         .count {
             font-size: 4vw;
             text-align: center;
@@ -197,9 +195,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 45%; /* Centrar verticalmente en todos los dispositivos */
-            left: 50%; /* Centrar horizontalmente en todos los dispositivos */
-            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            top: 45%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
 
             background-color: #ccc;
         }
@@ -322,7 +320,7 @@
 
         .message-block {
             position: fixed;
-            top: 30%;
+            top: 20%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 30%;
@@ -610,8 +608,52 @@
                 
        }
 
+       #backgroundImage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 887; 
+        }
 
-                .parent {
+       .image-sequence {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 888; 
+    
+        }
+
+        .sequence-image {
+            max-width: 100%;
+            max-height: 100%;
+
+        }
+
+        #mostrarSecuenciaButton {
+            background: transparent;
+            border: none; 
+            color: #fff; 
+            cursor: pointer; 
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+
+        .parent {
         display: grid;
         grid-template-columns: repeat(8, 1fr);
         grid-template-rows: repeat(9, 1fr);
@@ -625,89 +667,125 @@
         .div4 { grid-area: 8 / 4 / 9 / 6; }
         .div5 { grid-area: 8 / 6 / 9 / 8; }
         .div6 { grid-area: 2 / 7 / 8 / 8; }
-
-
+       
   
   </style>
   </head>
-    
-  <body>
-
-    <div class="parent">
-        <div class="div1"> 
-            <div class="content" >
-                <!-- Contenido principal de tu página -->
-                <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
-            </div>
-            <div class="sidebar" id="sidebar">
-                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-                <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
-                <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
-                <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
-            </div>
-
+  <div class="parent">
+    <div class="div1"> 
+        <div class="content" >
+            <!-- Contenido principal de tu página -->
+            <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
         </div>
-        <div class="div2">    
-            <p class="moneda-image">Puntos:</p>           
-            <div class="punto">
-               <!-- <img src="images/Monedas.png" alt="Moneda" class="moneda-image"> -->
-               
-                <div class="puntostexto">
-                    <p id="puntosTotales">00</p>
-                </div>
-            </div>
+        <div class="sidebar" id="sidebar">
+            <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+            <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
+            <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
+            <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
         </div>
-        <div class="div3"> 
-            <div class="slider-container">
-                <div class="blue-background"></div> 
-                <div class="duration-label">Duración: <span id="duracionLabel">20</span> minutos</div>
 
-                <div class="slider-wrapper">
-                    <input type="range" id="duracion" name="duracion" min="1" max="240" value="20" class="vertical-slider" oninput="updateDurationLabel()">
-
-               </div>
-
-            <div class="logout" >
-                <form action="/logout?_method=DELETE" method="POST" id="logoutForm">
-                    <button  type="submit">Salir</button>
-                  </form>
-            </div>
-            <p class="nombreUsuario" id="nombreUsuario">Usuario conectado: <%= user.name %></p>
-
-        </div>
-        <div class="div4">
-            <div class="message-block" id="messageBlock" style="display: none">
-                <p id="message">Mensaje inicial</p>
-            </div>
-            <p class="nombreMascota" id="MascotaNombre">Nombre</p>
-            <img src="images/cruz.png" alt="Mascota dormida" class="mascotadormida-image" id="imagenMascotaDormida">
-            <img src="images/cruz.png" alt="Mascota despierta" class="mascotadespierta-image" id="imagenMascotaDespierta">
-            <img src="images/BlancoSet.png" alt="blanco-image" class="blanco-image" id="blanco-image">
-            <div class="count" id="countdown"> 00:00</div>
-            <div class="barra-de-progreso">
-                <div class="barra-fondo">
-                  <div class="barra-avance" id="barraAvance"></div>
-                </div>
-              </div>
-            
-
-
-        </div>
-        <div class="div5"> 
-            <div class="empezar" >
-                <!-- Contenido principal de tu página -->
-                <button id="startButton" onclick="startCountdown()">Empezar</button>
-              </div>
-              <div class="terminar" >
-               <!-- Contenido principal de tu página -->
-               <button id="terminarButton" onclick="terminarCountdown()">FINALIZAR</button>
-             </div>
-             <p class="nopoder" >Asigna una mascota para continuar</p>
-        </div>
-        <div class="div6"> 
-            <p class="sisales" >Si le das al botón de finalizar tu mascota morirá y la cuenta atrás terminará.</p>
-        </div>
     </div>
+    <div class="div2">    
+        <p class="moneda-image">Puntos:</p>           
+        <div class="punto">
+            <!-- <img src="images/Monedas.png" alt="Moneda" class="moneda-image"> -->
+
+             <div class="puntostexto">
+                 <p id="puntosTotales">00</p>
+             </div>
+         </div>
+        </div>
+
+
+
+    <div class="div3"> 
+        <div class="slider-container">
+            <div class="blue-background"></div> 
+            <div class="duration-label">Duración: <span id="duracionLabel">20</span> minutos</div>
+
+            <div class="slider-wrapper">
+                <input type="range" id="duracion" name="duracion" min="1" max="240" value="20" class="vertical-slider" oninput="updateDurationLabel()">
+
+           </div>
+
+           <div class="logout" >
+            <form action="/logout?_method=DELETE" method="POST" id="logoutForm">
+                <button  type="submit">Salir</button>
+              </form>
+        </div>
+        </div>
+        <p class="nombreUsuario" id="nombreUsuario">Usuario conectado: <%= user.name %></p>
+
+
+    </div>
+    <div class="div4">
+
+        <div class="message-block" id="messageBlock" style="display: none">
+            <p id="message">Mensaje inicial</p>
+        </div>
+        <p class="nombreMascota" id="MascotaNombre">__</p>
+        <img src="images/cruz.png" alt="Mascota dormida" class="mascotadormida-image" id="imagenMascotaDormida">
+        <img src="images/cruz.png" alt="Mascota despierta" class="mascotadespierta-image" id="imagenMascotaDespierta">
+        <img src="images/BlancoSet.png" alt="blanco-image" class="blanco-image" id="blanco-image">
+        <div class="count" id="countdown"> 00:00</div>
+        <div class="barra-de-progreso">
+            <div class="barra-fondo">
+              <div class="barra-avance" id="barraAvance"></div>
+            </div>
+          </div>
+
+          <audio id="miAudio" src="images/short-success.mp3"></audio>
+
+          <img id="backgroundImage" src="images/Fondo3.png" alt="Imagen de fondo" />
+        <div class="image-sequence" style="display: none;">
+  
+            <img src="images/tutorial/1.png" alt="Imagen 1" class="sequence-image" />
+            <img src="images/tutorial/2.png" alt="Imagen 2" class="sequence-image" />
+            <img src="images/tutorial/3.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/4.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/5.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/6.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/7.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/8.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/9.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/9.1.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/9.2.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/9.3.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/9.4.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/FINAL.png" alt="Imagen 3" class="sequence-image" />
+            <img src="images/tutorial/FINAL.png" alt="Imagen 3" class="sequence-image" />
+    
+        </div>
+        <button id="mostrarSecuenciaButton" onclick="mostrarSecuencia()"></button>
+      </div>
+
+    </div>
+    <div class="div5"> 
+
+        <div class="empezar" >
+            <button id="startButton" onclick="startCountdown()">Empezar</button>
+          </div>
+          <div class="terminar" >
+           <button id="terminarButton" onclick="terminarCountdown()">FINALIZAR</button>
+         </div>
+         <p class="nopoder" >Asigna una mascota para continuar</p>
+
+         
+   
+    </div>
+    <div class="div6"> 
+        <p class="sisales" >Si le das al botón de finalizar tu mascota morirá y la cuenta atrás terminará.</p>
+    </div>
+</div>
+   
+             
+
+
+
+
+  
+
+    
 
 
     
@@ -735,10 +813,68 @@
     const messageBlock = document.getElementById("messageBlock");
     const messageElement = document.getElementById("message");
 
+    var currentImageIndex = 0; 
 
 
+    var currentImageIndex = 0; 
+    var secuenciaYaMostrada = localStorage.getItem('secuenciaMostrada') === 'true';
+    var backgroundImage = document.getElementById('backgroundImage');
+    backgroundImage.style.display = 'none';
+    document.getElementById('mostrarSecuenciaButton').style.display = 'none';
+    console.log(secuenciaYaMostrada);
+
+       if (!secuenciaYaMostrada) {
+
+            
+            mostrarSecuencia();
+
+            function mostrarSecuencia() {                
+                document.getElementById('mostrarSecuenciaButton').style.display = 'block';
+                console.log(secuenciaYaMostrada);
+                if (secuenciaYaMostrada) {
+                document.getElementById('mostrarSecuenciaButton').style.display = 'none';
+                return;
+                }
 
 
+                backgroundImage.style.display = 'block';
+                var sequenceContainer = document.querySelector('.image-sequence');
+                var images = sequenceContainer.querySelectorAll('.sequence-image');
+                sequenceContainer.style.display = 'flex';
+
+
+                if (currentImageIndex === 1) {
+                    var respuestaUsuario = confirm("¿Es tu primera vez aqui?");
+                    if (!respuestaUsuario) {
+                        // Si el usuario no quiere continuar, ocultar la secuencia y salir
+                        sequenceContainer.style.display = 'none';
+                        localStorage.setItem('secuenciaMostrada', 'true');
+                        backgroundImage.style.display = 'none';
+                        document.getElementById('mostrarSecuenciaButton').style.display = 'none';
+                        return;
+                    }
+                }
+
+
+                images.forEach(function (image) {
+                    image.style.display = 'none';
+                });
+
+
+                images[currentImageIndex].style.display = 'block';
+
+
+                currentImageIndex++;
+
+                if (currentImageIndex >= images.length) {
+                    currentImageIndex = 0;
+                    sequenceContainer.style.display = 'none';
+                    localStorage.setItem('secuenciaMostrada', 'true');
+                    document.getElementById('mostrarSecuenciaButton').style.display = 'none';
+                    backgroundImage.style.display = 'none';
+                }
+            }
+      }
     /*
     fetch(`/${userId}/puntos`, {
         method: 'DELETE',
@@ -750,6 +886,9 @@
         // Puedes realizar cualquier otra operación después de eliminar todas las tareas
     })
     .catch(error => console.error('Error al eliminar todas las tareas:', error)); */
+
+    //Tutorial
+
 
 
     fetch(`/${userId}/puntos`)
@@ -862,7 +1001,7 @@
 
             const postData = {
                     userId: userId,
-                    nombrePrincipal:  'Nombre', 
+                    nombrePrincipal:  '__', 
                     imagenPrincipal:  'images/cruz.png',
                     segundaImagen:  'images/cruz.png',
             };
@@ -1068,8 +1207,10 @@
         }
     }
 
-    var empezarcoundown = false;
-  
+    var empezarcoundown = false; 
+    //var empezarcoundown = localStorage.getItem('empezarcoundown') === 'false'; 
+
+    
      //
 
 
@@ -1200,6 +1341,11 @@
 
         ocultarSidebar();
         empezarcoundown = true;
+        
+        //localStorage.setItem('empezarcoundown', 'true');
+
+
+
 
         /*
         window.addEventListener('beforeunload', function (e) {
@@ -1285,10 +1431,36 @@
             var timer = setInterval(function () {
                 updateDisplay();
                 actualizarBarraDeProgreso();
+
+
+                console.log('empezarcoundown' + empezarcoundown);
+                
+
+
+                window.addEventListener('beforeunload', function (event) {
+                    console.log("Beforeunload");
+                    localStorage.setItem('actionToPerform', 'terminarCountdown');
+                });
+
+                // Check for the action and perform it on DOMContentLoaded
+                window.addEventListener('DOMContentLoaded', function () {
+                    var action = localStorage.getItem('actionToPerform');
+
+                    if (action === 'terminarCountdown') {
+                        // Execute the action after a short delay
+                        setTimeout(function () {
+                            terminarCountdown();
+                            localStorage.removeItem('actionToPerform');
+                        }, 1000); // Adjust the delay as needed
+                    }
+                });
+               
+                var miAudio = document.getElementById("miAudio");
                 
 
                 if (timeLeft === 0) {
                     if ( descansodesactivado) {
+                        miAudio.play();
                         messageBlock.style.display = "none";
                         if (cicloIniciado) {
                             // Suma un punto solo si el ciclo ya ha comenzado
@@ -1303,7 +1475,7 @@
                                 }
                                 
                                 const puntossuma = datap[0].puntosTotales + 1;
-                                console.log("Suma de los puntos:" + puntossuma);
+                                
 
                                 const dataToUpdate = {
                                     userId: userId,
@@ -1345,14 +1517,16 @@
                             cicloIniciado = true; // Marca el inicio del ciclo
                         }
                         numerosetrealizados++;
+                        
                         descansodesactivado = false;
-                        if(segundostotalesInsertados < 1500){
+                        if(segundostotalesInsertados < 1500){                                  // Cambiar
                             timeLeft = segundostotalesInsertados;
                         }else{
                             timeLeft = pomSet;
                         }
                         
                         console.log("Número de sets terminados: " + numerosetrealizados); 
+                        
 
                     } else {
                         // Inicio del ciclo de descanso
@@ -1362,11 +1536,13 @@
 
                         if (numerosetrealizados === 4) {
                             // Comienza el segundo ciclo de descanso (descanso2)
+                            miAudio.play();
                             numerosetrealizados = 0; // Reinicia el número de sets realizados
                             timeLeft = descanso2;
-                            console.log("¡Segundo ciclo de descanso!");
+                            
                         } else {
                                 // Inicio del ciclo de descanso normal (descanso1)
+                            miAudio.play();
                             timeLeft = descanso1;
                         }
                         //timeLeft = descanso1;
@@ -1384,15 +1560,17 @@
                         porcentaje = 100;
                         barraAvance.style.width  = porcentaje + "%";
                         document.getElementById("duracionLabel").textContent = valorActualSlider;
-                        
+                        miAudio.play();
                         despierta.style.display = "block"; 
                         dormida.style.display = "none"; 
                         terminar.style.display = "none";
                         empezar.style.display = "block";
                         botonSalir.style.display = "block";
                         sisales.style.display = "none";
+                        messageBlock.style.display = "none";
                         mostrarSidebar();
                         empezarcoundown = false;
+                        localStorage.setItem('empezarcoundown', 'false');
 
 
                 }
@@ -1509,7 +1687,6 @@
                     });
 
 
-
                 
         })
         .catch(error => console.error('Error al obtener la lista de tareas:', error));
@@ -1585,7 +1762,7 @@
 
                                             const dataToUpdate = {
                                                 userId: userId,
-                                                nombrePrincipal:  'Nombre', 
+                                                nombrePrincipal:  '__', 
                                                 imagenPrincipal:  'images/cruz.png',
                                                 segundaImagen:  'images/cruz.png',
                                             };
@@ -1612,6 +1789,7 @@
                                                 });
                                         })
                                         .catch(error => console.error('Error al guardar la tarea:', error));
+
 
                                         document.getElementById('imagenMascotaDespierta').src = "images/cruz.png";
                                         document.getElementById('imagenMascotaDormida').src = "images/cruz.png";
@@ -1659,7 +1837,7 @@
                                                     console.error('Error al realizar la solicitud:', error);
                                                 });
                                                 
-                                                
+                                                 
 
                                         })
                                         .catch(error => console.error('Error al obtener la lista de displayValue:', error));
@@ -1684,9 +1862,9 @@
 
     }
 
-    
 
-    
+
+
 
 
 
