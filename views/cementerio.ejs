@@ -6,7 +6,21 @@
     <title>AcademiaBach</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-      .sidebar {
+     .sidebaror {
+        position: relative;
+          transition: 0.3s;
+          display: flex;
+          flex-direction: column;
+          
+      }
+
+      .sidebaror img {
+            width: 85%;
+            height: auto;
+            margin-top: 2.5%;
+            }
+
+     .sidebar {
           height: 150%;
           width: 9%;
           position: fixed;
@@ -14,6 +28,7 @@
           left: -150%; 
           background-color: #acc1e5;
           transition: 0.3s;
+
       }
 
       .sidebar a {
@@ -27,6 +42,7 @@
       .sidebar img {
       width: 100%;
       height: auto;
+
       }
 
       .sidebar a:hover {
@@ -37,9 +53,7 @@
       .content {
           margin-left: 5%;
           padding: 7%;
-          z-index: 10;
       }
-
 
       .content a img {
         position: fixed;
@@ -51,21 +65,51 @@
         }
 
         body {
-            background-image: url('/images/Fondo3.png'); 
-            background-size: cover; 
-            background-repeat: no-repeat; 
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden
+        background-image: url('/images/Fondo3.png');  
+        background-size: cover;               
+
+        margin: 0;
+        padding: 0;
+        overflow: hidden; 
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        }
+
+        main {
+        display: flex;
+        flex-direction: column;
+        }
+
+        header{
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 0.5%;
+        
+        }
+
+        footer {
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 0.5%;
+            margin-top: auto;
+        }
+            
+            
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
         }
 
 
         .cementerio {
             position: fixed;
             top: 5%;
-            left: 15%; 
+            left: 20%; 
+            width: 75%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -88,7 +132,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 9%; 
+            top: 13%; 
             left: 95%; 
             transform: translate(-50%, -50%); 
             color: rgb(31, 39, 78);
@@ -105,19 +149,305 @@
             max-width: 50%;
         }
 
+        .nombreUsuario1 {
+            font-size: 1.3vw;
+            text-align: right;
+            color: rgb(255, 255, 255);
+            font-family: 'Arial', sans-serif; 
+            background-color: rgb(31, 39, 78);
+            z-index: 10;
+            margin: 0;
+        }
 
-        .parent {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            grid-template-rows: repeat(8, 1fr);
-            grid-column-gap: 0px;
-            grid-row-gap: 0px;
+        @media screen and (max-width: 600px) {
+            
+            .sidebaror {
+                position: relative;
+                transition: 0.3s;
+                display: flex;
+                flex-direction: row; 
+
             }
 
-            .div1 { grid-area: 1 / 1 / 10 / 2; }
-            .div2 { grid-area: 2 / 3 / 8 / 8; }
+            .sidebar {
+                height: 10%; 
+                width: 90%; 
+                position: fixed;
+                top: 5.5%;
+                left: -150%;
+                background-color: #acc1e5;
+                transition: 0.3s;
+                display: flex; 
+                flex-direction: row; 
+                align-items: center; 
+                font-size: 150%;
+
+            }
+
+            .sidebar a {
+                padding: 1%; 
+                text-decoration: none;
+                font-size: 1vw;
+                color: #1c4b6a;
+                display: inline-block; 
+            }
+
+            .sidebar img {
+                width: 50%;
+                margin-left: 0;
+            }
+
+            .sidebar a:hover {
+                background-color: #acc1e5;
+            }
+
+            .content a img {
+                position: fixed;
+                left: 1%;
+                top: 4%;
+                width: 10%;
+                height: auto;
+                z-index: 3;
+            }
+
+            header{
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 2%;
+
+            }
+
+            footer {
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 2%;
+            margin-top: auto;
+            }
+
+ 
+            .nombreUsuario1 {
+            font-size: 2.3vw;
+            text-align: right;
+            color: rgb(255, 255, 255);
+            font-family: 'Arial', sans-serif; 
+            background-color: rgb(31, 39, 78);
+            z-index: 10;
+            margin: 0;
+            }
+
+ 
+
+            .cerrar {
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 21%; 
+            left: 91%; 
+            transform: translate(-50%, -50%); 
+            color: rgb(31, 39, 78);
+
+            }
+
+            .cerrar img {
+            max-width: 120%;
+            height: auto;
+            }
+
+            
+            .cementerio {
+                position: fixed;
+                top: 13%;
+                left: 17%; 
+                width: 75%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                transform: translate(-10%, 5%);
+                overflow-y: auto; 
+                max-height: 75vh;
+                font-size: 2vw;
+            }
+
+            .cementerio img{
+                width: 40%;
+            }
+
+            .item {
+                background-color: #acc1e5;
+                border: 1px solid #1b184f;
+                padding: 1%;
+                margin: 7px;
+                text-align: center;
+                width: 40%;
+                height: auto;
+            }
 
 
+         }
+
+
+
+            @media screen and (min-width: 601px) and (max-width: 1024px) {
+            .sidebaror {
+                position: relative;
+                transition: 0.3s;
+                display: flex;
+                flex-direction: column;
+                
+            }
+
+            .sidebaror img {
+                    width: 95%;
+                    height: auto;
+                    margin-top: 2.5%;
+                    }
+
+            .sidebar {
+                height: 150%;
+                width: 13%;
+                position: fixed;
+                top: 0;
+                left: -150%; 
+                background-color: #acc1e5;
+                transition: 0.3s;
+
+            }
+
+            .sidebar a {
+                padding: 7%;
+                text-decoration: none;
+                font-size: 1vw;
+                color: #1c4b6a;
+                display: block;
+            }
+
+            .sidebar img {
+            width: 110%;
+            height: auto;
+
+            }
+
+            .sidebar a:hover {
+                background-color: #acc1e5;
+            }
+
+
+            .content {
+                margin-left: 5%;
+                padding: 7%;
+            }
+
+            .content a img {
+                position: fixed;
+                left: 1%;
+                top: 2%;
+                width: 10%;
+                height: auto;
+                z-index: 3;
+                }
+
+                body {
+                background-image: url('/images/Fondo3.png');  
+                background-size: cover;               
+
+                margin: 0;
+                padding: 0;
+                overflow: hidden; 
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                }
+
+                main {
+                display: flex;
+                flex-direction: column;
+                }
+
+                header{
+                    background-color: rgb(31, 39, 78);
+                    color: white;
+                    text-align: center;
+                    padding: 0.5%;
+                
+                }
+
+                footer {
+                    background-color: rgb(31, 39, 78);
+                    color: white;
+                    text-align: center;
+                    padding: 0.5%;
+                    margin-top: auto;
+                }
+                    
+                    
+                .header-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between; 
+                }
+
+            .nombreUsuario1 {
+                font-size: 1.9vw;
+                text-align: right;
+                color: rgb(255, 255, 255);
+                font-family: 'Arial', sans-serif; 
+                background-color: rgb(31, 39, 78);
+                z-index: 10;
+                margin: 0;
+            }
+
+ 
+            .cerrar {
+                position: fixed;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: 19%; 
+                left: 90%; 
+                transform: translate(-50%, -50%); 
+                color: rgb(31, 39, 78);
+
+            }
+
+            .cerrar img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .cementerio {
+                position: fixed;
+                top: 13%;
+                left: 24%; 
+                width: 65%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                transform: translate(-10%, 5%);
+                overflow-y: auto; 
+                max-height: 70vh;
+                font-size: 2vw;
+            }
+
+            .cementerio img{
+                width: 80%;
+            }
+
+            .item {
+                background-color: #acc1e5;
+                border: 1px solid #1b184f;
+                padding: 1%;
+                margin: 7px;
+                text-align: center;
+                width: 30%;
+                height: auto;
+            }
+
+            }
 
       
   </style>
@@ -125,42 +455,64 @@
     
   <body>
 
-    <div class="parent">
-        <div class="div1"> 
-            <div class="sidebar" id="sidebar">
-                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-                <a href="#" onclick="checklist()"><img src="/images/listaicono.png" alt="Icono Checklist"></a>
-                <a href="#" onclick="mascota()"><img src="/images/homeicono.png" alt="Icono Tienda"></a>
-                <a href="#" onclick="index()"><img src="/images/Tumba.png" alt="Icono Cementerio"></a>
-            </div>
-            <div class="content" >
-                <!-- Contenido principal de tu página -->
-                <a href="#" onclick="toggleSidebar()"><img src="/images/logo.png" alt="Botón de menú"></a>
-            </div>
-            <div class="cerrar" id="cerrar">
-                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-                <a href="#" onclick="cerrar()"><img src="/images/cerrar.png" alt="IconoCerrar"></a>
-            </div>
+    
+    <header>
+        <p class="nombreUsuario1">   Usuario conectado: <%= user.name %>  &nbsp;  &nbsp;</p>  
+    </header>
+
+    <main class="d-flex justify-content-between flex-row mb-3 flex-lg-row">
+
+        <div class="p-2 ">    
+            <div class="sidebaror " > 
+                <div class="content" >
+                    <a href="#" onclick="toggleSidebar()"><img src="/images/logo.png" alt="Botón de menú"></a>
+                </div>
+                <div class="sidebar" id="sidebar">
+                    <p>&nbsp; &nbsp;</p>
+                    <p>&nbsp; &nbsp;</p>
+                    <p>&nbsp; &nbsp;</p>
+                    <p>&nbsp; &nbsp;</p>
+                    <a href="#" onclick="checklist()"><img src="/images/listaicono.png" alt="Icono Checklist"></a>
+                    <a href="#" onclick="mascota()"><img src="/images/homeicono.png" alt="Icono Tienda"></a>
+                    <a href="#" onclick="cementerio()"><img src="/images/Tumba.png" alt="Icono Cementerio"></a>
+                </div>
+            </div>           
+
+      </div>
+
+      <div class="p-2 ">   
+
+
+        <div class="cementerio" id="cementerioContainer">
         </div>
-        <div class="div2"> 
-            <div class="cementerio" id="cementerioContainer">
-            </div>
+
+        <div class="cerrar" id="cerrar">
+            <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+            <a href="#" onclick="cerrar()"><img src="/images/cerrar.png" alt="IconoCerrar"></a>
         </div>
-        </div>
+
+
+        
+      </div>
 
 
 
+      <div class="p-2 "> 
+       
+      </div>
 
+                
+    </main>
 
-
-
-
+    <footer>
+      
+    </footer>
 
   <script>
       function toggleSidebar() {
           var sidebar = document.getElementById('sidebar');
           if (sidebar.style.left === '0px') {
-              sidebar.style.left = '-250px';
+              sidebar.style.left = '-750px';
           } else {
               sidebar.style.left = '0px';
           }

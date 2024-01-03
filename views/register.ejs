@@ -21,6 +21,34 @@
 
       }
 
+      main {
+        display: flex;
+        flex-direction: column;
+        }
+
+        header{
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 0.5%;
+            width: 100%;
+        }
+
+        footer {
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 0.5%;
+            margin-top: auto;
+            width: 100%;
+        }
+            
+            
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+        }
 
 
       .imagen-superpuesta {
@@ -31,17 +59,6 @@
 
         }
 
-        @media screen and (max-width: 768px) {
-          .imagen-superpuesta {
-            max-width: 90%; 
-          }
-        }
-
-    @media screen and (max-width: 480px) {
-      .imagen-superpuesta {
-        max-width: 95%; 
-      }
-    }
 
     .registro .name{
         margin-top: 10%;
@@ -122,27 +139,197 @@
         transform: translate(0%, 20%);  
       }
 
-      .parent {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(7, 1fr);
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
+      @media screen and (max-width: 600px) {
+
+        header{
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 2%;
+            width: 100%;
         }
 
-        .div1 { grid-area: 3 / 2 / 4 / 3; }
-        .div2 { grid-area: 4 / 2 / 7 / 3; }
+        footer {
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 2%;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .imagen-superpuesta {
+            transform: translate(7%, 20%);
+          max-width: 90%; 
+          height: auto;
+          z-index: 1; 
+
+            }
+
+
+        .registro .name{
+            margin-top: 20%;
+          }
+
+          .registro .contraseña{
+            margin-bottom: 30%;
+          }
+
+
+
+          .registroIntro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            font-size: 4.3vw;
+            font-family: Arial, Helvetica, sans-serif;
+            color: aliceblue;
+            text-shadow: -1px -1px 0 rgb(19, 31, 108), 1px -1px 0 rgb(19, 31, 108), -1px 1px 0 rgb(19, 31, 108), 3px 3px 0 rgb(21, 28, 71);
+            transform: translate(0%, 30%); 
+          }
+
+          .registro{
+            background-color: white;
+            border: 4px solid rgb(21, 28, 71);
+            border-radius: 4%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column; 
+
+            align-items: center;
+            margin: -1% 0%;
+            width: 80%;
+            max-height: 100%;
+
+            font-size: 3.5vw;
+            font-family: Arial, Helvetica, sans-serif;
+            transform: translate(12.5%, 5%); 
+          }
+
+
+
+          .button button {
+            width: 50%;
+            padding: 1.5%; 
+            font-size: 3.5vw; 
+            background-color: rgb(19, 31, 108); 
+            color: white; 
+            border: 4px solid rgb(13, 17, 44) ; 
+            border-radius: 5px;
+            transform: translate(50%, 40%); 
+          }
+
+
+            .login {
+              padding: 2%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1%;
+            width: 100%;
+            font-size: 3.5vw;
+            font-family: Arial, Helvetica, sans-serif;
+            color: aliceblue;
+            transform: translate(0%, 20%);  
+          }  
+
+      }
+                               
+                               
+      @media screen and (min-width: 601px) and (max-width: 1024px) {
+        .imagen-superpuesta {
+            transform: translate(7%, 5%);
+          max-width: 90%; 
+          height: auto;
+          z-index: 1; 
+
+            }
+
+
+          .registroIntro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            font-size: 3.3vw;
+            font-family: Arial, Helvetica, sans-serif;
+            color: aliceblue;
+            text-shadow: -1px -1px 0 rgb(19, 31, 108), 1px -1px 0 rgb(19, 31, 108), -1px 1px 0 rgb(19, 31, 108), 3px 3px 0 rgb(21, 28, 71);
+            transform: translate(0%, -50%); 
+          }
+
+          .registro{
+            background-color: white;
+            border: 4px solid rgb(21, 28, 71);
+            border-radius: 4%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column; 
+
+            align-items: center;
+            margin: -1% 0%;
+            width: 80%;
+            max-height: 100%;
+
+            font-size: 2vw;
+            font-family: Arial, Helvetica, sans-serif;
+            transform: translate(12.5%, -5%); 
+          }
+
+
+
+          .button button {
+            width: 60%;
+            padding: 3%; 
+            font-size: 2.5vw; 
+            background-color: rgb(19, 31, 108); 
+            color: white; 
+            border: 4px solid rgb(13, 17, 44) ; 
+            border-radius: 5px;
+            transform: translate(30%, 40%); 
+          }
+
+
+            .login {
+              padding: 2%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1%;
+            width: 100%;
+            font-size: 2.5vw;
+            font-family: Arial, Helvetica, sans-serif;
+            color: aliceblue;
+            transform: translate(0%, 20%);  
+          }                                          
+      }
 
 </style>
 </head>
 
 <body>
 
-  <div class="parent">
-    <div class="div1"> 
-      <img src="images/LogoBlue1.png" class="imagen-superpuesta" alt="Imagen Superpuesta">
+
+  <header>
+ 
+  </header>
+
+  <main class="d-flex justify-content-between flex-row mb-3 flex-lg-row">
+
+    <div class="p-2 ">  
+
+          
+
     </div>
-    <div class="div2"> 
+
+    <div class="p-2 flex-fill">   
+
+
+      <img src="images/LogoBlue1.png" class="imagen-superpuesta" alt="Imagen Superpuesta">
+   
       <div class="registroIntro">Registro</div>
       <div class="registro">    
         <% if (messages.error) { %>
@@ -166,6 +353,33 @@
           </div>
     </form>
     <div class= login><a href="/login">Login</a></div>
+ 
+    
+      
+
+    </div>
+
+
+
+    <div class="p-2 "> 
+     
+    </div>
+
+              
+  </main>
+
+  <footer>
+    
+  </footer>
+
+  <div class="parent">
+    <div class="div1"> 
+      
+    </div>
+    <div class="div2">
+
+      
+    
     </div>
     </div>
   </div>

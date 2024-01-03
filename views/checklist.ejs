@@ -10,12 +10,22 @@
     <link rel="stylesheet" href="/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.css">
     <script src="/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.js"></script>
 
-
-
-
         <style>
-      /* Estilos para el menú sidebar */
-      .sidebar {
+      .sidebaror {
+        position: relative;
+          transition: 0.3s;
+          display: flex;
+          flex-direction: column;
+          
+      }
+
+      .sidebaror img {
+            width: 85%;
+            height: auto;
+            margin-top: 2.5%;
+            }
+
+     .sidebar {
           height: 150%;
           width: 9%;
           position: fixed;
@@ -23,6 +33,7 @@
           left: -150%; 
           background-color: #acc1e5;
           transition: 0.3s;
+
       }
 
       .sidebar a {
@@ -36,6 +47,7 @@
       .sidebar img {
       width: 100%;
       height: auto;
+
       }
 
       .sidebar a:hover {
@@ -46,9 +58,7 @@
       .content {
           margin-left: 5%;
           padding: 7%;
-          z-index: 10;
       }
-
 
       .content a img {
         position: fixed;
@@ -58,15 +68,45 @@
         height: auto;
         z-index: 3;
         }
+
         body {
-            background-image: url('/images/Fondo3.png'); 
-            background-size: cover; 
-            background-repeat: no-repeat; 
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden
+        background-image: url('/images/Fondo3.png');  
+        background-size: cover;               
+
+        margin: 0;
+        padding: 0;
+        overflow: hidden; 
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        }
+
+        main {
+        display: flex;
+        flex-direction: column;
+        }
+
+        header{
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 0.5%;
+        
+        }
+
+        footer {
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 0.5%;
+            margin-top: auto;
+        }
+            
+            
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
         }
         
 
@@ -79,9 +119,9 @@
             padding: 1%;
             border: 1px solid #ccc;
             position: fixed;
-            top: 50%; /* Centrar verticalmente en todos los dispositivos */
-            left: 50%; /* Centrar horizontalmente en todos los dispositivos */
-            transform: translate(-50%, -50%); /* Centrar en la mitad de la pantalla */
+            top: 55%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
             font-family: 'Arial', sans-serif; 
             font-size: 1vw;
             flex-direction: column;
@@ -92,11 +132,11 @@
         .listaTareas li {
             list-style-type: none;
             display: flex;
-            flex-direction: row; /* Establece la dirección de los elementos como fila */
+            flex-direction: row; 
             align-items: center;
             margin-bottom: 10%;
-            background-color: white; /* Fondo blanco para cada tarea */
-            border: 1px solid #ccc; /* Borde alrededor de cada tarea */
+            background-color: white; 
+            border: 1px solid #ccc;
             padding: 10%;
         }
 
@@ -104,9 +144,9 @@
             margin-right: 10%;
         }
 
-        /* Estilos para los campos de información adicional */
+
         .listaTareas input[type="text"] {
-            flex: 3; /* Distribuye el espacio disponible de manera uniforme */
+            flex: 3;
             padding: 1%;
     
         }
@@ -120,8 +160,8 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            left: 35%;
-            top: 11%;
+            left: 34%;
+            top: 15%;
             transform: translate(-50%, -50%);
             font-family: 'Arial', sans-serif; 
             font-size: 1vw;
@@ -129,6 +169,22 @@
         }    
         .nuevaTarea input {
             margin: 0% 0.5% ; 
+        }
+
+
+        #Puntos,
+        button {
+            width: 6%; 
+            height: auto;
+        }
+
+
+        #nuevaTareaInput,
+        #fechaVencimiento,
+        #TipoDeTarea
+         {
+            width: 9%; 
+            height: auto;
         }
 
         .row {
@@ -154,7 +210,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 9%; 
+            top: 13%; 
             left: 85%; 
             transform: translate(-50%, -50%); 
             color: rgb(31, 39, 78);
@@ -162,7 +218,7 @@
         }
 
         .papelera img {
-            max-width: 60%;
+            max-width: 50%;
             height: auto;
         }
 
@@ -171,7 +227,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 9%; 
+            top: 13%; 
             left: 91%; 
             transform: translate(-50%, -50%); 
             color: rgb(31, 39, 78);
@@ -183,24 +239,12 @@
             height: auto;
         }
 
-        @media screen and (max-width: 1200px) {
-            .papelera img {
-                max-width: 50%; 
-            }
-        }
 
-
-        @media screen and (max-width: 768px) {
-            .papelera img {
-                max-width: 40%; 
-            }
-        }
 
         .tareaVencida {
             color: red;
       
         }
-
 
 
         .avisoTareasVencidas {
@@ -222,94 +266,574 @@
             padding: 0;
         }
 
+        .nombreUsuario1 {
+            font-size: 1.3vw;
+            text-align: right;
+            color: rgb(255, 255, 255);
+            font-family: 'Arial', sans-serif; 
+            background-color: rgb(31, 39, 78);
+            z-index: 10;
+            margin: 0;
+        }
 
+        @media screen and (max-width: 600px) {
 
+            
+            .sidebaror {
+                position: relative;
+                transition: 0.3s;
+                display: flex;
+                flex-direction: row; 
 
-
-
-        .parent {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            grid-template-rows: repeat(9, 1fr);
-            grid-column-gap: 0px;
-            grid-row-gap: 0px;
             }
 
-            .div1 { grid-area: 1 / 1 / 10 / 2; }
-            .div2 { grid-area: 2 / 3 / 9 / 8; }
-            .div3 { grid-area: 2 / 7 / 3 / 8; }
-            .div4 { grid-area: 2 / 3 / 3 / 7; }
+            .sidebar {
+                height: 10%; 
+                width: 90%; 
+                position: fixed;
+                top: 5.5%;
+                left: -150%;
+                background-color: #acc1e5;
+                transition: 0.3s;
+                display: flex; 
+                flex-direction: row; 
+                align-items: center; 
+                font-size: 150%;
+         
+            }
+
+            .sidebar a {
+                padding: 1%; 
+                text-decoration: none;
+                font-size: 1vw;
+                color: #1c4b6a;
+                display: inline-block; 
+            }
+
+            .sidebar img {
+                width: 50%;
+                margin-left: 0;
+            }
+
+            .sidebar a:hover {
+                background-color: #acc1e5;
+            }
+
+            .content a img {
+                position: fixed;
+                left: 1%;
+                top: 5.5%;
+                width: 10%;
+                height: auto;
+                z-index: 3;
+            }
+
+            header{
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 2%;
+    
+            }
+
+        footer {
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 2%;
+            margin-top: auto;
+        }
+
+        .papelera img {
+                max-width: 40%; 
+            }
+
+        .listaTareas {
+            background-color: rgb(163, 186, 217);
+            width: 70%;
+            max-height: 65vh; 
+            overflow-y: auto; 
+            height: 100%;
+            padding: 1%;
+            border: 1px solid #ccc;
+            position: fixed;
+            top: 63%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            font-family: 'Arial', sans-serif; 
+            font-size: 2.3vw;
+            flex-direction: column;
+            display: flex;
+            
+        }
+
+        .listaTareas li {
+            list-style-type: none;
+            display: flex;
+            flex-direction: row; 
+            align-items: center;
+            margin-bottom: 10%;
+            background-color: white; 
+            border: 1px solid #ccc;
+            padding: 10%;
+        }
+
+        .listaTareas input[type="checkbox"] {
+            margin-right: 10%;
+        }
+
+
+        .listaTareas input[type="text"] {
+            flex: 3;
+            padding: 1%;
+    
+        }
+
+        .nuevaTarea {
+         
+            position: absolute;
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 150%;
+            left: 50%;
+            top: 27%;
+            transform: translate(-50%, -50%);
+            font-family: 'Arial', sans-serif; 
+            font-size: 3vw;
+  
+        }    
+
+        button {
+            width: 10%; 
+            height: auto;
+        }
+
+
+        .nuevaTarea input {
+            margin: 0% 0.5% ; 
+        }
+
+        .nombreUsuario1 {
+            font-size: 2.3vw;
+            text-align: right;
+            color: rgb(255, 255, 255);
+            font-family: 'Arial', sans-serif; 
+            background-color: rgb(31, 39, 78);
+            z-index: 10;
+            margin: 0;
+        }
+
+        .avisoTareasVencidas {
+            position: fixed;
+            width: 40%;
+            height: 10%;
+            background-color: rgb(179, 213, 255); 
+            padding: 0.05%;
+            box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.1); 
+            z-index: 90;
+            top: 85.5%; 
+            left: 30%; 
+            font-size: 90%;
+            overflow-y: auto; 
+    
+        }
+
+        .avisoTareasVencidas ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+
+        .papelera {
+             position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 20%; 
+            left: 82%; 
+            transform: translate(-50%, -50%); 
+            color: rgb(31, 39, 78);
+
+        }
+
+        .papelera img {
+            max-width: 60%;
+            height: auto;
+        }
+
+        .cerrar {
+             position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 21%; 
+            left: 90%; 
+            transform: translate(-50%, -50%); 
+            color: rgb(31, 39, 78);
+
+        }
+
+        .cerrar img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .botoneliminar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5% 60%; 
+
+        }
+
+
+      }
+
+
+        
+        @media screen and (min-width: 601px) and (max-width: 1024px) {
+            .sidebaror {
+                position: relative;
+                transition: 0.3s;
+                display: flex;
+                flex-direction: column;
+                
+            }
+
+            .sidebaror img {
+                    width: 95%;
+                    height: auto;
+                    margin-top: 2.5%;
+                    }
+
+            .sidebar {
+                height: 150%;
+                width: 13%;
+                position: fixed;
+                top: 0;
+                left: -150%; 
+                background-color: #acc1e5;
+                transition: 0.3s;
+
+            }
+
+            .sidebar a {
+                padding: 7%;
+                text-decoration: none;
+                font-size: 1vw;
+                color: #1c4b6a;
+                display: block;
+            }
+
+            .sidebar img {
+            width: 110%;
+            height: auto;
+
+            }
+
+            .sidebar a:hover {
+                background-color: #acc1e5;
+            }
+
+
+            .content {
+                margin-left: 5%;
+                padding: 7%;
+            }
+
+            .content a img {
+                position: fixed;
+                left: 1%;
+                top: 2%;
+                width: 10%;
+                height: auto;
+                z-index: 3;
+                }
+
+                body {
+                background-image: url('/images/Fondo3.png');  
+                background-size: cover;               
+
+                margin: 0;
+                padding: 0;
+                overflow: hidden; 
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                }
+
+                main {
+                display: flex;
+                flex-direction: column;
+                }
+
+                header{
+                    background-color: rgb(31, 39, 78);
+                    color: white;
+                    text-align: center;
+                    padding: 0.5%;
+                
+                }
+
+                footer {
+                    background-color: rgb(31, 39, 78);
+                    color: white;
+                    text-align: center;
+                    padding: 0.5%;
+                    margin-top: auto;
+                }
+                    
+                    
+                .header-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between; 
+                }
+
+                .papelera img {
+                max-width: 40%; 
+            }
+
+            .listaTareas {
+                background-color: rgb(163, 186, 217);
+                width: 70%;
+                max-height: 65vh; 
+                overflow-y: auto; 
+                height: 100%;
+                padding: 1%;
+                border: 1px solid #ccc;
+                position: fixed;
+                top: 57%; 
+                left: 50%;
+                transform: translate(-50%, -50%); 
+                font-family: 'Arial', sans-serif; 
+                font-size: 1.5vw;
+                flex-direction: column;
+                display: flex;
+                
+            }
+
+            .listaTareas li {
+                list-style-type: none;
+                display: flex;
+                flex-direction: row; 
+                align-items: center;
+                margin-bottom: 10%;
+                background-color: white; 
+                border: 1px solid #ccc;
+                padding: 10%;
+            }
+
+            .listaTareas input[type="checkbox"] {
+                margin-right: 10%;
+            }
+
+
+            .listaTareas input[type="text"] {
+                flex: 3;
+                padding: 1%;
+        
+            }
+
+            .nuevaTarea {
+            
+                position: absolute;
+                padding: 10px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                left: 40%;
+                top: 20%;
+                transform: translate(-50%, -50%);
+                font-family: 'Arial', sans-serif; 
+                font-size: 2vw;
+    
+            }    
+
+            button {
+                width: 10%; 
+                height: auto;
+            }
+
+
+            .nuevaTarea input {
+                margin: 0% 0.5% ; 
+            }
+
+            .nombreUsuario1 {
+                font-size: 1.9vw;
+                text-align: right;
+                color: rgb(255, 255, 255);
+                font-family: 'Arial', sans-serif; 
+                background-color: rgb(31, 39, 78);
+                z-index: 10;
+                margin: 0;
+            }
+
+            .avisoTareasVencidas {
+                position: fixed;
+                width: 50%;
+                height: 10%;
+                background-color: rgb(179, 213, 255); 
+                padding: 0.05%;
+                box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.1); 
+                z-index: 90;
+                top: 85%; 
+                left: 25%; 
+                font-size: 90%;
+                overflow-y: auto; 
+        
+            }
+
+            .avisoTareasVencidas ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+
+            .papelera {
+                position: fixed;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: 17%; 
+                left: 82%; 
+                transform: translate(-50%, -50%); 
+                color: rgb(31, 39, 78);
+
+            }
+
+            .papelera img {
+                max-width: 55%;
+                height: auto;
+            }
+
+            .cerrar {
+                position: fixed;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                top: 19%; 
+                left: 90%; 
+                transform: translate(-50%, -50%); 
+                color: rgb(31, 39, 78);
+
+            }
+
+            .cerrar img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .botoneliminar {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 5% 40%; 
+
+            }
+
+
+        }
+
+
+
       
   </style>
   </head>
     
   <body>
 
-    <div class="parent">
-        <div class="div1">
-            <div class="sidebar" id="sidebar">
-                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-                <a href="#" onclick="index()"><img src="/images/listaicono.png" alt="Icono Checklist"></a>
-                <a href="#" onclick="mascota()"><img src="/images/homeicono.png" alt="Icono Tienda"></a>
-                <a href="#" onclick="cementerio()"><img src="/images/Tumba.png" alt="Icono Cementerio"></a>
-            </div>
-            <div class="content" >
-                <!-- Contenido principal de tu página -->
-                <a href="#" onclick="toggleSidebar()"><img src="/images/logo.png" alt="Botón de menú"></a>
-            </div>
-          
+
+    <header>
+        <p class="nombreUsuario1">   Usuario conectado: <%= user.name %>  &nbsp;  &nbsp;</p>  
+    </header>
+
+    <main class="d-flex justify-content-between flex-row mb-3 flex-lg-row">
+
+        <div class="p-2 ">    
+            <div class="sidebaror " > 
+                <div class="content" >
+                    <a href="#" onclick="toggleSidebar()"><img src="/images/logo.png" alt="Botón de menú"></a>
+                </div>
+                <div class="sidebar" id="sidebar">
+                    <p>&nbsp; &nbsp;</p>
+                    <p>&nbsp; &nbsp;</p>
+                    <p>&nbsp; &nbsp;</p>
+                    <p>&nbsp; &nbsp;</p>
+     
+                    <a href="#" onclick="checklist()"><img src="/images/listaicono.png" alt="Icono Checklist"></a>
+                    <a href="#" onclick="mascota()"><img src="/images/homeicono.png" alt="Icono Tienda"></a>
+                    <a href="#" onclick="cementerio()"><img src="/images/Tumba.png" alt="Icono Cementerio"></a>
+                </div>
+            </div>           
+
+      </div>
+
+      <div class="p-2 ">   
+
+        <form onsubmit="agregarTarea(); return false;" class="nuevaTarea">
+
+            <input type="text" id="nuevaTareaInput" placeholder="Escribe una nueva tarea" required>
+            <input type="text" id="fechaVencimiento" placeholder="Fecha de entrega">
+                  
+            <select id="Puntos">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <select id="Tipo de tarea">
+                <option value="Examen">Examen</option>
+                <option value="Proyecto">Proyecto</option>
+                <option value="Ejercicio/s">Ejercicio/s</option>
+            </select>
+            <button type="submit">Agregar</button>
+    
+        </form>
+
+        <ul class="listaTareas">
+        </ul>
+
+
+        <div class="papelera" id="papelera">
+            <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+            <a href="#" onclick="papelera()"><img src="/images/Trash3.png" alt="IconoPapelera"></a>
         </div>
-        <div class="div2"> 
-            <ul class="listaTareas">
-            </ul>
+        <div class="cerrar" id="cerrar">
+            <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
+            <a href="#" onclick="cerrar()"><img src="/images/cerrar.png" alt="IconoCerrar"></a>
+        </div>
+
+
         
-        </div>
-        <div class="div3"> 
-            <div class="papelera" id="papelera">
-                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-                <a href="#" onclick="papelera()"><img src="/images/Trash3.png" alt="IconoPapelera"></a>
-            </div>
-            <div class="cerrar" id="cerrar">
-                <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-                <a href="#" onclick="cerrar()"><img src="/images/cerrar.png" alt="IconoCerrar"></a>
-            </div>
-
-            
-        </div>
-        <div class="div4"> 
-            <form onsubmit="agregarTarea(); return false;" class="nuevaTarea">
-
-                <input type="text" id="nuevaTareaInput" placeholder="Escribe una nueva tarea" required>
-                <input type="text" id="fechaVencimiento" placeholder="Fecha de entrega">
-                      
-                <select id="Puntos">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <select id="Tipo de tarea">
-                    <option value="Examen">Examen</option>
-                    <option value="Proyecto">Proyecto</option>
-                    <option value="Ejercicio/s">Ejercicio/s</option>
-                </select>
-                <button type="submit">Agregar</button>
-        
-            </form>
-        </div>
-    </div>
-
-                                                                                    
+      </div>
 
 
+
+      <div class="p-2 "> 
+       
+      </div>
+
+                
+    </main>
+
+    <footer>
+      
+    </footer>
 
  
 <script>
       function toggleSidebar() {
           var sidebar = document.getElementById('sidebar');
           if (sidebar.style.left === '0px') {
-              sidebar.style.left = '-250px';
+              sidebar.style.left = '-650px';
           } else {
               sidebar.style.left = '0px';
           }

@@ -21,24 +21,42 @@
 
       }
 
+      main {
+        display: flex;
+        flex-direction: column;
+        }
+
+        header{
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 0.5%;
+            width: 100%;
+        }
+
+        footer {
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 0.5%;
+            margin-top: auto;
+            width: 100%;
+        }
+            
+            
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+        }
+
+
 
       .imagen-superpuesta {
         transform: translate(7%, 15%);
       max-width: 95%; 
       height: auto;
         }
-
-        @media screen and (max-width: 768px) {
-          .imagen-superpuesta {
-            max-width: 85%; 
-          }
-        }
-
-    @media screen and (max-width: 480px) {
-      .imagen-superpuesta {
-        max-width: 90%; 
-      }
-    }
 
 
 
@@ -133,16 +151,174 @@
         transform: translate(0%, 0%);
       }
 
-      .parent {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(5, 1fr);
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
+      
+      @media screen and (max-width: 600px) {
+        
+        header{
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 2%;
+            width: 100%;
         }
 
-        .div1 { grid-area: 2 / 2 / 3 / 5; }
-        .div2 { grid-area: 3 / 2 / 5 / 5; }
+        footer {
+            background-color: rgb(31, 39, 78);
+            color: white;
+            text-align: center;
+            padding: 2%;
+            margin-top: auto;
+            width: 100%;
+        }
+          
+
+        .imagen-superpuesta {
+        transform: translate(15%, 25%);
+        max-width: 80%; 
+        height: auto;
+          }
+
+        .login {
+          background-color: white;
+          border: 4px solid rgb(21, 28, 71);
+          border-radius: 4%;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+          display: flex;
+          flex-direction: column; 
+
+          align-items: center;
+          margin: -1% 0%;
+          width: 80%;
+          max-height: auto;
+
+          font-size: 3.5vw;
+          font-family: Arial, Helvetica, sans-serif;
+          transform: translate(12.5%, 20%); 
+
+
+        }
+
+       .loginIntro {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          width: 100%;
+          font-size: 4.3vw;
+          font-family: Arial, Helvetica, sans-serif;
+          color: aliceblue;
+          text-shadow: -1px -1px 0 rgb(19, 31, 108), 1px -1px 0 rgb(19, 31, 108), -1px 1px 0 rgb(19, 31, 108), 3px 3px 0 rgb(21, 28, 71);
+          transform: translate(0%, 110%); 
+        }
+
+        .button button {
+          width: 50%;
+          padding: 1.5%; 
+          font-size: 3.5vw; 
+          background-color: rgb(19, 31, 108); 
+          color: white; 
+          border: 4px solid rgb(13, 17, 44) ; 
+          border-radius: 5px;
+          transform: translate(50%, 30%); 
+        }
+
+
+        .register {
+          padding: 2%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0;
+          width: 100%;
+          font-size: 3.5vw;
+          font-family: Arial, Helvetica, sans-serif;
+          color: white;
+          transform: translate(0%, 30%); 
+        }
+
+
+        .error-message {
+          color: #882c2c;
+          border-radius: 5px;
+          transform: translate(0%, 10%);
+        }             
+     }
+              
+              
+     @media screen and (min-width: 601px) and (max-width: 1024px) {
+      .imagen-superpuesta {
+        transform: translate(15%, 25%);
+        max-width: 80%; 
+        height: auto;
+          }
+
+        .login {
+          background-color: white;
+          border: 4px solid rgb(21, 28, 71);
+          border-radius: 4%;
+          box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+          display: flex;
+          flex-direction: column; 
+
+          align-items: center;
+          margin: -1% 0%;
+          width: 80%;
+          max-height: auto;
+
+          font-size: 2vw;
+          font-family: Arial, Helvetica, sans-serif;
+          transform: translate(12.5%, 15%); 
+
+
+        }
+
+       .loginIntro {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          width: 100%;
+          font-size: 3vw;
+          font-family: Arial, Helvetica, sans-serif;
+          color: aliceblue;
+          text-shadow: -1px -1px 0 rgb(19, 31, 108), 1px -1px 0 rgb(19, 31, 108), -1px 1px 0 rgb(19, 31, 108), 3px 3px 0 rgb(21, 28, 71);
+          transform: translate(0%, 50%); 
+        }
+
+        .button button {
+          width: 50%;
+          padding: 1.5%; 
+          font-size: 2.5vw; 
+          background-color: rgb(19, 31, 108); 
+          color: white; 
+          border: 4px solid rgb(13, 17, 44) ; 
+          border-radius: 5px;
+          transform: translate(50%, 30%); 
+        }
+
+
+        .register {
+          padding: 2%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0;
+          width: 100%;
+          font-size: 2.5vw;
+          font-family: Arial, Helvetica, sans-serif;
+          color: white;
+          transform: translate(0%, 30%); 
+        }
+
+
+        .error-message {
+          color: #882c2c;
+          border-radius: 5px;
+          transform: translate(0%, 10%);
+        }                      
+     }
+
+
 
 
 </style>
@@ -152,31 +328,65 @@
 </head>
 <body>
 
-  <div class="parent">
-    <div class="div1"> <img src="images/LogoBlue1.png" class="imagen-superpuesta"  alt="Imagen Superpuesta"></div>
-    <div class="div2">   
-      <div class="loginIntro">Login</div>
-          <div class="login">  
-            <div class="error-message">
-              <% if (messages.error) { %>
-                <%= messages.error %>
-              <% } %>
-            </div>
-              <form action="/login" method="POST">
-                <div>
-                  <div class= email><label for="email">Email</label>
-                    <div class="input-container"><input type="email" id="email" name="email" required></div></div>
-                </div>
-                <div>
-                  <label  for="password">Contraseña</label>
-                  <div class="input-container"></div><input type="password" class= contraseña id="password" name="password" required></div>
-                </div>
-                <div class= button> <button type="submit">Login</button></div>
-          </form>
-          <div class= register><a href="/register">Registrarse</a></div>
-    </div>
-  </div>
-</div>
+
+  
+    <header>
+ 
+    </header>
+
+    <main class="d-flex justify-content-between flex-row mb-3 flex-lg-row">
+
+      <div class="p-2 ">  
+
+            
+
+      </div>
+
+      <div class="p-2 flex-fill">   
+
+
+         <img src="images/LogoBlue1.png" class="imagen-superpuesta"  alt="Imagen Superpuesta">
+     
+            <div class="loginIntro">Login</div>
+                <div class="login">  
+                  <div class="error-message">
+                    <% if (messages.error) { %>
+                      <%= messages.error %>
+                    <% } %>
+                  </div>
+                    <form action="/login" method="POST">
+                      <div>
+                        <div class= email><label for="email">Email</label>
+                          <div class="input-container"><input type="email" id="email" name="email" required></div></div>
+                      </div>
+                      <div>
+                        <label  for="password">Contraseña</label>
+                        <div class="input-container"></div><input type="password" class= contraseña id="password" name="password" required></div>
+                      </div>
+                      <div class= button> <button type="submit">Login</button></div>
+                </form>
+                <div class= register><a href="/register">Registrarse</a></div>
+          </div>
+   
+      
+        
+
+      </div>
+
+
+
+      <div class="p-2 "> 
+       
+      </div>
+
+                
+    </main>
+
+    <footer>
+      
+    </footer>
+
+
 
 
 
