@@ -13,7 +13,7 @@
           transition: 0.3s;
           display: flex;
           flex-direction: column;
-          
+          z-index: 99;
       }
 
       .sidebaror img {
@@ -63,7 +63,7 @@
         top: 1%;
         width: 7%;
         height: auto;
-        z-index: 3;
+        z-index: 99;
         }
 
         body {
@@ -384,7 +384,7 @@
         .sisales{
             font-size: 1vw;
             height: 100%;
-;
+
             width: 17%;
 
             position: fixed;
@@ -1604,6 +1604,401 @@
 
 
         }
+
+
+        @media screen and (min-width: 1301px) and (max-width: 1700px) {
+            .sidebaror {
+                position: relative;
+                transition: 0.3s;
+                display: flex;
+                flex-direction: column;
+                
+            }
+
+            .sidebaror img {
+                    width: 95%;
+                    height: auto;
+                    margin-top: 2.5%;
+                    }
+
+            .sidebar {
+                height: 150%;
+                width: 7%;
+                position: fixed;
+                top: 0;
+                left: -150%; 
+                background-color: #acc1e5;
+                transition: 0.3s;
+
+            }
+
+            .sidebar a {
+                padding: 7%;
+                text-decoration: none;
+                font-size: 1vw;
+                color: #1c4b6a;
+                display: block;
+            }
+
+            .sidebar img {
+            width: 110%;
+            height: auto;
+
+            }
+
+            .sidebar a:hover {
+                background-color: #acc1e5;
+            }
+
+
+            .content {
+                margin-left: 5%;
+                padding: 7%;
+            }
+
+            .content a img {
+                position: fixed;
+                left: 0.5%;
+                top: 2%;
+                width: 6%;
+                height: auto;
+                z-index: 3;
+                }
+
+                body {
+                background-image: url('/images/Fondo3.png');  
+                background-size: cover;               
+
+                margin: 0;
+                padding: 0;
+                overflow: hidden; 
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                }
+
+                main {
+                display: flex;
+                flex-direction: column;
+                }
+
+                header{
+                    background-color: rgb(31, 39, 78);
+                    color: white;
+                    text-align: center;
+                    padding: 0.5%;
+                
+                }
+
+                footer {
+                    background-color: rgb(31, 39, 78);
+                    color: white;
+                    text-align: center;
+                    padding: 0.5%;
+                    margin-top: auto;
+                }
+                    
+                    
+                .header-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between; 
+                }
+
+            .nombreUsuario1 {
+                font-size: 1.3vw;
+                text-align: right;
+                color: rgb(255, 255, 255);
+                font-family: 'Arial', sans-serif; 
+                background-color: rgb(31, 39, 78);
+                z-index: 10;
+                margin: 0;
+            }
+                .count {
+                    font-size: 4vw;
+                    text-align: center;
+                    height: 0;
+                    margin-top: 10%; 
+                    width: 100%;
+
+                    position: fixed;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    top: 50%; 
+                    left: 50%; 
+                    transform: translate(-50%, -50%); 
+                    color: rgb(31, 39, 78);
+                        font-family: 'Arial', sans-serif; 
+                }
+
+                .empezar {
+                    font-size: 1.5vw;
+                    height: 0;
+                    margin-top: 19%;    
+                    width: 50%;
+
+                    position: fixed;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    top: 50%; 
+                    left: 50%;
+                    transform: translate(-50%, -50%); 
+                    color: rgb(255, 255, 255);
+                    font-family: 'Arial', sans-serif; 
+                    background-color: rgb(31, 39, 78);
+                }
+
+                .terminar {
+                    font-size: 1.5vw;
+                    height: 0;
+                    margin-top:  19%;    
+                    width: 50%;
+
+                    position: fixed;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    top: 50%; 
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: rgb(255, 255, 255);
+                    font-family: 'Arial', sans-serif; 
+                    background-color: rgb(31, 39, 78);
+
+                }
+
+                .nopoder {
+                    font-size: 1.5vw;
+                    text-align: center;
+                    height: 8%;
+                    margin-top: 19%;   
+                    width: 40%;
+
+                    position: fixed;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: rgb(255, 255, 255);
+                    font-family: 'Arial', sans-serif; 
+                    background-color: rgb(31, 39, 78);
+                    padding: 1%;
+                }
+
+
+
+
+                .barra-de-progreso {
+                    height: 2.5%;
+                    margin-top: 16%; 
+                    width: 30%;
+
+                    position: fixed;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    top: 45%; 
+                    left: 50%;
+                    transform: translate(-50%, -50%); 
+                    background-color: #ccc;
+                }
+
+                .barra-fondo {
+                width: 100%;
+                height: 100%;
+                background-color: #f0f0f0;
+                }
+
+                .barra-avance {
+                height: 100%;
+                background-color: rgb(31, 39, 78);
+                width: 0;
+                transition: width 1s;
+                }
+
+                .punto {
+                font-size: 2.5vw;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                margin-top: 50%;
+                font-family: 'Arial', sans-serif;
+                background-color: rgb(31, 39, 78);
+                color: #fff;
+                z-index: -5;
+                transform: translateX(35%);
+                }
+
+                
+                .slider-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: rgb(31, 39, 78);
+                margin-top: 10%;
+                z-index: -5;
+                transform: translateX(35%);
+                }
+
+                .logout{
+                    width: 100%;
+                    font-size: 1.5vw;
+                    margin-top: 0;
+                    position: absolute;
+
+                    color: white; 
+                    border-radius: 5px;
+                    z-index: 0;
+                    margin-left: 7%;
+                    transform: translateX(10%);
+                }
+
+                .duration-label {
+                    font-weight: bold;
+                    font-size: 1.1vw;
+                    color: #f0f0f0;
+                    margin-bottom: 2%;
+
+                }
+
+
+                .slider-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                
+                }
+
+
+
+                .mascotadespierta-image {
+                    max-width: 17%;
+                    width:  auto;
+                    height: auto;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                .mascotadormida-image {
+                    max-width: 17%;
+                    width:  auto;
+                    height: auto;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                .blanco-image {
+                    max-width: 100%;
+                    width: auto;
+                    height: auto;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: -4;
+                    width: 30%;
+                }
+
+                .subirmascotas {
+                    top: 45%;
+                }
+
+                .subirmascotas p,
+                .subirmascotas img,
+                .subirmascotas div {
+                    top: 45%;
+                }
+
+
+                .message-block {
+                    position: fixed;
+                    top: 20%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 30%;
+                    height: auto;
+                    background-color: rgb(144, 164, 208);
+                    border: 1px solid #1b1c47;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                    padding: 10px; 
+
+                }
+
+                #message {
+                    font-size: 1vw;
+                    text-align: center;
+                    margin: 0;
+                    max-width: 100%; 
+                }
+
+                .nombreMascota {
+                    position: fixed;      
+                    margin-top:13.5%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 1.8vw;
+                    text-align: center;
+                    color: rgb(255, 255, 255);
+                    font-family: 'Arial', sans-serif; 
+                    background-color: rgb(31, 39, 78);
+                    z-index: 10;
+
+                }
+
+                .nombreUsuario {
+                    position: fixed;
+                    top: 106%;
+                    left: 70%;
+                    transform: translate(-50%, -50%);
+                    font-size: 1.3vw;
+                    text-align: center;
+                    color: rgb(255, 255, 255);
+                    font-family: 'Arial', sans-serif; 
+                    background-color: rgb(31, 39, 78);
+                    z-index: 10;
+
+                }
+
+
+                .sis{
+                    color:  rgb(255, 255, 255);
+                    font-weight: bold; 
+                    font-size: 1vw;
+
+                }
+
+                .sisales{
+                    font-size: 1vw;
+                    height: 100%;
+
+                    width: 17%;
+
+                    position: fixed;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    color:  rgb(16, 21, 45);
+                    font-family: 'Arial', sans-serif; 
+                    font-weight: bold; 
+
+                }
+
+
+            }
         
   
   </style>
@@ -1938,9 +2333,26 @@
         
             })
 
+            function ImagenAsignar() {
+                //document.getElementById('imagenMascotaDespierta').src = 'images/cruz.png';
+                var imagenMascotaAsignar = document.getElementById('imagenMascotaDespierta');
 
+                var urlImagenEsperadaAsignar = 'images/cruz.png';
+                console.log(imagenMascotaAsignar.src); //sale:  http://localhost:3000/images/cruz.png
+                var imagenCargada = imagenMascotaAsignar.src.trim();
+                var imagenEsperada = decodeURIComponent(urlImagenEsperadaAsignar).trim();
+                var nopoder = document.querySelector(".nopoder");
 
-    
+                if (imagenCargada.endsWith(imagenEsperada)) {
+                    console.log('La imagen es la esperada.');
+                    nopoder.style.display = 'block';
+                } else {
+                    console.log('La imagen no es la esperada.');
+                    nopoder.style.display = 'none';
+                }
+            }
+            ImagenAsignar();
+
 
     function getRandomMessage() {
     const randomIndex = Math.floor(Math.random() * messagesdescanso.length);
@@ -1978,7 +2390,8 @@
             document.getElementById('imagenMascotaDespierta').src = 'images/cruz.png';
             document.getElementById('imagenMascotaDormida').src = 'images/cruz.png';
             document.getElementById('MascotaNombre').textContent = 'Sin mascota';
-
+            
+            
             console.log("User: " + userId + " Nombre: " + postData.nombrePrincipal + " Imagen: " + postData.imagenPrincipal);
 
                     // Continúa con el código para enviar la solicitud al servidor aquí
@@ -1999,6 +2412,8 @@
                     .then(newMascotData => {
                         // Handle the response after creating the main mascot
                         console.log('Main mascot created:', newMascotData);
+                        var nopoder = document.querySelector(".nopoder");
+                        nopoder.style.display = 'block';
                     })
                     .catch(error => {
                         console.error('Error creating main mascot:', error.message);
@@ -2060,7 +2475,7 @@
 
 
 
-    var nopoder = document.querySelector(".nopoder");
+   
 
 
     //var savedDisplayValue = localStorage.getItem("displayValue");  ///
@@ -2087,9 +2502,14 @@
                         var savedDisplayValue = data[0].displayValue;
                         if (savedDisplayValue) {
                                    console.log("Valor display existe: " + savedDisplayValue)
-                                    var nopoder = document.querySelector(".nopoder");
-                                    nopoder.style.display = savedDisplayValue;
-                                    }else{
+                                    var nopoder = document.querySelector(".nopoder");                                  
+                                    
+                                    if(savedDisplayValue == "none"){
+                                        nopoder.style.display = savedDisplayValue;
+                                        ImagenAsignar();
+                                    }
+                                    
+                                    }else{                                        
                                         nopoder.style.display = "none";
                                     }
                         } else {                       
