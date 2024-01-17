@@ -1,202 +1,136 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AcademiaBach</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <style>
+<html lang="en" style="max-height: 100vh">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AcademiaBach</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<style>
+		/* .offcanvas {
+      --bs-offcanvas-width: none !important;
+      --bs-offcanvas-height: !important;
+    } */
 
 
-    .sidebaror {
-        position: relative;
-          transition: 0.3s;
-          display: flex;
-          flex-direction: column;
-          z-index: 99;
-      }
+	.message-block {
 
-      .sidebaror img {
-            width: 85%;
+            width: 30%;
             height: auto;
-            margin-top: 2.5%;
-            }
-
-     .sidebar {
-          height: 150%;
-          width: 9%;
-          position: fixed;
-          top: 0;
-          left: -150%; 
-          background-color: #acc1e5;
-          transition: 0.3s;
-
-      }
-
-      .sidebar a {
-          padding: 7%;
-          text-decoration: none;
-          font-size: 1vw;
-          color: #1c4b6a;
-          display: block;
-      }
-
-      .sidebar img {
-      width: 100%;
-      height: auto;
-
-      }
-
-      .sidebar a:hover {
-          background-color: #acc1e5;
-      }
-
-
-      .content {
-          margin-left: 5%;
-          padding: 7%;
-      }
-
-      .content a img {
-        position: fixed;
-        left: 1%;
-        top: 1%;
-        width: 7%;
-        height: auto;
-        z-index: 99;
-        }
-
-        body {
-        background-image: url('images/Fondo3.png');  
-        background-size: cover;                
-
-        margin: 0;
-        padding: 0;
-        overflow: hidden; 
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        }
-
-        main {
-        display: flex;
-        flex-direction: column;
-        }
-
-        header{
-            background-color: rgb(31, 39, 78);
-            color: white;
-            text-align: center;
-            padding: 0.5%;
-        
-        }
-
-        footer {
-            background-color: rgb(31, 39, 78);
-            color: white;
-            text-align: center;
-            padding: 0.5%;
-            margin-top: auto;
-        }
-            
-            
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between; 
-        }
-
-
-        .count {
-            font-size: 4vw;
-            text-align: center;
-            height: 0;
-            margin-top: 12%; 
-            width: 100%;
-
-            position: fixed;
+            background-color: rgb(144, 164, 208);
+            border: 1px solid #1b1c47;
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            color: rgb(31, 39, 78);
-                font-family: 'Arial', sans-serif; 
+            flex-direction: row;
+			margin-top: 2%;
+			color: black;
+
         }
+		
 
-        .empezar {
-            font-size: 2.3vw;
-            height: 0;
-            margin-top: 23%; 
-            width: 50%;
-
-            position: fixed;
+		.message-block2 {
+            width: 30%;
+            height: auto;
+            background-color: rgb(11, 27, 63);
+			color: rgb(255, 255, 255);
+            border: 1px solid #1b1c47;
             display: flex;
             justify-content: center;
             align-items: center;
-            top: 50%; 
-            left: 50%;
-            transform: translate(-50%, -50%); 
-            color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            background-color: rgb(31, 39, 78);
-        }
+            flex-direction: row;
+            padding: 5px; 
+			font-family:  sans-serif; 
 
-        .terminar {
-            font-size: 2.3vw;
-            height: 0;
-            margin-top: 23%;  
-            width: 50%;
+        } 
 
-            position: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 50%; 
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            background-color: rgb(31, 39, 78);
-
-        }
-
-        .nopoder {
-            font-size: 1.3vw;
+        #message {
+            font-size: 1.5vw;
             text-align: center;
-            height: 9%;
-            margin-top: 23%; 
+            margin: 0;
+            max-width: 100%; 
+        }
+
+		#message2 {
+            font-size: 1.5vw;
+            text-align: center;
+            margin: 0;
+            max-width: 100%; 
+        } 
+
+		.nombreicono{
+			font-family:  sans-serif; 
+			color: rgb(11, 27, 63);
+		}
+
+		@media (max-width: 668px) {
+
+        #imagenMascotaDespierta,
+		#imagenMascotaDormida
+		 {
+            background-size: 40% 75% !important; 
+        }
+
+		
+		.message-block {
+				position: fixed;
+				top: 23%;
+				width: 70%;
+				height: auto;
+				background-color: rgb(144, 164, 208);
+				border: 1px solid #1b1c47;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				padding: 20px; color: black;
+				font-family:  sans-serif; 
+				font-size: 4vw;
+			}
+
+			.message-block2 {
+				position: fixed;
+				top: 13%;
+				width: 90%;
+				height: auto;
+				background-color: rgb(144, 164, 208);
+				border: 1px solid #1b1c47;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				padding: 20px; color: black;
+				font-family:  sans-serif; 
+				font-size: 4vw;
+			}
+
+
+			#message {
+            font-size: 2.5vw;
+            text-align: center;
+            margin: 0;
+            max-width: 100%; 
+        }
+
+		#message2 {
+            font-size: 2.5vw;
+            text-align: center;
+            margin: 0;
+            max-width: 100%; 
+        } 
+    }
+
+	@media (max-width: 400px) {
+        #imagenMascotaDespierta,
+		#imagenMascotaDormida
+		 {
+            background-size: 45% 55% !important; 
+        }
+    }
+
+	.barra-de-progreso {
+            height: 3%;
             width: 40%;
-
-            position: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            background-color: rgb(31, 39, 78);
-            padding: 1%;
-        }
-
-
-
-
-        .barra-de-progreso {
-            height: 2%;
-            margin-top: 19%; 
-            width: 40%;
-
-            position: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 45%; 
-            left: 50%;
-            transform: translate(-50%, -50%); 
 
             background-color: #ccc;
         }
@@ -213,3083 +147,1537 @@
         width: 0;
         transition: width 1s;
         }
- 
-        .punto {
-        font-size: 2.5vw;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
 
-        margin-top: 50%;
-        font-family: 'Arial', sans-serif;
-        background-color: rgb(31, 39, 78);
-        color: #fff;
-        z-index: -5;
-        }
-
-        
-        .slider-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: rgb(31, 39, 78);
-        margin-top: 10%;
-        z-index: -5;
-        }
-
-    
-        .duration-label {
-            font-weight: bold;
-            font-size: 1.1vw;
-            color: #f0f0f0;
-            margin-bottom: 2%;
- 
-        }
-
-
-        .slider-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          
-        }
-
-
-
-        .mascotadespierta-image {
-            max-width: 100%;
-            width: auto;
-            height: auto;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .mascotadormida-image {
-            max-width: 100%;
-            width: auto;
-            height: auto;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .blanco-image {
-            max-width: 100%;
-            width: auto;
-            height: auto;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: -4;
-            width: 35%;
-        }
-
-        .subirmascotas {
-            top: 43%;
-        }
-
-        .subirmascotas p,
-        .subirmascotas img,
-        .subirmascotas div {
-            top: 43%;
-        }
-
-
-        .message-block {
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30%;
-            height: auto;
-            background-color: rgb(144, 164, 208);
-            border: 1px solid #1b1c47;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 10px; 
-
-        }
-
-        #message {
-            font-size: 1vw;
-            text-align: center;
-            margin: 0;
-            max-width: 100%; 
-        }
-
-        .nombreMascota {
-            position: fixed;      
-            margin-top:16%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.8vw;
-            text-align: center;
-            color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            background-color: rgb(31, 39, 78);
-            z-index: 10;
-
-        }
-
-        .nombreUsuario {
-            position: fixed;
-            top: 106%;
-            left: 70%;
-            transform: translate(-50%, -50%);
-            font-size: 1.3vw;
-            text-align: center;
-            color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            background-color: rgb(31, 39, 78);
-            z-index: 10;
-
-        }
-
-        .nombreUsuario1 {
-            font-size: 1.3vw;
-            text-align: right;
-            color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            background-color: rgb(31, 39, 78);
-            z-index: 10;
-            margin: 0;
-        }
-
-        .logout{
-            width: 100%;
-            font-size: 1.5vw;
-            margin-top: 0;
-            position: absolute;
-
-            color: white; 
-            border-radius: 5px;
-            z-index: 0;
-            margin-left: 7%;
-        }
-
-        .sis{
-            color:  rgb(255, 255, 255);
-              font-weight: bold; 
-            font-size: 1vw;
-
-        }
-
-        .sisales{
-            font-size: 1vw;
-            height: 100%;
-
-            width: 17%;
-
-            position: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            color:  rgb(16, 21, 45);
-            font-family: 'Arial', sans-serif; 
-            font-weight: bold; 
-
-        }
-
-    /*
-       #backgroundImage {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 887; 
-        } 
-
-       .image-sequence {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 888; 
-    
-        }
-
-        .sequence-image {
-            max-width: 100%;
-            max-height: 100%;
-
-        }
-
-        #mostrarSecuenciaButton {
-            background: transparent;
-            border: none; 
-            color: #fff; 
-            cursor: pointer; 
-            position: fixed; 
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex; 
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-        } 
-        */
-
-        @media screen and (max-width: 600px) { 
-            .sidebaror {
-                position: relative;
-                transition: 0.3s;
-                display: flex;
-                flex-direction: row; 
-
-            }
-
-            .sidebar {
-                height: 10%; 
-                width: 90%; 
-                position: fixed;
-                top: 5.5%;
-                left: -150%;
-                background-color: #acc1e5;
-                transition: 0.3s;
-                display: flex; 
-                flex-direction: row; 
-                align-items: center; 
-                font-size: 150%;
-
-            }
-
-            .sidebar a {
-                padding: 1%; 
-                text-decoration: none;
-                font-size: 1vw;
-                color: #1c4b6a;
-                display: inline-block; 
-            }
-
-            .sidebar img {
-                width: 50%;
-                margin-left: 0;
-            }
-
-            .sidebar a:hover {
-                background-color: #acc1e5;
-            }
-
-            .content a img {
-                position: fixed;
-                left: 1%;
-                top: 4%;
-                width: 10%;
-                height: auto;
-                z-index: 3;
-            }
-
-            header{
-            background-color: rgb(31, 39, 78);
-            color: white;
-            text-align: center;
-            padding: 2%;
-
-            }
-
-            footer {
-            background-color: rgb(31, 39, 78);
-            color: white;
-            text-align: center;
-            padding: 2%;
-            margin-top: auto;
-            }
-
-
-            .count {
-            font-size: 6vw;
-            text-align: center;
-            height: 0;
-            margin-top: 15%; 
-            width: 100%;
-
-            position: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            color: rgb(31, 39, 78);
-                font-family: 'Arial', sans-serif; 
-            }
-
-            .empezar {
-                font-size: 2.3vw;
-                height: 0;
-                margin-top: 45%; 
-                width: 50%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                top: 50%; 
-                left: 50%;
-                transform: translate(-50%, -50%); 
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-            }
-
-            .terminar {
-                font-size: 2.3vw;
-                height: 0;
-                margin-top: 45%; 
-                width: 50%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                top: 50%; 
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-
-            }
-
-            .nopoder {
-                font-size: 2.9vw;
-                text-align: center;
-                height: 7%;
-                margin-top: 45%; 
-                width: 40%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-                padding: 1%;
-            }
-
-
-
-
-            .barra-de-progreso {
-                height: 2%;
-                margin-top: 37%; 
-                width: 40%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                top: 45%; 
-                left: 50%;
-                transform: translate(-50%, -50%); 
-
-                background-color: #ccc;
-            }
-
-            .barra-fondo {
-            width: 100%;
-            height: 100%;
-            background-color: #f0f0f0;
-            }
-
-            .barra-avance {
-            height: 100%;
-            background-color: rgb(31, 39, 78);
-            width: 0;
-            transition: width 1s;
-            }
-    
-            .punto {
-            font-size: 3.5vw;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 40%;
-     
-            font-family: 'Arial', sans-serif;
-            background-color: rgb(31, 39, 78);
-            color: #fff;
-            z-index: -5;
-            transform: translateX(30%);
-            }
-
-            .sis{
-                color:  rgb(255, 255, 255);
-                font-weight: bold; 
-                font-size: 2.5vw;
-             
-            }
+				
+		.message-block {
+				position: fixed;
+				top: 17%;
+				width: 90%;
+				height: auto;
+				background-color: rgb(144, 164, 208);
+				border: 1px solid #1b1c47;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				padding: 20px; color: black;
+				font-family:  sans-serif; 
+				font-size: 4vw;
+			}
+
+			.message-block2 {
+				position: fixed;
+				top: 13%;
+				width: 90%;
+				height: auto;
+				background-color: rgb(144, 164, 208);
+				border: 1px solid #1b1c47;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				padding: 20px; color: black;
+				font-family:  sans-serif; 
+				font-size: 4vw;
+			}
+
+	</style>
+
+</head>
+
+<body class="vh-100">
+	<div class="d-flex flex-row vh-100">
+		<div class="offcanvas offcanvas-start w-auto" id="navbarSupportedContent" style="background-color: #acc1e5;"> 
+			<div class="offcanvas-header">
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+
+			<div class="offcanvas-body">
+				<ul class="nav flex-column">
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="checklist()">
+							<img src="images/listaicono.png" style="width: 100px;" >
+							<p class="nombreicono">Lista de tareas</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="papelera()">
+							<img src="images/papeleralogo.png" style="width: 100px;">
+							<p class="nombreicono">Papelera</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" href="#"  style="text-align:center" onclick="mascota()">
+							<img src="images/homeicono.png" style="width: 100px;">
+							<p class="nombreicono">Mascotas</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="tienda()">
+							<img src="images/tiendalogo.png" style="width: 100px;">
+							<p class="nombreicono" >Tienda</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="cementerio()">
+							<img src="images/Tumba.png" style="width: 100px; margin-bottom: 0.5%;">
+							<p class="nombreicono" >Cementerio</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="offcanvas offcanvas-top" id="navbarSupportedContentTop" style="background-color: #acc1e5;">
+			<div class="offcanvas-header">
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+			<div class="offcanvas-body">
+				<ul class="nav flex-row">
+
+					<li class="nav-item" style="margin-right: -2%;">
+						<a class="nav-link" aria-current="page" href="#"  style="text-align:center" onclick="checklist()">
+							<img src="images/listaicono.png" style="width: 55px;" >
+							<p class="nombreicono">Lista de tareas</p>
+						</a>
+					</li>
+					<li class="nav-item" style="margin-right: -2%;">
+						<a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="papelera()">
+							<img src="images/papeleralogo.png" style="width: 55px;">
+							<p class="nombreicono">Papelera</p>
+						</a>
+					</li>
             
-            .slider-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: rgb(31, 39, 78);
-            margin-top: 5%;
-            z-index: -5;
-            transform: translateX(30%);
-             }
-
-        
-            .duration-label {
-                font-weight: bold;
-                font-size: 2.5vw;
-                color: #f0f0f0;
-                margin-bottom: 2%;
-    
-            }
-
-            .logout{
-                width: 100%;
-                font-size: 3vw;
-                margin-top: -4%;
-                position: absolute;
-
-                color: white; 
-                border-radius: 10px;
-                z-index: 0;
-                margin-left: 3%;
-                transform: translateX(30%);
-            }
-
-
-
-            .mascotadespierta-image {
-                max-width: 30%;
-                width: auto;
-                height: auto;
-                position: fixed;
-                top: 70%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .mascotadormida-image {
-                max-width: 30%;
-                width: auto;
-                height: auto;
-                position: fixed;
-                top: 70%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .blanco-image {
-                max-width: 100%;
-                height: auto;
-                position: fixed;
-                top: 70%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: -4;
-                width: 55%;
-            }
-
-
-            .subirmascotas {
-                top: 62%;
-            }
-
-            .subirmascotas p,
-            .subirmascotas img,
-            .subirmascotas div {
-                top: 62%;
-            }
-
-
-            .message-block {
-                position: fixed;
-                top: 20%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 30%;
-                height: auto;
-                background-color: rgb(144, 164, 208);
-                border: 1px solid #1b1c47;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                padding: 10px; 
-
-            }
-
-            #message {
-                font-size: 1vw;
-                text-align: center;
-                margin: 0;
-                max-width: 100%; 
-            }
-
-            .nombreMascota {
-                position: fixed;      
-                margin-top:30%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 3.5vw;
-                text-align: center;
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-                z-index: 10;
-
-            }
-
-            .nombreUsuario {
-                position: fixed;
-                top: 106%;
-                left: 70%;
-                transform: translate(-50%, -50%);
-                font-size: 1.3vw;
-                text-align: center;
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-                z-index: 10;
-
-            }
-
-            .nombreUsuario1 {
-                font-size: 1.3vw;
-                text-align: right;
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-                z-index: 10;
-                margin: 0;
-            }
-
-
-
-
-            .sisales{
-                font-size: 1vw;
-                height: 100%;
-
-                width: 17%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                color:  rgb(16, 21, 45);
-                font-family: 'Arial', sans-serif; 
-                font-weight: bold; 
-
-            }
-
-
-            .nombreUsuario1 {
-            font-size: 2.3vw;
-            text-align: right;
-            color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            background-color: rgb(31, 39, 78);
-            z-index: 10;
-            margin: 0;
-            }
-
-        }
-
-
-        @media screen and (min-width: 601px) and (max-width: 1024px) {
-
-            .sidebaror {
-                position: relative;
-                transition: 0.3s;
-                display: flex;
-                flex-direction: column;
-                
-            }
-
-            .sidebaror img {
-                    width: 95%;
-                    height: auto;
-                    margin-top: 2.5%;
-                    }
-
-            .sidebar {
-                height: 150%;
-                width: 13%;
-                position: fixed;
-                top: 0;
-                left: -150%; 
-                background-color: #acc1e5;
-                transition: 0.3s;
-
-            }
-
-            .sidebar a {
-                padding: 7%;
-                text-decoration: none;
-                font-size: 1vw;
-                color: #1c4b6a;
-                display: block;
-            }
-
-            .sidebar img {
-            width: 110%;
-            height: auto;
-
-            }
-
-            .sidebar a:hover {
-                background-color: #acc1e5;
-            }
-
-
-            .content {
-                margin-left: 5%;
-                padding: 7%;
-            }
-
-            .content a img {
-                position: fixed;
-                left: 1%;
-                top: 2%;
-                width: 10%;
-                height: auto;
-                z-index: 3;
-                }
-
-                body {
-                background-image: url('/images/Fondo3.png');  
-                background-size: cover;               
-
-                margin: 0;
-                padding: 0;
-                overflow: hidden; 
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-                }
-
-                main {
-                display: flex;
-                flex-direction: column;
-                }
-
-                header{
-                    background-color: rgb(31, 39, 78);
-                    color: white;
-                    text-align: center;
-                    padding: 0.5%;
-                
-                }
-
-                footer {
-                    background-color: rgb(31, 39, 78);
-                    color: white;
-                    text-align: center;
-                    padding: 0.5%;
-                    margin-top: auto;
-                }
-                    
-                    
-                .header-container {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between; 
-                }
-
-            .nombreUsuario1 {
-                font-size: 1.9vw;
-                text-align: right;
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-                z-index: 10;
-                margin: 0;
-            }
-                .count {
-                    font-size: 4vw;
-                    text-align: center;
-                    height: 0;
-                    margin-top: 15%; 
-                    width: 100%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 50%; 
-                    left: 50%; 
-                    transform: translate(-50%, -50%); 
-                    color: rgb(31, 39, 78);
-                        font-family: 'Arial', sans-serif; 
-                }
-
-                .empezar {
-                    font-size: 2.3vw;
-                    height: 0;
-                    margin-top: 31%;  
-                    width: 50%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 50%; 
-                    left: 50%;
-                    transform: translate(-50%, -50%); 
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-                }
-
-                .terminar {
-                    font-size: 2.3vw;
-                    height: 0;
-                    margin-top: 31%;  
-                    width: 50%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 50%; 
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-
-                }
-
-                .nopoder {
-                    font-size: 2.3vw;
-                    text-align: center;
-                    height: 8%;
-                    margin-top: 31%; 
-                    width: 40%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-                    padding: 1%;
-                }
-
-
-
-
-                .barra-de-progreso {
-                    height: 2%;
-                    margin-top: 25%; 
-                    width: 40%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 45%; 
-                    left: 50%;
-                    transform: translate(-50%, -50%); 
-
-                    background-color: #ccc;
-                }
-
-                .barra-fondo {
-                width: 100%;
-                height: 100%;
-                background-color: #f0f0f0;
-                }
-
-                .barra-avance {
-                height: 100%;
-                background-color: rgb(31, 39, 78);
-                width: 0;
-                transition: width 1s;
-                }
-        
-                .punto {
-                font-size: 2.5vw;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                margin-top: 50%;
-                font-family: 'Arial', sans-serif;
-                background-color: rgb(31, 39, 78);
-                color: #fff;
-                z-index: -5;
-                transform: translateX(85%);
-                }
-
-                
-                .slider-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background: rgb(31, 39, 78);
-                margin-top: 10%;
-                z-index: -5;
-                transform: translateX(85%);
-                }
-
-                .logout{
-                    width: 100%;
-                    font-size: 1.5vw;
-                    margin-top: 0;
-                    position: absolute;
-
-                    color: white; 
-                    border-radius: 5px;
-                    z-index: 0;
-                    margin-left: 7%;
-                    transform: translateX(20%);
-                }
-            
-                .duration-label {
-                    font-weight: bold;
-                    font-size: 1.1vw;
-                    color: #f0f0f0;
-                    margin-bottom: 2%;
-        
-                }
-
-
-                .slider-wrapper {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                
-                }
-
-
-
-                .mascotadespierta-image {
-                    max-width: 30%;
-                    width: 50%;
-                    height: auto;
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-
-                .mascotadormida-image {
-                    max-width: 30%;
-                    width:  auto;
-                    height: auto;
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-
-                .blanco-image {
-                    max-width: 100%;
-                    width: auto;
-                    height: auto;
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    z-index: -4;
-                    width: 45%;
-                }
-
-                .subirmascotas {
-                    top: 41%;
-                }
-
-                .subirmascotas p,
-                .subirmascotas img,
-                .subirmascotas div {
-                    top: 41%;
-                }
-
-
-                .message-block {
-                    position: fixed;
-                    top: 20%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 30%;
-                    height: auto;
-                    background-color: rgb(144, 164, 208);
-                    border: 1px solid #1b1c47;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column;
-                    padding: 10px; 
-
-                }
-
-                #message {
-                    font-size: 1vw;
-                    text-align: center;
-                    margin: 0;
-                    max-width: 100%; 
-                }
-
-                .nombreMascota {
-                    position: fixed;      
-                    margin-top:21%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    font-size: 1.8vw;
-                    text-align: center;
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-                    z-index: 10;
-
-                }
-
-                .nombreUsuario {
-                    position: fixed;
-                    top: 106%;
-                    left: 70%;
-                    transform: translate(-50%, -50%);
-                    font-size: 1.3vw;
-                    text-align: center;
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-                    z-index: 10;
-
-                }
-
-
-                .sis{
-                    color:  rgb(255, 255, 255);
-                    font-weight: bold; 
-                    font-size: 1vw;
-
-                }
-
-                .sisales{
-                    font-size: 1vw;
-                    height: 100%;
-    
-                    width: 17%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    color:  rgb(16, 21, 45);
-                    font-family: 'Arial', sans-serif; 
-                    font-weight: bold; 
-
-                }
-
-
-        }
-
-        @media screen and (min-width: 1025px) and (max-width: 1300px) {
-
-        .sidebaror {
-            position: relative;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-            
-        }
-
-        .sidebaror img {
-                width: 95%;
-                height: auto;
-                margin-top: 2.5%;
-                }
-
-        .sidebar {
-            height: 150%;
-            width: 9%;
-            position: fixed;
-            top: 0;
-            left: -150%; 
-            background-color: #acc1e5;
-            transition: 0.3s;
-
-        }
-
-        .sidebar a {
-            padding: 7%;
-            text-decoration: none;
-            font-size: 1vw;
-            color: #1c4b6a;
-            display: block;
-        }
-
-        .sidebar img {
-        width: 110%;
-        height: auto;
-
-        }
-
-        .sidebar a:hover {
-            background-color: #acc1e5;
-        }
-
-
-        .content {
-            margin-left: 5%;
-            padding: 7%;
-        }
-
-        .content a img {
-            position: fixed;
-            left: 1%;
-            top: 2%;
-            width: 7%;
-            height: auto;
-            z-index: 3;
-            }
-
-            body {
-            background-image: url('/images/Fondo3.png');  
-            background-size: cover;               
-
-            margin: 0;
-            padding: 0;
-            overflow: hidden; 
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            }
-
-            main {
-            display: flex;
-            flex-direction: column;
-            }
-
-            header{
-                background-color: rgb(31, 39, 78);
-                color: white;
-                text-align: center;
-                padding: 0.5%;
-            
-            }
-
-            footer {
-                background-color: rgb(31, 39, 78);
-                color: white;
-                text-align: center;
-                padding: 0.5%;
-                margin-top: auto;
-            }
-                
-                
-            .header-container {
-                display: flex;
-                align-items: center;
-                justify-content: space-between; 
-            }
-
-        .nombreUsuario1 {
-            font-size: 1.3vw;
-            text-align: right;
-            color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            background-color: rgb(31, 39, 78);
-            z-index: 10;
-            margin: 0;
-        }
-            .count {
-                font-size: 4vw;
-                text-align: center;
-                height: 0;
-                margin-top: 13%; 
-                width: 100%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                top: 50%; 
-                left: 50%; 
-                transform: translate(-50%, -50%); 
-                color: rgb(31, 39, 78);
-                    font-family: 'Arial', sans-serif; 
-            }
-
-            .empezar {
-                font-size: 1.5vw;
-                height: 0;
-                margin-top:  26%;    
-                width: 50%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                top: 50%; 
-                left: 50%;
-                transform: translate(-50%, -50%); 
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-            }
-
-            .terminar {
-                font-size: 1.5vw;
-                height: 0;
-                margin-top:  26%;    
-                width: 50%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                top: 50%; 
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-
-            }
-
-            .nopoder {
-                font-size: 1.5vw;
-                text-align: center;
-                height: 8%;
-                margin-top: 26%;  
-                width: 40%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-                padding: 1%;
-            }
-
-
-
-
-            .barra-de-progreso {
-                height: 2%;
-                margin-top: 22%; 
-                width: 30%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                top: 45%; 
-                left: 50%;
-                transform: translate(-50%, -50%); 
-
-                background-color: #ccc;
-            }
-
-            .barra-fondo {
-            width: 100%;
-            height: 100%;
-            background-color: #f0f0f0;
-            }
-
-            .barra-avance {
-            height: 100%;
-            background-color: rgb(31, 39, 78);
-            width: 0;
-            transition: width 1s;
-            }
-
-            .punto {
-            font-size: 2.5vw;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            margin-top: 50%;
-            font-family: 'Arial', sans-serif;
-            background-color: rgb(31, 39, 78);
-            color: #fff;
-            z-index: -5;
-            transform: translateX(45%);
-            }
-
-            
-            .slider-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: rgb(31, 39, 78);
-            margin-top: 10%;
-            z-index: -5;
-            transform: translateX(45%);
-            }
-
-            .logout{
-                width: 100%;
-                font-size: 1.5vw;
-                margin-top: 0;
-                position: absolute;
-
-                color: white; 
-                border-radius: 5px;
-                z-index: 0;
-                margin-left: 7%;
-                transform: translateX(10%);
-            }
-
-            .duration-label {
-                font-weight: bold;
-                font-size: 1.1vw;
-                color: #f0f0f0;
-                margin-bottom: 2%;
-
-            }
-
-
-            .slider-wrapper {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            
-            }
-
-
-
-            .mascotadespierta-image {
-                max-width: 25%;
-                width:  auto;
-                height: auto;
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .mascotadormida-image {
-                max-width: 25%;
-                width:  auto;
-                height: auto;
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .blanco-image {
-                max-width: 100%;
-                width: auto;
-                height: auto;
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: -4;
-                width: 40%;
-            }
-
-            .subirmascotas {
-                top: 45%;
-            }
-
-            .subirmascotas p,
-            .subirmascotas img,
-            .subirmascotas div {
-                top: 45%;
-            }
-
-
-            .message-block {
-                position: fixed;
-                top: 20%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 30%;
-                height: auto;
-                background-color: rgb(144, 164, 208);
-                border: 1px solid #1b1c47;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                padding: 10px; 
-
-            }
-
-            #message {
-                font-size: 1vw;
-                text-align: center;
-                margin: 0;
-                max-width: 100%; 
-            }
-
-            .nombreMascota {
-                position: fixed;      
-                margin-top:19%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 1.8vw;
-                text-align: center;
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-                z-index: 10;
-
-            }
-
-            .nombreUsuario {
-                position: fixed;
-                top: 106%;
-                left: 70%;
-                transform: translate(-50%, -50%);
-                font-size: 1.3vw;
-                text-align: center;
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-                z-index: 10;
-
-            }
-
-
-            .sis{
-                color:  rgb(255, 255, 255);
-                font-weight: bold; 
-                font-size: 1vw;
-
-            }
-
-            .sisales{
-                font-size: 1vw;
-                height: 100%;
-
-                width: 17%;
-
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                color:  rgb(16, 21, 45);
-                font-family: 'Arial', sans-serif; 
-                font-weight: bold; 
-
-            }
-
-
-        }
-
-
-        @media screen and (min-width: 1301px) and (max-width: 1700px) {
-            .sidebaror {
-                position: relative;
-                transition: 0.3s;
-                display: flex;
-                flex-direction: column;
-                
-            }
-
-            .sidebaror img {
-                    width: 95%;
-                    height: auto;
-                    margin-top: 2.5%;
-                    }
-
-            .sidebar {
-                height: 150%;
-                width: 7%;
-                position: fixed;
-                top: 0;
-                left: -150%; 
-                background-color: #acc1e5;
-                transition: 0.3s;
-
-            }
-
-            .sidebar a {
-                padding: 7%;
-                text-decoration: none;
-                font-size: 1vw;
-                color: #1c4b6a;
-                display: block;
-            }
-
-            .sidebar img {
-            width: 110%;
-            height: auto;
-
-            }
-
-            .sidebar a:hover {
-                background-color: #acc1e5;
-            }
-
-
-            .content {
-                margin-left: 5%;
-                padding: 7%;
-            }
-
-            .content a img {
-                position: fixed;
-                left: 0.5%;
-                top: 2%;
-                width: 6%;
-                height: auto;
-                z-index: 3;
-                }
-
-                body {
-                background-image: url('/images/Fondo3.png');  
-                background-size: cover;               
-
-                margin: 0;
-                padding: 0;
-                overflow: hidden; 
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-                }
-
-                main {
-                display: flex;
-                flex-direction: column;
-                }
-
-                header{
-                    background-color: rgb(31, 39, 78);
-                    color: white;
-                    text-align: center;
-                    padding: 0.5%;
-                
-                }
-
-                footer {
-                    background-color: rgb(31, 39, 78);
-                    color: white;
-                    text-align: center;
-                    padding: 0.5%;
-                    margin-top: auto;
-                }
-                    
-                    
-                .header-container {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between; 
-                }
-
-            .nombreUsuario1 {
-                font-size: 1.3vw;
-                text-align: right;
-                color: rgb(255, 255, 255);
-                font-family: 'Arial', sans-serif; 
-                background-color: rgb(31, 39, 78);
-                z-index: 10;
-                margin: 0;
-            }
-                .count {
-                    font-size: 4vw;
-                    text-align: center;
-                    height: 0;
-                    margin-top: 10%; 
-                    width: 100%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 50%; 
-                    left: 50%; 
-                    transform: translate(-50%, -50%); 
-                    color: rgb(31, 39, 78);
-                        font-family: 'Arial', sans-serif; 
-                }
-
-                .empezar {
-                    font-size: 1.5vw;
-                    height: 0;
-                    margin-top: 19%;    
-                    width: 50%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 50%; 
-                    left: 50%;
-                    transform: translate(-50%, -50%); 
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-                }
-
-                .terminar {
-                    font-size: 1.5vw;
-                    height: 0;
-                    margin-top:  19%;    
-                    width: 50%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 50%; 
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-
-                }
-
-                .nopoder {
-                    font-size: 1.5vw;
-                    text-align: center;
-                    height: 8%;
-                    margin-top: 19%;   
-                    width: 40%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-                    padding: 1%;
-                }
-
-
-
-
-                .barra-de-progreso {
-                    height: 2.5%;
-                    margin-top: 16%; 
-                    width: 30%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 45%; 
-                    left: 50%;
-                    transform: translate(-50%, -50%); 
-                    background-color: #ccc;
-                }
-
-                .barra-fondo {
-                width: 100%;
-                height: 100%;
-                background-color: #f0f0f0;
-                }
-
-                .barra-avance {
-                height: 100%;
-                background-color: rgb(31, 39, 78);
-                width: 0;
-                transition: width 1s;
-                }
-
-                .punto {
-                font-size: 2.5vw;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                margin-top: 50%;
-                font-family: 'Arial', sans-serif;
-                background-color: rgb(31, 39, 78);
-                color: #fff;
-                z-index: -5;
-                transform: translateX(35%);
-                }
-
-                
-                .slider-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background: rgb(31, 39, 78);
-                margin-top: 10%;
-                z-index: -5;
-                transform: translateX(35%);
-                }
-
-                .logout{
-                    width: 100%;
-                    font-size: 1.5vw;
-                    margin-top: 0;
-                    position: absolute;
-
-                    color: white; 
-                    border-radius: 5px;
-                    z-index: 0;
-                    margin-left: 7%;
-                    transform: translateX(10%);
-                }
-
-                .duration-label {
-                    font-weight: bold;
-                    font-size: 1.1vw;
-                    color: #f0f0f0;
-                    margin-bottom: 2%;
-
-                }
-
-
-                .slider-wrapper {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                
-                }
-
-
-
-                .mascotadespierta-image {
-                    max-width: 17%;
-                    width:  auto;
-                    height: auto;
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-
-                .mascotadormida-image {
-                    max-width: 17%;
-                    width:  auto;
-                    height: auto;
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-
-                .blanco-image {
-                    max-width: 100%;
-                    width: auto;
-                    height: auto;
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    z-index: -4;
-                    width: 30%;
-                }
-
-                .subirmascotas {
-                    top: 45%;
-                }
-
-                .subirmascotas p,
-                .subirmascotas img,
-                .subirmascotas div {
-                    top: 45%;
-                }
-
-
-                .message-block {
-                    position: fixed;
-                    top: 20%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 30%;
-                    height: auto;
-                    background-color: rgb(144, 164, 208);
-                    border: 1px solid #1b1c47;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column;
-                    padding: 10px; 
-
-                }
-
-                #message {
-                    font-size: 1vw;
-                    text-align: center;
-                    margin: 0;
-                    max-width: 100%; 
-                }
-
-                .nombreMascota {
-                    position: fixed;      
-                    margin-top:13.5%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    font-size: 1.8vw;
-                    text-align: center;
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-                    z-index: 10;
-
-                }
-
-                .nombreUsuario {
-                    position: fixed;
-                    top: 106%;
-                    left: 70%;
-                    transform: translate(-50%, -50%);
-                    font-size: 1.3vw;
-                    text-align: center;
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-                    z-index: 10;
-
-                }
-
-
-                .sis{
-                    color:  rgb(255, 255, 255);
-                    font-weight: bold; 
-                    font-size: 1vw;
-
-                }
-
-                .sisales{
-                    font-size: 1vw;
-                    height: 100%;
-
-                    width: 17%;
-
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    color:  rgb(16, 21, 45);
-                    font-family: 'Arial', sans-serif; 
-                    font-weight: bold; 
-
-                }
-
-
-            }
-        
-  
-  </style>
-  </head>
-
-  <header>
-
-    <p class="nombreUsuario1">   Usuario conectado: <%= user.name %>  &nbsp;  &nbsp;</p>     
-
-
-  </header>
-
-  <main class="d-flex justify-content-between flex-row mb-3 flex-md-row flex-lg-row flex-row">
-
-    <div class="p-2 ">  
-
-           <div class="sidebaror" > 
-                <div class="content" >
-                    <a href="#" onclick="toggleSidebar()"><img src="images/logo.png" alt="Botón de menú"></a>
-                </div>
-                <div class="sidebar" id="sidebar">
-                    <p>&nbsp; &nbsp;</p>
-                    <p>&nbsp; &nbsp;</p>
-                    <p>&nbsp; &nbsp;</p>
-                    <p>&nbsp; &nbsp;</p>
-                    <a href="#" onclick="checklist()"><img src="images/listaicono.png" alt="Icono Checklist"></a>
-                    <a href="#" onclick="mascota()"><img src="images/homeicono.png" alt="Icono Tienda"></a>
-                    <a href="#" onclick="cementerio()"><img src="images/Tumba.png" alt="Icono Cementerio"></a>
-                </div>
-            </div>
-
-    </div>
-
-    
-    <div class="p-2 flex-fill">   
-
-        <div class="message-block" id="messageBlock" style="display: none">
-            <p id="message">Mensaje inicial</p>
-        </div>
-
-        <div class="subirmascotas" >
-            <p class="nombreMascota" id="MascotaNombre"></p>
-            <img src="images/cruz.png" alt="Mascota dormida" class="mascotadormida-image" id="imagenMascotaDormida">
-            <img src="images/cruz.png" alt="Mascota despierta" class="mascotadespierta-image" id="imagenMascotaDespierta">
-            <img src="images/BlancoSet.png" alt="blanco-image" class="blanco-image" id="blanco-image">
-            <div class="count" id="countdown"> 00:00</div>       
-
-            <div class="barra-de-progreso">
-                <div class="barra-fondo">
-                <div class="barra-avance" id="barraAvance"></div>
-                </div>
-            </div>
-
-            <div class="empezar" >
-                <button id="startButton" onclick="startCountdown()">EMPEZAR</button>
-            </div>
-            <div class="terminar" >
-            <button id="terminarButton" onclick="terminarCountdown()">FINALIZAR</button>
-            </div>
-            <p class="nopoder" >Asigna una mascota para continuar</p>
-
-        </div>
-
-
-
-
-
-        <audio id="miAudio" src="images/short-success.mp3"></audio>
-        <!--
-                <img id="backgroundImage" src="images/Fondo3.png" alt="Imagen de fondo" />
-                <div class="image-sequence" style="display: none;">
-
-                    <img src="images/tutorial/1.png" alt="Imagen 1" class="sequence-image" />
-                    <img src="images/tutorial/2.png" alt="Imagen 2" class="sequence-image" />
-                    <img src="images/tutorial/3.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/4.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/5.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/6.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/7.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/8.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/9.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/9.1.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/9.2.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/9.3.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/9.4.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/FINAL.png" alt="Imagen 3" class="sequence-image" />
-                    <img src="images/tutorial/FINAL.png" alt="Imagen 3" class="sequence-image" />
-            
-                </div>
-                <button id="mostrarSecuenciaButton" onclick="mostrarSecuencia()"></button>
-        -->
-    </div>
-
-
-
-    <div class="p-2 ">    
-
-        
-            <div class="punto d-flex align-items-center" >        
-                    <p style="margin: 3% 0;"></p>
-                    <!-- <img src="images/Monedas.png" alt="Moneda" class="moneda-image"> -->
-
-                    <div class="puntostexto d-flex align-items-center">
-                        <p class="moneda-image">Puntos:</p>
-                        <p> &nbsp; &nbsp;</p>
-                        <p id="puntosTotales">00</p>
-                    </div>
-                    
-            </div>
-            <p></p>
-    
-   
-            <div class="slider-container">
-                <p style="margin: 3% 0;"></p>
-                <p class="sis" > &nbsp; &nbsp; &nbsp; Seleccionar duración de la sesión:&nbsp; &nbsp;&nbsp;</p>
-                    <div class="duration-label">&nbsp; &nbsp; &nbsp;  Duración: <span id="duracionLabel"> 0h 20min </span>&nbsp; &nbsp;&nbsp;</div>
-
-                    <div class="slider-wrapper">
-                        <input type="range" id="duracion" name="duracion" min="1" max="240" value="20" class="vertical-slider" oninput="updateDurationLabel()">
-
-                    </div>
-                    <p style="margin: 3% 0;"></p>
-
-            </div>
-            <p style="margin: 10% 0;"></p>
-            <div class="logout " >
-                <form action="/logout?_method=DELETE" method="POST" id="logoutForm">
-                    <button  type="submit">Salir</button>
-                </form>
-            </div>
-           
-            <p class="nombreUsuario" id="nombreUsuario">Usuario conectado: <%= user.name %></p>
-            <p class="sisales" ></p>
-   
-
-     </div>
-     <div class="p-2 ">  
-        <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>  
-    </div>
-             
-</main>
-
-<footer>
-   
-</footer>
-
-
-
-
-  
-
-    
-
-
-    
-</div>
-
-<script>
-    console.log('User ID index:', '<%= user.id %>');
-    let userId = '<%= user.id %>';
-    
-    const messagesdescanso = [
-    "Sistema Leitner: Las flashcards son utilizadas para reformar la memoria mediante el uso de tarjetas de papel. Funcionan de la siguiente manera: Por un lado, se escribe una pregunta, definición…Y del otro lado se escribe la respuesta o a aquello a lo que hace referencia. Las flashcards tienen como objetivo dividir la información en partes más pequeñas y fáciles de asimilar.",
-    "Método Robinson. Su objetivo principal es reducir el tiempo de estudio y mejorar la capacidad para comprender la información.  Para llevar a cabo este método, se siguen los siguientes pasos: Explorar ->  Preguntar -> Leer -> Recitar -> Revisión -> Repetición",
-    "Recuerda tomar agua e hidratarte",
-    "Check-list: La creación de una lista que enumera las tareas a realizar diaria o semanalmente, permitiendo al usuario marcarlas a medida que se completan. Estas listas suelen organizarse según la prioridad o la dificultad de las tareas y ofrecen una visión clara del progreso a lo largo del día o la semana.",
-    "Recuerda NO saltarte los descansos",
-    "No dejes todo para el final",
-    "Utiliza colores durante el estudio para hacer uso de la memoria fotográfica",
-    "Evalúate con exámenes o cuestionarios acerca del tema que estás estudiando",
-    "Durante los descansos levantate y estira esas piernas",
-    "El palacio de la memoria consiste en crear mentalmente un palaciocon diferentes habitaciones y en cada una de ellas se albergará una imagen de algo que se quiere recordar",
-    "Recuerda planificar tus horarios de estudio",
-    "Dormir ayuda a asentar los conocimientos adquiridos durante el estudio"
-    ];
-
-    const messageBlock = document.getElementById("messageBlock");
-    const messageElement = document.getElementById("message");
-
-    var currentImageIndex = 0; 
-
-    /*
-    var secuenciaYaMostrada = localStorage.getItem('secuenciaMostrada') === 'true';
-    var backgroundImage = document.getElementById('backgroundImage');
-    backgroundImage.style.display = 'none';
-    document.getElementById('mostrarSecuenciaButton').style.display = 'none';
-    console.log(secuenciaYaMostrada);
-
-       if (!secuenciaYaMostrada) {
-
-            
-            mostrarSecuencia();
-
-            function mostrarSecuencia() {                
-                document.getElementById('mostrarSecuenciaButton').style.display = 'block';
-                console.log(secuenciaYaMostrada);
-                if (secuenciaYaMostrada) {
-                document.getElementById('mostrarSecuenciaButton').style.display = 'none';
-                return;
-                }
-
-
-                backgroundImage.style.display = 'block';
-                var sequenceContainer = document.querySelector('.image-sequence');
-                var images = sequenceContainer.querySelectorAll('.sequence-image');
-                sequenceContainer.style.display = 'flex';
-
-
-                if (currentImageIndex === 1) {
-                    var respuestaUsuario = confirm("¿Es tu primera vez aqui?");
-                    if (!respuestaUsuario) {
-                        // Si el usuario no quiere continuar, ocultar la secuencia y salir
-                        sequenceContainer.style.display = 'none';
-                        localStorage.setItem('secuenciaMostrada', 'true');
-                        backgroundImage.style.display = 'none';
-                        document.getElementById('mostrarSecuenciaButton').style.display = 'none';
-                        return;
-                    }
-                }
-
-
-                images.forEach(function (image) {
-                    image.style.display = 'none';
-                });
-
-
-                images[currentImageIndex].style.display = 'block';
-
-
-                currentImageIndex++;
-
-                if (currentImageIndex >= images.length) {
-                    currentImageIndex = 0;
-                    sequenceContainer.style.display = 'none';
-                    localStorage.setItem('secuenciaMostrada', 'true');
-                    document.getElementById('mostrarSecuenciaButton').style.display = 'none';
-                    backgroundImage.style.display = 'none';
-                }
-            }
-      } */
-    /*
-    fetch(`/${userId}/puntos`, {
-        method: 'DELETE',
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Manejar la respuesta recibida después de eliminar todas las tareas
-        console.log('Todas las tareas eliminadas:', data);
-        // Puedes realizar cualquier otra operación después de eliminar todas las tareas
-    })
-    .catch(error => console.error('Error al eliminar todas las tareas:', error)); */
-
-    //Tutorial
-
-
-
-    fetch(`/${userId}/puntos`)
-            .then(response => {
-                if (!response.ok) {
-                throw new Error(`Error de red: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Datos de puntos:', data);
-                if (data === null) {
-                    data = 0;
-                } else {
-                    // Convertir a número si no es null
-                    //data = parseInt(data, 10);
-
-                            
-                    if (data.length > 0) {
-                        const idPuntos = data[0]._id;
-                        console.log('ID de los puntos para el userId:', idPuntos);
-                    } else {                       
-                        
-                            fetch(`/${userId}/puntos`, {
-                                method: 'POST', 
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                    body: JSON.stringify({
-                                        userId: userId,
-                                        puntosTotales: 0, 
-                                    }),
-                                })
-                                .then(newResponse => {
-                                    if (!newResponse.ok) {
-                                         throw new Error(`Error al crear nuevos puntos: ${newResponse.status}`);
-                                    }
-                                        return newResponse.json();
-                                })
-                                .then(newData => {
-                                    const newIdPuntos = newData._id;
-                                    console.log('Se creó un nuevo conjunto de puntos. Nuevo ID:', newIdPuntos);
-
-                                    // Fetch points after creating new points
-                                    fetch(`/${userId}/puntos`)
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            // Manejar la lista de tareas recibida en 'data'
-                                            console.log('Lista de tareas:', data);
-                                            // Aquí puedes realizar cualquier otra operación con la lista de tareas
-                                        })
-                                        .catch(error => console.error('Error al obtener la lista de tareas:', error));
-                                })
-
-                                .catch(newError => {
-                                        console.error('Error al crear nuevos puntos:', newError.message);
-
-                                }); 
-
-                            
-                    }  
-                    fetch(`/${userId}/puntos`)
-                    .then(response => response.json())
-                    .then(data => {            
-
-                        if (data) {
-                        var puntosTotales = data[0].puntosTotales;
-                        document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
-                        } else {
-                            puntosTotales = 0; 
-                        }
-                        
-                    })
-                    .catch(error => console.error('Error al obtener la lista de tareas:', error));
-
-
-                }
-        
-            })
-
-            function ImagenAsignar() {
-                //document.getElementById('imagenMascotaDespierta').src = 'images/cruz.png';
-                var imagenMascotaAsignar = document.getElementById('imagenMascotaDespierta');
-
-                var urlImagenEsperadaAsignar = 'images/cruz.png';
-                console.log(imagenMascotaAsignar.src); //sale:  http://localhost:3000/images/cruz.png
-                var imagenCargada = imagenMascotaAsignar.src.trim();
-                var imagenEsperada = decodeURIComponent(urlImagenEsperadaAsignar).trim();
-                var nopoder = document.querySelector(".nopoder");
-
-                if (imagenCargada.endsWith(imagenEsperada)) {
-                    console.log('La imagen es la esperada.');
-                    nopoder.style.display = 'block';
-                } else {
-                    console.log('La imagen no es la esperada.');
-                    nopoder.style.display = 'none';
-                }
-            }
-            ImagenAsignar();
-
-
-    function getRandomMessage() {
-    const randomIndex = Math.floor(Math.random() * messagesdescanso.length);
-    return messagesdescanso[randomIndex];
-    }
-
-    function updateMessage() {
-        const newMessage = getRandomMessage();
-        messageElement.textContent = newMessage;
-    }
-
-    //updateMessage();
-    //despierta.style.display = "none"; 
-    //dormida.style.display = "block"; 
-
-
-    fetch(`/${userId}/mascotaprincipal`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Network error: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Check if there is no information for the userId
-        if (Object.keys(data).length === 0) {
-
-            const postData = {
-                    userId: userId,
-                    nombrePrincipal:  'Sin mascota', 
-                    imagenPrincipal:  'images/cruz.png',
-                    segundaImagen:  'images/cruz.png',
-            };
-
-            document.getElementById('imagenMascotaDespierta').src = 'images/cruz.png';
-            document.getElementById('imagenMascotaDormida').src = 'images/cruz.png';
-            document.getElementById('MascotaNombre').textContent = 'Sin mascota';
-            
-            
-            console.log("User: " + userId + " Nombre: " + postData.nombrePrincipal + " Imagen: " + postData.imagenPrincipal);
-
-                    // Continúa con el código para enviar la solicitud al servidor aquí
-                    
-                    fetch(`/${userId}/mascotaprincipal`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(postData),
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Failed to create main mascot: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(newMascotData => {
-                        // Handle the response after creating the main mascot
-                        console.log('Main mascot created:', newMascotData);
-                        var nopoder = document.querySelector(".nopoder");
-                        nopoder.style.display = 'block';
-                    })
-                    .catch(error => {
-                        console.error('Error creating main mascot:', error.message);
-                    });
-
-
-
-            // Make a POST request to create a main mascot
-            
- 
-            //console.log("Imagen despierto if: " + data[0].imagenPrincipal);
-            
-        } else {
-            
-            console.log("Imagen despierto else: " + data[0].imagenPrincipal);
-            document.getElementById('imagenMascotaDespierta').src = data[0].imagenPrincipal;
-            document.getElementById('imagenMascotaDormida').src = data[0].segundaImagen;
-            document.getElementById('MascotaNombre').textContent = data[0].nombrePrincipal;
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching main mascot data:', error.message);
-    });
-
-
-
-     function toggleSidebar() {
-          var sidebar = document.getElementById('sidebar');
-          if (sidebar.style.left === '0px') {
-              sidebar.style.left = '-750px';
-          } else {
-              sidebar.style.left = '0px';
-          }
-      }
-
-    var countdown;
-    var puntosTotales = 0;
-    var cicloIniciado = false;
-    
-    //var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
-
-    
-    var despierta = document.getElementById("imagenMascotaDespierta");
-    var dormida = document.getElementById("imagenMascotaDormida");
-    despierta.style.display = "block"; 
-    dormida.style.display = "none";
-
-    var terminar = document.getElementById("terminarButton");
-    terminar.style.display = "none";
-    var empezar = document.getElementById("startButton");
-    var botonSalir = document.querySelector('.logout button');
-    botonSalir.style.display = 'block';
-    empezar.style.display = "block";
-
-
-    var sisales = document.querySelector(".sisales");
-    sisales.style.display = "none";
-
-
-
-
-   
-
-
-    //var savedDisplayValue = localStorage.getItem("displayValue");  ///
-
-    fetch(`/${userId}/displayValue`)
-            .then(response => {
-                if (!response.ok) {
-                throw new Error(`Error de red: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Datos de displayValue:', data);
-                if (data === null) {
-                    data = 0;
-                } else {
-                    // Convertir a número si no es null
-                    //data = parseInt(data, 10);
-
-                    
-                    if (data.length > 0) {
-                        const idPuntos = data[0]._id;
-                        console.log('ID de los displayValue para el userId:', idPuntos);
-                        var savedDisplayValue = data[0].displayValue;
-                        if (savedDisplayValue) {
-                                   console.log("Valor display existe: " + savedDisplayValue)
-                                    var nopoder = document.querySelector(".nopoder");                                  
-                                    
-                                    if(savedDisplayValue == "none"){
-                                        nopoder.style.display = savedDisplayValue;
-                                        ImagenAsignar();
-                                    }
-                                    
-                                    }else{                                        
-                                        nopoder.style.display = "none";
-                                    }
-                        } else {                       
-                            
-                            fetch(`/${userId}/displayValue`, {
-                                method: 'POST', 
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                    body: JSON.stringify({
-                                        userId: userId,
-                                        displayValue: "none", 
-                                    }),
-                                })
-                                .then(newResponse => {
-                                    if (!newResponse.ok) {
-                                         throw new Error(`Error al crear nuevos displayValue: ${newResponse.status}`);
-                                    }
-                                        return newResponse.json();
-                                })
-                                .then(newData => {
-                                        const newIdPuntos = newData._id;
-                                        console.log('Se creó un nuevo conjunto de displayValue. Nuevo ID:', newIdPuntos);
-
-                                })
-                                .catch(newError => {
-                                        console.error('Error al crear nuevos displayValue:', newError.message);
-
-                                }); 
-
-                                fetch(`/${userId}/displayValue`)
-                                .then(response => response.json())
-                                .then(data => {
-                                    // Manejar la lista de tareas recibida en 'data'
-                                    console.log('Lista de displayValue:', data);
-
-                                    savedDisplayValue = data[0].displayValue;
-                                    if (savedDisplayValue == "none") {
-                                    var nopoder = document.querySelector(".nopoder");
-                                    nopoder.style.display = savedDisplayValue;
-                                    }else{
-                                        nopoder.style.display = "block";
-                                    }
-                                })
-                                .catch(error => console.error('Error al obtener la lista de displayValue:', error));
-
-                            
-                    }  
-
-
-
-                }
-        
-            })
-
-
-
-    //sidebar
-    function ocultarSidebar() {
-        var logoButton = document.querySelector('.content a img');
-        logoButton.style.display = 'none';
-
-        var sidebar = document.querySelector('.sidebar');
-        var elementosSidebar = sidebar.children;
-
-        for (var i = 0; i < elementosSidebar.length; i++) {
-            var elemento = elementosSidebar[i];
-            elemento.style.display = 'none';
-        }
-
-        
-    }
-
-    function mostrarSidebar() {
-        var logoButton = document.querySelector('.content a img');
-        logoButton.style.display = 'block';
-
-        var sidebar = document.querySelector('.sidebar');
-        var elementosSidebar = sidebar.children;
-
-        for (var i = 0; i < elementosSidebar.length; i++) {
-            var elemento = elementosSidebar[i];
-            elemento.style.display = 'block';
-        }
-    }
-
-    var empezarcoundown = false; 
-    //var empezarcoundown = localStorage.getItem('empezarcoundown') === 'false'; 
-
-    
-     //
-
-
-    /*
-    if (puntosTotalesGuardados) { 
-    puntosTotales = parseInt(puntosTotalesGuardados, 10);
-    // Actualiza el texto en el elemento de puntos totales
-    document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
-    } else {
-        puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
-    } */
-
-    //var valorBarraAvance = localStorage.getItem("barraAvance"); //
-    
-    fetch(`/${userId}/barraAvance`)
-            .then(response => {
-                if (!response.ok) {
-                throw new Error(`Error de red: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Datos de barraAvance:', data);
-                if (data === null) {
-                    data = 0;
-                } else {
-                    // Convertir a número si no es null
-                    //data = parseInt(data, 10);
-
-                            
-                    if (data.length > 0) {
-                        const idPuntos = data[0]._id;
-                        console.log('ID de los barraAvance para el userId:', idPuntos);
-
-                    } else {                       
-                        
-                            fetch(`/${userId}/barraAvance`, {
-                                method: 'POST', 
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                    body: JSON.stringify({
-                                        userId: userId,
-                                        barraAvance: "100%", 
-                                    }),
-                                })
-                                .then(newResponse => {
-                                    if (!newResponse.ok) {
-                                         throw new Error(`Error al crear nuevos barraAvance: ${newResponse.status}`);
-                                    }
-                                        return newResponse.json();
-                                })
-                                .then(newData => {
-                                        const newIdPuntos = newData._id;
-                                        console.log('Se creó un nuevo conjunto de barraAvance. Nuevo ID:', newIdPuntos);
-
-                                })
-                                .catch(newError => {
-                                        console.error('Error al crear nuevos displayValue:', newError.message);
-
-                                }); 
-
-                                fetch(`/${userId}/barraAvance`)
-                                .then(response => response.json())
-                                .then(data => {
-                                    // Manejar la lista de tareas recibida en 'data'
-                                    console.log('Lista de barraAvance:', data);
-                                    valorBarraAvance=  data[0].barraAvance;     
-                                        if (valorBarraAvance !== null) {
-                                        barraAvance.style.width = valorBarraAvance;
-                                        }
-                                })
-                                .catch(error => console.error('Error al obtener la lista de displayValue:', error));
-
-                            
-                    }  
-
-
-
-                }
-        
-            })
-
-
-
-
-
-
-    function updateDurationLabel() {
-        var duracionLabel = document.getElementById("duracionLabel");
-        var duracionInput = document.getElementById("duracion");
-
-        var minutos = duracionInput.value;
-        var horas = Math.floor(minutos / 60);
-        var minutosRestantes = minutos % 60;
-
-        duracionLabel.textContent = horas + "h " + minutosRestantes + "min";
-
-        }
-
-        
-    function startCountdown() {
-        var timeLeft = 0; // Duración en segundos de la cuenta atrás
-        var pomSet = 1500; //Duración en segundos de la cuenta atrás del set.                                                  Cambiar
-        var descanso1 = 300; //Duración del descanso.                                                                              Cambiar
-        var descanso2 = 1800; //Duración del descanso.  
-        var numerosetrealizados = -1;
-        
-        var segundostotalesInsertados = parseInt(document.getElementById("duracion").value);
-        console.log("Segundos totales: " +  segundostotalesInsertados);
-        segundostotalesInsertados = segundostotalesInsertados * 60; 
-        var segundostotales = parseInt(document.getElementById("duracion").value);      
-        segundostotales = segundostotales * 60; 
-        var slider = document.getElementById("duracion");
-        var valorActualSlider = parseInt(slider.value, 10);
-        
-        
-        var descansodesactivado = true;                                              
-        var display = document.getElementById('countdown');
-
-        
-        dormida.style.display = "block"; 
-        despierta.style.display = "none"; 
-        terminar.style.display = "block";
-        empezar.style.display = "none";
-        botonSalir.style.display = "none";
-        sisales.style.display = "block";
-
-        ocultarSidebar();
-        empezarcoundown = true;
-        
-        //localStorage.setItem('empezarcoundown', 'true');
-
-
-
-
-        /*
-        window.addEventListener('beforeunload', function (e) {
-            if(empezarcoundown){
-                e.preventDefault();
-                terminarCountdown();
-                //window.location.href = 'cementerio.ejs';
-            }
-        }); */
-
-
- 
-
-        function updateDisplay() {             
-              
-        var minutes = Math.floor(timeLeft / 60);
-        var seconds = timeLeft % 60;
-        display.textContent = '' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
- 
-        }
-
-        
-        //var barraAvance = document.getElementById("barraAvance"); 
-
-        function actualizarBarraDeProgreso() {
-        var porcentaje = (segundostotales / segundostotalesInsertados) * 100;
-        barraAvance.style.width = porcentaje + "%";
-        //console.log("Segundos totales: " +  segundostotales);
-        }
-
-
-
-        // Función para manejar la cuenta regresiva
-        function countdown() {
-            barraAvance.style.width = "100%";
-           //localStorage.setItem("barraAvance", "100"); //
-           fetch(`/${userId}/barraAvance`)
-                            .then(response => response.json())
-                            .then(datap => {
-                                let idbarraAvance = datap[0]._id;
-                                let userId = '<%= user.id %>';
-
-                                const dataToUpdate = {
-                                    userId: userId,
-                                    barraAvance: "100%" ,
-                                };
-
-                                fetch(`/${userId}/barraAvance/${idbarraAvance}`, {
-                                            method: 'PUT',
-                                            headers: {
-                                                'Content-Type': 'application/json',
-                                            },
-                                            body: JSON.stringify(dataToUpdate),
-                                            })
-                                            .then(response => {
-                                                if (!response.ok) {
-                                                throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
-                                                }
-                                                return response.json();
-                                            })
-                                            .then(updatedData => {
-                                                console.log('Response JSON:', updatedData);
-                                                // Handle the updated data as needed
-                                            })
-                                            .catch(error => {
-                                                console.error('Error al realizar la solicitud:', error);
-                                            });                           
-                               
-                            })
-                            .catch(error => console.error('Error al obtener la lista de tareas:', error));
-
-           terminar.style.display = "block";
-           empezar.style.display = "none";
-           botonSalir.style.display = "none";
-           sisales.style.display = "block";
-
-           
-
-
-
-
-
-            var timer = setInterval(function () {
-                updateDisplay();
-                actualizarBarraDeProgreso();
-
-
-                console.log('empezarcoundown' + empezarcoundown);
-                
-
-
-                window.addEventListener('beforeunload', function (event) {
-                    console.log("Beforeunload");
-                    localStorage.setItem('actionToPerform', 'terminarCountdown');
-                });
-
-                // Check for the action and perform it on DOMContentLoaded
-                window.addEventListener('DOMContentLoaded', function () {
-                    var action = localStorage.getItem('actionToPerform');
-
-                    if (action === 'terminarCountdown') {
-                        // Execute the action after a short delay
-                        setTimeout(function () {
-                            terminarCountdown();
-                            localStorage.removeItem('actionToPerform');
-                        }, 1000); // Adjust the delay as needed
-                    }
-                });
-               
-                var miAudio = document.getElementById("miAudio");
-                
-
-                if (timeLeft === 0) {
-                    if ( descansodesactivado) {
-                        miAudio.play();
-                        messageBlock.style.display = "none";
-                        if (cicloIniciado) {
-                            // Suma un punto solo si el ciclo ya ha comenzado
-                            fetch(`/${userId}/puntos`)
-                            .then(response => response.json())
-                            .then(datap => {
-                                let idPuntos = datap[0]._id;
-                                let userId = '<%= user.id %>';
-
-                                if (!idPuntos) {
-                                    throw new Error('No se encontró un ID en los datos de puntos');
-                                }
-                                
-                                const puntossuma = datap[0].puntosTotales + 1;
-                                
-
-                                const dataToUpdate = {
-                                    userId: userId,
-                                    puntosTotales: puntossuma ,
-                                };
-
-                                
-                                document.getElementById("puntosTotales").textContent = puntossuma < 10 ? '0' +puntossuma : puntossuma;       
-                                /*                         
-                                puntosTotales++;
-                                document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales; ///
-                                localStorage.setItem("puntosTotales", puntosTotales);  */
-
-                                fetch(`/${userId}/puntos/${idPuntos}`, {
-                                            method: 'PUT',
-                                            headers: {
-                                                'Content-Type': 'application/json',
-                                            },
-                                            body: JSON.stringify(dataToUpdate),
-                                            })
-                                            .then(response => {
-                                                if (!response.ok) {
-                                                throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
-                                                }
-                                                return response.json();
-                                            })
-                                            .then(updatedData => {
-                                                console.log('Response JSON:', updatedData);
-                                                // Handle the updated data as needed
-                                            })
-                                            .catch(error => {
-                                                console.error('Error al realizar la solicitud:', error);
-                                            });                           
-                               
-                            })
-                            .catch(error => console.error('Error al obtener la lista de tareas:', error));
-
-                        } else {
-                            cicloIniciado = true; // Marca el inicio del ciclo
-                        }
-                        numerosetrealizados++;
-                        
-                        descansodesactivado = false;
-                        if(segundostotalesInsertados < 1500){                                  // Cambiar
-                            timeLeft = segundostotalesInsertados;
-                        }else{
-                            timeLeft = pomSet;
-                        }
-                        
-                        console.log("Número de sets terminados: " + numerosetrealizados); 
-                        
-
-                    } else {
-                        // Inicio del ciclo de descanso
-                        messageBlock.style.display = "block";
-                        updateMessage();
-                        descansodesactivado = true;
-
-                        if (numerosetrealizados === 4) {
-                            // Comienza el segundo ciclo de descanso (descanso2)
-                            miAudio.play();
-                            numerosetrealizados = 0; // Reinicia el número de sets realizados
-                            timeLeft = descanso2;
-                            
-                        } else {
-                                // Inicio del ciclo de descanso normal (descanso1)
-                            miAudio.play();
-                            timeLeft = descanso1;
-                        }
-                        //timeLeft = descanso1;
-                    }
-                }
-
-                if (segundostotales === 0) {
-                        clearInterval(timer); // Detén el temporizador cuando se agoten los segundos totales
-                        console.log("Cuenta atrás finalizada.");
-                        display.textContent = '' + (0 < 10 ? '0' : '') + 0 + ':' + (0 < 10 ? '0' : '') + 0;
-                        segundostotales= 0;
-                        descansodesactivado = true;
-                        numerosetrealizados = -1;
-                        cicloIniciado = false; 
-                        porcentaje = 100;
-                        barraAvance.style.width  = porcentaje + "%";
-                        document.getElementById("duracionLabel").textContent = valorActualSlider;
-                        miAudio.play();
-                        despierta.style.display = "block"; 
-                        dormida.style.display = "none"; 
-                        terminar.style.display = "none";
-                        empezar.style.display = "block";
-                        botonSalir.style.display = "block";
-                        sisales.style.display = "none";
-                        messageBlock.style.display = "none";
-                        mostrarSidebar();
-                        empezarcoundown = false;
-                        localStorage.setItem('empezarcoundown', 'false');
-
-
-                }
-
-                timeLeft--;
-                segundostotales--;
-                valorActualSlider--;
-                slider.value = valorActualSlider;
-
-            }, 1000);
-
-        }
-
-
-        //var valorBarraAvance = localStorage.getItem("barraAvance"); //
-        fetch(`/${userId}/barraAvance`)
-                            .then(response => response.json())
-                            .then(datap => {
-                                let idbarraAvance = datap[0]._id;
-                                let userId = '<%= user.id %>';
-
-                                if (!datap[0].barraAvance) {
-                                        barraAvance.style.width = "100%";
-                                        //localStorage.setItem("barraAvance", "100"); //
-                                    
-
-                                    const dataToUpdate = {
-                                        userId: userId,
-                                        barraAvance: "100" ,
-                                    };
-
-                                    fetch(`/${userId}/puntos/${idbarraAvance}`, {
-                                                method: 'PUT',
-                                                headers: {
-                                                    'Content-Type': 'application/json',
-                                                },
-                                                body: JSON.stringify(dataToUpdate),
-                                                })
-                                                .then(response => {
-                                                    if (!response.ok) {
-                                                    throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
-                                                    }
-                                                    return response.json();
-                                                })
-                                                .then(updatedData => {
-                                                    console.log('Response JSON:', updatedData);
-                                                    // Handle the updated data as needed
-                                                })
-                                                .catch(error => {
-                                                    console.error('Error al realizar la solicitud:', error);
-                                                });                           
-                                }
-                            })
-                            .catch(error => console.error('Error al obtener la lista de tareas:', error));
-
-
-        countdown();
-            
-    }
-
-    /*
-    var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];  ///
-        window.onload = function () {
-            // Obtener la lista local
-            var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];  ////
-
-            itemStore = 0;
-            listaCementerio.forEach(function (element) {
-                if (element.index > itemStore) {
-                    itemStore = element.index;
-                }
-            });  
-
-    }; */
-
-
-    //var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
-            /*
-            var indiceAEliminar = -1;
-            data.forEach(function (element, index) {
-            if (element.nombre === nombreMascota) {
-                indiceAEliminar = index;
-                console.log("Se llega aqui");
-            } */
-
-
-
-
-    function eliminarMascota(nombreMascota) {
-        fetch('/' + userId +'/mascotas')
-        .then(response => response.json())
-        .then(data => {
-                /*Hacerlo aqui*/     
-                const mascotaAEliminar = data.find(mascota => mascota.nombre === nombreMascota);
-
-
-                    const mascotaId = mascotaAEliminar._id;
-
-                    fetch(`/${userId}/mascotas/${mascotaId}`, {
-                    method: 'DELETE',
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                        throw new Error(`Error al borrar la mascota: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('Mascota eliminada con éxito:', data);
-                        window.location.href = "/cementerio/" + userId;
-                    })
-                    .catch(error => {
-                        console.error('Error al borrar la mascota:', error.message);
-                    });
-
-
-                
-        })
-        .catch(error => console.error('Error al obtener la lista de tareas:', error));
-        
-        
-    }
-
-
-
-
-    function enviarCementerio() {
-            // imagenPrincipalSrc
-            // nombrePrincipalSrc 
-                             
-            //localStorage.setItem('imagenPrincipalCementerio', imagenPrincipalSrc); ///
-            //localStorage.setItem('nombrePrincipalCementerio', nombrePrincipalSrc );  //
-            //localStorage.setItem('fechaCementerio', fechaFormateada );  ///
-
-            /*
-            var nuevoElemento = {
-                        imagenPrincipal: imagenPrincipalSrc,
-                        nombre: nombrePrincipalSrc,
-                        fechamuerte: fechaFormateada
-            }; */
-
-            //listaCementerio.push(nuevoElemento);
-
-
-            //localStorage.setItem('CementerioElements', JSON.stringify( listaCementerio));
-            fetch(`/${userId}/mascotaprincipal`)
-                .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`Error de red: ${response.status}`);
-                        }
-                        return response.json();
-                        })
-                .then(datap => {
-                    
-                        var fechaActual = new Date();
-                        let userId = '<%= user.id %>';
-
-                        // Formatea la fecha
-                        var options = { year: 'numeric', month: 'long', day: 'numeric' };
-                        var fechaFormateada = fechaActual.toLocaleDateString(undefined, options);
-
-                        var nuevoElemento = {
-                                userId: userId,
-                                imagenPrincipal: datap[0].imagenPrincipal,                            
-                                nombre: datap[0].nombrePrincipal,
-                                fecha: fechaActual
-                        };
-
-
-                                    
-                        fetch('/' + userId +'/muertos', {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                        },
-                                        body: JSON.stringify(nuevoElemento),
-                                        })
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            console.log('Mascota muerta:', data);
-                                            eliminarMascota(datap[0].nombrePrincipal);
-
-                                            let idPrincipal = datap[0]._id;
-
-                                            if (!idPrincipal) {
-                                                    throw new Error('No se encontró un ID en los datos de puntos');
-                                            }
-                                            
-
-                                            const dataToUpdate = {
-                                                userId: userId,
-                                                nombrePrincipal:  'Sin mascota', 
-                                                imagenPrincipal:  'images/cruz.png',
-                                                segundaImagen:  'images/cruz.png',
-                                            };
-
-                                            
-                                                          
-                          
-                                            fetch(`/${userId}/mascotaprincipal/${idPrincipal}`, {
-                                                method: 'PUT',
-                                                headers: {
-                                                'Content-Type': 'application/json',
-                                            },
-                                                body: JSON.stringify(dataToUpdate),
-                                            })
-                                            .then(response => {
-                                                if (!response.ok) {
-                                                    throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
-                                                }
-                                                    return response.json();
-                                                })
-                                                .then(updatedData => {
-                                                    console.log('Response JSON:', updatedData);
-                                                                
-                                                })
-                                                .catch(error => {
-                                                    console.error('Error al realizar la solicitud:', error);
-                                                });
-                                        })
-                                        .catch(error => console.error('Error al guardar la tarea:', error));
-
-
-                                        document.getElementById('imagenMascotaDespierta').src = "images/cruz.png";
-                                        document.getElementById('imagenMascotaDormida').src = "images/cruz.png";
-                                        document.getElementById('MascotaNombre').textContent = "";
-                                        
-                                        //localStorage.setItem('imagenPrincipal', "images/cruz.png"); ///
-                                        //localStorage.setItem('segundaImagen', "images/cruz.png");   //
-                                        //localStorage.setItem('nombrePrincipal', ""); ///
-
-                                        nopoder.style.display = "block";
-                                        //localStorage.setItem("displayValue", "block"); //
-                                        
-                                        fetch(`/${userId}/displayValue`)
-                                            .then(response => response.json())
-                                            .then(data => {                                   
-                                                console.log('Lista de displayValue:', data);
-                                                idPrincipal = data[0]._id;
-
-
-                                                const dataToUpdate = {
-                                                userId: userId,
-                                                displayValue:  "block", 
-
-                                                };
-
-                                                fetch(`/${userId}/displayValue/${idPrincipal}`, {
-                                                    method: 'PUT',
-                                                    headers: {
-                                                    'Content-Type': 'application/json',
-                                                },
-                                                    body: JSON.stringify(dataToUpdate),
-                                                })
-                                                .then(response => {
-                                                    if (!response.ok) {
-                                                    throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
-                                                    }
-                                                        return response.json();
-                                                        
-                                                })
-                                                .then(updatedData => {
-                                                    console.log('Response JSON:', updatedData);
-                                                                                            
-                                                })
-                                                .catch(error => {
-                                                    console.error('Error al realizar la solicitud:', error);
-                                                });
-                                                
-                                                 
-
-                                        })
-                                        .catch(error => console.error('Error al obtener la lista de displayValue:', error));
-
-   
-                                    
-                    })
-                    .catch(error => {
-                            console.error('Error al obtener datos de puntos:', error.message);
-                    }); 
-           
-             
-     }
-
-
-     
-
-    function terminarCountdown(){
-        mostrarSidebar();
-        enviarCementerio();
-            
-
-    }
-
-
-
-
-
-
-
-
-</script>
-
-
-<script>
-
-    function checklist(){
-      var userId = '<%= user.id %>';
-    window.location.href = "/checklist/" + userId;
-    }
-
-
-
-    function mascota(){
-      var userId = '<%= user.id %>';
-      window.location.href = "/mascota/" + userId;
-
-    }
-
-    function cementerio(){
+                <li class="nav-item" style="margin-right: -2%;">
+                    <a class="nav-link" aria-current="page" href="#"  style="text-align:center" onclick="mascota()">
+                        <img src="images/homeicono.png" style="width: 55px;">
+						<p class="nombreicono">Mascotas</p>
+                    </a>
+                </li>
+                <li class="nav-item" style="margin-right: -2%;">
+                    <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="tienda()">
+                        <img src="images/tiendalogo.png" style="width: 55px;">
+						<p class="nombreicono" >Tienda</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="cementerio()">
+                        <img src="images/Tumba.png" style="width: 60px;">
+						<p class="nombreicono" >Cementerio</p>
+                    </a>
+                </li>
+				</ul>
+			</div>
+		</div>
+
+
+		<div class="flex-grow-1 d-flex flex-lg-row flex-column" style="border:1px SOLID black;">
+			<div class="p-2  flex-grow-1 d-flex flex-column  justify-content-center align-items-center" style="background-color:rgb(82,107,141); color:white">
+
+				<div class="d-flex flex-row justify-content-between" style="width:100%;">
+					<a type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="d-none d-lg-block">
+						<img src="images/logo.png" style="width: 100px;">
+					</a>
+
+					<a type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContentTop" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="d-lg-none">
+						<img src="images/logo.png" style="width: 80px;">
+					</a>
+
+					
+					<h1 style="font-size:  3em;" class="display-2">
+						<p class="nombreMascota" id="MascotaNombre"  style="text-align:center">Mascota</p>
+					</h1>
+
+
+
+				</div>
+
+			
+				<div class="message-block2" id="messageBlock2" style="display: none; background-position: center center; background-color: rgb(11, 27, 63); color: rgb(255, 255, 255);  z-index: 3;" >
+					<p id="message2">DESCANSO</p>
+					
+				</div>  
+
+				<div class="message-block" id="messageBlock" style="display: none; background-position: center center;  z-index: 3;">
+					<p id="message">Mensaje inicial</p>					
+				</div>
+
+
+				<div style="width:100%; background-image: url('images/BlancoSet.png'); background-repeat: no-repeat; background-attachment: local; background-size: contain;
+               background-position: center center;" class="flex-grow-1 d-flex flex-column ">
+
+					<!-- <div style="border: 1px SOLID black; background-image: url('images/cruz.png'); background-repeat: no-repeat; background-attachment: local; background-size: contain;
+					background-position: center center;" class="flex-grow-1"> -->
+
+					<div id="imagenMascotaDormida" style="background-image: url('images/cruz.png');  background-repeat: no-repeat; background-attachment: local; background-size: 25% 70%;
+					background-position: center center;"  class="flex-grow-1">
+                   </div>
+					
+					<div id="imagenMascotaDespierta" style="background-image: url('images/cruz.png'); background-repeat: no-repeat; background-attachment: local; background-size: 25% 70%;
+					background-position: center center;"class=" flex-grow-1">
+					</div>	
+					
+			   </div>
+			   <h3 style="font-size:  1em; font-family:  sans-serif; margin-top: 1%;" class="display-3 " >
+				<p class="sisales">Si le das al botón de TERMINAR tu mascota morirá</p>
+		     	</h3>
+			
+
+
+				<h1 class="display-1" id="countdown"  style="font-family:  sans-serif; "> 00:00</h1>
+
+				
+				<div class="barra-de-progreso">
+					<div class="barra-fondo">
+					<div class="barra-avance" id="barraAvance"></div>
+					</div>
+				</div>
+				<!--
+				<div class="progress" role="progressbar" style="width:50%; height: 20px">
+					<div class="progress-bar w-100" id="barraAvance" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+					</div>
+				</div> -->
+
+				<div class="p-2">
+					<button type="button" class="btn btn-primary btn-lg" id="algo"  style="font-size: 24px; background-color: #212958;">Asigna una mascota para continuar</button>
+					<button type="button"  class="btn btn-primary btn-lg" id="startButton" onclick="startCountdown()" style="font-size: 24px; background-color: #212958; ">EMPEZAR</button>
+					<button type="button" class="btn btn-primary btn-lg" id="terminarButton" onclick="terminarCountdown()" style="font-size: 24px; background-color: #212958;">TERMINAR</button>
+			
+				</div>
+			</div> 
+			<div class="p-2 d-flex flex-lg-column flex-row" style="background-color: rgb(31, 39, 78); color:white; z-index: 4;">
+				<div>
+					<h1 class="display-4" style="text-align:center; font-size:  3em;" >Puntos</h1>
+					<h1 class="display-5" style="text-align:center"><p id="puntosTotales">00</p></h1>
+				</div>
+				<div class="flex-grow-1 d-flex flex-column">
+					<div class="range-slider d-flex flex-column flex-grow-1 p-2">
+						<p class="text-center fs-3">Duración</p>
+						
+						<!-- Larger screens -->
+						<input class="input-range flex-grow-1 d-none d-lg-block" orient="vertical" type="range" step="1"  id="duracion-lg" name="duracion"  min="1" max="240" value="0" style="appearance: slider-vertical;" oninput="updateDurationLabellg('duracion-lg')"> 
+						
+						<!-- Smaller screens -->
+						<input class="input-range flex-grow-1 d-lg-none" orient="vertical" type="range" step="1"  id="duracion-sm" name="duracion"   min="1" max="240" value="0" oninput="updateDurationLabelsm('duracion-sm')">
+						
+						<p class="text-center fs-4"><span id="duracionLabel"> 0h 0min </span></p>
+					</div>
+				</div>
+				<div class="d-flex flex-column  text-center" style="align-items: center;">
+					<p class="text-center fs-5">Usuario:</p>
+					<p class="text-center  fs-6"><%= user.name %> </p>
+					<form action="/logout?_method=DELETE" method="POST" id="logoutForm">
+						<button type="submit" class="btn btn-secondary" id="btnSalir" >Salir</button>
+					</form>
+					<audio id="miAudio" src="images/short-success.mp3"></audio>
+			
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		console.log('User ID index:', '<%= user.id %>');
+		let userId = '<%= user.id %>';
+		
+		const messagesdescanso = [
+		"Sistema Leitner: Las flashcards son utilizadas para reformar la memoria mediante el uso de tarjetas de papel. Funcionan de la siguiente manera: Por un lado, se escribe una pregunta, definición…Y del otro lado se escribe la respuesta o a aquello a lo que hace referencia. Las flashcards tienen como objetivo dividir la información en partes más pequeñas y fáciles de asimilar.",
+		"Método Robinson. Su objetivo principal es reducir el tiempo de estudio y mejorar la capacidad para comprender la información.  Para llevar a cabo este método, se siguen los siguientes pasos: Explorar ->  Preguntar -> Leer -> Recitar -> Revisión -> Repetición",
+		"Recuerda tomar agua e hidratarte",
+		"Check-list: La creación de una lista que enumera las tareas a realizar diaria o semanalmente, permitiendo al usuario marcarlas a medida que se completan. Estas listas suelen organizarse según la prioridad o la dificultad de las tareas y ofrecen una visión clara del progreso a lo largo del día o la semana.",
+		"Recuerda NO saltarte los descansos",
+		"No dejes todo para el final",
+		"Utiliza colores durante el estudio para hacer uso de la memoria fotográfica",
+		"Evalúate con exámenes o cuestionarios acerca del tema que estás estudiando",
+		"Durante los descansos levantate y estira esas piernas",
+		"El palacio de la memoria consiste en crear mentalmente un palacio con diferentes habitaciones y en cada una de ellas se albergará una imagen de algo que se quiere recordar",
+		"Recuerda planificar tus horarios de estudio",
+		"Dormir ayuda a asentar los conocimientos adquiridos durante el estudio"
+		];
+
+		const messagesdescanso2 = ["DESCANSO"];
+		const messageBlock = document.getElementById("messageBlock");
+		const messageBlock2 = document.getElementById("messageBlock2");
+		
+		const messageElement = document.getElementById("message");
+			
+		const messageElement2 = document.getElementById("message2");
+
+
+		var currentImageIndex = 0; 
+	
+		/*
+		var secuenciaYaMostrada = localStorage.getItem('secuenciaMostrada') === 'true';
+		var backgroundImage = document.getElementById('backgroundImage');
+		backgroundImage.style.display = 'none';
+		document.getElementById('mostrarSecuenciaButton').style.display = 'none';
+		console.log(secuenciaYaMostrada);
+	
+		   if (!secuenciaYaMostrada) {
+	
+				
+				mostrarSecuencia();
+	
+				function mostrarSecuencia() {                
+					document.getElementById('mostrarSecuenciaButton').style.display = 'block';
+					console.log(secuenciaYaMostrada);
+					if (secuenciaYaMostrada) {
+					document.getElementById('mostrarSecuenciaButton').style.display = 'none';
+					return;
+					}
+	
+	
+					backgroundImage.style.display = 'block';
+					var sequenceContainer = document.querySelector('.image-sequence');
+					var images = sequenceContainer.querySelectorAll('.sequence-image');
+					sequenceContainer.style.display = 'flex';
+	
+	
+					if (currentImageIndex === 1) {
+						var respuestaUsuario = confirm("¿Es tu primera vez aqui?");
+						if (!respuestaUsuario) {
+							// Si el usuario no quiere continuar, ocultar la secuencia y salir
+							sequenceContainer.style.display = 'none';
+							localStorage.setItem('secuenciaMostrada', 'true');
+							backgroundImage.style.display = 'none';
+							document.getElementById('mostrarSecuenciaButton').style.display = 'none';
+							return;
+						}
+					}
+	
+	
+					images.forEach(function (image) {
+						image.style.display = 'none';
+					});
+	
+	
+					images[currentImageIndex].style.display = 'block';
+	
+	
+					currentImageIndex++;
+	
+					if (currentImageIndex >= images.length) {
+						currentImageIndex = 0;
+						sequenceContainer.style.display = 'none';
+						localStorage.setItem('secuenciaMostrada', 'true');
+						document.getElementById('mostrarSecuenciaButton').style.display = 'none';
+						backgroundImage.style.display = 'none';
+					}
+				}
+		  } */
+		/*
+		fetch(`/${userId}/puntos`, {
+			method: 'DELETE',
+		})
+		.then(response => response.json())
+		.then(data => {
+			// Manejar la respuesta recibida después de eliminar todas las tareas
+			console.log('Todas las tareas eliminadas:', data);
+			// Puedes realizar cualquier otra operación después de eliminar todas las tareas
+		})
+		.catch(error => console.error('Error al eliminar todas las tareas:', error)); */
+	
+		//Tutorial
+	
+	
+	
+		fetch(`/${userId}/puntos`)
+				.then(response => {
+					if (!response.ok) {
+					throw new Error(`Error de red: ${response.status}`);
+					}
+					return response.json();
+				})
+				.then(data => {
+					console.log('Datos de puntos:', data);
+					if (data === null) {
+						data = 0;
+					} else {
+						// Convertir a número si no es null
+						//data = parseInt(data, 10);
+	
+								
+						if (data.length > 0) {
+							const idPuntos = data[0]._id;
+							console.log('ID de los puntos para el userId:', idPuntos);
+						} else {                       
+							
+								fetch(`/${userId}/puntos`, {
+									method: 'POST', 
+									headers: {
+										'Content-Type': 'application/json',
+									},
+										body: JSON.stringify({
+											userId: userId,
+											puntosTotales: 0, 
+										}),
+									})
+									.then(newResponse => {
+										if (!newResponse.ok) {
+											 throw new Error(`Error al crear nuevos puntos: ${newResponse.status}`);
+										}
+											return newResponse.json();
+									})
+									.then(newData => {
+										const newIdPuntos = newData._id;
+										console.log('Se creó un nuevo conjunto de puntos. Nuevo ID:', newIdPuntos);
+	
+										// Fetch points after creating new points
+										fetch(`/${userId}/puntos`)
+											.then(response => response.json())
+											.then(data => {
+												// Manejar la lista de tareas recibida en 'data'
+												console.log('Lista de tareas:', data);
+												// Aquí puedes realizar cualquier otra operación con la lista de tareas
+											})
+											.catch(error => console.error('Error al obtener la lista de tareas:', error));
+									})
+	
+									.catch(newError => {
+											console.error('Error al crear nuevos puntos:', newError.message);
+	
+									}); 
+	
+								
+						}  
+						fetch(`/${userId}/puntos`)
+						.then(response => response.json())
+						.then(data => {            
+	
+							if (data) {
+							var puntosTotales = data[0].puntosTotales;
+							document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+							} else {
+								puntosTotales = 0; 
+							}
+							
+						})
+						.catch(error => console.error('Error al obtener la lista de tareas:', error));
+	
+	
+					}
+			
+				});
+
+				var empezar = document.getElementById("startButton");
+				empezar.classList.add('d-none');	
+
+				function ImagenAsignar() {
+					//document.getElementById('imagenMascotaDespierta').src = 'images/cruz.png';
+					var imagenMascotaAsignar = document.getElementById('imagenMascotaDespierta');	
+					var urlImagenEsperadaAsignar = 'images/cruz.png';
+
+					if (imagenMascotaAsignar) {
+
+						var backgroundImage = window.getComputedStyle(imagenMascotaAsignar, null).getPropertyValue('background-image');
+
+						// La URL del fondo estará entre paréntesis
+						//var backgroundImageUrl = backgroundImage.match(/\((.*?)\)/)[1].replace(/('|")/g, '');
+
+
+						var nopoder = document.getElementById("algo");
+
+						fetch(`/${userId}/mascotaprincipal`)
+						.then(response => {
+							if (!response.ok) {
+								throw new Error(`Network error: ${response.status}`);
+							}
+							return response.json();
+						})
+						.then(data => {
+							if(backgroundImage.includes("images/cruz.png") && (data[0].imagenPrincipal).includes("images/cruz.png")){
+									//if (imagenCargada.endsWith(imagenEsperada)) {
+										console.log('La imagen es la esperada.');
+										//nopoder.style.display = 'block';
+										nopoder.classList.remove('d-none');
+										empezar.classList.add('d-none');
+				
+								} else {
+										console.log('La imagen no es la esperada.');
+										nopoder.classList.add('d-none');
+										empezar.classList.remove('d-none');
+							}
+
+						})
+						.catch(error => {
+							console.error('Error fetching main mascot data:', error.message);
+						});
+
+					
+
+
+					} else {
+						console.error('Elemento no encontrado');
+						nopoder.classList.remove('d-none');
+						empezar.classList.add('d-none');
+					}
+						
+					
+
+
+
+
+					//console.log(imagenMascotaAsignar.src); //sale:  http://localhost:3000/images/cruz.png
+					//var imagenCargada = imagenMascotaAsignar.src.trim();
+					//var imagenEsperada = decodeURIComponent(urlImagenEsperadaAsignar).trim();
+
+
+					//imagenMascotaDespierta.style.backgroundImage = "url('images/cruz.png')";
+					//var nopoder = document.querySelector(".nopoder");
+
+
+				}
+				ImagenAsignar();
+	
+	
+		function getRandomMessage() {
+		const randomIndex = Math.floor(Math.random() * messagesdescanso.length);
+		return messagesdescanso[randomIndex];
+		}
+	
+		function getRandomMessage2() {
+		const randomIndex = Math.floor(Math.random() * messagesdescanso2.length);
+		return messagesdescanso2[randomIndex];
+		}
+
+		function updateMessage() {
+			const newMessage = getRandomMessage();
+			const newMessage2 = getRandomMessage2();
+			messageElement.textContent = newMessage;
+			messageElement2.textContent = newMessage2;
+		}
+	
+		//updateMessage();
+		//despierta.style.display = "none"; 
+		//dormida.style.display = "block"; 
+		var imagenMascotaDormida = document.getElementById('imagenMascotaDormida');
+		var imagenMascotaDespierta = document.getElementById('imagenMascotaDespierta');
+	
+		fetch(`/${userId}/mascotaprincipal`)
+		.then(response => {
+			if (!response.ok) {
+				throw new Error(`Network error: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then(data => {
+			// Check if there is no information for the userId
+			if (Object.keys(data).length === 0) {
+	
+				const postData = {
+						userId: userId,
+						nombrePrincipal:  'Sin mascota', 
+						imagenPrincipal:  'images/cruz.png',
+						segundaImagen:  'images/cruz.png',
+				};
+	
+				//document.getElementById('imagenMascotaDespierta').src = 'images/cruz.png';
+				//document.getElementById('imagenMascotaDormida').src = 'images/cruz.png';
+				imagenMascotaDespierta.style.backgroundImage = "url('images/cruz.png')";	
+				imagenMascotaDormida.style.backgroundImage = "url('images/cruz.png')";				
+				document.getElementById('MascotaNombre').textContent = 'Sin mascota';
+				
+				
+				console.log("User: " + userId + " Nombre: " + postData.nombrePrincipal + " Imagen: " + postData.imagenPrincipal);
+	
+						// Continúa con el código para enviar la solicitud al servidor aquí
+						
+						fetch(`/${userId}/mascotaprincipal`, {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify(postData),
+						})
+						.then(response => {
+							if (!response.ok) {
+								throw new Error(`Failed to create main mascot: ${response.status}`);
+							}
+							return response.json();
+						})
+						.then(newMascotData => {
+							// Handle the response after creating the main mascot
+							console.log('Main mascot created:', newMascotData);
+							//var nopoder = document.querySelector(".nopoder");
+							//nopoder.style.display = 'block';
+							var nopoder = document.getElementById("algo");
+							nopoder.classList.remove('d-none');
+						})
+						.catch(error => {
+							console.error('Error creating main mascot:', error.message);
+						});
+	
+	
+	
+				// Make a POST request to create a main mascot
+				
+	 
+				//console.log("Imagen despierto if: " + data[0].imagenPrincipal);
+				
+			} else {
+				
+				//console.log("Imagen despierto else: " + data[0].imagenPrincipal);
+				//document.getElementById('imagenMascotaDespierta').src = data[0].imagenPrincipal;
+				imagenMascotaDespierta.style.backgroundImage = "url('" + data[0].imagenPrincipal + "')";
+
+				//document.getElementById('imagenMascotaDormida').src = data[0].segundaImagen;
+				imagenMascotaDormida.style.backgroundImage = "url('" + data[0].segundaImagen + "')";
+
+				document.getElementById('MascotaNombre').textContent = data[0].nombrePrincipal;
+			}
+		})
+		.catch(error => {
+			console.error('Error fetching main mascot data:', error.message);
+		});
+	
+	
+	/*
+		function toggleSidebar() {
+			  var sidebar = document.getElementById('sidebar');
+			  if (sidebar.style.left === '0px') {
+				  sidebar.style.left = '-750px';
+			  } else {
+				  sidebar.style.left = '0px';
+			  }
+		  } */
+	
+		//var countdown;
+		var puntosTotales = 0;
+		var cicloIniciado = false;
+		
+		//var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
+	
+		
+		var despierta = document.getElementById("imagenMascotaDespierta");
+		var dormida = document.getElementById("imagenMascotaDormida");
+		//despierta.style.display = "block"; 
+		despierta.classList.remove('d-none');
+		//dormida.style.display = "none";
+		dormida.classList.add('d-none');
+	
+		var terminar = document.getElementById("terminarButton");
+		//terminar.style.display = "none";
+		terminar.classList.add('d-none');
+
+		//empezar.style.display = "block";
+		//empezar.classList.add('d-none');
+
+		//var botonSalir = document.querySelector('.logout button');
+		//botonSalir.style.display = 'block';
+		document.getElementById('btnSalir').style.display = 'block';
+
+	
+		var sisales = document.querySelector(".sisales");
+		sisales.style.display = "none";
+	
+		   
+	
+		//var savedDisplayValue = localStorage.getItem("displayValue");  ///
+	
+		fetch(`/${userId}/displayValue`)
+				.then(response => {
+					if (!response.ok) {
+					throw new Error(`Error de red: ${response.status}`);
+					}
+					return response.json();
+				})
+				.then(data => {
+					console.log('Datos de displayValue:', data);
+					if (data === null) {
+						data = 0;
+					} else {
+						// Convertir a número si no es null
+						//data = parseInt(data, 10);
+	
+						
+						if (data.length > 0) {
+							const idPuntos = data[0]._id;
+							console.log('ID de los displayValue para el userId:', idPuntos);
+							var savedDisplayValue = data[0].displayValue;
+							
+
+							if (savedDisplayValue) {
+									   console.log("Valor display existe: " + savedDisplayValue);
+									   var nopoder = document.getElementById("algo");
+										//var nopoder = document.querySelector(".nopoder");                                  
+										
+										if(savedDisplayValue == "none"){
+
+											nopoder.classList.add('d-none');
+											ImagenAsignar();
+										}
+										
+										}else{                                        
+											//nopoder.style.display = "none";
+											nopoder.classList.add('d-none');
+										}
+							} else {                       
+								
+								fetch(`/${userId}/displayValue`, {
+									method: 'POST', 
+									headers: {
+										'Content-Type': 'application/json',
+									},
+										body: JSON.stringify({
+											userId: userId,
+											displayValue: "none", 
+										}),
+									})
+									.then(newResponse => {
+										if (!newResponse.ok) {
+											 throw new Error(`Error al crear nuevos displayValue: ${newResponse.status}`);
+										}
+											return newResponse.json();
+									})
+									.then(newData => {
+											const newIdPuntos = newData._id;
+											console.log('Se creó un nuevo conjunto de displayValue. Nuevo ID:', newIdPuntos);
+	
+									})
+									.catch(newError => {
+											console.error('Error al crear nuevos displayValue:', newError.message);
+	
+									}); 
+	
+									fetch(`/${userId}/displayValue`)
+									.then(response => response.json())
+									.then(data => {
+										// Manejar la lista de tareas recibida en 'data'
+										console.log('Lista de displayValue:', data);
+	
+										savedDisplayValue = data[0].displayValue;
+										if (savedDisplayValue == "none") {
+										//var nopoder = document.querySelector(".nopoder");
+										var nopoder = document.getElementById("algo");
+										nopoder.classList.add('d-none');
+
+										//nopoder.style.display = savedDisplayValue;
+
+										}else{
+											//nopoder.style.display = "block";
+											nopoder.classList.remove('d-none');
+										}
+									})
+									.catch(error => console.error('Error al obtener la lista de displayValue:', error));
+	
+								
+						}  
+	
+	
+	
+					}
+			
+				})
+	
+	
+	
+		//sidebar
+		/*
+		function ocultarSidebar() {
+			var logoButton = document.querySelector('.content a img');
+			logoButton.style.display = 'none';
+	
+			var sidebar = document.querySelector('.sidebar');
+			var elementosSidebar = sidebar.children;
+	
+			for (var i = 0; i < elementosSidebar.length; i++) {
+				var elemento = elementosSidebar[i];
+				elemento.style.display = 'none';
+			}
+	
+			
+		}
+
+		function mostrarSidebar() {
+			var logoButton = document.querySelector('.content a img');
+			logoButton.style.display = 'block';
+	
+			var sidebar = document.querySelector('.sidebar');
+			var elementosSidebar = sidebar.children;
+	
+			for (var i = 0; i < elementosSidebar.length; i++) {
+				var elemento = elementosSidebar[i];
+				elemento.style.display = 'block';
+			}
+		} */
+
+		var navbarSupportedContent = document.getElementById("navbarSupportedContent");
+		var navbarSupportedContentTop = document.getElementById("navbarSupportedContentTop");
+		function ocultarSidebar() {
+
+			navbarSupportedContent.style.display = "none";
+			navbarSupportedContentTop.style.display = "none";
+		}
+
+		function mostrarSidebar() {
+			navbarSupportedContent.style.display = "block";
+			navbarSupportedContentTop.style.display = "block";
+		}
+	
+		var empezarcoundown = false; 
+		//var empezarcoundown = localStorage.getItem('empezarcoundown') === 'false'; 
+	
+		
+		 //
+	
+	
+		/*
+		if (puntosTotalesGuardados) { 
+		puntosTotales = parseInt(puntosTotalesGuardados, 10);
+		// Actualiza el texto en el elemento de puntos totales
+		document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
+		} else {
+			puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
+		} */
+	
+		//var valorBarraAvance = localStorage.getItem("barraAvance"); //
+		
+		fetch(`/${userId}/barraAvance`)
+				.then(response => {
+					if (!response.ok) {
+					throw new Error(`Error de red: ${response.status}`);
+					}
+					return response.json();
+				})
+				.then(data => {
+					console.log('Datos de barraAvance:', data);
+					if (data === null) {
+						data = 0;
+					} else {
+						// Convertir a número si no es null
+						//data = parseInt(data, 10);
+	
+								
+						if (data.length > 0) {
+							const idPuntos = data[0]._id;
+							console.log('ID de los barraAvance para el userId:', idPuntos);
+	
+						} else {                       
+							
+								fetch(`/${userId}/barraAvance`, {
+									method: 'POST', 
+									headers: {
+										'Content-Type': 'application/json',
+									},
+										body: JSON.stringify({
+											userId: userId,
+											barraAvance: "100%", 
+										}),
+									})
+									.then(newResponse => {
+										if (!newResponse.ok) {
+											 throw new Error(`Error al crear nuevos barraAvance: ${newResponse.status}`);
+										}
+											return newResponse.json();
+									})
+									.then(newData => {
+											const newIdPuntos = newData._id;
+											console.log('Se creó un nuevo conjunto de barraAvance. Nuevo ID:', newIdPuntos);
+	
+									})
+									.catch(newError => {
+											console.error('Error al crear nuevos displayValue:', newError.message);
+	
+									}); 
+	
+									fetch(`/${userId}/barraAvance`)
+									.then(response => response.json())
+									.then(data => {
+										// Manejar la lista de tareas recibida en 'data'
+										console.log('Lista de barraAvance:', data);
+
+										valorBarraAvance=  data[0].barraAvance;     
+											if (valorBarraAvance !== null) {
+											barraAvance.style.width = valorBarraAvance;
+											}
+									})
+									.catch(error => console.error('Error al obtener la lista de displayValue:', error));
+	
+								
+						}  
+	
+	
+	
+					}
+			
+				})
+	
+	
+	
+	
+
+	
+		function updateDurationLabellg() {
+			var duracionLabel = document.getElementById("duracionLabel");
+			var duracionInput = document.getElementById("duracion-lg");
+
+
+			var minutos = duracionInput.value;
+			var horas = Math.floor(minutos / 60);
+			var minutosRestantes = minutos % 60;
+	
+			duracionLabel.textContent = horas + "h " + minutosRestantes + "min";
+	
+			}
+
+			function updateDurationLabelsm() {
+			var duracionLabel = document.getElementById("duracionLabel");
+			var duracionInput = document.getElementById("duracion-sm");
+
+			var minutos = duracionInput.value;
+			var horas = Math.floor(minutos / 60);
+			var minutosRestantes = minutos % 60;
+	
+			duracionLabel.textContent = horas + "h " + minutosRestantes + "min";
+	
+			}
+	
+		updateDurationLabellg();
+		updateDurationLabelsm();
+
+
+		function startCountdown() {
+			var timeLeft = 0; // Duración en segundos de la cuenta atrás
+			var pomSet = 1500; //Duración en segundos de la cuenta atrás del set. 1500                                                 Cambiar
+			var descanso1 = 300; //Duración del descanso.          300                                                                    Cambiar
+			var descanso2 = 1800; //Duración del descanso.  1800
+			var numerosetrealizados = -1;
+			
+		    var segundostotalesInsertadoslg = parseInt(document.getElementById("duracion-lg").value);
+		    var segundostotalesInsertadossm = parseInt(document.getElementById("duracion-sm").value);
+			var segundostotalesInsertados = 0;
+
+
+			var segundostotales = 0;
+			var slider = 0;
+
+			if(segundostotalesInsertadoslg > segundostotalesInsertadossm ){
+				console.log("Segundos totaleslg2: " +  segundostotalesInsertadoslg);
+				segundostotalesInsertados = segundostotalesInsertadoslg * 60; 
+
+				segundostotales = parseInt(document.getElementById("duracion-lg").value);      
+				segundostotales = segundostotales * 60;
+
+				slider = document.getElementById("duracion-lg");
+
+			}else{
+				console.log("Segundos totalessm2: " +  segundostotalesInsertadossm);
+				segundostotalesInsertados = segundostotalesInsertadossm * 60; 
+
+				segundostotales = parseInt(document.getElementById("duracion-sm").value);      
+				segundostotales = segundostotales * 60;
+
+				slider = document.getElementById("duracion-sm");
+			}
+
+			
+			//console.log("Segundos totales: " +  segundostotalesInsertados);
+
+
+			
+			
+			var descansodesactivado = true;                                              
+			var display = document.getElementById('countdown');
+	
+			
+			//dormida.style.display = "block"; 
+			dormida.classList.remove('d-none');
+			//despierta.style.display = "none"; 
+			despierta.classList.add('d-none');			
+			//terminar.style.display = "block";
+			terminar.classList.remove('d-none');
+			//empezar.style.display = "none";
+			empezar.classList.add('d-none');	
+
+			//botonSalir.style.display = "none";
+			document.getElementById('btnSalir').style.display = 'none';
+			sisales.style.display = "block";
+	
+			ocultarSidebar();                                             
+			empezarcoundown = true;
+			
+			//localStorage.setItem('empezarcoundown', 'true');
+	
+	
+	
+	
+			/*
+			window.addEventListener('beforeunload', function (e) {
+				if(empezarcoundown){
+					e.preventDefault();
+					terminarCountdown();
+					//window.location.href = 'cementerio.ejs';
+				}
+			}); */
+	
+	
+	 
+	
+			function updateDisplay() {             
+
+			var minutes = Math.floor(timeLeft / 60);
+			var seconds = timeLeft % 60;
+			display.textContent = '' + (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+			}
+	
+			
+			//var barraAvance = document.getElementById("barraAvance"); 
+	
+			function actualizarBarraDeProgreso() {
+			var porcentaje = (segundostotales / segundostotalesInsertados) * 100;    
+			barraAvance.style.width = porcentaje + "%";
+			//console.log("Segundos totales: " +  segundostotales);
+			}
+	
+	
+	  
+			// Función para manejar la cuenta regresiva
+			function countdown() {
+				barraAvance.style.width = "100%";
+				
+			   //localStorage.setItem("barraAvance", "100"); //
+			   fetch(`/${userId}/barraAvance`)
+								.then(response => response.json())
+								.then(datap => {
+									let idbarraAvance = datap[0]._id;
+									let userId = '<%= user.id %>';
+	
+									const dataToUpdate = {
+										userId: userId,
+										barraAvance: "100%" ,
+									};
+	
+									fetch(`/${userId}/barraAvance/${idbarraAvance}`, {
+												method: 'PUT',
+												headers: {
+													'Content-Type': 'application/json',
+												},
+												body: JSON.stringify(dataToUpdate),
+												})
+												.then(response => {
+													if (!response.ok) {
+													throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+													}
+													return response.json();
+												})
+												.then(updatedData => {
+													//console.log('Response JSON:', updatedData);
+													// Handle the updated data as needed
+												})
+												.catch(error => {
+													console.error('Error al realizar la solicitud:', error);
+												});                           
+								   
+								})
+								.catch(error => console.error('Error al obtener la lista de tareas:', error));
+	
+			   //terminar.style.display = "block";
+			   terminar.classList.remove('d-none');	
+			   //empezar.style.display = "none";
+			   empezar.classList.add('d-none');
+
+			   //botonSalir.style.display = "none";
+			   document.getElementById('btnSalir').style.display = 'none';
+			   sisales.style.display = "block";
+	
+			   
+	
+				var timer = setInterval(function () {
+					updateDisplay();
+					actualizarBarraDeProgreso();
+	
+	
+	
+	
+					window.addEventListener('beforeunload', function (event) {
+						console.log("Beforeunload");
+						localStorage.setItem('actionToPerform', 'terminarCountdown');
+					});
+	
+					// Check for the action and perform it on DOMContentLoaded
+					window.addEventListener('DOMContentLoaded', function () {
+						var action = localStorage.getItem('actionToPerform');
+	
+						if (action === 'terminarCountdown') {
+							// Execute the action after a short delay
+							setTimeout(function () {
+								terminarCountdown();
+								localStorage.removeItem('actionToPerform');
+							}, 1000); // Adjust the delay as needed
+						}
+					});
+				   
+					var miAudio = document.getElementById("miAudio");
+
+		
+					
+	
+					if (timeLeft === 0) {   
+						if ( descansodesactivado) {
+							console.log("Timeleft prueba 3")
+							miAudio.play();
+							messageBlock.style.display = "none";
+							messageBlock2.style.display = "none";
+
+							if (cicloIniciado) {
+								// Suma un punto solo si el ciclo ya ha comenzado
+								fetch(`/${userId}/puntos`)
+								.then(response => response.json())
+								.then(datap => {
+									let idPuntos = datap[0]._id;
+									let userId = '<%= user.id %>';
+	
+									if (!idPuntos) {
+										throw new Error('No se encontró un ID en los datos de puntos');
+									}
+									
+									const puntossuma = datap[0].puntosTotales + 1;
+									
+	
+									const dataToUpdate = {
+										userId: userId,
+										puntosTotales: puntossuma ,
+									};
+	
+									
+									document.getElementById("puntosTotales").textContent = puntossuma < 10 ? '0' +puntossuma : puntossuma;       
+									/*                         
+									puntosTotales++;
+									document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales; ///
+									localStorage.setItem("puntosTotales", puntosTotales);  */
+										
+									fetch(`/${userId}/puntos/${idPuntos}`, {
+												method: 'PUT',
+												headers: {
+													'Content-Type': 'application/json',
+												},
+												body: JSON.stringify(dataToUpdate),
+												})
+												.then(response => {
+													if (!response.ok) {
+													throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+													}
+													return response.json();
+												})
+												.then(updatedData => {
+													console.log('Response JSON:', updatedData);
+													// Handle the updated data as needed
+												})
+												.catch(error => {
+													console.error('Error al realizar la solicitud:', error);
+												});                           
+									
+								})
+								.catch(error => console.error('Error al obtener la lista de tareas:', error));
+						     	
+	
+							} else {
+								cicloIniciado = true; // Marca el inicio del ciclo
+							}
+							numerosetrealizados++;
+							
+							descansodesactivado = false;
+							if(segundostotalesInsertados < 1500){                                                              // Cambiar
+								timeLeft = segundostotalesInsertados;
+							}else{
+								timeLeft = pomSet;
+							}
+							
+							console.log("Número de sets terminados: " + numerosetrealizados); 
+							
+	
+						} else {
+							// Inicio del ciclo de descanso
+							messageBlock.style.display = "block";
+							messageBlock2.style.display = "block";
+							updateMessage();
+							descansodesactivado = true;
+	
+							if (numerosetrealizados === 4) {
+								// Comienza el segundo ciclo de descanso (descanso2)
+								miAudio.play();
+								numerosetrealizados = 0; // Reinicia el número de sets realizados
+								timeLeft = descanso2;
+								
+							} else {
+									// Inicio del ciclo de descanso normal (descanso1)
+								miAudio.play();
+								timeLeft = descanso1;
+							}
+							//timeLeft = descanso1;
+						}
+					  
+					}
+	
+					if (segundostotales === 0) {
+							clearInterval(timer); // Detén el temporizador cuando se agoten los segundos totales
+							console.log("Cuenta atrás finalizada.");
+							display.textContent = '' + (0 < 10 ? '0' : '') + 0 + ':' + (0 < 10 ? '0' : '') + 0;
+							segundostotales= 0;
+							descansodesactivado = true;
+							numerosetrealizados = -1;
+							cicloIniciado = false; 
+							porcentaje = 100;
+							barraAvance.style.width  = porcentaje + "%";
+							//document.getElementById("duracionLabel").textContent = valorActualSlider;
+							miAudio.play();
+
+
+							//despierta.style.display = "block"; 
+							despierta.classList.remove('d-none');
+							//dormida.style.display = "none"; 
+							dormida.classList.add('d-none');
+							//terminar.style.display = "none";
+							terminar.classList.add('d-none');
+							//empezar.style.display = "block";
+							empezar.classList.remove('d-none');
+
+							//botonSalir.style.display = "block";
+							document.getElementById('btnSalir').style.display = 'block';
+							sisales.style.display = "none";
+							messageBlock.style.display = "none";
+							messageBlock2.style.display = "none";
+							mostrarSidebar();                                                       
+							empezarcoundown = false;
+							localStorage.setItem('empezarcoundown', 'false');
+	
+	
+					}
+	
+					timeLeft--;
+					segundostotales--;
+
+				}, 1000);
+	
+			}
+	
+	
+			//var valorBarraAvance = localStorage.getItem("barraAvance"); //
+			fetch(`/${userId}/barraAvance`)
+								.then(response => response.json())
+								.then(datap => {
+									let idbarraAvance = datap[0]._id;
+									let userId = '<%= user.id %>';
+	
+									if (!datap[0].barraAvance) {
+											barraAvance.style.width = "100%";
+											//localStorage.setItem("barraAvance", "100"); //
+										
+	
+										const dataToUpdate = {
+											userId: userId,
+											barraAvance: "100" ,
+										};
+	
+										fetch(`/${userId}/puntos/${idbarraAvance}`, {
+													method: 'PUT',
+													headers: {
+														'Content-Type': 'application/json',
+													},
+													body: JSON.stringify(dataToUpdate),
+													})
+													.then(response => {
+														if (!response.ok) {
+														throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+														}
+														return response.json();
+													})
+													.then(updatedData => {
+														console.log('Response JSON:', updatedData);
+														// Handle the updated data as needed
+													})
+													.catch(error => {
+														console.error('Error al realizar la solicitud:', error);
+													});                           
+									}
+								})
+								.catch(error => console.error('Error al obtener la lista de tareas:', error));
+	
+	
+			countdown();
+				
+		}
+	
+		/*
+		var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];  ///
+			window.onload = function () {
+				// Obtener la lista local
+				var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];  ////
+	
+				itemStore = 0;
+				listaCementerio.forEach(function (element) {
+					if (element.index > itemStore) {
+						itemStore = element.index;
+					}
+				});  
+	
+		}; */
+	
+	
+		//var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
+				/*
+				var indiceAEliminar = -1;
+				data.forEach(function (element, index) {
+				if (element.nombre === nombreMascota) {
+					indiceAEliminar = index;
+					console.log("Se llega aqui");
+				} */
+	
+	
+	
+	
+		function eliminarMascota(nombreMascota) {
+			fetch('/' + userId +'/mascotas')
+			.then(response => response.json())
+			.then(data => {
+					/*Hacerlo aqui*/     
+					const mascotaAEliminar = data.find(mascota => mascota.nombre === nombreMascota);
+	
+	
+						const mascotaId = mascotaAEliminar._id;
+	
+						fetch(`/${userId}/mascotas/${mascotaId}`, {
+						method: 'DELETE',
+						})
+						.then(response => {
+							if (!response.ok) {
+							throw new Error(`Error al borrar la mascota: ${response.status}`);
+							}
+							return response.json();
+						})
+						.then(data => {
+							console.log('Mascota eliminada con éxito:', data);
+							window.location.href = "/cementerio/" + userId;
+						})
+						.catch(error => {
+							console.error('Error al borrar la mascota:', error.message);
+						});
+	
+	
+					
+			})
+			.catch(error => console.error('Error al obtener la lista de tareas:', error));
+			
+			
+		}
+	
+	
+	
+	
+		function enviarCementerio() {
+				// imagenPrincipalSrc
+				// nombrePrincipalSrc 
+								 
+				//localStorage.setItem('imagenPrincipalCementerio', imagenPrincipalSrc); ///
+				//localStorage.setItem('nombrePrincipalCementerio', nombrePrincipalSrc );  //
+				//localStorage.setItem('fechaCementerio', fechaFormateada );  ///
+	
+				/*
+				var nuevoElemento = {
+							imagenPrincipal: imagenPrincipalSrc,
+							nombre: nombrePrincipalSrc,
+							fechamuerte: fechaFormateada
+				}; */
+	
+				//listaCementerio.push(nuevoElemento);
+	
+	
+				//localStorage.setItem('CementerioElements', JSON.stringify( listaCementerio));
+				fetch(`/${userId}/mascotaprincipal`)
+					.then(response => {
+							if (!response.ok) {
+								throw new Error(`Error de red: ${response.status}`);
+							}
+							return response.json();
+							})
+					.then(datap => {
+						
+							var fechaActual = new Date();
+							let userId = '<%= user.id %>';
+	
+							// Formatea la fecha
+							var options = { year: 'numeric', month: 'long', day: 'numeric' };
+							var fechaFormateada = fechaActual.toLocaleDateString(undefined, options);
+	
+							var nuevoElemento = {
+									userId: userId,
+									imagenPrincipal: datap[0].imagenPrincipal,                            
+									nombre: datap[0].nombrePrincipal,
+									fecha: fechaActual
+							};
+	
+	
+										
+							fetch('/' + userId +'/muertos', {
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json',
+											},
+											body: JSON.stringify(nuevoElemento),
+											})
+											.then(response => response.json())
+											.then(data => {
+												console.log('Mascota muerta:', data);
+												eliminarMascota(datap[0].nombrePrincipal);
+	
+												let idPrincipal = datap[0]._id;
+	
+												if (!idPrincipal) {
+														throw new Error('No se encontró un ID en los datos de puntos');
+												}
+												
+	
+												const dataToUpdate = {
+													userId: userId,
+													nombrePrincipal:  'Sin mascota', 
+													imagenPrincipal:  'images/cruz.png',
+													segundaImagen:  'images/cruz.png',
+												};
+	
+												
+															  
+							  
+												fetch(`/${userId}/mascotaprincipal/${idPrincipal}`, {
+													method: 'PUT',
+													headers: {
+													'Content-Type': 'application/json',
+												},
+													body: JSON.stringify(dataToUpdate),
+												})
+												.then(response => {
+													if (!response.ok) {
+														throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+													}
+														return response.json();
+													})
+													.then(updatedData => {
+														console.log('Response JSON:', updatedData);
+																	
+													})
+													.catch(error => {
+														console.error('Error al realizar la solicitud:', error);
+													});
+											})
+											.catch(error => console.error('Error al guardar la tarea:', error));
+	
+	
+											//document.getElementById('imagenMascotaDespierta').src = "images/cruz.png";
+											imagenMascotaDespierta.style.backgroundImage = "url('images/cruz.png')";		
+
+											//document.getElementById('imagenMascotaDormida').src = "images/cruz.png";
+											imagenMascotaDormida.style.backgroundImage = "url('images/cruz.png')";		
+
+											document.getElementById('MascotaNombre').textContent = "";
+											
+											//localStorage.setItem('imagenPrincipal', "images/cruz.png"); ///
+											//localStorage.setItem('segundaImagen', "images/cruz.png");   //
+											//localStorage.setItem('nombrePrincipal', ""); ///
+	
+											nopoder.style.display = "block";
+											//localStorage.setItem("displayValue", "block"); //
+											
+											fetch(`/${userId}/displayValue`)
+												.then(response => response.json())
+												.then(data => {                                   
+													console.log('Lista de displayValue:', data);
+													idPrincipal = data[0]._id;
+	
+	
+													const dataToUpdate = {
+													userId: userId,
+													displayValue:  "block", 
+	
+													};
+	
+													fetch(`/${userId}/displayValue/${idPrincipal}`, {
+														method: 'PUT',
+														headers: {
+														'Content-Type': 'application/json',
+													},
+														body: JSON.stringify(dataToUpdate),
+													})
+													.then(response => {
+														if (!response.ok) {
+														throw new Error(`Error del servidor: ${response.status} - ${response.statusText}`);
+														}
+															return response.json();
+															
+													})
+													.then(updatedData => {
+														console.log('Response JSON:', updatedData);
+																								
+													})
+													.catch(error => {
+														console.error('Error al realizar la solicitud:', error);
+													});
+													
+													 
+	
+											})
+											.catch(error => console.error('Error al obtener la lista de displayValue:', error));
+	
+	   
+										
+						})
+						.catch(error => {
+								console.error('Error al obtener datos de puntos:', error.message);
+						}); 
+			   
+				 
+		 }
+	
+	
+		 
+	
+		function terminarCountdown(){
+			mostrarSidebar();                            //CAMBIAR NUEVO
+			enviarCementerio();
+				
+	
+		}
+	
+	
+		function checklist(){
+		console.log("Checklist");
+		var userId = '<%= user.id %>';
+		window.location.href = "/checklist/" + userId;
+		}
+	
+	
+	
+		function mascota(){
+		  console.log("Mascota");
+		  var userId = '<%= user.id %>';
+		  window.location.href = "/mascota/" + userId;
+	
+		}
+	
+		function cementerio(){
+		console.log("Cementerio");
+		var userId = '<%= user.id %>';
+		window.location.href = "/cementerio/" + userId;
+	
+		}
+
+		function papelera(){
+			 var userId = '<%= user.id %>';
+			 window.location.href = "/papelera/" + userId;
+	 
+		 }
+	 
+		 function tienda(){
         var userId = '<%= user.id %>';
-      window.location.href = "/cementerio/" + userId;
+        window.location.href = "/tienda/" + userId;
+        }		 
+	
+	
+	
+	
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
 
-    }
-
-
-
-
-</script>
-    <!--  <h1>Hello, world!</h1> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
 </html>

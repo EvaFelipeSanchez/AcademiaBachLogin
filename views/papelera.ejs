@@ -14,121 +14,15 @@
 
 
         <style>
-      .sidebaror {
-        position: relative;
-          transition: 0.3s;
-          display: flex;
-          flex-direction: column;
-          
-      }
-
-      .sidebaror img {
-            width: 85%;
-            height: auto;
-            margin-top: 2.5%;
-            }
-
-     .sidebar {
-          height: 150%;
-          width: 9%;
-          position: fixed;
-          top: 0;
-          left: -150%; 
-          background-color: #acc1e5;
-          transition: 0.3s;
-
-      }
-
-      .sidebar a {
-          padding: 7%;
-          text-decoration: none;
-          font-size: 1vw;
-          color: #1c4b6a;
-          display: block;
-      }
-
-      .sidebar img {
-      width: 100%;
-      height: auto;
-
-      }
-
-      .sidebar a:hover {
-          background-color: #acc1e5;
-      }
-
-
-      .content {
-          margin-left: 5%;
-          padding: 7%;
-      }
-
-      .content a img {
-        position: fixed;
-        left: 1%;
-        top: 1%;
-        width: 7%;
-        height: auto;
-        z-index: 3;
-        }
-
-        body {
-        background-image: url('/images/Fondo3.png');  
-        background-size: cover;               
-
-        margin: 0;
-        padding: 0;
-        overflow: hidden; 
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        }
-
-        main {
-        display: flex;
-        flex-direction: column;
-        }
-
-        header{
-            background-color: rgb(31, 39, 78);
-            color: white;
-            text-align: center;
-            padding: 0.5%;
-        
-        }
-
-        footer {
-            background-color: rgb(31, 39, 78);
-            color: white;
-            text-align: center;
-            padding: 0.5%;
-            margin-top: auto;
-        }
-            
-            
-        .header-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between; 
-        }
-        
+ 
 
         .listaTareasEliminadas {
             background-color: rgb(163, 186, 217);
-            width: 70%;
-            max-height: 70vh; 
-            overflow-y: auto; 
-            height: 70vh;
-            padding: 1.5%;
-            border: 1px solid #ccc;
-            position: fixed;
-            top: 55%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            font-family: 'Arial', sans-serif; 
-            font-size: 1vw;
-            flex-direction: column;
-            display: flex;
+            overflow-y: auto;      
+            padding: 1%;
+            font-family: sans-serif;
+             color: rgb(0, 0, 0);;
+            
             
         }
 
@@ -145,55 +39,23 @@
 
 
         .nuevaTarea {
-            padding: 1%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
+         
+            position: absolute;
+            padding: 10px;
             width: 100%;
-            left: 35%;
-            top: 11%;
-            transform: translate(-50%, -50%);
-            font-family: 'Arial', sans-serif; 
             font-size: 1vw;
-  
+            background-color: rgb(255, 255, 255);
+            
         }    
 
 
         .row {
-            display: flex;
-            align-items: center;
-            background-color: #fff;
-
+            background-color: rgb(255, 255, 255);
+            margin-bottom: 15px; 
+            margin: 0.7% 0%;
+            padding: 0.4%;
         }
 
-        .col {
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin: 0% 0%;;
-        }
-
-        .col:last-child {
-            margin-right: 0;
-        }
-
-        .flechavolver {
-        width: 90%;
-        position: fixed;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top: 13%; 
-        left: 23%; 
-        transform: translate(-50%, -50%); 
-        color: rgb(31, 39, 78);
-
-        }
-
-        .flechavolver img {
-        width: 43%;
-        height: auto;
-        }
 
 
         .textoexplicativo {
@@ -201,8 +63,8 @@
             font-family: 'Arial', sans-serif; 
             font-size: 1.2vw;
             position: absolute;
-            top: 91%;
-            left: 48%;
+            top: 85%;
+            left: 44%;
                 
         }
 
@@ -211,198 +73,57 @@
             font-family: 'Arial', sans-serif; 
             font-size: 1.2vw;
             position: absolute;
-            top: 94%;
-            left: 48%;
+            top: 89%;
+            left: 44%;
                 
         }
 
-        .cerrar {
-             position: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 13%; 
-            left: 91%; 
-            transform: translate(-50%, -50%); 
-            color: rgb(31, 39, 78);
-
-        }
-
-        .cerrar img {
-            max-width: 60%;
-            height: auto;
-        }
-
-        .nombreUsuario1 {
-            font-size: 1.3vw;
-            text-align: right;
-            color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            background-color: rgb(31, 39, 78);
-            z-index: 10;
-            margin: 0;
-        }
-
+    
         @media screen and (max-width: 600px) {
                         
-            .sidebaror {
-                position: relative;
-                transition: 0.3s;
-                display: flex;
-                flex-direction: row; 
-
-            }
-
-            .sidebar {
-                height: 10%; 
-                width: 90%; 
-                position: fixed;
-                top: 5.5%;
-                left: -150%;
-                background-color: #acc1e5;
-                transition: 0.3s;
-                display: flex; 
-                flex-direction: row; 
-                align-items: center; 
-                font-size: 150%;
-
-            }
-
-            .sidebar a {
-                padding: 1%; 
-                text-decoration: none;
-                font-size: 1vw;
-                color: #1c4b6a;
-                display: inline-block; 
-            }
-
-            .sidebar img {
-                width: 50%;
-                margin-left: 0;
-            }
-
-            .sidebar a:hover {
-                background-color: #acc1e5;
-            }
-
-            .content a img {
-                position: fixed;
-                left: 1%;
-                top: 4%;
-                width: 12%;
-                height: auto;
-                z-index: 3;
-            }
-
-            header{
-            background-color: rgb(31, 39, 78);
-            color: white;
-            text-align: center;
-            padding: 2%;
-
-            }
-
-            footer {
-            background-color: rgb(31, 39, 78);
-            color: white;
-            text-align: center;
-            padding: 2%;
-            margin-top: auto;
-            }
-
+        /*
+    
             .listaTareasEliminadas {
-            background-color: rgb(163, 186, 217);
-            width: 70%;
-            max-height: 60vh; 
-            overflow-y: auto; 
-            height: 60vh;
-            padding: 1.5%;
+                background-color: rgb(163, 186, 217);
+            width: 72%;
+            max-height: 65vh; 
+
+            height: 100%;
+            padding: 1%;
             border: 1px solid #ccc;
             position: fixed;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -50%); 
-            font-family: 'Arial', sans-serif; 
-            font-size: 2.1vw;
-            flex-direction: column;
-            display: flex;
+            font-size: 2.6vw;
+            font-family: sans-serif;
+            
             
         }
 
         .listaTareasEliminadas li {
-            list-style-type: none;
-            display: flex;
-            flex-direction: row; 
-            align-items: center;
-            background-color: white;
-            border: 1px solid #ccc; 
-            padding: 0.5%;
-        } 
+            margin-bottom: 10%;
+                background-color: white; 
+                border: 1px solid #ccc;
+                padding: 10%;
+        }  */
 
-        .flechavolver {
-        width: 60%;
-        position: fixed;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top: 25%; 
-        left: 38%; 
-        transform: translate(-50%, -50%); 
-        color: rgb(31, 39, 78);
-
-        }
-
-        .flechavolver img {
-        width: 33%;
-        height: auto;
-        }
-
-        .nombreUsuario1 {
-            font-size: 2.3vw;
-            text-align: right;
-            color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            background-color: rgb(31, 39, 78);
-            z-index: 10;
-            margin: 0;
-            }
-
-
-        .cerrar {
-            position: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            top: 25%; 
-            left: 85%; 
-            transform: translate(-50%, -50%); 
-            color: rgb(31, 39, 78);
-
-            }
-
-            .cerrar img {
-            max-width: 85%;
-            height: auto;
-            }
 
             
         .textoexplicativo {
             color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            font-size: 2.1vw;
+            font-family:  sans-serif; 
+            font-size: 2.5vw;
             position: absolute;
-            top: 91%;
-            left: 21%;
+            top: 87%;
+            left: 17%;
                 
         }
 
         .textoexplicativo2 {
             color: rgb(255, 255, 255);
-            font-family: 'Arial', sans-serif; 
-            font-size: 2.1vw;
+            font-family:  sans-serif; 
+            font-size: 2.5vw;
             position: absolute;
-            top: 93%;
-            left: 21%;
+            top: 90%;
+            left: 17%;
                 
         }
 
@@ -410,121 +131,19 @@
 
 
 
-            @media screen and (min-width: 601px) and (max-width: 1024px) {
-            .sidebaror {
-                position: relative;
-                transition: 0.3s;
-                display: flex;
-                flex-direction: column;
-                
-            }
-
-            .sidebaror img {
-                    width: 95%;
-                    height: auto;
-                    margin-top: 2.5%;
-                    }
-
-            .sidebar {
-                height: 150%;
-                width: 13%;
-                position: fixed;
-                top: 0;
-                left: -150%; 
-                background-color: #acc1e5;
-                transition: 0.3s;
-
-            }
-
-            .sidebar a {
-                padding: 7%;
-                text-decoration: none;
-                font-size: 1vw;
-                color: #1c4b6a;
-                display: block;
-            }
-
-            .sidebar img {
-            width: 110%;
-            height: auto;
-
-            }
-
-            .sidebar a:hover {
-                background-color: #acc1e5;
-            }
-
-
-            .content {
-                margin-left: 5%;
-                padding: 7%;
-            }
-
-            .content a img {
-                position: fixed;
-                left: 1%;
-                top: 2%;
-                width: 10%;
-                height: auto;
-                z-index: 3;
-                }
-
-                body {
-                background-image: url('/images/Fondo3.png');  
-                background-size: cover;               
-
-                margin: 0;
-                padding: 0;
-                overflow: hidden; 
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-                }
-
-                main {
-                display: flex;
-                flex-direction: column;
-                }
-
-                header{
-                    background-color: rgb(31, 39, 78);
-                    color: white;
-                    text-align: center;
-                    padding: 0.5%;
-                
-                }
-
-                footer {
-                    background-color: rgb(31, 39, 78);
-                    color: white;
-                    text-align: center;
-                    padding: 0.5%;
-                    margin-top: auto;
-                }
-                    
-                    
-                .header-container {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between; 
-                }
-
+            @media screen and (min-width: 601px) and (max-width: 1424px)  {
+                /*
                 .listaTareasEliminadas {
                     background-color: rgb(163, 186, 217);
                     width: 70%;
-                    max-height: 60vh; 
-                    overflow-y: auto; 
-                    height: 60vh;
-                    padding: 1.5%;
+                    max-height: 65vh; 
+                    height: 100%;
+                    padding: 1%;
                     border: 1px solid #ccc;
                     position: fixed;
-                    top: 60%;
-                    left: 50%;
-                    transform: translate(-50%, -50%); 
-                    font-family: 'Arial', sans-serif; 
                     font-size: 1.5vw;
-                    flex-direction: column;
-                    display: flex;
+                    font-family: sans-serif;
+    
                     
                 }
 
@@ -536,72 +155,26 @@
                     background-color: white;
                     border: 1px solid #ccc; 
                     padding: 0.5%;
-                } 
+                }  */
 
-                .flechavolver {
-                width: 60%;
-                position: fixed;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                top: 25%; 
-                left: 26%; 
-                transform: translate(-50%, -50%); 
-                color: rgb(31, 39, 78);
-
-                }
-
-                .flechavolver img {
-                width: 40%;
-                height: auto;
-                }
-
-                .nombreUsuario1 {
-                    font-size: 1.9vw;
-                    text-align: right;
-                    color: rgb(255, 255, 255);
-                    font-family: 'Arial', sans-serif; 
-                    background-color: rgb(31, 39, 78);
-                    z-index: 10;
-                    margin: 0;
-                    }
-
-
-                .cerrar {
-                    position: fixed;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    top: 23%; 
-                    left: 90%; 
-                    transform: translate(-50%, -50%); 
-                    color: rgb(31, 39, 78);
-
-                    }
-
-                    .cerrar img {
-                    max-width: 80%;
-                    height: auto;
-                    }
-
-                    
+                   
                 .textoexplicativo {
                     color: rgb(255, 255, 255);
                     font-family: 'Arial', sans-serif; 
-                    font-size: 1.8vw;
+                    font-size: 1.6vw;
                     position: absolute;
-                    top: 91%;
-                    left: 21%;
+                    top: 84%;
+                    left: 31%;
                         
                 }
 
                 .textoexplicativo2 {
                     color: rgb(255, 255, 255);
                     font-family: 'Arial', sans-serif; 
-                    font-size: 1.8vw;
+                    font-size: 1.6vw;
                     position: absolute;
-                    top: 94%;
-                    left: 21%;
+                    top: 88%;
+                    left: 31%;
                         
                 }
 
@@ -610,136 +183,141 @@
                     
   </style>
   </head>
-    
-  <body>
+  <body class="vh-100">
+	<div class="d-flex flex-row vh-100">
+		<div class="offcanvas offcanvas-start w-auto" id="navbarSupportedContent" style="background-color: #acc1e5;">
+			<div class="offcanvas-header">
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
 
-    
+			<div class="offcanvas-body">
+				<ul class="nav flex-column">
 
-    <header>
-        <p class="nombreUsuario1">   Usuario conectado: <%= user.name %>  &nbsp;  &nbsp;</p>  
-    </header>
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="index()">
+							<img src="/images/indexlogo.png" style="width: 100px;" >
 
-    <main class="d-flex justify-content-between flex-row mb-3 flex-lg-row">
-
-        <div class="p-2 ">    
-            <div class="sidebaror " > 
-                <div class="content" >
-                    <a href="#" onclick="toggleSidebar()"><img src="/images/logo.png" alt="Botón de menú"></a>
-                </div>
-                <div class="sidebar" id="sidebar">
-                    <p>&nbsp; &nbsp;</p>
-                    <p>&nbsp; &nbsp;</p>
-                    <p>&nbsp; &nbsp;</p>
-                    <p>&nbsp; &nbsp;</p>
-                    <a href="#" onclick="checklist()"><img src="/images/listaicono.png" alt="Icono Checklist"></a>
-                    <a href="#" onclick="mascota()"><img src="/images/homeicono.png" alt="Icono Tienda"></a>
-                    <a href="#" onclick="cementerio()"><img src="/images/Tumba.png" alt="Icono Cementerio"></a>
-                </div>
-            </div>           
-
-      </div>
-
-      <div class="p-2 ">   
-
-        
-        <ul class="listaTareasEliminadas" id="listaTareasEliminadas">
-        </ul>     
-
-
-        <div class="flechavolver" id="flechavolver">
-            <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-            <a href="#" onclick="flechavolver()"><img src="/images/Flecha.png" alt="IconoFlecha"></a>
-        </div>
-        <div class="cerrar" id="cerrar">
-            <a></a> <a></a>  <a></a> <a></a> <a></a> <a></a> <a></a> <a></a>
-            <a href="#" onclick="cerrar()"><img src="/images/cerrar.png" alt="IconoCerrar"></a>
-        </div>
-
-        <div class="textoexplicativo" id="textoexplicativo">Las tareas con fecha de hace un mes se borrarán automáticamente.</div>
-        <div class="textoexplicativo2" id="textoexplicativo2">Las tareas restauradas ya no valdrán puntos.</div>
-        
-      </div>
-
-
-
-      <div class="p-2 "> 
-       
-      </div>
-
-                
-    </main>
-
-    <footer>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="checklist()">
+							<img src="/images/listaicono.png" style="width: 100px;" >
+         
+						</a>
+					</li>
       
-    </footer>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="mascota()">
+                            <img src="/images/homeicono.png" style="width: 100px;">
+                   
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="tienda()">
+                            <img src="/images/tiendalogo.png" style="width: 100px;">
+            
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="cementerio()">
+                            <img src="/images/Tumba.png" style="width: 100px;">
+            
+                        </a>
+                    </li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="offcanvas offcanvas-top" id="navbarSupportedContentTop" style="background-color: #acc1e5;">
+			<div class="offcanvas-header">
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+			<div class="offcanvas-body">
+				<ul class="nav flex-row">
+                    <li class="nav-item"  style="margin-right: -2%; ">
+						<a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="index()">
+							<img src="/images/indexlogo.png" style="width: 55px;" >
+               
+						</a>
+					</li>
+					<li class="nav-item" style="margin-right: -2%;">
+						<a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="checklist()">
+							<img src="/images/listaicono.png" style="width: 55px;" >
+                            
+						</a>
+					</li>
+            
+                <li class="nav-item" style="margin-right: -2%;">
+                    <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="mascota()">
+                        <img src="/images/homeicono.png" style="width: 55px;">
+                      
+                    </a>
+                </li>
+                <li class="nav-item" style="margin-right: -2%;">
+                    <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="tienda()">
+                        <img src="/images/tiendalogo.png" style="width: 55px;">
+                   
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="cementerio()">
+                        <img src="/images/Tumba.png" style="width: 60px;">
+                       
+                    </a>
+                </li>
+				</ul>
+			</div>
+		</div>
 
 
+
+
+
+        <div class="flex-grow-1 d-flex flex-column">
+			<div class="p-2  flex-grow-1 d-flex flex-column  justify-content-start align-items-stretch" style="background-color:rgb(82,107,141); color:white">
+
+				<div class="d-flex flex-row justify-content-between">
+					<a type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="d-none d-lg-block">
+						<img src="/images/logo.png" style="width: 100px;">
+					</a>
+
+					<a type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContentTop" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="d-lg-none">
+						<img src="/images/logo.png" style="width: 80px;">
+					</a>
+
+				</div>
+
+               
+		        <div class="flex-grow-1" style="background-color: rgb(163, 186, 217);">
+                    <ul  class="listaTareasEliminadas" id="listaTareasEliminadas" >
+                    </ul>   
+                </div> 
+                <div >
+                    <div id="textoexplicativo" style="text-align: right;">Las tareas con fecha de hace un mes se borrarán automáticamente.</div>
+  
+                </div> 
+                <div >
+                    <div  id="textoexplicativo2" style="text-align: right;" >Las tareas restauradas ya no valdrán puntos.</div>  
+                </div> 
+               
+
+                     
+			</div>
+		</div>
+
+
+        
+    </div>
 
 
 
 
   <script>
-           /*
-       const nuevaTarea = {
-        nombre: 'Nombre de la tarea',
-        fechaVencimiento: new Date(), // Puedes ajustar la fecha según sea necesario
-        puntos: 10,
-        tipotarea: 'Tipo de tarea',
-        };
-
-        // Realizar una solicitud POST a la ruta /api/tareas
-        fetch('/api/tareas', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(nuevaTarea),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Manejar la respuesta recibida después de guardar la tarea
-            console.log('Tarea guardada:', data);
-            // Aquí puedes realizar cualquier otra operación después de guardar la tarea
-        })
-        .catch(error => console.error('Error al guardar la tarea:', error));
-
-        fetch('/api/tareas')
-        .then(response => response.json())
-        .then(data => {
-            // Manejar la lista de tareas recibida en 'data'
-            console.log('Lista de tareas:', data);
-            // Aquí puedes realizar cualquier otra operación con la lista de tareas
-        })
-        .catch(error => console.error('Error al obtener la lista de tareas:', error));
-
-        const taskId = Obtén el id de alguna manera ;
-        // Realizar una solicitud DELETE a la ruta /api/tareas/:id
-        fetch(`/api/tareas/${taskId}`, {
-        method: 'DELETE',
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Manejar la respuesta recibida después de eliminar la tarea
-            console.log('Tarea eliminada:', data);
-            // Puedes realizar cualquier otra operación después de eliminar la tarea
-        })
-        .catch(error => console.error('Error al eliminar la tarea:', error));
-
-      */
-    
+   
 
     
       var userId = '<%= user.id %>';
       
-      function toggleSidebar() {
-          var sidebar = document.getElementById('sidebar');
-          if (sidebar.style.left === '0px') {
-              sidebar.style.left = '-750px';
-          } else {
-              sidebar.style.left = '0px';
-          }
-      }
-
         
         //const tareasEliminadas = JSON.parse(localStorage.getItem('tareasEliminadas')) || []; ///
         let taskIdCounter = 0;
@@ -914,27 +492,29 @@
 
     }
 
-    function flechavolver(){
-        var userId = '<%= user.id %>';
-        window.location.href = "/checklist/" + userId;
-
-    }
-
     function mascota(){
         var userId = '<%= user.id %>';
       window.location.href = "/mascota/" + userId;
 
     }
-    function cerrar(){
-        var userId = '<%= user.id %>';
-        window.location.href = "/"  + userId;
 
-    }
     function cementerio(){
         var userId = '<%= user.id %>';
       window.location.href = "/cementerio/" + userId;
 
     }
+
+    function tienda(){
+        var userId = '<%= user.id %>';
+        window.location.href = "/tienda/" + userId;
+    }		 
+	
+
+    function checklist(){
+		console.log("Checklist");
+		var userId = '<%= user.id %>';
+		window.location.href = "/checklist/" + userId;
+	}
 
 </script>
     <script src="/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.js"></script>
