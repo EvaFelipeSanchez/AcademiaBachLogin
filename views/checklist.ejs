@@ -52,11 +52,13 @@
             right: 0;
             height: 60px;
             overflow-y: auto; 
+            text-align: center;
         }
 
         .avisoTareasVencidas ul {
             list-style-type: none;
             padding: 0;
+            text-align: center;
         }
 
 
@@ -68,8 +70,8 @@
     
 
 
-<body class="vh-100">
-	<div class="d-flex flex-row vh-100">
+<body >
+	<div class="d-flex flex-row min-vh-100">
 		<div class="offcanvas offcanvas-start w-auto" id="navbarSupportedContent" style="background-color: #acc1e5;">
 			<div class="offcanvas-header">
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -180,8 +182,8 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <select id="Tipo de tarea" class="form-select m-1">
-                        <option selected>Tipo de tarea</option>
+                    <select id="Tipo de tarea" class="form-select m-1" placeholder="Tipo de tarea">
+                        <option selected>Ejercicio</option>
                         <option value="Examen">Examen</option>
                         <option value="Proyecto">Proyecto</option>
                     </select>

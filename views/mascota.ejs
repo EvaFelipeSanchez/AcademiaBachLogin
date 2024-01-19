@@ -149,7 +149,7 @@
                 </div>
                 -->
 
-                <div style="background-color: rgb(31, 39, 78); color:white;" id="avisovacio" class="d-flex flex-column align-items-center p-3">
+                <div style="background-color: rgb(31, 39, 78); color:white;" class="avisovacio d-flex flex-column align-items-center p-3" id="avisovacio">
                     <h3  class="display-3 text-center" >Lista de mascotas vacía</h3>
                     <h3  class="display-3 text-center" >Compra una mascota en la tienda</h3>
                     <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="tienda()">
@@ -432,20 +432,7 @@
          
 
         
-        fetch(`/${userId}/puntos`)
-        .then(response => response.json())
-        .then(data => {
-            
-            console.log('Lista de tareas:', data);
-            if (data) {
-            puntosTotales = data[0].puntosTotales;
-            document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
-            } else {
-                puntosTotales = 0; 
-            }
-            
-        })
-        .catch(error => console.error('Error al obtener la lista de tareas:', error));
+
 
 
    
