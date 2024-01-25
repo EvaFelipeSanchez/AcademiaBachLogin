@@ -149,13 +149,17 @@
                 </div>
                 -->
 
-                <div style="background-color: rgb(31, 39, 78); color:white;" class="avisovacio d-flex flex-column align-items-center p-3" id="avisovacio">
-                    <h3  class="display-3 text-center" >Lista de mascotas vacía</h3>
-                    <h3  class="display-3 text-center" >Compra una mascota en la tienda</h3>
-                    <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="tienda()">
-                        <img src="/images/tiendalogo.png" style="width: 100px;">
-                    </a>
-                </div>
+                <div  id="avisovacio">
+                    <div style="background-color: rgb(31, 39, 78); color:white;" class="avisovacio d-flex flex-column align-items-center p-3" >
+                        <h3  class="display-3 text-center" >Lista de mascotas vacía</h3>
+                        <h3  class="display-3 text-center" >Compra una mascota en la tienda</h3>
+                        <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="tienda()">
+                            <img src="/images/tiendalogo.png" style="width: 100px;">
+                        </a>
+                    </div>
+                </div> 
+               
+
   
                
                 
@@ -179,23 +183,47 @@
         var items = store.querySelectorAll('.item');
         var userId = '<%= user.id %>';
 
-		var avisovacio = document.querySelector(".avisovacio");
-		avisovacio.style.display = "none";
+		//var avisovacio = document.querySelector(".avisovacio");
+        //var avisovacio = document.getElementById('avisovacio');
+        var avisovacioContainer = document.getElementById('avisovacio');
+
+		//avisovacio.style.display = 'none';
+
+        function ocultarContenido() {
+            avisovacioContainer.innerHTML = '';
+        }
 
 
+        function mostrarContenido() {
+            avisovacioContainer.innerHTML = `
+                <div style="background-color: rgb(31, 39, 78); color:white;" class="avisovacio d-flex flex-column align-items-center p-3">
+                    <h3 class="display-3 text-center">Lista de mascotas vacía</h3>
+                    <h3 class="display-3 text-center">Compra una mascota en la tienda</h3>
+                    <a class="nav-link" aria-current="page" href="#" style="text-align:center" onclick="tienda()">
+                        <img src="/images/tiendalogo.png" style="width: 100px;">
+                    </a>
+                </div>
+            `;
+        }
+        
 
         fetch('/' + userId +'/mascotas')
         .then(response => response.json())
         .then(data => {
             console.log('Lista de mascotas:', data);
 
+           /*
+            if (data.length === 0) {
+               // avisovacio.style.display = 'block';
+            }else{
+                avisovacio.style.display = 'none';
+            } */
 
             if (data.length === 0) {
-                avisovacio.style.display = "block";
+                mostrarContenido();
             }else{
-                avisovacio.style.display = "none";
+                ocultarContenido();
             }
-
             
 
         //var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];

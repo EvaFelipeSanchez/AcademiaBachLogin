@@ -293,11 +293,11 @@
                     </ul>   
                 </div> 
                 <div >
-                    <div id="textoexplicativo" style="text-align: right;">Las tareas con fecha de hace un mes se borrarán automáticamente.</div>
+                    <div id="textoexplicativo" style="text-align: right;">Las tareas con fecha de vencimiento de hace más de 30 días se borrarán automáticamente.</div>
   
                 </div> 
                 <div >
-                    <div  id="textoexplicativo2" style="text-align: right;" >Las tareas restauradas ya no valdrán puntos.</div>  
+                    <div  id="textoexplicativo2" style="text-align: right;" >Las tareas restauradas que han sido completadas ya no valdrán puntos.</div>  
                 </div> 
                
 
@@ -334,10 +334,10 @@
         }); */
 
         
-
+        /*
         function eliminarTareasAnterioresAUnMes() {                                                                         //ARREGLAR
 
-         }
+         } */
 
                 /*
         function eliminarTarea(tareaRow) {
@@ -368,10 +368,10 @@
                         const fechaVencimiento = new Date(tarea.fechaVencimiento);
                         const diferenciaEnMilisegundos = fechaVencimiento - fechaActual;
                         const diferenciaEnDias = Math.floor(diferenciaEnMilisegundos / (1000 * 60 * 60 * 24));
-                        
+                        console.log(tarea.nombre+ " tiene como diferencia de días " + diferenciaEnDias);
+       
 
-
-                        if (diferenciaEnDias > 30) {
+                        if (diferenciaEnDias <  -30) {
                             fetch('/' + userId +`/papeleras/${tarea._id}`, {
                                 method: 'DELETE',
                                 })
@@ -479,7 +479,7 @@
             });
         }
 
-        eliminarTareasAnterioresAUnMes();
+        //eliminarTareasAnterioresAUnMes();
         ordenarTareasPorFecha();
 </script>
 
