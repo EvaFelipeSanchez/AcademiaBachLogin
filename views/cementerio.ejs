@@ -129,14 +129,6 @@
 
                 
 			</div>
-            <!--
-            <div class="p-2 d-flex flex-lg-column  flex-row align-items-center"  style="background-color: rgb(31, 39, 78); color:white;">
-                <div>
-                    <h1 class="display-9 " style="text-align:center">Puntos</h1>
-                    <h1 class="display-10 " style="text-align:center"><p id="puntosTotales">00</p></h1>
-                </div>    
-            </div>
-           -->
 
 		</div>
 
@@ -148,17 +140,9 @@
 <script>
 
     var cementerio = document.querySelector('.cementerio');
-
-    // Obtener todos los elementos con clase "item" dentro de la tienda
-    var items = cementerio.querySelectorAll('.item');
-    let userId = '<%= user.id %>';
-
-    // Crear una lista local para almacenar los elementos de la tienda
-    //var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
-    //var listaCementerio = [];
-    //localStorage.setItem('CementerioElements', JSON.stringify(listaCementerio));
-
     
+    var items = cementerio.querySelectorAll('.item');
+    let userId = '<%= user.id %>';    
 
 
     fetch(`/${userId}/muertos`)
@@ -171,15 +155,7 @@
             var nombre = item.querySelector('.nombre').textContent;
             var fechamuerte = item.querySelector('.fechamuerte').textContent;
             
-            /*
-            var elementoCementerio = {
-                imagenPrincipal: imagenPrincipal,
-                nombre : nombre,
-                fechamuerte: fechamuerte
-            };
-
-            listaCementerio.push(elementoCementerio); */
-                });
+            });
 
             }
 
@@ -187,8 +163,6 @@
         })
         .catch(error => console.error('Error al obtener la lista de tareas:', error)); 
  
-   // localStorage.setItem('CementerioElements', JSON.stringify(listaCementerio));
-    //console.log(listaCementerio);
 
     window.onload = function() {
         
@@ -210,7 +184,7 @@
         function cargarElementosGuardados() {
             var CementerioElementsContainer = document.querySelector('.cementerio');
             CementerioElementsContainer.innerHTML = '';
-            //var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];
+           
             fetch(`/${userId}/muertos`)
             .then(response => response.json())
             .then(listaCementerio => {
@@ -288,7 +262,6 @@
 
 </script>
 
-    <!--  <h1>Hello, world!</h1> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>

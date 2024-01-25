@@ -7,10 +7,6 @@
 	<title>AcademiaBach</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<style>
-		/* .offcanvas {
-      --bs-offcanvas-width: none !important;
-      --bs-offcanvas-height: !important;
-    } */
 
 
 	.message-block {
@@ -306,8 +302,6 @@
 				<div style="width:100%; background-image: url('images/BlancoSet.png'); background-repeat: no-repeat; background-attachment: local; background-size: contain;
                background-position: center center;" class="flex-grow-1 d-flex flex-column ">
 
-					<!-- <div style="border: 1px SOLID black; background-image: url('images/cruz.png'); background-repeat: no-repeat; background-attachment: local; background-size: contain;
-					background-position: center center;" class="flex-grow-1"> -->
 
 					<div id="imagenMascotaDormida" style="background-image: url('images/cruz.png');  background-repeat: no-repeat; background-attachment: local; background-size: 25% 70%;
 					background-position: center center;"  class="flex-grow-1">
@@ -332,11 +326,6 @@
 					<div class="barra-avance" id="barraAvance"></div>
 					</div>
 				</div>
-				<!--
-				<div class="progress" role="progressbar" style="width:50%; height: 20px">
-					<div class="progress-bar w-100" id="barraAvance" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-					</div>
-				</div> -->
 
 				<div class="p-2">
 					<button type="button" class="btn btn-primary btn-lg" id="algo"  style="font-size: 24px; background-color: #212958;">Asigna una mascota para continuar</button>
@@ -354,10 +343,10 @@
 					<div class="range-slider d-flex flex-column flex-grow-1 p-2">
 						<p class="text-center fs-3">Duración</p>
 						
-						<!-- Larger screens -->
+						
 						<input class="input-range flex-grow-1 d-none d-lg-block" orient="vertical" type="range" step="1"  id="duracion-lg" name="duracion"  min="1" max="240" value="0" style="appearance: slider-vertical;" oninput="updateDurationLabellg('duracion-lg')"> 
 						
-						<!-- Smaller screens -->
+						
 						<input class="input-range flex-grow-1 d-lg-none" orient="vertical" type="range" step="1"  id="duracion-sm" name="duracion"   min="1" max="240" value="0" oninput="updateDurationLabelsm('duracion-sm')">
 						
 						<p class="text-center fs-4"><span id="duracionLabel"> 0h 0min </span></p>
@@ -495,8 +484,7 @@
 					if (data === null) {
 						data = 0;
 					} else {
-						// Convertir a número si no es null
-						//data = parseInt(data, 10);
+						
 	
 								
 						if (data.length > 0) {
@@ -524,13 +512,13 @@
 										const newIdPuntos = newData._id;
 										console.log('Se creó un nuevo conjunto de puntos. Nuevo ID:', newIdPuntos);
 	
-										// Fetch points after creating new points
+										
 										fetch(`/${userId}/puntos`)
 											.then(response => response.json())
 											.then(data => {
-												// Manejar la lista de tareas recibida en 'data'
+												
 												console.log('Lista de tareas:', data);
-												// Aquí puedes realizar cualquier otra operación con la lista de tareas
+												
 											})
 											.catch(error => console.error('Error al obtener la lista de tareas:', error));
 									})
@@ -565,17 +553,13 @@
 				empezar.classList.add('d-none');	
 
 				function ImagenAsignar() {
-					//document.getElementById('imagenMascotaDespierta').src = 'images/cruz.png';
+					
 					var imagenMascotaAsignar = document.getElementById('imagenMascotaDespierta');	
 					var urlImagenEsperadaAsignar = 'images/cruz.png';
 
 					if (imagenMascotaAsignar) {
 
 						var backgroundImage = window.getComputedStyle(imagenMascotaAsignar, null).getPropertyValue('background-image');
-
-						// La URL del fondo estará entre paréntesis
-						//var backgroundImageUrl = backgroundImage.match(/\((.*?)\)/)[1].replace(/('|")/g, '');
-
 
 						var nopoder = document.getElementById("algo");
 
@@ -588,9 +572,9 @@
 						})
 						.then(data => {
 							if(backgroundImage.includes("images/cruz.png") && (data[0].imagenPrincipal).includes("images/cruz.png")){
-									//if (imagenCargada.endsWith(imagenEsperada)) {
+									
 										console.log('La imagen es la esperada.');
-										//nopoder.style.display = 'block';
+										
 										nopoder.classList.remove('d-none');
 										empezar.classList.add('d-none');
 				
@@ -612,22 +596,8 @@
 						console.error('Elemento no encontrado');
 						nopoder.classList.remove('d-none');
 						empezar.classList.add('d-none');
-					}
-						
+					}				
 					
-
-
-
-
-					//console.log(imagenMascotaAsignar.src); //sale:  http://localhost:3000/images/cruz.png
-					//var imagenCargada = imagenMascotaAsignar.src.trim();
-					//var imagenEsperada = decodeURIComponent(urlImagenEsperadaAsignar).trim();
-
-
-					//imagenMascotaDespierta.style.backgroundImage = "url('images/cruz.png')";
-					//var nopoder = document.querySelector(".nopoder");
-
-
 				}
 				ImagenAsignar();
 	
@@ -649,9 +619,7 @@
 			messageElement2.textContent = newMessage2;
 		}
 	
-		//updateMessage();
-		//despierta.style.display = "none"; 
-		//dormida.style.display = "block"; 
+ 
 		var imagenMascotaDormida = document.getElementById('imagenMascotaDormida');
 		var imagenMascotaDespierta = document.getElementById('imagenMascotaDespierta');
 	
@@ -663,7 +631,7 @@
 			return response.json();
 		})
 		.then(data => {
-			// Check if there is no information for the userId
+			
 			if (Object.keys(data).length === 0) {
 	
 				const postData = {
@@ -673,8 +641,7 @@
 						segundaImagen:  'images/cruz.png',
 				};
 	
-				//document.getElementById('imagenMascotaDespierta').src = 'images/cruz.png';
-				//document.getElementById('imagenMascotaDormida').src = 'images/cruz.png';
+
 				imagenMascotaDespierta.style.backgroundImage = "url('images/cruz.png')";	
 				imagenMascotaDormida.style.backgroundImage = "url('images/cruz.png')";				
 				document.getElementById('MascotaNombre').textContent = 'Sin mascota';
@@ -682,7 +649,6 @@
 				
 				console.log("User: " + userId + " Nombre: " + postData.nombrePrincipal + " Imagen: " + postData.imagenPrincipal);
 	
-						// Continúa con el código para enviar la solicitud al servidor aquí
 						
 						fetch(`/${userId}/mascotaprincipal`, {
 							method: 'POST',
@@ -698,10 +664,9 @@
 							return response.json();
 						})
 						.then(newMascotData => {
-							// Handle the response after creating the main mascot
+							
 							console.log('Main mascot created:', newMascotData);
-							//var nopoder = document.querySelector(".nopoder");
-							//nopoder.style.display = 'block';
+
 							var nopoder = document.getElementById("algo");
 							nopoder.classList.remove('d-none');
 						})
@@ -711,18 +676,12 @@
 	
 	
 	
-				// Make a POST request to create a main mascot
-				
-	 
-				//console.log("Imagen despierto if: " + data[0].imagenPrincipal);
+
 				
 			} else {
 				
-				//console.log("Imagen despierto else: " + data[0].imagenPrincipal);
-				//document.getElementById('imagenMascotaDespierta').src = data[0].imagenPrincipal;
-				imagenMascotaDespierta.style.backgroundImage = "url('" + data[0].imagenPrincipal + "')";
 
-				//document.getElementById('imagenMascotaDormida').src = data[0].segundaImagen;
+				imagenMascotaDespierta.style.backgroundImage = "url('" + data[0].imagenPrincipal + "')";
 				imagenMascotaDormida.style.backgroundImage = "url('" + data[0].segundaImagen + "')";
 
 				document.getElementById('MascotaNombre').textContent = data[0].nombrePrincipal;
@@ -730,51 +689,27 @@
 		})
 		.catch(error => {
 			console.error('Error fetching main mascot data:', error.message);
-		});
+		});	
 	
 	
-	/*
-		function toggleSidebar() {
-			  var sidebar = document.getElementById('sidebar');
-			  if (sidebar.style.left === '0px') {
-				  sidebar.style.left = '-750px';
-			  } else {
-				  sidebar.style.left = '0px';
-			  }
-		  } */
-	
-		//var countdown;
 		var puntosTotales = 0;
 		var cicloIniciado = false;
 		
-		//var puntosTotalesGuardados = localStorage.getItem("puntosTotales"); //
 	
 		
 		var despierta = document.getElementById("imagenMascotaDespierta");
 		var dormida = document.getElementById("imagenMascotaDormida");
-		//despierta.style.display = "block"; 
+
 		despierta.classList.remove('d-none');
-		//dormida.style.display = "none";
-		dormida.classList.add('d-none');
-	
+		dormida.classList.add('d-none');	
 		var terminar = document.getElementById("terminarButton");
-		//terminar.style.display = "none";
+	
 		terminar.classList.add('d-none');
 
-		//empezar.style.display = "block";
-		//empezar.classList.add('d-none');
-
-		//var botonSalir = document.querySelector('.logout button');
-		//botonSalir.style.display = 'block';
-		document.getElementById('btnSalir').style.display = 'block';
-
-	
+		document.getElementById('btnSalir').style.display = 'block';	
 		var sisales = document.querySelector(".sisales");
-		sisales.style.display = "none";
-	
-		   
-	
-		//var savedDisplayValue = localStorage.getItem("displayValue");  ///
+		sisales.style.display = "none";	   
+
 	
 		fetch(`/${userId}/displayValue`)
 				.then(response => {
@@ -788,8 +723,6 @@
 					if (data === null) {
 						data = 0;
 					} else {
-						// Convertir a número si no es null
-						//data = parseInt(data, 10);
 	
 						
 						if (data.length > 0) {
@@ -801,7 +734,7 @@
 							if (savedDisplayValue) {
 									   console.log("Valor display existe: " + savedDisplayValue);
 									   var nopoder = document.getElementById("algo");
-										//var nopoder = document.querySelector(".nopoder");                                  
+										                                 
 										
 										if(savedDisplayValue == "none"){
 
@@ -810,7 +743,7 @@
 										}
 										
 										}else{                                        
-											//nopoder.style.display = "none";
+											
 											nopoder.classList.add('d-none');
 										}
 							} else {                       
@@ -844,19 +777,18 @@
 									fetch(`/${userId}/displayValue`)
 									.then(response => response.json())
 									.then(data => {
-										// Manejar la lista de tareas recibida en 'data'
+										
 										console.log('Lista de displayValue:', data);
 	
 										savedDisplayValue = data[0].displayValue;
 										if (savedDisplayValue == "none") {
-										//var nopoder = document.querySelector(".nopoder");
+										
 										var nopoder = document.getElementById("algo");
 										nopoder.classList.add('d-none');
-
-										//nopoder.style.display = savedDisplayValue;
+										
 
 										}else{
-											//nopoder.style.display = "block";
+											
 											nopoder.classList.remove('d-none');
 										}
 									})
@@ -873,36 +805,7 @@
 	
 	
 	
-		//sidebar
-		/*
-		function ocultarSidebar() {
-			var logoButton = document.querySelector('.content a img');
-			logoButton.style.display = 'none';
 	
-			var sidebar = document.querySelector('.sidebar');
-			var elementosSidebar = sidebar.children;
-	
-			for (var i = 0; i < elementosSidebar.length; i++) {
-				var elemento = elementosSidebar[i];
-				elemento.style.display = 'none';
-			}
-	
-			
-		}
-
-		function mostrarSidebar() {
-			var logoButton = document.querySelector('.content a img');
-			logoButton.style.display = 'block';
-	
-			var sidebar = document.querySelector('.sidebar');
-			var elementosSidebar = sidebar.children;
-	
-			for (var i = 0; i < elementosSidebar.length; i++) {
-				var elemento = elementosSidebar[i];
-				elemento.style.display = 'block';
-			}
-		} */
-
 		var navbarSupportedContent = document.getElementById("navbarSupportedContent");
 		var navbarSupportedContentTop = document.getElementById("navbarSupportedContentTop");
 		function ocultarSidebar() {
@@ -916,23 +819,8 @@
 			navbarSupportedContentTop.style.display = "block";
 		}
 	
-		var empezarcoundown = false; 
-		//var empezarcoundown = localStorage.getItem('empezarcoundown') === 'false'; 
-	
+		var empezarcoundown = false; 	
 		
-		 //
-	
-	
-		/*
-		if (puntosTotalesGuardados) { 
-		puntosTotales = parseInt(puntosTotalesGuardados, 10);
-		// Actualiza el texto en el elemento de puntos totales
-		document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales;
-		} else {
-			puntosTotales = 0; // Inicializa la variable si no hay puntos almacenados
-		} */
-	
-		//var valorBarraAvance = localStorage.getItem("barraAvance"); //
 		
 		fetch(`/${userId}/barraAvance`)
 				.then(response => {
@@ -946,9 +834,7 @@
 					if (data === null) {
 						data = 0;
 					} else {
-						// Convertir a número si no es null
-						//data = parseInt(data, 10);
-	
+
 								
 						if (data.length > 0) {
 							const idPuntos = data[0]._id;
@@ -985,7 +871,7 @@
 									fetch(`/${userId}/barraAvance`)
 									.then(response => response.json())
 									.then(data => {
-										// Manejar la lista de tareas recibida en 'data'
+										
 										console.log('Lista de barraAvance:', data);
 
 										valorBarraAvance=  data[0].barraAvance;     
@@ -1039,10 +925,10 @@
 
 
 		function startCountdown() {
-			var timeLeft = 0; // Duración en segundos de la cuenta atrás
-			var pomSet = 1500; //Duración en segundos de la cuenta atrás del set. 1500                                                 Cambiar
-			var descanso1 = 300; //Duración del descanso.          300                                                                    Cambiar
-			var descanso2 = 1800; //Duración del descanso.  1800
+			var timeLeft = 0; 
+			var pomSet = 1500; 
+			var descanso1 = 300; 
+			var descanso2 = 1800; 
 			var numerosetrealizados = -1;
 			
 		    var segundostotalesInsertadoslg = parseInt(document.getElementById("duracion-lg").value);
@@ -1071,49 +957,25 @@
 
 				slider = document.getElementById("duracion-sm");
 			}
-
-			
-			//console.log("Segundos totales: " +  segundostotalesInsertados);
-
-
 			
 			
 			var descansodesactivado = true;                                              
 			var display = document.getElementById('countdown');
 	
 			
-			//dormida.style.display = "block"; 
-			dormida.classList.remove('d-none');
-			//despierta.style.display = "none"; 
-			despierta.classList.add('d-none');			
-			//terminar.style.display = "block";
+			 
+			dormida.classList.remove('d-none');			
+			despierta.classList.add('d-none');	
 			terminar.classList.remove('d-none');
-			//empezar.style.display = "none";
 			empezar.classList.add('d-none');	
 
-			//botonSalir.style.display = "none";
+		
 			document.getElementById('btnSalir').style.display = 'none';
 			sisales.style.display = "block";
 	
 			ocultarSidebar();                                             
 			empezarcoundown = true;
 			
-			//localStorage.setItem('empezarcoundown', 'true');
-	
-	
-	
-	
-			/*
-			window.addEventListener('beforeunload', function (e) {
-				if(empezarcoundown){
-					e.preventDefault();
-					terminarCountdown();
-					//window.location.href = 'cementerio.ejs';
-				}
-			}); */
-	
-	
-	 
 	
 			function updateDisplay() {             
 
@@ -1124,21 +986,20 @@
 			}
 	
 			
-			//var barraAvance = document.getElementById("barraAvance"); 
+			 
 	
 			function actualizarBarraDeProgreso() {
 			var porcentaje = (segundostotales / segundostotalesInsertados) * 100;    
 			barraAvance.style.width = porcentaje + "%";
-			//console.log("Segundos totales: " +  segundostotales);
+	
 			}
 	
 	
 	  
-			// Función para manejar la cuenta regresiva
+	
 			function countdown() {
-				barraAvance.style.width = "100%";
-				
-			   //localStorage.setItem("barraAvance", "100"); //
+				barraAvance.style.width = "100%";				
+
 			   fetch(`/${userId}/barraAvance`)
 								.then(response => response.json())
 								.then(datap => {
@@ -1164,8 +1025,7 @@
 													return response.json();
 												})
 												.then(updatedData => {
-													//console.log('Response JSON:', updatedData);
-													// Handle the updated data as needed
+
 												})
 												.catch(error => {
 													console.error('Error al realizar la solicitud:', error);
@@ -1174,12 +1034,10 @@
 								})
 								.catch(error => console.error('Error al obtener la lista de tareas:', error));
 	
-			   //terminar.style.display = "block";
-			   terminar.classList.remove('d-none');	
-			   //empezar.style.display = "none";
+			   
+			   terminar.classList.remove('d-none');				   
 			   empezar.classList.add('d-none');
-
-			   //botonSalir.style.display = "none";
+			   
 			   document.getElementById('btnSalir').style.display = 'none';
 			   sisales.style.display = "block";
 	
@@ -1197,16 +1055,16 @@
 						localStorage.setItem('actionToPerform', 'terminarCountdown');
 					});
 	
-					// Check for the action and perform it on DOMContentLoaded
+					
 					window.addEventListener('DOMContentLoaded', function () {
 						var action = localStorage.getItem('actionToPerform');
 	
 						if (action === 'terminarCountdown') {
-							// Execute the action after a short delay
+							
 							setTimeout(function () {
 								terminarCountdown();
 								localStorage.removeItem('actionToPerform');
-							}, 1000); // Adjust the delay as needed
+							}, 1000); 
 						}
 					});
 				   
@@ -1223,7 +1081,7 @@
 							messageBlock2.style.display = "none";
 
 							if (cicloIniciado) {
-								// Suma un punto solo si el ciclo ya ha comenzado
+								
 								fetch(`/${userId}/puntos`)
 								.then(response => response.json())
 								.then(datap => {
@@ -1244,10 +1102,7 @@
 	
 									
 									document.getElementById("puntosTotales").textContent = puntossuma < 10 ? '0' +puntossuma : puntossuma;       
-									/*                         
-									puntosTotales++;
-									document.getElementById("puntosTotales").textContent = puntosTotales < 10 ? '0' + puntosTotales : puntosTotales; ///
-									localStorage.setItem("puntosTotales", puntosTotales);  */
+
 										
 									fetch(`/${userId}/puntos/${idPuntos}`, {
 												method: 'PUT',
@@ -1264,7 +1119,7 @@
 												})
 												.then(updatedData => {
 													console.log('Response JSON:', updatedData);
-													// Handle the updated data as needed
+													
 												})
 												.catch(error => {
 													console.error('Error al realizar la solicitud:', error);
@@ -1275,12 +1130,12 @@
 						     	
 	
 							} else {
-								cicloIniciado = true; // Marca el inicio del ciclo
+								cicloIniciado = true; 
 							}
 							numerosetrealizados++;
 							
 							descansodesactivado = false;
-							if(segundostotalesInsertados < 1500){                                                              // Cambiar
+							if(segundostotalesInsertados < 1500){                                                            
 								timeLeft = segundostotalesInsertados;
 							}else{
 								timeLeft = pomSet;
@@ -1290,30 +1145,30 @@
 							
 	
 						} else {
-							// Inicio del ciclo de descanso
+							
 							messageBlock.style.display = "block";
 							messageBlock2.style.display = "block";
 							updateMessage();
 							descansodesactivado = true;
 	
 							if (numerosetrealizados === 4) {
-								// Comienza el segundo ciclo de descanso (descanso2)
+								
 								miAudio.play();
-								numerosetrealizados = 0; // Reinicia el número de sets realizados
+								numerosetrealizados = 0; 
 								timeLeft = descanso2;
 								
 							} else {
-									// Inicio del ciclo de descanso normal (descanso1)
+									
 								miAudio.play();
 								timeLeft = descanso1;
 							}
-							//timeLeft = descanso1;
+							
 						}
 					  
 					}
 	
 					if (segundostotales === 0) {
-							clearInterval(timer); // Detén el temporizador cuando se agoten los segundos totales
+							clearInterval(timer); 
 							console.log("Cuenta atrás finalizada.");
 							display.textContent = '' + (0 < 10 ? '0' : '') + 0 + ':' + (0 < 10 ? '0' : '') + 0;
 							segundostotales= 0;
@@ -1322,20 +1177,17 @@
 							cicloIniciado = false; 
 							porcentaje = 100;
 							barraAvance.style.width  = porcentaje + "%";
-							//document.getElementById("duracionLabel").textContent = valorActualSlider;
+							
 							miAudio.play();
 
 
-							//despierta.style.display = "block"; 
-							despierta.classList.remove('d-none');
-							//dormida.style.display = "none"; 
-							dormida.classList.add('d-none');
-							//terminar.style.display = "none";
-							terminar.classList.add('d-none');
-							//empezar.style.display = "block";
+							 
+							despierta.classList.remove('d-none');							
+							dormida.classList.add('d-none');							
+							terminar.classList.add('d-none');							
 							empezar.classList.remove('d-none');
 
-							//botonSalir.style.display = "block";
+			
 							document.getElementById('btnSalir').style.display = 'block';
 							sisales.style.display = "none";
 							messageBlock.style.display = "none";
@@ -1352,10 +1204,8 @@
 
 				}, 1000);
 	
-			}
-	
-	
-			//var valorBarraAvance = localStorage.getItem("barraAvance"); //
+			}	
+		
 			fetch(`/${userId}/barraAvance`)
 								.then(response => response.json())
 								.then(datap => {
@@ -1363,8 +1213,7 @@
 									let userId = '<%= user.id %>';
 	
 									if (!datap[0].barraAvance) {
-											barraAvance.style.width = "100%";
-											//localStorage.setItem("barraAvance", "100"); //
+											barraAvance.style.width = "100%";											
 										
 	
 										const dataToUpdate = {
@@ -1387,7 +1236,7 @@
 													})
 													.then(updatedData => {
 														console.log('Response JSON:', updatedData);
-														// Handle the updated data as needed
+														
 													})
 													.catch(error => {
 														console.error('Error al realizar la solicitud:', error);
@@ -1401,39 +1250,13 @@
 				
 		}
 	
-		/*
-		var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];  ///
-			window.onload = function () {
-				// Obtener la lista local
-				var listaCementerio = JSON.parse(localStorage.getItem('CementerioElements')) || [];  ////
-	
-				itemStore = 0;
-				listaCementerio.forEach(function (element) {
-					if (element.index > itemStore) {
-						itemStore = element.index;
-					}
-				});  
-	
-		}; */
-	
-	
-		//var listaLocal = JSON.parse(localStorage.getItem('storeElements')) || [];
-				/*
-				var indiceAEliminar = -1;
-				data.forEach(function (element, index) {
-				if (element.nombre === nombreMascota) {
-					indiceAEliminar = index;
-					console.log("Se llega aqui");
-				} */
-	
-	
-	
+
 	
 		function eliminarMascota(nombreMascota) {
 			fetch('/' + userId +'/mascotas')
 			.then(response => response.json())
 			.then(data => {
-					/*Hacerlo aqui*/     
+					     
 					const mascotaAEliminar = data.find(mascota => mascota.nombre === nombreMascota);
 	
 	
@@ -1468,24 +1291,7 @@
 	
 	
 		function enviarCementerio() {
-				// imagenPrincipalSrc
-				// nombrePrincipalSrc 
-								 
-				//localStorage.setItem('imagenPrincipalCementerio', imagenPrincipalSrc); ///
-				//localStorage.setItem('nombrePrincipalCementerio', nombrePrincipalSrc );  //
-				//localStorage.setItem('fechaCementerio', fechaFormateada );  ///
-	
-				/*
-				var nuevoElemento = {
-							imagenPrincipal: imagenPrincipalSrc,
-							nombre: nombrePrincipalSrc,
-							fechamuerte: fechaFormateada
-				}; */
-	
-				//listaCementerio.push(nuevoElemento);
-	
-	
-				//localStorage.setItem('CementerioElements', JSON.stringify( listaCementerio));
+
 				fetch(`/${userId}/mascotaprincipal`)
 					.then(response => {
 							if (!response.ok) {
@@ -1498,7 +1304,7 @@
 							var fechaActual = new Date();
 							let userId = '<%= user.id %>';
 	
-							// Formatea la fecha
+							
 							var options = { year: 'numeric', month: 'long', day: 'numeric' };
 							var fechaFormateada = fechaActual.toLocaleDateString(undefined, options);
 	
@@ -1564,20 +1370,17 @@
 											.catch(error => console.error('Error al guardar la tarea:', error));
 	
 	
-											//document.getElementById('imagenMascotaDespierta').src = "images/cruz.png";
+											
 											imagenMascotaDespierta.style.backgroundImage = "url('images/cruz.png')";		
 
-											//document.getElementById('imagenMascotaDormida').src = "images/cruz.png";
+											
 											imagenMascotaDormida.style.backgroundImage = "url('images/cruz.png')";		
 
 											document.getElementById('MascotaNombre').textContent = "";
 											
-											//localStorage.setItem('imagenPrincipal', "images/cruz.png"); ///
-											//localStorage.setItem('segundaImagen', "images/cruz.png");   //
-											//localStorage.setItem('nombrePrincipal', ""); ///
+
 	
 											nopoder.style.display = "block";
-											//localStorage.setItem("displayValue", "block"); //
 											
 											fetch(`/${userId}/displayValue`)
 												.then(response => response.json())
@@ -1633,7 +1436,7 @@
 		 
 	
 		function terminarCountdown(){
-			mostrarSidebar();                            //CAMBIAR NUEVO
+			mostrarSidebar();                           
 			enviarCementerio();
 				
 	

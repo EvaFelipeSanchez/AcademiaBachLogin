@@ -30,10 +30,6 @@ db.on('error', err => { console.error('DB ERROR', err); });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Replace the connection string with your MongoDB Atlas connection string
-
-
-//mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const usersCollection = mongoose.connection.collection('users');
 
@@ -45,7 +41,6 @@ app.use(express.json());
 
 
 
-//const initializePassport = require('./passport-config');
 initializePassport(
   passport,
   async email => {
@@ -59,10 +54,8 @@ initializePassport(
   },
   async id => {
     try {
-      //const client = await MongoClient.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
-      //const usersCollection = client.db('mi_basededatos').collection('users');
-      const user = await usersCollection.findOne({ id: id });
-      //client.close();
+
+      const user = await usersCollection.findOne({ id: id });     
       return user;
     } catch (error) {
       console.error(error);
@@ -79,7 +72,7 @@ app.use(express.urlencoded({ extended: false }));
 const secrett = process.env.SESSION_SECRET || 'default-secret';
 
 app.use(session({
-secret: secrett, // Replace with your actual secret key
+secret: secrett, 
 resave: false,
 saveUninitialized: true
 }));
@@ -120,15 +113,9 @@ app.get('/login', checkNotAuthenticated, async (req, res) => {
     res.render('login.ejs');  
 });
 
-/*
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: true
-})); */
 
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-  //successRedirect: '/',
+
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {  
   failureRedirect: '/login',
   failureFlash: true
 }),
@@ -142,8 +129,7 @@ async (req, res) => {
 
 app.get('/register', checkNotAuthenticated, async (req, res) => {
   try {
-    //const usuarios = await usersCollection.find().toArray();
-    //res.json({ usuarios });
+
     res.render('register.ejs');
   } catch (error) {
     console.error('Error al obtener la lista de usuarios:', error);
@@ -186,7 +172,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 
 app.post('/guardar', async (req, res) => {
   try {
-    // Insertar datos en la colección usando Mongoose
+    
     await usersCollection.create(req.body);
     console.log('Datos insertados con éxito');
     res.redirect('/');
@@ -196,28 +182,6 @@ app.post('/guardar', async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 });
-
-/*
-app.post('/guardar', (req, res) => {
-  // Conectar a la base de datos
-  MongoClient.connect('mongodb://localhost:27017/mi_basededatos', (err, client) => {
-    if (err) return console.error(err);
-    console.log('Conexión exitosa a la base de datos');
-
-    const db = client.db('mi_basededatos');
-    const collection = db.collection('misdatos');
-
-    // Insertar datos en la colección
-    collection.insertOne(req.body, (err, result) => {
-      if (err) return console.error(err);
-      console.log('Datos insertados con éxito');
-      client.close();
-      res.redirect('/');
-      console.log('Ruta /guardar llamada');
-    });
-  });
-}); */
-
 
 
 app.delete('/logout', (req, res) => {
@@ -245,10 +209,6 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 
-/*
-app.get('/', async (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
-}); */
 
 app.get('/', (req, res) => {
   res.redirect('/login');
@@ -266,10 +226,8 @@ app.get('/:id', async (req, res) => {
     
 
     console.log('User ID:', userId);
-    //res.sendFile(__dirname + '/public/index.html', { user });
-    //res.render('index.ejs', { user });
     res.render('index.ejs', { user });
-    //res.json({ user });
+  
   } catch (error) {
     console.error('Error al obtener usuario por ID:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
@@ -331,7 +289,7 @@ app.get('/cementerio/:id', async function(req, res) {
 }); 
 
 
-//Tareas//
+
 const Tarea = require('./model/tarea');  
 
 app.get('/:idt/tareas', async (req, res) => {
@@ -350,11 +308,11 @@ app.post('/:idt/tareas', async (req, res) => {
   console.log(`POST /:idt/tarea`);
   console.log('BODY', tarea);
   try {
-    // Aquí debes comparar con el ID del usuario que envías en la solicitud POST
+    
     if (idt !== tarea.userId) {
       return res.status(403).json({ message: 'No tienes permiso para realizar esta acción.' });
     }
-    tarea.userId = idt; // Actualiza el ID del usuario con el valor de idt
+    tarea.userId = idt; 
     res.json(await Tarea(tarea).save());
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -393,7 +351,7 @@ app.put('/:idt/tareas/:id', async (req, res) => {
   } catch (err) { res.status(500).send({ message: err.message }); }
 });
 
-//Puntos guardados
+
 const Puntos = require('./model/puntos');  
 
 app.get('/:idt/puntos', async (req, res) => {
@@ -452,7 +410,7 @@ app.post('/:idt/puntos', async (req, res) => {
   });
   
   
-//MascotaPrincipal
+
 const MascotaPrincipal = require('./model/mascotaprincipal');  
 
 
@@ -527,7 +485,7 @@ app.post('/:idt/mascotaprincipal', async (req, res) => {
   });
 
 
-//displayValue
+
 const DisplayValue = require('./model/displayValue');  
 
 
@@ -602,7 +560,6 @@ app.post('/:idt/displayValue', async (req, res) => {
   });
 
 
-//barraAvance
 const BarraAvance = require('./model/barraAvance');  
 
 
@@ -676,8 +633,7 @@ app.post('/:idt/barraAvance', async (req, res) => {
     }
   });
 
-//
-//Papeleras
+
 const Papelera = require('./model/papelera');  
 
 app.get('/:idt/papeleras', async (req, res) => {
@@ -696,11 +652,11 @@ app.post('/:idt/papeleras', async (req, res) => {
   console.log(`POST /:idt/papelera`);
   console.log('BODY', papelera);
   try {
-    // Aquí debes comparar con el ID del usuario que envías en la solicitud POST
+    
     if (idt !== papelera.userId) {
       return res.status(403).json({ message: 'No tienes permiso para realizar esta acción.' });
     }
-    papelera.userId = idt; // Actualiza el ID del usuario con el valor de idt
+    papelera.userId = idt; 
     res.json(await Papelera(papelera).save());
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -739,8 +695,7 @@ app.put('/:idt/papeleras/:id', async (req, res) => {
   } catch (err) { res.status(500).send({ message: err.message }); }
 });
 
-//
-//Mascotas//
+
 const Mascota = require('./model/mascota');  
 
 app.get('/:idt/mascotas', async (req, res) => {
@@ -759,11 +714,11 @@ app.post('/:idt/mascotas', async (req, res) => {
   console.log(`POST /:idt/mascota`);
   console.log('BODY', mascota);
   try {
-    // Aquí debes comparar con el ID del usuario que envías en la solicitud POST
+    
     if (idt !== mascota.userId) {
       return res.status(403).json({ message: 'No tienes permiso para realizar esta acción.' });
     }
-    mascota.userId = idt; // Actualiza el ID del usuario con el valor de idt
+    mascota.userId = idt; 
     res.json(await Mascota(mascota).save());
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -803,7 +758,7 @@ app.put('/:idt/mascotas/:id', async (req, res) => {
 });
 
 
-//Muertos//
+
 const Muerto = require('./model/muerto');  
 
 app.get('/:idt/muertos', async (req, res) => {
@@ -822,11 +777,11 @@ app.post('/:idt/muertos', async (req, res) => {
   console.log(`POST /:idt/muerto`);
   console.log('BODY', muerto);
   try {
-    // Aquí debes comparar con el ID del usuario que envías en la solicitud POST
+   
     if (idt !== muerto.userId) {
       return res.status(403).json({ message: 'No tienes permiso para realizar esta acción.' });
     }
-    muerto.userId = idt; // Actualiza el ID del usuario con el valor de idt
+    muerto.userId = idt; 
     res.json(await Muerto(muerto).save());
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -897,14 +852,12 @@ app.put('/:id', async (req, res) => {
 });
 
 
-
-// Configura la carpeta "public" para servir archivos estáticos
 app.use(express.static('public'));
 
 const port = parseInt(process.env.PORT) || 3000;
 
 async function main() {
-   //mongoose.connect('mongodb://127.0.0.1:27017/tareas-sample');
+
    await mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 main();
