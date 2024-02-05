@@ -40,6 +40,22 @@
 
         } 
 
+		.message-block3 {
+            width: 80%;			
+            height: auto;
+            background-color: rgb(11, 27, 63);
+			color: rgb(255, 255, 255);
+            border: 1px solid #1b1c47;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            padding: 5px; 
+			font-family:  sans-serif; 
+			font-size: 1.5vw;
+        } 
+
+
         #message {
             font-size: 1.5vw;
             text-align: center;
@@ -53,6 +69,7 @@
             margin: 0;
             max-width: 100%; 
         } 
+
 
 		.nombreicono{
 			font-family:  sans-serif; 
@@ -99,6 +116,21 @@
 				font-family:  sans-serif; 
 				font-size: 4vw;
 			}
+
+			.message-block3 {
+            width: 80%;
+            height: auto;
+            background-color: rgb(11, 27, 63);
+			color: rgb(255, 255, 255);
+            border: 1px solid #1b1c47;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            padding: 5px; 
+			font-family:  sans-serif; 
+			font-size: 2vw;
+            } 
 
 
 			#message {
@@ -176,6 +208,8 @@
 				font-family:  sans-serif; 
 				font-size: 4vw;
 			}
+
+			
 
 	</style>
 
@@ -297,7 +331,27 @@
 				<div class="message-block" id="messageBlock" style="display: none; background-position: center center;  z-index: 3;">
 					<p id="message">Mensaje inicial</p>					
 				</div>
-
+				<div class="message-block3" id="backgroundImage" style="display: none; background-position: center center; align-items: center; justify-content: center; text-align: center; position: fixed; display: flex; background-color: rgb(11, 27, 63); color: rgb(255, 255, 255); z-index: 3;">
+					<div id="message3">
+						<p><strong>📕📚¡Te damos la bienvenida!📚📕</strong></p>
+						<p>
+							En esta aplicación, utilizamos la técnica 🍅Pomodoro🍅 para ayudarte a maximizar tu productividad durante tus sesiones de estudio. Aquí te explicamos cómo funciona:
+						</p>    
+						<p>
+							La sesión de estudio se divide en intervalos de trabajo llamados "Pomodoros". Cada Pomodoro dura 25 minutos. Después de cada Pomodoro, tendrás una pausa corta de 5 minutos para descansar y recargar energías. Después de completar cuatro Pomodoros consecutivos, tendrás un descanso más largo.
+						</p>
+						<p>
+							Antes de empezar, puedes asignar la duración total de tu sesión de estudio en la barra de duración. Esta duración incluye tanto los Pomodoros como los descansos. Asegúrate de planificar tu tiempo sabiamente para completar tus tareas dentro del período establecido.
+						</p>
+						<p style="color: rgb(255, 58, 58);"><strong>Importante:</strong></p>
+						<p>    
+							Si abandonas la sesión antes de que termine, tu mascota virtual🐶 sufrirá las consecuencias. Así que ¡mantente enfocado y no dejes que tu mascota muera!
+							¡Y eso es todo! Ahora empieza tu sesión de estudio utilizando la técnica Pomodoro en nuestra aplicación. 📖¡A estudiar con todo!📖 
+						</p>
+					
+						<button type="button" class="btn btn-primary btn-lg" onclick="tutorial()" style="font-size: 24px; background-color: #5e689e; color: rgb(17, 17, 67);">ENTENDIDO</button>
+					</div>
+				</div>
 
 				<div style="width:100%; background-image: url('images/BlancoSet.png'); background-repeat: no-repeat; background-attachment: local; background-size: contain;
                background-position: center center;" class="flex-grow-1 d-flex flex-column ">
@@ -328,7 +382,7 @@
 				</div>
 
 				<div class="p-2">
-					<button type="button" class="btn btn-primary btn-lg" id="algo"  style="font-size: 24px; background-color: #212958;">Asigna una mascota para continuar</button>
+					<button type="button" class="btn btn-primary btn-lg" id="algo" onclick="llevarATienda()"  style="font-size: 24px; background-color: #212958;">Asigna una mascota para iniciar una sesión de estudio</button>
 					<button type="button"  class="btn btn-primary btn-lg" id="startButton" onclick="startCountdown()" style="font-size: 24px; background-color: #212958; ">EMPEZAR</button>
 					<button type="button" class="btn btn-primary btn-lg" id="terminarButton" onclick="terminarCountdown()" style="font-size: 24px; background-color: #212958;">TERMINAR</button>
 			
@@ -395,8 +449,25 @@
 		const messageElement2 = document.getElementById("message2");
 
 
-		var currentImageIndex = 0; 
-	
+		//var currentImageIndex = 0; 
+
+
+		document.addEventListener("DOMContentLoaded", function() {
+			var isFirstVisit = localStorage.getItem("firstVisit");
+
+			if (!isFirstVisit) {
+				document.getElementById("backgroundImage").style.display = "block";			
+
+				localStorage.setItem("firstVisit", "true");
+			}else{
+				document.getElementById("backgroundImage").style.display = "none";	 
+			}
+		});
+
+		function  tutorial(){
+			document.getElementById("backgroundImage").style.display = "none";
+		}
+		
 		/*
 		var secuenciaYaMostrada = localStorage.getItem('secuenciaMostrada') === 'true';
 		var backgroundImage = document.getElementById('backgroundImage');
@@ -456,8 +527,10 @@
 					}
 				}
 		  } */
+		   
 		/*
-		fetch(`/${userId}/puntos`, {
+
+				fetch(`/${userId}/puntos`, {
 			method: 'DELETE',
 		})
 		.then(response => response.json())
@@ -922,6 +995,10 @@
 	
 		updateDurationLabellg();
 		updateDurationLabelsm();
+
+		function llevarATienda(){
+              window.location.href = "/mascota/" + userId;
+		}
 
 
 		function startCountdown() {
